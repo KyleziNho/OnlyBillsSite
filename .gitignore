@@ -1,0 +1,5 @@
+.DS_Store
+node_modules/
+split-app/node_modules/
+split-app/dist/
+*.log
