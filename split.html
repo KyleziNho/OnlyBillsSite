@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Receipt Breakdown - OnlyBills</title>
     <meta name="description" content="View the detailed breakdown of this shared receipt">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Receipt Breakdown - OnlyBills">
@@ -22,39 +25,54 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #000000;
+            --bg-card: rgba(255, 255, 255, 0.06);
+            --bg-card-hover: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --accent: #34C759;
+            --accent-blue: #007AFF;
+            --border: rgba(255, 255, 255, 0.1);
+            --safe-bottom: env(safe-area-inset-bottom, 20px);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Rounded', 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: 100%;
             min-height: 100vh;
+            min-height: 100dvh;
         }
 
         .container {
-            max-width: 500px;
+            max-width: 480px;
             margin: 0 auto;
-            padding: 20px 16px;
-            padding-bottom: 100px;
+            padding: 0 16px;
+            padding-bottom: calc(140px + var(--safe-bottom));
         }
 
-        /* Loading State */
+        /* Loading */
         .loading {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 60vh;
-            gap: 20px;
+            min-height: 80vh;
+            gap: 16px;
         }
 
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #007AFF;
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
@@ -62,432 +80,464 @@
         }
 
         .loading-text {
-            color: #888;
-            font-size: 15px;
+            color: var(--text-tertiary);
+            font-size: 14px;
         }
 
-        /* Error State */
+        /* Error */
         .error {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 24px;
         }
 
         .error-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.8;
         }
 
         .error-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
 
         .error-message {
-            color: #888;
-            font-size: 15px;
-            margin-bottom: 30px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 32px;
         }
 
         /* Header */
         .header {
             position: relative;
-            margin: -20px -16px 20px;
-            border-radius: 0 0 24px 24px;
+            margin: 0 -16px;
             overflow: hidden;
         }
 
-        .restaurant-photo {
+        .header-image {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
         }
 
-        .restaurant-photo-placeholder {
+        .header-placeholder {
             width: 100%;
-            height: 140px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            height: 160px;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .header-overlay {
+        .header-placeholder-icon {
+            font-size: 40px;
+            opacity: 0.2;
+        }
+
+        .header-gradient {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 60px 20px 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            height: 140px;
+            background: linear-gradient(to top, var(--bg-primary) 0%, transparent 100%);
+        }
+
+        .header-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
         }
 
         .store-name {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 6px;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.3px;
+            margin-bottom: 8px;
         }
 
         .store-meta {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
-            font-size: 14px;
-            color: #aaa;
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
         .rating {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 4px;
         }
 
         .star {
-            color: #FFD700;
+            color: #FFD60A;
         }
 
-        .rating-count {
-            color: #888;
+        .meta-separator {
+            opacity: 0.3;
         }
 
-        .meta-dot {
-            color: #555;
-        }
-
-        /* Total Card */
-        .total-card {
-            background: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
+        /* Total Section */
+        .total-section {
+            padding: 24px 20px;
+            margin: 16px 0;
+            background: linear-gradient(135deg, rgba(52, 199, 89, 0.15) 0%, rgba(52, 199, 89, 0.05) 100%);
             border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(52, 199, 89, 0.2);
         }
 
         .total-label {
-            font-size: 14px;
-            color: #8ab4f8;
+            font-size: 12px;
             font-weight: 600;
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 4px;
         }
 
         .total-amount {
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: -1px;
         }
 
-        .total-meta {
-            margin-top: 12px;
-            font-size: 14px;
-            color: #8ab4f8;
+        .total-info {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 8px;
         }
 
         /* Section */
         .section {
-            margin-bottom: 24px;
+            margin: 24px 0;
         }
 
-        .section-title {
-            font-size: 13px;
+        .section-header {
+            font-size: 12px;
             font-weight: 600;
-            color: #888;
+            color: var(--text-tertiary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 12px;
-            padding: 0 4px;
+            padding-left: 4px;
         }
 
         /* Person Card */
         .person-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--bg-card);
             border-radius: 16px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: background 0.2s ease;
+        }
+
+        .person-card:active {
+            background: var(--bg-card-hover);
         }
 
         .person-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 16px;
+            padding: 14px 16px;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .person-header:active {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .person-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .person-avatar {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 16px;
+            font-weight: 600;
+            font-size: 14px;
             color: white;
+            flex-shrink: 0;
+        }
+
+        .person-info {
+            flex: 1;
+            margin-left: 12px;
         }
 
         .person-name {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
         }
 
-        .person-total {
-            font-size: 18px;
+        .person-items-count {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-top: 1px;
+        }
+
+        .person-amount {
+            font-size: 16px;
             font-weight: 700;
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        .chevron {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            transition: transform 0.25s ease;
+        }
+
+        .person-card.expanded .chevron {
+            transform: rotate(180deg);
         }
 
         .person-details {
-            padding: 0 16px 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
             display: none;
+            padding: 0 16px 14px;
+            border-top: 1px solid var(--border);
         }
 
-        .person-details.expanded {
+        .person-card.expanded .person-details {
             display: block;
         }
 
         .item-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 10px 0;
             font-size: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
-        .item-row:last-child {
-            border-bottom: none;
+        .item-row:not(:last-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .item-name {
-            color: #ccc;
+            color: var(--text-secondary);
+            flex: 1;
+            padding-right: 12px;
         }
 
         .item-price {
-            color: #fff;
             font-weight: 500;
+        }
+
+        .fees-section {
+            margin-top: 8px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
         }
 
         .fee-row {
             display: flex;
             justify-content: space-between;
-            padding: 6px 0;
+            padding: 4px 0;
             font-size: 13px;
-            color: #888;
-        }
-
-        .subtotal-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0 6px;
-            font-size: 14px;
-            color: #aaa;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 8px;
-        }
-
-        .expand-icon {
-            color: #555;
-            transition: transform 0.2s;
-            font-size: 12px;
-        }
-
-        .person-card.expanded .expand-icon {
-            transform: rotate(180deg);
+            color: var(--text-tertiary);
         }
 
         /* Receipt Image */
-        .receipt-section {
-            margin-top: 32px;
-        }
-
-        .receipt-image-container {
-            background: rgba(255, 255, 255, 0.05);
+        .receipt-container {
+            background: var(--bg-card);
             border-radius: 16px;
-            padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px;
+            margin-top: 8px;
         }
 
         .receipt-image {
             width: 100%;
             border-radius: 12px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: opacity 0.2s;
         }
 
         .receipt-image:active {
-            transform: scale(0.98);
+            opacity: 0.8;
         }
 
-        /* App Download Banner */
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0 16px;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .footer-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Download Banner */
         .download-banner {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.95) 20%);
-            padding: 30px 16px 24px;
+            padding: 16px;
+            padding-bottom: calc(16px + var(--safe-bottom));
+            background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.95) 70%, transparent 100%);
+            z-index: 100;
         }
 
         .download-button {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: #007AFF;
-            color: white;
-            text-decoration: none;
-            padding: 16px 24px;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            max-width: 500px;
+            gap: 10px;
+            max-width: 380px;
             margin: 0 auto;
-            transition: all 0.2s;
+            padding: 12px 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: transform 0.2s, opacity 0.2s;
         }
 
         .download-button:active {
             transform: scale(0.98);
-            background: #0066DD;
+            opacity: 0.9;
         }
 
-        .download-icon {
-            font-size: 24px;
+        .app-store-badge {
+            width: 24px;
+            height: 24px;
         }
 
-        /* Image Modal */
+        .download-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .download-subtitle {
+            font-size: 9px;
+            font-weight: 500;
+            color: #666;
+            letter-spacing: 0.2px;
+            line-height: 1;
+        }
+
+        .download-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #000;
+            letter-spacing: -0.2px;
+            line-height: 1.2;
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             padding: 20px;
-            overflow: auto;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal.active {
+            display: flex;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: max(20px, env(safe-area-inset-top));
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
         .modal-image {
             max-width: 100%;
-            max-height: 90vh;
+            max-height: 85vh;
             object-fit: contain;
-            border-radius: 12px;
+            border-radius: 8px;
         }
 
         /* Address */
         .address {
             display: flex;
             align-items: flex-start;
-            gap: 8px;
+            gap: 6px;
             margin-top: 8px;
-            font-size: 13px;
-            color: #666;
+            font-size: 12px;
+            color: var(--text-tertiary);
         }
 
-        .address-icon {
-            margin-top: 2px;
-        }
-
-        /* Powered by */
-        .powered-by {
-            text-align: center;
-            margin-top: 32px;
-            padding: 20px;
-        }
-
-        .powered-by-text {
-            font-size: 13px;
-            color: #555;
-        }
-
-        .powered-by a {
-            color: #007AFF;
-            text-decoration: none;
-        }
-
-        @media (min-width: 768px) {
+        @media (min-width: 500px) {
             .container {
-                padding: 40px 24px;
-                padding-bottom: 120px;
+                padding: 0 24px;
+                padding-bottom: calc(160px + var(--safe-bottom));
             }
 
             .header {
-                margin: -40px -24px 30px;
-                border-radius: 0 0 32px 32px;
+                margin: 0 -24px;
             }
 
-            .restaurant-photo {
-                height: 280px;
+            .header-image {
+                height: 260px;
             }
 
-            .download-button:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
+            .store-name {
+                font-size: 28px;
+            }
+
+            .total-amount {
+                font-size: 42px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container" id="content">
-        <!-- Loading State -->
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p class="loading-text">Loading receipt breakdown...</p>
+            <p class="loading-text">Loading breakdown...</p>
         </div>
     </div>
 
-    <!-- Image Modal -->
-    <div class="modal" id="imageModal">
+    <div class="modal" id="imageModal" onclick="closeModal()">
         <button class="modal-close" onclick="closeModal()">&times;</button>
         <img class="modal-image" id="modalImage" src="" alt="Receipt">
     </div>
 
-    <!-- Download Banner -->
     <div class="download-banner">
-        <a href="https://apps.apple.com/app/onlybills" class="download-button" id="downloadBtn">
-            <span class="download-icon"></span>
-            <span>Download OnlyBills</span>
+        <a href="https://apps.apple.com/app/onlybills" class="download-button">
+            <svg class="app-store-badge" viewBox="0 0 24 24" fill="none">
+                <path d="M17.0349 12.7587C17.0166 10.4259 18.8651 9.29638 18.9528 9.24094C17.8865 7.70181 16.2217 7.48562 15.6255 7.46686C14.2331 7.32159 12.8857 8.30993 12.1788 8.30993C11.4569 8.30993 10.3615 7.48187 9.18285 7.50688C7.66241 7.53127 6.24666 8.41618 5.46598 9.78855C3.85341 12.5916 5.05146 16.7278 6.59614 18.9953C7.36933 20.1048 8.27721 21.3455 9.45525 21.3018C10.6046 21.2537 11.0295 20.5531 12.4119 20.5531C13.7793 20.5531 14.1754 21.3018 15.377 21.2724C16.6142 21.2537 17.3992 20.1579 18.1437 19.038C19.0428 17.7536 19.3952 16.4917 19.4096 16.4255C19.3796 16.4168 17.0562 15.5281 17.0349 12.7587Z" fill="black"/>
+                <path d="M14.8054 5.96162C15.4366 5.19033 15.8683 4.14327 15.7493 3.08008C14.8386 3.12071 13.7038 3.69759 13.0439 4.45263C12.4577 5.12268 11.9335 6.20709 12.0675 7.22951C13.0864 7.30682 14.1449 6.72057 14.8054 5.96162Z" fill="black"/>
+            </svg>
+            <div class="download-content">
+                <span class="download-subtitle">Download on the</span>
+                <span class="download-title">App Store</span>
+            </div>
         </a>
     </div>
 
     <script>
-        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyByDh_nxkV1kWGdIHFldDAoIU7iGqU3FQc",
             authDomain: "onlybills-b8dac.firebaseapp.com",
@@ -497,230 +547,165 @@
             appId: "1:572680746912:web:9c3890b712bdc19a9a16c5"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // Get receipt ID from URL
         const urlParams = new URLSearchParams(window.location.search);
         const receiptId = urlParams.get('id');
 
-        // Format currency
         function formatPrice(amount, currency) {
             const symbols = {
                 'GBP': '£', 'USD': '$', 'EUR': '€', 'JPY': '¥',
-                'CAD': 'CA$', 'AUD': 'A$', 'CHF': 'CHF', 'CNY': '¥'
+                'CAD': 'C$', 'AUD': 'A$', 'CHF': 'CHF', 'CNY': '¥',
+                'SGD': 'S$', 'HKD': 'HK$', 'MYR': 'RM', 'THB': '฿',
+                'INR': '₹', 'KRW': '₩'
             };
-            const symbol = symbols[currency] || currency + ' ';
-            return symbol + amount.toFixed(2);
+            return (symbols[currency] || currency + ' ') + amount.toFixed(2);
         }
 
-        // Format date
         function formatDate(timestamp) {
             const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-            return date.toLocaleDateString('en-GB', {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric'
-            });
+            return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
         }
 
-        // Format rating count
         function formatCount(count) {
-            if (count >= 1000) {
-                return (count / 1000).toFixed(1) + 'K';
-            }
-            return count.toString();
+            return count >= 1000 ? (count / 1000).toFixed(1) + 'K' : count.toString();
         }
 
-        // Get initials from name
         function getInitials(name) {
             const parts = name.trim().split(' ');
-            if (parts.length >= 2) {
-                return (parts[0][0] + parts[1][0]).toUpperCase();
-            }
-            return name.charAt(0).toUpperCase();
+            return parts.length >= 2 ? (parts[0][0] + parts[1][0]).toUpperCase() : name.charAt(0).toUpperCase();
         }
 
-        // Toggle person details
-        function togglePerson(element) {
-            const card = element.closest('.person-card');
-            const details = card.querySelector('.person-details');
-            card.classList.toggle('expanded');
-            details.classList.toggle('expanded');
+        function togglePerson(el) {
+            el.closest('.person-card').classList.toggle('expanded');
         }
 
-        // Open image modal
         function openModal(src) {
             document.getElementById('modalImage').src = src;
             document.getElementById('imageModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        // Close image modal
         function closeModal() {
             document.getElementById('imageModal').classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        // Close modal on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-        // Show error
-        function showError(message) {
+        function showError(msg) {
             document.getElementById('content').innerHTML = `
                 <div class="error">
                     <div class="error-icon">😕</div>
                     <h2 class="error-title">Receipt Not Found</h2>
-                    <p class="error-message">${message}</p>
-                    <a href="https://apps.apple.com/app/onlybills" class="download-button" style="display: inline-flex;">
-                        <span class="download-icon"></span>
-                        <span>Get OnlyBills</span>
-                    </a>
-                </div>
-            `;
+                    <p class="error-message">${msg}</p>
+                </div>`;
         }
 
-        // Render receipt
         function renderReceipt(data) {
-            const container = document.getElementById('content');
-
             let html = '';
 
-            // Header with restaurant photo
+            // Header
             html += `<div class="header">`;
             if (data.restaurantPhotoUrl) {
-                html += `<img class="restaurant-photo" src="${data.restaurantPhotoUrl}" alt="${data.storeName}">`;
+                html += `<img class="header-image" src="${data.restaurantPhotoUrl}" alt="${data.storeName}">`;
             } else {
-                html += `<div class="restaurant-photo-placeholder"><span style="font-size: 48px; opacity: 0.3;">🍽️</span></div>`;
+                html += `<div class="header-placeholder"><span class="header-placeholder-icon">🍽️</span></div>`;
             }
-            html += `<div class="header-overlay">`;
+            html += `<div class="header-gradient"></div>`;
+            html += `<div class="header-content">`;
             html += `<h1 class="store-name">${data.storeName}</h1>`;
             html += `<div class="store-meta">`;
             if (data.rating) {
                 html += `<span class="rating"><span class="star">★</span> ${data.rating.toFixed(1)}`;
-                if (data.ratingCount) {
-                    html += ` <span class="rating-count">(${formatCount(data.ratingCount)})</span>`;
-                }
+                if (data.ratingCount) html += ` (${formatCount(data.ratingCount)})`;
                 html += `</span>`;
+                if (data.placeType || data.date) html += `<span class="meta-separator">·</span>`;
             }
             if (data.placeType) {
-                html += `<span class="meta-dot">•</span><span>${data.placeType}</span>`;
+                html += `<span>${data.placeType}</span>`;
+                if (data.date) html += `<span class="meta-separator">·</span>`;
             }
-            html += `<span class="meta-dot">•</span><span>${formatDate(data.date)}</span>`;
+            html += `<span>${formatDate(data.date)}</span>`;
             html += `</div>`;
             if (data.address) {
-                html += `<div class="address"><span class="address-icon">📍</span><span>${data.address}</span></div>`;
+                html += `<div class="address"><span>📍</span><span>${data.address}</span></div>`;
             }
             html += `</div></div>`;
 
-            // Total Card
-            html += `<div class="total-card">`;
+            // Total
+            html += `<div class="total-section">`;
             html += `<div class="total-label">Total Bill</div>`;
             html += `<div class="total-amount">${formatPrice(data.totalBill, data.currency)}</div>`;
-            html += `<div class="total-meta">Split between ${data.people.length} ${data.people.length === 1 ? 'person' : 'people'}</div>`;
+            html += `<div class="total-info">Split between ${data.people.length} ${data.people.length === 1 ? 'person' : 'people'}</div>`;
             html += `</div>`;
 
-            // People Section
+            // Breakdown
             html += `<div class="section">`;
-            html += `<h2 class="section-title">Breakdown</h2>`;
+            html += `<div class="section-header">Breakdown</div>`;
 
-            data.people.forEach((person, index) => {
-                html += `<div class="person-card" id="person-${index}">`;
+            data.people.forEach((person, i) => {
+                const itemCount = person.items?.length || 0;
+                html += `<div class="person-card">`;
                 html += `<div class="person-header" onclick="togglePerson(this)">`;
+                html += `<div class="person-avatar" style="background:${person.color}">${getInitials(person.name)}</div>`;
                 html += `<div class="person-info">`;
-                html += `<div class="person-avatar" style="background-color: ${person.color}">${getInitials(person.name)}</div>`;
-                html += `<span class="person-name">${person.name}</span>`;
+                html += `<div class="person-name">${person.name}</div>`;
+                html += `<div class="person-items-count">${itemCount} item${itemCount !== 1 ? 's' : ''}</div>`;
                 html += `</div>`;
-                html += `<div style="display: flex; align-items: center; gap: 12px;">`;
-                html += `<span class="person-total">${formatPrice(person.total, data.currency)}</span>`;
-                html += `<span class="expand-icon">▼</span>`;
-                html += `</div>`;
+                html += `<span class="person-amount">${formatPrice(person.total, data.currency)}</span>`;
+                html += `<div class="chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
                 html += `</div>`;
 
-                // Details (expandable)
                 html += `<div class="person-details">`;
-
-                // Items
-                if (person.items && person.items.length > 0) {
+                if (person.items?.length) {
                     person.items.forEach(item => {
-                        html += `<div class="item-row">`;
-                        html += `<span class="item-name">${item.name}${item.quantity && item.quantity !== 1 ? ' × ' + item.quantity : ''}</span>`;
-                        html += `<span class="item-price">${formatPrice(item.price, data.currency)}</span>`;
-                        html += `</div>`;
+                        const qty = item.quantity && item.quantity !== 1 ? ` × ${item.quantity}` : '';
+                        html += `<div class="item-row"><span class="item-name">${item.name}${qty}</span><span class="item-price">${formatPrice(item.price, data.currency)}</span></div>`;
                     });
                 }
 
-                // Subtotal and fees
-                html += `<div class="subtotal-row">`;
-                html += `<span>Subtotal</span>`;
-                html += `<span>${formatPrice(person.subtotal, data.currency)}</span>`;
-                html += `</div>`;
-
-                if (person.tax && person.tax > 0) {
-                    html += `<div class="fee-row"><span>Tax</span><span>${formatPrice(person.tax, data.currency)}</span></div>`;
+                const hasFees = (person.tax > 0) || (person.serviceCharge > 0) || (person.tip > 0);
+                if (hasFees) {
+                    html += `<div class="fees-section">`;
+                    if (person.tax > 0) html += `<div class="fee-row"><span>Tax</span><span>${formatPrice(person.tax, data.currency)}</span></div>`;
+                    if (person.serviceCharge > 0) html += `<div class="fee-row"><span>Service</span><span>${formatPrice(person.serviceCharge, data.currency)}</span></div>`;
+                    if (person.tip > 0) html += `<div class="fee-row"><span>Tip</span><span>${formatPrice(person.tip, data.currency)}</span></div>`;
+                    html += `</div>`;
                 }
-                if (person.serviceCharge && person.serviceCharge > 0) {
-                    html += `<div class="fee-row"><span>Service</span><span>${formatPrice(person.serviceCharge, data.currency)}</span></div>`;
-                }
-                if (person.tip && person.tip > 0) {
-                    html += `<div class="fee-row"><span>Tip</span><span>${formatPrice(person.tip, data.currency)}</span></div>`;
-                }
-
-                html += `</div>`; // person-details
-                html += `</div>`; // person-card
+                html += `</div></div>`;
             });
-
-            html += `</div>`; // section
-
-            // Receipt Image Section
-            if (data.receiptImageUrl) {
-                html += `<div class="section receipt-section">`;
-                html += `<h2 class="section-title">Original Receipt</h2>`;
-                html += `<div class="receipt-image-container">`;
-                html += `<img class="receipt-image" src="${data.receiptImageUrl}" alt="Receipt" onclick="openModal('${data.receiptImageUrl}')">`;
-                html += `</div>`;
-                html += `</div>`;
-            }
-
-            // Powered by
-            html += `<div class="powered-by">`;
-            html += `<p class="powered-by-text">Split with <a href="https://apps.apple.com/app/onlybills">OnlyBills</a></p>`;
             html += `</div>`;
 
-            container.innerHTML = html;
-        }
-
-        // Load receipt data
-        async function loadReceipt() {
-            if (!receiptId) {
-                showError('No receipt ID provided. Please check the link.');
-                return;
+            // Receipt
+            if (data.receiptImageUrl) {
+                html += `<div class="section">`;
+                html += `<div class="section-header">Original Receipt</div>`;
+                html += `<div class="receipt-container">`;
+                html += `<img class="receipt-image" src="${data.receiptImageUrl}" alt="Receipt" onclick="openModal('${data.receiptImageUrl}')">`;
+                html += `</div></div>`;
             }
 
+            // Footer
+            html += `<div class="footer"><p class="footer-text">Split with <a href="https://apps.apple.com/app/onlybills">OnlyBills</a></p></div>`;
+
+            document.getElementById('content').innerHTML = html;
+        }
+
+        async function loadReceipt() {
+            if (!receiptId) { showError('No receipt ID provided.'); return; }
             try {
                 const doc = await db.collection('sharedReceipts').doc(receiptId).get();
-
-                if (!doc.exists) {
-                    showError('This receipt could not be found. It may have been deleted or the link is incorrect.');
-                    return;
-                }
-
-                const data = doc.data();
-                renderReceipt(data);
-
-                // Update page title
-                document.title = `${data.storeName} - Receipt Breakdown`;
-
-            } catch (error) {
-                console.error('Error loading receipt:', error);
-                showError('There was an error loading this receipt. Please try again later.');
+                if (!doc.exists) { showError('This receipt could not be found.'); return; }
+                renderReceipt(doc.data());
+                document.title = `${doc.data().storeName} - OnlyBills`;
+            } catch (e) {
+                console.error(e);
+                showError('Error loading receipt. Please try again.');
             }
         }
 
-        // Initialize
         loadReceipt();
     </script>
 </body>
