@@ -6,54 +6,359 @@
     <title>Receipt Breakdown - OnlyBills</title>
     <meta name="description" content="View the detailed breakdown of this shared receipt">
     <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Receipt Breakdown - OnlyBills">
     <meta property="og:description" content="View how this bill was split">
     <meta property="og:type" content="website">
 
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg-primary: #000000;
-            --bg-card: rgba(255, 255, 255, 0.06);
-            --bg-card-hover: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-tertiary: rgba(255, 255, 255, 0.4);
-            --accent: #34C759;
-            --accent-blue: #007AFF;
-            --border: rgba(255, 255, 255, 0.1);
-            --safe-bottom: env(safe-area-inset-bottom, 20px);
+            --bg: #000;
+            --card: rgba(255,255,255,0.05);
+            --card-hover: rgba(255,255,255,0.08);
+            --text: #fff;
+            --text-dim: rgba(255,255,255,0.6);
+            --text-muted: rgba(255,255,255,0.35);
+            --green: #32D74B;
+            --border: rgba(255,255,255,0.08);
+            --safe-b: env(safe-area-inset-bottom, 16px);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.5;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.4;
             -webkit-font-smoothing: antialiased;
-            -webkit-text-size-adjust: 100%;
-            min-height: 100vh;
-            min-height: 100dvh;
         }
 
-        .container {
-            max-width: 480px;
+        .wrap {
+            max-width: 440px;
             margin: 0 auto;
-            padding: 0 16px;
-            padding-bottom: calc(140px + var(--safe-bottom));
+            padding: 0 16px 120px;
+        }
+
+        /* Header */
+        .hero {
+            position: relative;
+            margin: 0 -16px 16px;
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .hero-img.loaded { opacity: 1; }
+
+        .hero-grad {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--bg) 0%, transparent 60%);
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+        }
+
+        .place-name {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            margin-bottom: 4px;
+        }
+
+        .place-meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-dim);
+            flex-wrap: wrap;
+        }
+
+        .star { color: #FFD60A; }
+        .dot { opacity: 0.4; }
+
+        /* Total */
+        .total-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: var(--card);
+            border-radius: 14px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .total-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .total-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .total-people {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .total-amount {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--green);
+            letter-spacing: -0.5px;
+        }
+
+        /* Section */
+        .section { margin-bottom: 20px; }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 10px;
+            padding-left: 2px;
+        }
+
+        /* Person */
+        .person {
+            background: var(--card);
+            border-radius: 14px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .person-head {
+            display: flex;
+            align-items: center;
+            padding: 12px 14px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .person-head:active { background: var(--card-hover); }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 13px;
+            color: #fff;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .avatar.emoji {
+            font-size: 20px;
+            background: transparent !important;
+        }
+
+        .person-info {
+            flex: 1;
+            margin-left: 10px;
+            min-width: 0;
+        }
+
+        .person-name {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .person-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .person-amt {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--green);
+            margin-right: 6px;
+        }
+
+        .chev {
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+
+        .person.open .chev { transform: rotate(180deg); }
+
+        .person-body {
+            display: none;
+            padding: 0 14px 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .person.open .person-body { display: block; }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .item:last-child { border-bottom: none; }
+        .item-name { color: var(--text-dim); flex: 1; padding-right: 10px; }
+        .item-price { font-weight: 500; }
+
+        .fees {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+        }
+
+        .fee {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            padding: 3px 0;
+        }
+
+        /* Receipt */
+        .receipt-box {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 10px;
+        }
+
+        .receipt-img {
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .receipt-img.loaded { opacity: 1; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px 0 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .footer a { color: var(--green); text-decoration: none; }
+
+        /* Banner */
+        .banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 16px;
+            padding-bottom: calc(12px + var(--safe-b));
+            background: linear-gradient(to top, rgba(0,0,0,0.97), rgba(0,0,0,0.9) 80%, transparent);
+        }
+
+        .dl-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 8px 16px;
+            background: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.15s;
+        }
+
+        .dl-btn:active { transform: scale(0.97); }
+
+        .dl-btn svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .dl-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .dl-small {
+            font-size: 8px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .dl-big {
+            font-size: 14px;
+            color: #000;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal.show { display: flex; }
+
+        .modal-close {
+            position: absolute;
+            top: max(16px, env(safe-area-inset-top));
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 8px;
         }
 
         /* Loading */
@@ -62,651 +367,249 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 80vh;
-            gap: 16px;
+            min-height: 70vh;
+            gap: 12px;
         }
 
-        .spinner {
-            width: 32px;
-            height: 32px;
+        .spin {
+            width: 28px;
+            height: 28px;
             border: 2px solid var(--border);
-            border-top-color: var(--accent);
+            border-top-color: var(--green);
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            animation: spin 0.7s linear infinite;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .loading-text {
-            color: var(--text-tertiary);
-            font-size: 14px;
-        }
+        .loading-text { font-size: 13px; color: var(--text-muted); }
 
         /* Error */
         .error {
             text-align: center;
-            padding: 80px 24px;
+            padding: 60px 20px;
         }
 
-        .error-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-            opacity: 0.8;
+        .error-icon { font-size: 40px; margin-bottom: 12px; }
+        .error-title { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+        .error-msg { font-size: 13px; color: var(--text-dim); }
+
+        /* Skeleton */
+        .skel {
+            background: linear-gradient(90deg, var(--card) 25%, rgba(255,255,255,0.08) 50%, var(--card) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 6px;
         }
 
-        .error-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .error-message {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 32px;
-        }
-
-        /* Header */
-        .header {
-            position: relative;
-            margin: 0 -16px;
-            overflow: hidden;
-        }
-
-        .header-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .header-placeholder {
-            width: 100%;
-            height: 160px;
-            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .header-placeholder-icon {
-            font-size: 40px;
-            opacity: 0.2;
-        }
-
-        .header-gradient {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 140px;
-            background: linear-gradient(to top, var(--bg-primary) 0%, transparent 100%);
-        }
-
-        .header-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-        }
-
-        .store-name {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            margin-bottom: 8px;
-        }
-
-        .store-meta {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .rating {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .star {
-            color: #FFD60A;
-        }
-
-        .meta-separator {
-            opacity: 0.3;
-        }
-
-        /* Total Section */
-        .total-section {
-            padding: 24px 20px;
-            margin: 16px 0;
-            background: linear-gradient(135deg, rgba(52, 199, 89, 0.15) 0%, rgba(52, 199, 89, 0.05) 100%);
-            border-radius: 20px;
-            border: 1px solid rgba(52, 199, 89, 0.2);
-        }
-
-        .total-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-
-        .total-amount {
-            font-size: 36px;
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
-
-        .total-info {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 8px;
-        }
-
-        /* Section */
-        .section {
-            margin: 24px 0;
-        }
-
-        .section-header {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-            padding-left: 4px;
-        }
-
-        /* Person Card */
-        .person-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            margin-bottom: 10px;
-            overflow: hidden;
-            transition: background 0.2s ease;
-        }
-
-        .person-card:active {
-            background: var(--bg-card-hover);
-        }
-
-        .person-header {
-            display: flex;
-            align-items: center;
-            padding: 14px 16px;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .person-avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 14px;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .person-info {
-            flex: 1;
-            margin-left: 12px;
-        }
-
-        .person-name {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .person-items-count {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            margin-top: 1px;
-        }
-
-        .person-amount {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-right: 8px;
-        }
-
-        .chevron {
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-tertiary);
-            transition: transform 0.25s ease;
-        }
-
-        .person-card.expanded .chevron {
-            transform: rotate(180deg);
-        }
-
-        .person-details {
-            display: none;
-            padding: 0 16px 14px;
-            border-top: 1px solid var(--border);
-        }
-
-        .person-card.expanded .person-details {
-            display: block;
-        }
-
-        .item-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            font-size: 14px;
-        }
-
-        .item-row:not(:last-child) {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .item-name {
-            color: var(--text-secondary);
-            flex: 1;
-            padding-right: 12px;
-        }
-
-        .item-price {
-            font-weight: 500;
-        }
-
-        .fees-section {
-            margin-top: 8px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border);
-        }
-
-        .fee-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-            font-size: 13px;
-            color: var(--text-tertiary);
-        }
-
-        /* Receipt Image */
-        .receipt-container {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 12px;
-            margin-top: 8px;
-        }
-
-        .receipt-image {
-            width: 100%;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .receipt-image:active {
-            opacity: 0.8;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 32px 0 16px;
-        }
-
-        .footer-text {
-            font-size: 12px;
-            color: var(--text-tertiary);
-        }
-
-        .footer-text a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        /* Download Banner */
-        .download-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 16px;
-            padding-bottom: calc(16px + var(--safe-bottom));
-            background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.95) 70%, transparent 100%);
-            z-index: 100;
-        }
-
-        .download-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            max-width: 380px;
-            margin: 0 auto;
-            padding: 12px 20px;
-            background: #ffffff;
-            border-radius: 12px;
-            text-decoration: none;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-
-        .download-button:active {
-            transform: scale(0.98);
-            opacity: 0.9;
-        }
-
-        .app-store-badge {
-            width: 24px;
-            height: 24px;
-        }
-
-        .download-content {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .download-subtitle {
-            font-size: 9px;
-            font-weight: 500;
-            color: #666;
-            letter-spacing: 0.2px;
-            line-height: 1;
-        }
-
-        .download-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #000;
-            letter-spacing: -0.2px;
-            line-height: 1.2;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            padding: 20px;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: max(20px, env(safe-area-inset-top));
-            right: 20px;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-image {
-            max-width: 100%;
-            max-height: 85vh;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        /* Address */
-        .address {
-            display: flex;
-            align-items: flex-start;
-            gap: 6px;
-            margin-top: 8px;
-            font-size: 12px;
-            color: var(--text-tertiary);
-        }
-
-        @media (min-width: 500px) {
-            .container {
-                padding: 0 24px;
-                padding-bottom: calc(160px + var(--safe-bottom));
-            }
-
-            .header {
-                margin: 0 -24px;
-            }
-
-            .header-image {
-                height: 260px;
-            }
-
-            .store-name {
-                font-size: 28px;
-            }
-
-            .total-amount {
-                font-size: 42px;
-            }
-        }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
 </head>
 <body>
-    <div class="container" id="content">
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p class="loading-text">Loading breakdown...</p>
+    <div class="wrap" id="app">
+        <div class="loading">
+            <div class="spin"></div>
+            <p class="loading-text">Loading...</p>
         </div>
     </div>
 
-    <div class="modal" id="imageModal" onclick="closeModal()">
-        <button class="modal-close" onclick="closeModal()">&times;</button>
-        <img class="modal-image" id="modalImage" src="" alt="Receipt">
+    <div class="modal" id="modal" onclick="closeModal()">
+        <button class="modal-close">&times;</button>
+        <img class="modal-img" id="modalImg">
     </div>
 
-    <div class="download-banner">
-        <a href="https://apps.apple.com/app/onlybills" class="download-button">
-            <svg class="app-store-badge" viewBox="0 0 24 24" fill="none">
-                <path d="M17.0349 12.7587C17.0166 10.4259 18.8651 9.29638 18.9528 9.24094C17.8865 7.70181 16.2217 7.48562 15.6255 7.46686C14.2331 7.32159 12.8857 8.30993 12.1788 8.30993C11.4569 8.30993 10.3615 7.48187 9.18285 7.50688C7.66241 7.53127 6.24666 8.41618 5.46598 9.78855C3.85341 12.5916 5.05146 16.7278 6.59614 18.9953C7.36933 20.1048 8.27721 21.3455 9.45525 21.3018C10.6046 21.2537 11.0295 20.5531 12.4119 20.5531C13.7793 20.5531 14.1754 21.3018 15.377 21.2724C16.6142 21.2537 17.3992 20.1579 18.1437 19.038C19.0428 17.7536 19.3952 16.4917 19.4096 16.4255C19.3796 16.4168 17.0562 15.5281 17.0349 12.7587Z" fill="black"/>
-                <path d="M14.8054 5.96162C15.4366 5.19033 15.8683 4.14327 15.7493 3.08008C14.8386 3.12071 13.7038 3.69759 13.0439 4.45263C12.4577 5.12268 11.9335 6.20709 12.0675 7.22951C13.0864 7.30682 14.1449 6.72057 14.8054 5.96162Z" fill="black"/>
+    <div class="banner">
+        <a href="https://apps.apple.com/app/onlybills" class="dl-btn">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M17.05 12.76c-.02-2.33 1.83-3.46 1.91-3.51-.94-1.54-2.6-1.76-3.2-1.78-1.39-.14-2.74.87-3.45.87-.72 0-1.82-.85-3-.83-1.52.03-2.94.94-3.72 2.31-1.61 2.8-.41 6.94 1.13 9.21.77 1.11 1.68 2.35 2.86 2.31 1.15-.04 1.58-.74 2.96-.74 1.37 0 1.77.74 2.97.71 1.24-.02 2.02-1.11 2.76-2.23.9-1.28 1.26-2.55 1.27-2.61-.03-.01-2.32-.89-2.34-3.52z" fill="#000"/>
+                <path d="M14.8 5.96c.63-.77 1.06-1.82.94-2.88-.91.04-2.04.64-2.7 1.4-.58.67-1.1 1.75-.97 2.78 1.02.08 2.08-.51 2.73-1.3z" fill="#000"/>
             </svg>
-            <div class="download-content">
-                <span class="download-subtitle">Download on the</span>
-                <span class="download-title">App Store</span>
+            <div class="dl-text">
+                <span class="dl-small">Download on the</span>
+                <span class="dl-big">App Store</span>
             </div>
         </a>
     </div>
 
     <script>
-        const firebaseConfig = {
+        firebase.initializeApp({
             apiKey: "AIzaSyByDh_nxkV1kWGdIHFldDAoIU7iGqU3FQc",
             authDomain: "onlybills-b8dac.firebaseapp.com",
             projectId: "onlybills-b8dac",
             storageBucket: "onlybills-b8dac.firebasestorage.app",
             messagingSenderId: "572680746912",
             appId: "1:572680746912:web:9c3890b712bdc19a9a16c5"
+        });
+
+        const db = firebase.firestore();
+        const id = new URLSearchParams(location.search).get('id');
+
+        const fmt = (n, c) => {
+            const s = { GBP:'£', USD:'$', EUR:'€', JPY:'¥', CAD:'C$', AUD:'A$', SGD:'S$', MYR:'RM', THB:'฿', INR:'₹', KRW:'₩', CNY:'¥', HKD:'HK$' };
+            return (s[c] || c + ' ') + n.toFixed(2);
         };
 
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        const fmtDate = t => {
+            const d = t.toDate ? t.toDate() : new Date(t);
+            return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+        };
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const receiptId = urlParams.get('id');
+        const fmtCount = n => n >= 1000 ? (n/1000).toFixed(1) + 'K' : n;
 
-        function formatPrice(amount, currency) {
-            const symbols = {
-                'GBP': '£', 'USD': '$', 'EUR': '€', 'JPY': '¥',
-                'CAD': 'C$', 'AUD': 'A$', 'CHF': 'CHF', 'CNY': '¥',
-                'SGD': 'S$', 'HKD': 'HK$', 'MYR': 'RM', 'THB': '฿',
-                'INR': '₹', 'KRW': '₩'
-            };
-            return (symbols[currency] || currency + ' ') + amount.toFixed(2);
-        }
+        // Check if string starts with emoji
+        const startsWithEmoji = str => {
+            const emojiRegex = /^(?:\p{Emoji_Presentation}|\p{Emoji}\uFE0F)/u;
+            return emojiRegex.test(str.trim());
+        };
 
-        function formatDate(timestamp) {
-            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-            return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-        }
+        const getDisplay = name => {
+            const n = name.trim();
+            if (startsWithEmoji(n)) {
+                // Extract first emoji cluster
+                const match = n.match(/^(\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji})/u);
+                return { emoji: true, char: match ? match[0] : n.charAt(0) };
+            }
+            const p = n.split(' ');
+            const initials = p.length >= 2 ? (p[0][0] + p[1][0]).toUpperCase() : n.charAt(0).toUpperCase();
+            return { emoji: false, char: initials };
+        };
 
-        function formatCount(count) {
-            return count >= 1000 ? (count / 1000).toFixed(1) + 'K' : count.toString();
-        }
+        const toggle = el => el.closest('.person').classList.toggle('open');
 
-        function getInitials(name) {
-            const parts = name.trim().split(' ');
-            return parts.length >= 2 ? (parts[0][0] + parts[1][0]).toUpperCase() : name.charAt(0).toUpperCase();
-        }
-
-        function togglePerson(el) {
-            el.closest('.person-card').classList.toggle('expanded');
-        }
-
-        function openModal(src) {
-            document.getElementById('modalImage').src = src;
-            document.getElementById('imageModal').classList.add('active');
+        const openModal = src => {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('modal').classList.add('show');
             document.body.style.overflow = 'hidden';
-        }
+        };
 
-        function closeModal() {
-            document.getElementById('imageModal').classList.remove('active');
+        const closeModal = () => {
+            document.getElementById('modal').classList.remove('show');
             document.body.style.overflow = '';
-        }
+        };
 
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+        document.addEventListener('keydown', e => e.key === 'Escape' && closeModal());
 
-        function showError(msg) {
-            document.getElementById('content').innerHTML = `
-                <div class="error">
-                    <div class="error-icon">😕</div>
-                    <h2 class="error-title">Receipt Not Found</h2>
-                    <p class="error-message">${msg}</p>
-                </div>`;
-        }
+        const lazyImg = (src, cls) => {
+            const img = document.createElement('img');
+            img.className = cls;
+            img.onload = () => img.classList.add('loaded');
+            img.src = src;
+            return img.outerHTML.replace('>', ` src="${src}">`);
+        };
 
-        function renderReceipt(data) {
-            let html = '';
+        const render = d => {
+            let h = '';
 
-            // Header
-            html += `<div class="header">`;
-            if (data.restaurantPhotoUrl) {
-                html += `<img class="header-image" src="${data.restaurantPhotoUrl}" alt="${data.storeName}">`;
-            } else {
-                html += `<div class="header-placeholder"><span class="header-placeholder-icon">🍽️</span></div>`;
+            // Hero
+            h += `<div class="hero">`;
+            if (d.restaurantPhotoUrl) {
+                h += `<img class="hero-img" onload="this.classList.add('loaded')" src="${d.restaurantPhotoUrl}" alt="">`;
             }
-            html += `<div class="header-gradient"></div>`;
-            html += `<div class="header-content">`;
-            html += `<h1 class="store-name">${data.storeName}</h1>`;
-            html += `<div class="store-meta">`;
-            if (data.rating) {
-                html += `<span class="rating"><span class="star">★</span> ${data.rating.toFixed(1)}`;
-                if (data.ratingCount) html += ` (${formatCount(data.ratingCount)})`;
-                html += `</span>`;
-                if (data.placeType || data.date) html += `<span class="meta-separator">·</span>`;
+            h += `<div class="hero-grad"></div>`;
+            h += `<div class="hero-content">`;
+            h += `<h1 class="place-name">${d.storeName}</h1>`;
+            h += `<div class="place-meta">`;
+            if (d.rating) {
+                h += `<span><span class="star">★</span> ${d.rating.toFixed(1)}`;
+                if (d.ratingCount) h += ` (${fmtCount(d.ratingCount)})`;
+                h += `</span>`;
             }
-            if (data.placeType) {
-                html += `<span>${data.placeType}</span>`;
-                if (data.date) html += `<span class="meta-separator">·</span>`;
-            }
-            html += `<span>${formatDate(data.date)}</span>`;
-            html += `</div>`;
-            if (data.address) {
-                html += `<div class="address"><span>📍</span><span>${data.address}</span></div>`;
-            }
-            html += `</div></div>`;
+            if (d.rating && d.placeType) h += `<span class="dot">·</span>`;
+            if (d.placeType) h += `<span>${d.placeType}</span>`;
+            if ((d.rating || d.placeType) && d.date) h += `<span class="dot">·</span>`;
+            h += `<span>${fmtDate(d.date)}</span>`;
+            h += `</div></div></div>`;
 
-            // Total
-            html += `<div class="total-section">`;
-            html += `<div class="total-label">Total Bill</div>`;
-            html += `<div class="total-amount">${formatPrice(data.totalBill, data.currency)}</div>`;
-            html += `<div class="total-info">Split between ${data.people.length} ${data.people.length === 1 ? 'person' : 'people'}</div>`;
-            html += `</div>`;
+            // Total row
+            h += `<div class="total-row">`;
+            h += `<div class="total-left">`;
+            h += `<span class="total-label">Total</span>`;
+            h += `<span class="total-people">${d.people.length} ${d.people.length === 1 ? 'person' : 'people'}</span>`;
+            h += `</div>`;
+            h += `<span class="total-amount">${fmt(d.totalBill, d.currency)}</span>`;
+            h += `</div>`;
 
-            // Breakdown
-            html += `<div class="section">`;
-            html += `<div class="section-header">Breakdown</div>`;
+            // People
+            h += `<div class="section">`;
+            h += `<div class="section-title">Breakdown</div>`;
 
-            data.people.forEach((person, i) => {
-                const itemCount = person.items?.length || 0;
-                html += `<div class="person-card">`;
-                html += `<div class="person-header" onclick="togglePerson(this)">`;
-                html += `<div class="person-avatar" style="background:${person.color}">${getInitials(person.name)}</div>`;
-                html += `<div class="person-info">`;
-                html += `<div class="person-name">${person.name}</div>`;
-                html += `<div class="person-items-count">${itemCount} item${itemCount !== 1 ? 's' : ''}</div>`;
-                html += `</div>`;
-                html += `<span class="person-amount">${formatPrice(person.total, data.currency)}</span>`;
-                html += `<div class="chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
-                html += `</div>`;
+            d.people.forEach(p => {
+                const disp = getDisplay(p.name);
+                const items = p.items?.length || 0;
 
-                html += `<div class="person-details">`;
-                if (person.items?.length) {
-                    person.items.forEach(item => {
-                        const qty = item.quantity && item.quantity !== 1 ? ` × ${item.quantity}` : '';
-                        html += `<div class="item-row"><span class="item-name">${item.name}${qty}</span><span class="item-price">${formatPrice(item.price, data.currency)}</span></div>`;
+                h += `<div class="person">`;
+                h += `<div class="person-head" onclick="toggle(this)">`;
+
+                if (disp.emoji) {
+                    h += `<div class="avatar emoji">${disp.char}</div>`;
+                } else {
+                    h += `<div class="avatar" style="background:${p.color}">${disp.char}</div>`;
+                }
+
+                h += `<div class="person-info">`;
+                h += `<div class="person-name">${p.name}</div>`;
+                h += `<div class="person-sub">${items} item${items !== 1 ? 's' : ''}</div>`;
+                h += `</div>`;
+                h += `<span class="person-amt">${fmt(p.total, d.currency)}</span>`;
+                h += `<svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+                h += `</div>`;
+
+                h += `<div class="person-body">`;
+                if (p.items?.length) {
+                    p.items.forEach(i => {
+                        const q = i.quantity && i.quantity !== 1 ? ` ×${i.quantity}` : '';
+                        h += `<div class="item"><span class="item-name">${i.name}${q}</span><span class="item-price">${fmt(i.price, d.currency)}</span></div>`;
                     });
                 }
 
-                const hasFees = (person.tax > 0) || (person.serviceCharge > 0) || (person.tip > 0);
-                if (hasFees) {
-                    html += `<div class="fees-section">`;
-                    if (person.tax > 0) html += `<div class="fee-row"><span>Tax</span><span>${formatPrice(person.tax, data.currency)}</span></div>`;
-                    if (person.serviceCharge > 0) html += `<div class="fee-row"><span>Service</span><span>${formatPrice(person.serviceCharge, data.currency)}</span></div>`;
-                    if (person.tip > 0) html += `<div class="fee-row"><span>Tip</span><span>${formatPrice(person.tip, data.currency)}</span></div>`;
-                    html += `</div>`;
+                if ((p.tax > 0) || (p.serviceCharge > 0) || (p.tip > 0)) {
+                    h += `<div class="fees">`;
+                    if (p.tax > 0) h += `<div class="fee"><span>Tax</span><span>${fmt(p.tax, d.currency)}</span></div>`;
+                    if (p.serviceCharge > 0) h += `<div class="fee"><span>Service</span><span>${fmt(p.serviceCharge, d.currency)}</span></div>`;
+                    if (p.tip > 0) h += `<div class="fee"><span>Tip</span><span>${fmt(p.tip, d.currency)}</span></div>`;
+                    h += `</div>`;
                 }
-                html += `</div></div>`;
+
+                h += `</div></div>`;
             });
-            html += `</div>`;
+
+            h += `</div>`;
 
             // Receipt
-            if (data.receiptImageUrl) {
-                html += `<div class="section">`;
-                html += `<div class="section-header">Original Receipt</div>`;
-                html += `<div class="receipt-container">`;
-                html += `<img class="receipt-image" src="${data.receiptImageUrl}" alt="Receipt" onclick="openModal('${data.receiptImageUrl}')">`;
-                html += `</div></div>`;
+            if (d.receiptImageUrl) {
+                h += `<div class="section">`;
+                h += `<div class="section-title">Receipt</div>`;
+                h += `<div class="receipt-box">`;
+                h += `<img class="receipt-img" onload="this.classList.add('loaded')" src="${d.receiptImageUrl}" onclick="openModal('${d.receiptImageUrl}')">`;
+                h += `</div></div>`;
             }
 
-            // Footer
-            html += `<div class="footer"><p class="footer-text">Split with <a href="https://apps.apple.com/app/onlybills">OnlyBills</a></p></div>`;
+            h += `<div class="footer">Split with <a href="https://apps.apple.com/app/onlybills">OnlyBills</a></div>`;
 
-            document.getElementById('content').innerHTML = html;
-        }
+            document.getElementById('app').innerHTML = h;
+        };
 
-        async function loadReceipt() {
-            if (!receiptId) { showError('No receipt ID provided.'); return; }
+        const showErr = m => {
+            document.getElementById('app').innerHTML = `
+                <div class="error">
+                    <div class="error-icon">😕</div>
+                    <div class="error-title">Not Found</div>
+                    <div class="error-msg">${m}</div>
+                </div>`;
+        };
+
+        (async () => {
+            if (!id) return showErr('No receipt ID');
             try {
-                const doc = await db.collection('sharedReceipts').doc(receiptId).get();
-                if (!doc.exists) { showError('This receipt could not be found.'); return; }
-                renderReceipt(doc.data());
-                document.title = `${doc.data().storeName} - OnlyBills`;
+                const doc = await db.collection('sharedReceipts').doc(id).get();
+                if (!doc.exists) return showErr('Receipt not found');
+                render(doc.data());
+                document.title = doc.data().storeName + ' - OnlyBills';
             } catch (e) {
                 console.error(e);
-                showError('Error loading receipt. Please try again.');
+                showErr('Error loading');
             }
-        }
-
-        loadReceipt();
+        })();
     </script>
 </body>
 </html>
