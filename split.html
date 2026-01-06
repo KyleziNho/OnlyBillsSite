@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt Breakdown - OnlyBills</title>
+    <meta name="description" content="View the detailed breakdown of this shared receipt">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Receipt Breakdown - OnlyBills">
+    <meta property="og:description" content="View how this bill was split">
+    <meta property="og:type" content="website">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Rounded', 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            padding-bottom: 100px;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            gap: 20px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #007AFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #888;
+            font-size: 15px;
+        }
+
+        /* Error State */
+        .error {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .error-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .error-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            color: #888;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            margin: -20px -16px 20px;
+            border-radius: 0 0 24px 24px;
+            overflow: hidden;
+        }
+
+        .restaurant-photo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .restaurant-photo-placeholder {
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 60px 20px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+        }
+
+        .store-name {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .store-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .star {
+            color: #FFD700;
+        }
+
+        .rating-count {
+            color: #888;
+        }
+
+        .meta-dot {
+            color: #555;
+        }
+
+        /* Total Card */
+        .total-card {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .total-label {
+            font-size: 14px;
+            color: #8ab4f8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .total-amount {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .total-meta {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #8ab4f8;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        /* Person Card */
+        .person-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .person-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .person-header:active {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .person-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .person-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+        }
+
+        .person-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .person-total {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .person-details {
+            padding: 0 16px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+
+        .person-details.expanded {
+            display: block;
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .item-row:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            color: #ccc;
+        }
+
+        .item-price {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .fee-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .subtotal-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0 6px;
+            font-size: 14px;
+            color: #aaa;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 8px;
+        }
+
+        .expand-icon {
+            color: #555;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+
+        .person-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Receipt Image */
+        .receipt-section {
+            margin-top: 32px;
+        }
+
+        .receipt-image-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .receipt-image {
+            width: 100%;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .receipt-image:active {
+            transform: scale(0.98);
+        }
+
+        /* App Download Banner */
+        .download-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.95) 20%);
+            padding: 30px 16px 24px;
+        }
+
+        .download-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #007AFF;
+            color: white;
+            text-decoration: none;
+            padding: 16px 24px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            max-width: 500px;
+            margin: 0 auto;
+            transition: all 0.2s;
+        }
+
+        .download-button:active {
+            transform: scale(0.98);
+            background: #0066DD;
+        }
+
+        .download-icon {
+            font-size: 24px;
+        }
+
+        /* Image Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        /* Address */
+        .address {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .address-icon {
+            margin-top: 2px;
+        }
+
+        /* Powered by */
+        .powered-by {
+            text-align: center;
+            margin-top: 32px;
+            padding: 20px;
+        }
+
+        .powered-by-text {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .powered-by a {
+            color: #007AFF;
+            text-decoration: none;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 40px 24px;
+                padding-bottom: 120px;
+            }
+
+            .header {
+                margin: -40px -24px 30px;
+                border-radius: 0 0 32px 32px;
+            }
+
+            .restaurant-photo {
+                height: 280px;
+            }
+
+            .download-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content">
+        <!-- Loading State -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p class="loading-text">Loading receipt breakdown...</p>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <img class="modal-image" id="modalImage" src="" alt="Receipt">
+    </div>
+
+    <!-- Download Banner -->
+    <div class="download-banner">
+        <a href="https://apps.apple.com/app/onlybills" class="download-button" id="downloadBtn">
+            <span class="download-icon"></span>
+            <span>Download OnlyBills</span>
+        </a>
+    </div>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyByDh_nxkV1kWGdIHFldDAoIU7iGqU3FQc",
+            authDomain: "onlybills-b8dac.firebaseapp.com",
+            projectId: "onlybills-b8dac",
+            storageBucket: "onlybills-b8dac.firebasestorage.app",
+            messagingSenderId: "572680746912",
+            appId: "1:572680746912:web:9c3890b712bdc19a9a16c5"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Get receipt ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const receiptId = urlParams.get('id');
+
+        // Format currency
+        function formatPrice(amount, currency) {
+            const symbols = {
+                'GBP': '£', 'USD': '$', 'EUR': '€', 'JPY': '¥',
+                'CAD': 'CA$', 'AUD': 'A$', 'CHF': 'CHF', 'CNY': '¥'
+            };
+            const symbol = symbols[currency] || currency + ' ';
+            return symbol + amount.toFixed(2);
+        }
+
+        // Format date
+        function formatDate(timestamp) {
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+            return date.toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+
+        // Format rating count
+        function formatCount(count) {
+            if (count >= 1000) {
+                return (count / 1000).toFixed(1) + 'K';
+            }
+            return count.toString();
+        }
+
+        // Get initials from name
+        function getInitials(name) {
+            const parts = name.trim().split(' ');
+            if (parts.length >= 2) {
+                return (parts[0][0] + parts[1][0]).toUpperCase();
+            }
+            return name.charAt(0).toUpperCase();
+        }
+
+        // Toggle person details
+        function togglePerson(element) {
+            const card = element.closest('.person-card');
+            const details = card.querySelector('.person-details');
+            card.classList.toggle('expanded');
+            details.classList.toggle('expanded');
+        }
+
+        // Open image modal
+        function openModal(src) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('imageModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close image modal
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Show error
+        function showError(message) {
+            document.getElementById('content').innerHTML = `
+                <div class="error">
+                    <div class="error-icon">😕</div>
+                    <h2 class="error-title">Receipt Not Found</h2>
+                    <p class="error-message">${message}</p>
+                    <a href="https://apps.apple.com/app/onlybills" class="download-button" style="display: inline-flex;">
+                        <span class="download-icon"></span>
+                        <span>Get OnlyBills</span>
+                    </a>
+                </div>
+            `;
+        }
+
+        // Render receipt
+        function renderReceipt(data) {
+            const container = document.getElementById('content');
+
+            let html = '';
+
+            // Header with restaurant photo
+            html += `<div class="header">`;
+            if (data.restaurantPhotoUrl) {
+                html += `<img class="restaurant-photo" src="${data.restaurantPhotoUrl}" alt="${data.storeName}">`;
+            } else {
+                html += `<div class="restaurant-photo-placeholder"><span style="font-size: 48px; opacity: 0.3;">🍽️</span></div>`;
+            }
+            html += `<div class="header-overlay">`;
+            html += `<h1 class="store-name">${data.storeName}</h1>`;
+            html += `<div class="store-meta">`;
+            if (data.rating) {
+                html += `<span class="rating"><span class="star">★</span> ${data.rating.toFixed(1)}`;
+                if (data.ratingCount) {
+                    html += ` <span class="rating-count">(${formatCount(data.ratingCount)})</span>`;
+                }
+                html += `</span>`;
+            }
+            if (data.placeType) {
+                html += `<span class="meta-dot">•</span><span>${data.placeType}</span>`;
+            }
+            html += `<span class="meta-dot">•</span><span>${formatDate(data.date)}</span>`;
+            html += `</div>`;
+            if (data.address) {
+                html += `<div class="address"><span class="address-icon">📍</span><span>${data.address}</span></div>`;
+            }
+            html += `</div></div>`;
+
+            // Total Card
+            html += `<div class="total-card">`;
+            html += `<div class="total-label">Total Bill</div>`;
+            html += `<div class="total-amount">${formatPrice(data.totalBill, data.currency)}</div>`;
+            html += `<div class="total-meta">Split between ${data.people.length} ${data.people.length === 1 ? 'person' : 'people'}</div>`;
+            html += `</div>`;
+
+            // People Section
+            html += `<div class="section">`;
+            html += `<h2 class="section-title">Breakdown</h2>`;
+
+            data.people.forEach((person, index) => {
+                html += `<div class="person-card" id="person-${index}">`;
+                html += `<div class="person-header" onclick="togglePerson(this)">`;
+                html += `<div class="person-info">`;
+                html += `<div class="person-avatar" style="background-color: ${person.color}">${getInitials(person.name)}</div>`;
+                html += `<span class="person-name">${person.name}</span>`;
+                html += `</div>`;
+                html += `<div style="display: flex; align-items: center; gap: 12px;">`;
+                html += `<span class="person-total">${formatPrice(person.total, data.currency)}</span>`;
+                html += `<span class="expand-icon">▼</span>`;
+                html += `</div>`;
+                html += `</div>`;
+
+                // Details (expandable)
+                html += `<div class="person-details">`;
+
+                // Items
+                if (person.items && person.items.length > 0) {
+                    person.items.forEach(item => {
+                        html += `<div class="item-row">`;
+                        html += `<span class="item-name">${item.name}${item.quantity && item.quantity !== 1 ? ' × ' + item.quantity : ''}</span>`;
+                        html += `<span class="item-price">${formatPrice(item.price, data.currency)}</span>`;
+                        html += `</div>`;
+                    });
+                }
+
+                // Subtotal and fees
+                html += `<div class="subtotal-row">`;
+                html += `<span>Subtotal</span>`;
+                html += `<span>${formatPrice(person.subtotal, data.currency)}</span>`;
+                html += `</div>`;
+
+                if (person.tax && person.tax > 0) {
+                    html += `<div class="fee-row"><span>Tax</span><span>${formatPrice(person.tax, data.currency)}</span></div>`;
+                }
+                if (person.serviceCharge && person.serviceCharge > 0) {
+                    html += `<div class="fee-row"><span>Service</span><span>${formatPrice(person.serviceCharge, data.currency)}</span></div>`;
+                }
+                if (person.tip && person.tip > 0) {
+                    html += `<div class="fee-row"><span>Tip</span><span>${formatPrice(person.tip, data.currency)}</span></div>`;
+                }
+
+                html += `</div>`; // person-details
+                html += `</div>`; // person-card
+            });
+
+            html += `</div>`; // section
+
+            // Receipt Image Section
+            if (data.receiptImageUrl) {
+                html += `<div class="section receipt-section">`;
+                html += `<h2 class="section-title">Original Receipt</h2>`;
+                html += `<div class="receipt-image-container">`;
+                html += `<img class="receipt-image" src="${data.receiptImageUrl}" alt="Receipt" onclick="openModal('${data.receiptImageUrl}')">`;
+                html += `</div>`;
+                html += `</div>`;
+            }
+
+            // Powered by
+            html += `<div class="powered-by">`;
+            html += `<p class="powered-by-text">Split with <a href="https://apps.apple.com/app/onlybills">OnlyBills</a></p>`;
+            html += `</div>`;
+
+            container.innerHTML = html;
+        }
+
+        // Load receipt data
+        async function loadReceipt() {
+            if (!receiptId) {
+                showError('No receipt ID provided. Please check the link.');
+                return;
+            }
+
+            try {
+                const doc = await db.collection('sharedReceipts').doc(receiptId).get();
+
+                if (!doc.exists) {
+                    showError('This receipt could not be found. It may have been deleted or the link is incorrect.');
+                    return;
+                }
+
+                const data = doc.data();
+                renderReceipt(data);
+
+                // Update page title
+                document.title = `${data.storeName} - Receipt Breakdown`;
+
+            } catch (error) {
+                console.error('Error loading receipt:', error);
+                showError('There was an error loading this receipt. Please try again later.');
+            }
+        }
+
+        // Initialize
+        loadReceipt();
+    </script>
+</body>
+</html>
