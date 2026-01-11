@@ -333,16 +333,26 @@ const ImageModal = ({ imageUrl, onClose }) => (
   </motion.div>
 );
 
-const AppStoreBanner = () => (
-  <motion.div className="app-banner" initial={{ y: 100 }} animate={{ y: 0 }} transition={{ delay: 0.5, type: 'spring', stiffness: 300, damping: 30 }}>
-    <a href="https://apps.apple.com/app/onlybills" className="download-button">
-      <img src="app-icon.png" alt="OnlyBills" className="app-icon-img" />
-      <div className="download-text">
-        <span className="download-small">Download</span>
-        <span className="download-big">OnlyBills</span>
-      </div>
-    </a>
-  </motion.div>
+const AppStoreBanner = ({ visible }) => (
+  <AnimatePresence>
+    {visible && (
+      <motion.div
+        className="app-banner"
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 100, opacity: 0 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+      >
+        <a href="https://apps.apple.com/app/onlybills" className="download-button">
+          <img src="app-icon.png" alt="OnlyBills" className="app-icon-img" />
+          <div className="download-text">
+            <span className="download-small">Download</span>
+            <span className="download-big">OnlyBills</span>
+          </div>
+        </a>
+      </motion.div>
+    )}
+  </AnimatePresence>
 );
 
 const LoadingState = () => (
@@ -371,6 +381,25 @@ function App() {
   const [error, setError] = useState(null);
   const [heroLoaded, setHeroLoaded] = useState(false);
   const [modalImage, setModalImage] = useState(null);
+  const [bannerVisible, setBannerVisible] = useState(true);
+
+  // Hide banner while scrolling, show when stopped
+  useEffect(() => {
+    let scrollTimeout;
+    const handleScroll = () => {
+      setBannerVisible(false);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setBannerVisible(true);
+      }, 300);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchReceipt = async () => {
@@ -415,8 +444,8 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [modalImage]);
 
-  if (loading) return <div className="app"><LoadingState /><AppStoreBanner /></div>;
-  if (error) return <div className="app"><ErrorState message={error} /><AppStoreBanner /></div>;
+  if (loading) return <div className="app"><LoadingState /><AppStoreBanner visible={true} /></div>;
+  if (error) return <div className="app"><ErrorState message={error} /><AppStoreBanner visible={true} /></div>;
 
   return (
     <div className="app">
@@ -447,7 +476,7 @@ function App() {
         </motion.div>
       </div>
 
-      <AppStoreBanner />
+      <AppStoreBanner visible={bannerVisible} />
 
       <AnimatePresence>
         {modalImage && <ImageModal imageUrl={modalImage} onClose={() => setModalImage(null)} />}

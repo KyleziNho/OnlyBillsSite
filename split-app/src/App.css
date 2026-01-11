@@ -466,34 +466,31 @@
   right: 0;
   padding: 16px 20px;
   padding-bottom: calc(16px + var(--safe-bottom));
-  background: linear-gradient(
-    to top,
-    rgba(10, 10, 15, 0.98) 0%,
-    rgba(10, 10, 15, 0.95) 50%,
-    transparent 100%
-  );
-  backdrop-filter: blur(20px);
   z-index: 100;
+  pointer-events: none;
 }
 
 .download-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  max-width: 220px;
+  gap: 12px;
+  width: calc(100% - 40px);
+  max-width: 400px;
   margin: 0 auto;
-  padding: 12px 20px;
-  background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
-  border-radius: var(--radius-md);
+  padding: 14px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  pointer-events: auto;
 }
 
 .download-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 .download-button:active {
