@@ -229,7 +229,7 @@ export default function LiveBillPage({ docId, initialData, demo }) {
 
       {bill.locked && (
         <motion.div className="lock-banner" initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}>
-          🔒 {hostName} locked the bill — totals are final
+          ✨ This table is settled — totals are final. You can still view and pay your share.
         </motion.div>
       )}
 
