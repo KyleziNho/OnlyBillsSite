@@ -324,6 +324,13 @@
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25);
 }
 .pay-mark.small { width: 36px; height: 36px; font-size: 17px; }
+.pay-mark.has-logo {
+  background: #fff;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4), 0 2px 6px rgba(0,0,0,0.18);
+}
+.pay-logo { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pay-text { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .pay-label { font-weight: 700; font-size: 16.5px; letter-spacing: -0.01em; }
 .pay-note {
@@ -342,38 +349,59 @@
 }
 .pay-btn .ico { width: 22px; height: 22px; color: rgba(255,255,255,0.9); flex-shrink: 0; }
 
-/* ── Bank card ────────────────────────────────────────── */
+/* ── Bank card (per-field copy) ───────────────────────── */
 .bank-card {
   width: 100%;
   text-align: left;
   border: 1px solid var(--line);
   background: var(--card);
   border-radius: var(--r-md);
-  padding: 14px 16px;
-  cursor: pointer;
+  padding: 14px 14px 12px;
   color: var(--ink);
-  transition: border-color 0.2s, background 0.2s;
 }
-.bank-card:hover { border-color: var(--line-strong); background: var(--card-2); }
-.bank-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.bank-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.bank-head-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .bank-card .pay-mark {
   background: color-mix(in srgb, var(--brand) 22%, transparent);
   color: var(--brand);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand) 40%, transparent);
 }
-.bank-title { flex: 1; font-weight: 700; font-size: 16px; }
-.bank-copy {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 12.5px; font-weight: 600; color: var(--brand);
-}
-.bank-copy .ico { width: 15px; height: 15px; }
-.bank-rows { display: flex; flex-direction: column; gap: 7px; padding-left: 52px; }
+.bank-title { font-weight: 700; font-size: 16px; }
+.bank-sub { font-size: 12px; color: var(--ink-faint); font-weight: 500; }
+.bank-rows { display: flex; flex-direction: column; gap: 8px; }
 .bank-row {
-  display: flex; justify-content: space-between; gap: 12px;
-  font-family: var(--mono); font-size: 13px;
+  display: flex; align-items: center; gap: 10px;
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  background: rgba(245,241,232,0.03);
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.18s, background 0.18s;
 }
-.bank-row span { color: var(--ink-faint); }
-.bank-row b { color: var(--ink); font-weight: 600; }
+.bank-row:hover { border-color: var(--line-strong); background: var(--card-2); }
+.bank-row-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink-faint);
+  flex: 0 0 84px;
+}
+.bank-row-val {
+  flex: 1; min-width: 0;
+  font-family: var(--mono); font-size: 14.5px; font-weight: 600;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.bank-row-copy {
+  display: inline-flex; align-items: center; gap: 4px;
+  flex-shrink: 0;
+  font-size: 12px; font-weight: 700;
+  color: var(--brand);
+}
+.bank-row-copy .ico { width: 14px; height: 14px; }
+.bank-row.copied { border-color: var(--mint); background: rgba(56, 211, 159, 0.08); }
+.bank-row.copied .bank-row-copy { color: var(--mint); }
 
 /* ── QR ───────────────────────────────────────────────── */
 .qr-card {
@@ -828,6 +856,71 @@
   cursor: pointer;
 }
 .ive-paid .ico { width: 17px; height: 17px; }
+
+/* Lead line above the pay methods — keeps the amount + payee in view */
+.pay-lead {
+  margin: 2px 2px 2px;
+  font-size: 13.5px; font-weight: 500;
+  color: var(--ink-dim);
+}
+.pay-lead b { color: var(--ink); font-weight: 700; font-family: var(--mono); }
+.pay-lead.settled {
+  margin-top: 14px;
+  text-align: center;
+  color: var(--mint); font-weight: 600;
+}
+
+/* Paid confirmation + undo (replaces the old host-confirmation flow) */
+.paid-done {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: rgba(56, 211, 159, 0.1);
+  border: 1.5px solid rgba(56, 211, 159, 0.35);
+  border-radius: var(--r-md);
+}
+.paid-done-main {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14.5px; font-weight: 700; color: var(--mint);
+}
+.paid-done-main .ico { width: 17px; height: 17px; }
+.paid-undo {
+  flex-shrink: 0;
+  font: inherit; font-size: 12.5px; font-weight: 600;
+  color: var(--ink-dim);
+  background: none; border: none; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 2px;
+}
+.paid-undo:hover { color: var(--ink); }
+
+/* "Amend" button reuses .change-btn but carries a little pencil */
+.change-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.change-btn .ico { width: 14px; height: 14px; }
+
+/* Empty ticket becomes a nudge you can tap */
+.ticket-empty.tappable {
+  width: 100%;
+  font: inherit;
+  background: none; border: none;
+  cursor: pointer;
+  color: var(--ink-dim);
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+}
+.ticket-empty.tappable:hover { color: var(--ink); }
+
+/* "2 of 3 paid" progress in the table header */
+.pay-progress {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12.5px; font-weight: 700;
+  color: var(--ink-dim);
+}
+.pay-progress.done { color: var(--mint); }
+.pay-progress .ico { width: 14px; height: 14px; }
+.table-cell.is-paid { border-color: rgba(56, 211, 159, 0.3); }
+.paid-chip.mini .ico { width: 11px; height: 11px; }
 
 /* ── Edit sheet ────────────────────────────────────────── */
 .sheet-scrim {

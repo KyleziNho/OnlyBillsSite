@@ -88,17 +88,17 @@ export const buildPayOptions = (payment, { amount, currency, reference }) => {
   const opts = [];
 
   if (p.monzoUsername) opts.push({
-    key: 'monzo', label: 'Monzo', color: 'var(--monzo)', mark: 'M',
+    key: 'monzo', label: 'Monzo', color: 'var(--monzo)', mark: 'M', logo: 'logo-monzo.jpg',
     href: `https://monzo.me/${p.monzoUsername}/${amt}?d=${ref}`,
     note: `Opens with ${sym}${amt} ready to send`, prefilled: true,
   });
   if (p.revolutUsername) opts.push({
-    key: 'revolut', label: 'Revolut', color: 'var(--revolut)', mark: 'R',
+    key: 'revolut', label: 'Revolut', color: 'var(--revolut)', mark: 'R', logo: 'logo-revolut.png',
     href: `https://revolut.me/${p.revolutUsername}`,
     note: `Opens Revolut · enter ${sym}${amt}`, prefilled: false,
   });
   if (p.paypalUsername) opts.push({
-    key: 'paypal', label: 'PayPal', color: 'var(--paypal)', mark: 'P',
+    key: 'paypal', label: 'PayPal', color: 'var(--paypal)', mark: 'P', logo: 'logo-paypal.png',
     href: `https://paypal.me/${p.paypalUsername.replace(/^@/, '')}/${amt}${cur}`,
     note: `Opens with ${sym}${amt} ready to send`, prefilled: true,
   });
@@ -138,7 +138,9 @@ export const PayButton = ({ opt, index }) => (
     style={{ '--brand': opt.color }}
     initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 + index * 0.05 }}
     whileTap={{ scale: 0.98 }}>
-    <span className="pay-mark">{opt.mark}</span>
+    <span className={`pay-mark ${opt.logo ? 'has-logo' : ''}`}>
+      {opt.logo ? <img src={opt.logo} alt="" className="pay-logo" /> : opt.mark}
+    </span>
     <span className="pay-text">
       <span className="pay-label">Pay with {opt.label}</span>
       <span className="pay-note">{opt.prefilled && <span className="pre-dot" />}{opt.note}</span>
@@ -147,32 +149,46 @@ export const PayButton = ({ opt, index }) => (
   </motion.a>
 );
 
-export const BankCard = ({ payment, onToast }) => {
-  const fields = (payment.bankDetails || []).filter((f) => f.label && f.value);
-  const copy = () => {
-    const lines = [];
-    if (payment.bankAccountName) lines.push(payment.bankAccountName);
-    fields.forEach((f) => lines.push(`${f.label}: ${f.value}`));
-    navigator.clipboard?.writeText(lines.join('\n'));
-    onToast('Bank details copied');
+// Each field copies on its own tap — sort code, account number, name — because
+// bank apps want them pasted one at a time. `onCopied(label, value)` lets the
+// host page confirm the copy and (on the live page) float the pay panel back up.
+export const BankCard = ({ payment, onCopied }) => {
+  const [hit, setHit] = useState(null);
+  const rows = [];
+  if (payment.bankAccountName) rows.push({ label: 'Name', value: payment.bankAccountName });
+  (payment.bankDetails || []).filter((f) => f.label && f.value)
+    .forEach((f) => rows.push({ label: f.label, value: f.value }));
+
+  const copyRow = async (r, i) => {
+    try { await navigator.clipboard?.writeText(String(r.value)); } catch { /* clipboard blocked */ }
+    setHit(i);
+    setTimeout(() => setHit((cur) => (cur === i ? null : cur)), 1100);
+    onCopied?.(r.label, r.value);
   };
+
   return (
-    <motion.button className="bank-card" onClick={copy} style={{ '--brand': 'var(--bank)' }}
-      initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.26 }} whileTap={{ scale: 0.99 }}>
+    <motion.div className="bank-card" style={{ '--brand': 'var(--bank)' }}
+      initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.26 }}>
       <div className="bank-head">
         <span className="pay-mark small">&pound;</span>
-        <span className="bank-title">Bank transfer</span>
-        <span className="bank-copy"><CopyIcon /> Copy</span>
+        <div className="bank-head-text">
+          <span className="bank-title">Pay by bank transfer</span>
+          <span className="bank-sub">Tap any field to copy it</span>
+        </div>
       </div>
       <div className="bank-rows">
-        {payment.bankAccountName && (
-          <div className="bank-row"><span>Name</span><b>{payment.bankAccountName}</b></div>
-        )}
-        {fields.map((f, i) => (
-          <div className="bank-row" key={i}><span>{f.label}</span><b>{f.value}</b></div>
+        {rows.map((r, i) => (
+          <motion.button className={`bank-row ${hit === i ? 'copied' : ''}`} key={i}
+            onClick={() => copyRow(r, i)} whileTap={{ scale: 0.985 }}>
+            <span className="bank-row-label">{r.label}</span>
+            <span className="bank-row-val">{r.value}</span>
+            <span className="bank-row-copy">
+              {hit === i ? <><CheckIcon /> Copied</> : <><CopyIcon /> Copy</>}
+            </span>
+          </motion.button>
         ))}
       </div>
-    </motion.button>
+    </motion.div>
   );
 };
 

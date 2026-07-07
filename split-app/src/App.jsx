@@ -111,7 +111,7 @@ const ShareTicket = ({ data, person, onChange, onToast, onQR }) => {
 
       <div className="pay-stack">
         {payOpts.map((opt, i) => <PayButton key={opt.key} opt={opt} index={i} />)}
-        {hasBank(data.payment) && <BankCard payment={data.payment} onToast={onToast} />}
+        {hasBank(data.payment) && <BankCard payment={data.payment} onCopied={(label) => onToast(`${label} copied`)} />}
         {data.payment?.qrCodeUrl && <QRCard payment={data.payment} onOpen={onQR} />}
         {payOpts.length === 0 && !hasBank(data.payment) && !data.payment?.qrCodeUrl && (
           <div className="no-pay">The bill owner hasn&rsquo;t added a payment method yet.</div>

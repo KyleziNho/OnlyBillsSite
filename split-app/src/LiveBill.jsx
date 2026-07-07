@@ -73,20 +73,53 @@ export default function LiveBillPage({ docId, initialData, demo }) {
 
   const ref = useMemo(() => (demo ? null : doc(db, 'sharedReceipts', docId)), [docId, demo]);
 
+  const showToast = useCallback((msg) => {
+    setToast(msg);
+    clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToast(null), 2400);
+  }, []);
+
+  // Keep a live ref to identity so the snapshot listener can tell "me" apart
+  // from everyone else without re-subscribing every time someone joins.
+  const identityRef = useRef(identity);
+  useEffect(() => { identityRef.current = identity; }, [identity]);
+
+  // Remember who'd joined / paid last tick, so an incoming snapshot can be
+  // diffed into a friendly "Dad paid up" nudge — makes the table feel live.
+  const seenRef = useRef(null);
+  if (seenRef.current === null) {
+    const n0 = normalizeLive(initialData);
+    seenRef.current = {
+      paid: n0.paid,
+      names: Object.fromEntries(n0.guests.map((g) => [g.id, g.name])),
+    };
+  }
+
   useEffect(() => {
     if (!ref) return;
     const unsub = onSnapshot(ref, (snap) => {
       const data = snap.data();
-      if (data) setBill(normalizeLive(data));
+      if (!data) return;
+      const next = normalizeLive(data);
+      const prev = seenRef.current;
+      const myGid = identityRef.current?.gid;
+      if (prev) {
+        next.guests.forEach((g) => {
+          if (g.id === myGid) return;
+          const paidNow = !!next.paid[g.id];
+          const paidBefore = !!prev.paid[g.id];
+          if (paidNow && !paidBefore) showToast(`${g.name} paid their share 🎉`);
+          else if (!prev.names[g.id] && !g.isHost) showToast(`${g.name} joined the table`);
+        });
+      }
+      seenRef.current = {
+        paid: next.paid,
+        names: Object.fromEntries(next.guests.map((g) => [g.id, g.name])),
+      };
+      setBill(next);
     });
     return unsub;
-  }, [ref]);
-
-  const showToast = useCallback((msg) => {
-    setToast(msg);
-    clearTimeout(toastTimer.current);
-    toastTimer.current = setTimeout(() => setToast(null), 1700);
-  }, []);
+  }, [ref, showToast]);
 
   const write = useCallback(async (fields, optimistic) => {
     if (demo) { optimistic && setBill(optimistic); return; }
@@ -109,7 +142,9 @@ export default function LiveBillPage({ docId, initialData, demo }) {
     const me = { gid, name: trimmed };
     setIdentity(me);
     if (!demo) saveIdentity(docId, me);
-    write({ [`guests.${gid}`]: { name: trimmed, color, joinedAt: serverTimestamp() } });
+    // Optimistically seat the guest so the demo (no Firestore) is fully explorable.
+    const optimistic = { ...bill, guests: [...bill.guests, { id: gid, name: trimmed, color, joinedAt: 0, isHost: false }] };
+    write({ [`guests.${gid}`]: { name: trimmed, color, joinedAt: serverTimestamp() } }, optimistic);
     if (navigator.vibrate) navigator.vibrate(10);
   };
 
@@ -151,8 +186,30 @@ export default function LiveBillPage({ docId, initialData, demo }) {
 
   const markPaid = () => {
     if (!identity) return;
-    write({ [`paid.${identity.gid}`]: 'pending' });
-    showToast('Nice — we’ve let the host know');
+    // No host confirmation step — tapping "I've paid" settles your share outright.
+    write({ [`paid.${identity.gid}`]: 'confirmed' }, { ...bill, paid: { ...bill.paid, [identity.gid]: 'confirmed' } });
+    showToast('Nice one — marked as paid 🎉');
+    if (navigator.vibrate) navigator.vibrate([8, 40, 8]);
+  };
+
+  const unmarkPaid = () => {
+    if (!identity) return;
+    const nextPaid = { ...bill.paid };
+    delete nextPaid[identity.gid];
+    write({ [`paid.${identity.gid}`]: deleteField() }, { ...bill, paid: nextPaid });
+    showToast('Okay — marked as unpaid');
+  };
+
+  // Copy one bank field, confirm it, and float the pay panel back into view so
+  // the amount + methods stay in sight while you paste. Non-destructive: keep tapping.
+  const copyField = useCallback((label) => {
+    showToast(`${label} copied — paste it into your bank`);
+    if (navigator.vibrate) navigator.vibrate(6);
+    document.getElementById('my-ticket')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [showToast]);
+
+  const scrollToBill = () => {
+    document.getElementById('the-bill')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   // ── Derived ────────────────────────────────────────────
@@ -183,7 +240,7 @@ export default function LiveBillPage({ docId, initialData, demo }) {
           <MyTicket key="ticket"
             bill={bill} identity={identity} myItems={myItems} myTotal={myTotal}
             myPaid={myPaid} payOpts={payOpts} hostName={hostName}
-            onToast={showToast} onQR={setModalImage} onMarkPaid={markPaid} />
+            onCopy={copyField} onMarkPaid={markPaid} onUnmarkPaid={unmarkPaid} onAmend={scrollToBill} />
         )}
       </AnimatePresence>
 
@@ -259,12 +316,17 @@ const JoinCard = ({ guests, onJoin }) => {
 };
 
 // ── My ticket ────────────────────────────────────────────
-const MyTicket = ({ bill, identity, myItems, myTotal, myPaid, payOpts, hostName, onToast, onQR, onMarkPaid }) => {
+const MyTicket = ({ bill, identity, myItems, myTotal, myPaid, payOpts, hostName, onCopy, onMarkPaid, onUnmarkPaid, onAmend }) => {
   const cur = bill.currency;
   const hasClaims = myItems.length > 0;
+  const isPaid = !!myPaid;
+  const owes = myTotal > 0.004;
+  const canPay = hasClaims && owes && !isPaid;
+  const hasBankT = hasBank(bill.payment);
+  const hasAnyMethod = payOpts.length > 0 || hasBankT;
 
   return (
-    <motion.section className="ticket-wrap"
+    <motion.section id="my-ticket" className="ticket-wrap"
       initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}>
       <div className="ticket">
@@ -277,10 +339,12 @@ const MyTicket = ({ bill, identity, myItems, myTotal, myPaid, payOpts, hostName,
               <div className="ticket-name">{identity.name}</div>
             </div>
           </div>
-          {myPaid === 'confirmed' ? (
+          {isPaid ? (
             <span className="paid-chip confirmed"><CheckIcon /> Paid</span>
-          ) : myPaid === 'pending' ? (
-            <span className="paid-chip pending">Waiting on {hostName}</span>
+          ) : !bill.locked && hasClaims ? (
+            <button className="change-btn" onClick={onAmend}>
+              <PencilIcon /> Amend
+            </button>
           ) : null}
         </div>
 
@@ -300,7 +364,9 @@ const MyTicket = ({ bill, identity, myItems, myTotal, myPaid, payOpts, hostName,
             </AnimatePresence>
           </div>
         ) : (
-          <p className="ticket-empty">Tap your items below — they’ll appear here.</p>
+          <button className="ticket-empty tappable" onClick={onAmend}>
+            You haven’t claimed anything yet — tap here to pick your items.
+          </button>
         )}
 
         <div className="perf" />
@@ -315,18 +381,29 @@ const MyTicket = ({ bill, identity, myItems, myTotal, myPaid, payOpts, hostName,
         </div>
       </div>
 
-      {hasClaims && myTotal > 0.004 && myPaid !== 'confirmed' && (
+      {isPaid ? (
+        <motion.div className="paid-done" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+          <span className="paid-done-main"><CheckIcon /> You’ve settled up with {hostName}</span>
+          <button className="paid-undo" onClick={onUnmarkPaid}>Not paid? Undo</button>
+        </motion.div>
+      ) : canPay ? (
         <div className="pay-stack">
+          <p className="pay-lead">
+            Send <b>{money(myTotal, cur)}</b> to {hostName}
+          </p>
           {payOpts.map((opt, i) => <PayButton key={opt.key} opt={opt} index={i} />)}
-          {hasBank(bill.payment) && <BankCard payment={bill.payment} onToast={onToast} />}
-          {myPaid !== 'pending' && (
-            <motion.button className="ive-paid" onClick={onMarkPaid} whileTap={{ scale: 0.98 }}
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-              <CheckIcon /> I’ve paid {hostName}
-            </motion.button>
+          {hasBankT && <BankCard payment={bill.payment} onCopied={onCopy} />}
+          {!hasAnyMethod && (
+            <div className="no-pay">{hostName} hasn’t added a payment method yet — settle up in person.</div>
           )}
+          <motion.button className="ive-paid" onClick={onMarkPaid} whileTap={{ scale: 0.98 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+            <CheckIcon /> I’ve paid
+          </motion.button>
         </div>
-      )}
+      ) : hasClaims && !owes ? (
+        <p className="pay-lead settled">Nothing to pay — you’re all square.</p>
+      ) : null}
     </motion.section>
   );
 };
@@ -338,7 +415,7 @@ const BillList = ({ bill, totals, identity, onClaim, onEdit }) => {
   const upForGrabs = totals.unclaimed.length;
 
   return (
-    <section className="section">
+    <section className="section" id="the-bill">
       <div className="section-head-row">
         <span className="section-title">The bill</span>
         {upForGrabs > 0 ? (
@@ -426,28 +503,29 @@ const BillList = ({ bill, totals, identity, onClaim, onEdit }) => {
 // ── Everyone's totals ────────────────────────────────────
 const TableTotals = ({ bill, totals, identity }) => {
   if (bill.guests.length === 0) return null;
+  const paidCount = bill.guests.filter((g) => bill.paid[g.id]).length;
+  const total = bill.guests.length;
+  const allPaid = paidCount === total && total > 0;
   return (
     <section className="section">
       <div className="section-head-row">
         <span className="section-title">The table</span>
-        <span className="section-total">{money(totals.grandTotal, bill.currency)}</span>
+        <span className={`pay-progress ${allPaid ? 'done' : ''}`}>
+          {allPaid ? <><CheckIcon /> everyone’s paid</> : `${paidCount} of ${total} paid`}
+        </span>
       </div>
       <div className="table-grid">
         {bill.guests.map((g) => {
-          const status = bill.paid[g.id];
+          const paid = !!bill.paid[g.id];
           return (
-            <motion.div className="table-cell" key={g.id} layout
+            <motion.div className={`table-cell ${paid ? 'is-paid' : ''}`} key={g.id} layout
               initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
               <Avatar name={g.name} color={g.color} size="sm" />
               <span className="table-name">
                 {identity && g.id === identity.gid ? 'You' : g.isHost ? `${g.name} · host` : g.name}
               </span>
               <span className="table-amt">{money(totals.totalFor(g.id), bill.currency)}</span>
-              {status && (
-                <span className={`paid-chip mini ${status}`}>
-                  {status === 'confirmed' ? 'paid' : 'pending'}
-                </span>
-              )}
+              {paid && <span className="paid-chip mini confirmed"><CheckIcon /> paid</span>}
             </motion.div>
           );
         })}

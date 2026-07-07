@@ -40,7 +40,7 @@ export const DEMO_LIVE_DATA = {
     gst_host: { name: 'Kyle', color: '#ff5a3c', joinedAt: null },
     gst_dad: { name: 'Dad', color: '#4dabf7', joinedAt: null },
   },
-  paid: { gst_dad: 'pending' },
+  paid: { gst_dad: 'confirmed' },
 };
 
 // v1 STATIC snapshot document
