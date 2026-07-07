@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
+import { DEMO_DATA } from './demoData';
 
-// Firebase config
+// ── Firebase ─────────────────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyByDh_nxkV1kWGdIHFldDAoIU7iGqU3FQc",
   authDomain: "onlybills-b8dac.firebaseapp.com",
@@ -13,473 +14,503 @@ const firebaseConfig = {
   messagingSenderId: "572680746912",
   appId: "1:572680746912:web:9c3890b712bdc19a9a16c5"
 };
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Currency formatter
-const formatCurrency = (amount, currency) => {
-  const symbols = {
-    GBP: '£', USD: '$', EUR: '€', JPY: '¥', CAD: 'C$', AUD: 'A$',
-    SGD: 'S$', MYR: 'RM', THB: '฿', INR: '₹', KRW: '₩', CNY: '¥', HKD: 'HK$'
-  };
-  return (symbols[currency] || currency + ' ') + amount.toFixed(2);
+// ── Helpers ──────────────────────────────────────────────
+const CURRENCY_SYMBOLS = {
+  GBP: '£', USD: '$', EUR: '€', JPY: '¥', CAD: 'C$', AUD: 'A$',
+  SGD: 'S$', MYR: 'RM', THB: '฿', INR: '₹', KRW: '₩', CNY: '¥', HKD: 'HK$'
 };
+const symbolFor = (currency) => CURRENCY_SYMBOLS[currency] || (currency ? currency + ' ' : '£');
+const money = (amount, currency) => symbolFor(currency) + (amount ?? 0).toFixed(2);
 
-// Date formatter
 const formatDate = (timestamp) => {
+  if (!timestamp) return '';
   const date = timestamp?.toDate ? timestamp.toDate() : new Date(timestamp);
-  return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  if (isNaN(date)) return '';
+  return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 };
 
-// Count formatter
-const formatCount = (n) => n >= 1000 ? (n / 1000).toFixed(1) + 'K' : n;
+const formatCount = (n) => (n >= 1000 ? (n / 1000).toFixed(1) + 'K' : n);
 
-// Check if string starts with emoji
-const startsWithEmoji = (str) => {
-  const emojiRegex = /^(?:\p{Emoji_Presentation}|\p{Emoji}\uFE0F)/u;
-  return emojiRegex.test(str.trim());
-};
-
-// Get display info for avatar
+const startsWithEmoji = (str) => /^(?:\p{Emoji_Presentation}|\p{Emoji}️)/u.test(str.trim());
 const getAvatarDisplay = (name) => {
-  const n = name.trim();
+  const n = (name || '?').trim();
   if (startsWithEmoji(n)) {
-    const match = n.match(/^(\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\p{Emoji})/u);
+    const match = n.match(/^(\p{Emoji_Presentation}|\p{Emoji}️|\p{Emoji})/u);
     return { isEmoji: true, char: match ? match[0] : n.charAt(0) };
   }
-  const parts = n.split(' ');
-  const initials = parts.length >= 2
-    ? (parts[0][0] + parts[1][0]).toUpperCase()
-    : n.charAt(0).toUpperCase();
+  const parts = n.split(' ').filter(Boolean);
+  const initials = parts.length >= 2 ? (parts[0][0] + parts[1][0]).toUpperCase() : n.charAt(0).toUpperCase();
   return { isEmoji: false, char: initials };
 };
 
-// Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 }
-  }
+// Build the tappable pay options for a specific person's exact amount.
+const buildPayOptions = (data, person) => {
+  const p = data.payment || {};
+  const amount = person?.total ?? 0;
+  const amt = amount.toFixed(2);
+  const cur = (data.currency || 'GBP').toUpperCase();
+  const ref = encodeURIComponent(data.storeName || 'Split');
+  const sym = symbolFor(data.currency);
+  const opts = [];
+
+  if (p.monzoUsername) opts.push({
+    key: 'monzo', label: 'Monzo', color: 'var(--monzo)', mark: 'M',
+    href: `https://monzo.me/${p.monzoUsername}/${amt}?d=${ref}`,
+    note: `Opens with ${sym}${amt} ready to send`, prefilled: true,
+  });
+  if (p.revolutUsername) opts.push({
+    key: 'revolut', label: 'Revolut', color: 'var(--revolut)', mark: 'R',
+    href: `https://revolut.me/${p.revolutUsername}`,
+    note: `Opens Revolut · enter ${sym}${amt}`, prefilled: false,
+  });
+  if (p.paypalUsername) opts.push({
+    key: 'paypal', label: 'PayPal', color: 'var(--paypal)', mark: 'P',
+    href: `https://paypal.me/${p.paypalUsername.replace(/^@/, '')}/${amt}${cur}`,
+    note: `Opens with ${sym}${amt} ready to send`, prefilled: true,
+  });
+  if (p.venmoHandle) opts.push({
+    key: 'venmo', label: 'Venmo', color: 'var(--venmo)', mark: 'V',
+    href: `https://venmo.com/${p.venmoHandle.replace(/^@/, '')}?txn=pay&amount=${amt}&note=${ref}`,
+    note: `Opens with ${sym}${amt} ready to send`, prefilled: true,
+  });
+  return opts;
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { type: 'spring', stiffness: 300, damping: 24 }
-  }
-};
+const hasBank = (p) => p && (p.bankAccountName || (p.bankDetails && p.bankDetails.length));
 
-const expandVariants = {
-  collapsed: { height: 0, opacity: 0 },
-  expanded: {
-    height: 'auto',
-    opacity: 1,
-    transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
-  }
-};
-
-// Icons
+// ── Icons ────────────────────────────────────────────────
+const ArrowIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="ico"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+);
+const CopyIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="ico"><rect x="9" y="9" width="11" height="11" rx="2.5" stroke="currentColor" strokeWidth="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+);
+const CheckIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="ico"><path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+);
 const ChevronIcon = () => (
-  <svg className="expand-icon" viewBox="0 0 20 20" fill="none">
-    <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
+  <svg viewBox="0 0 20 20" fill="none" className="chev"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+);
+const ReceiptGlyph = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="ico"><path d="M6 3.5h12v17l-2.2-1.4L13.5 20.5 12 19l-1.5 1.5L8.2 19.1 6 20.5v-17Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round"/><path d="M9 8h6M9 11.5h6M9 15h3.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/></svg>
 );
 
-const AppleIcon = () => (
-  <svg className="apple-icon" viewBox="0 0 24 24" fill="none">
-    <path d="M17.05 12.76c-.02-2.33 1.83-3.46 1.91-3.51-.94-1.54-2.6-1.76-3.2-1.78-1.39-.14-2.74.87-3.45.87-.72 0-1.82-.85-3-.83-1.52.03-2.94.94-3.72 2.31-1.61 2.8-.41 6.94 1.13 9.21.77 1.11 1.68 2.35 2.86 2.31 1.15-.04 1.58-.74 2.96-.74 1.37 0 1.77.74 2.97.71 1.24-.02 2.02-1.11 2.76-2.23.9-1.28 1.26-2.55 1.27-2.61-.03-.01-2.32-.89-2.34-3.52z" fill="#000" />
-    <path d="M14.8 5.96c.63-.77 1.06-1.82.94-2.88-.91.04-2.04.64-2.7 1.4-.58.67-1.1 1.75-.97 2.78 1.02.08 2.08-.51 2.73-1.3z" fill="#000" />
-  </svg>
-);
-
-const BankIcon = () => (
-  <svg className="payment-icon" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2L2 7v2h20V7L12 2zm0 2.5L18 7H6l6-2.5zM4 11v7h3v-7H4zm6 0v7h4v-7h-4zm7 0v7h3v-7h-3zM2 20h20v2H2v-2z"/>
-  </svg>
-);
-
-const PayPalIcon = () => (
-  <svg className="payment-icon paypal" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.082-8.558 6.082h-2.19c-1.717 0-3.146 1.27-3.403 2.966l-1.334 8.466a.641.641 0 0 0 .633.74h3.397c.524 0 .968-.382 1.05-.9l.823-5.228a1.087 1.087 0 0 1 1.074-.922h.679c4.133 0 7.362-1.676 8.306-6.521.393-2.021.18-3.717-.829-4.896z"/>
-  </svg>
-);
-
-const VenmoIcon = () => (
-  <svg className="payment-icon venmo" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M19.5 2.25c.75 1.25 1.1 2.5 1.1 4.1 0 5.1-4.35 11.75-7.9 16.4H5.85L2.5 3.65l6.5-.6 1.75 14.1c1.65-2.7 3.7-6.95 3.7-9.85 0-1.5-.25-2.55-.7-3.4l5.75-1.65z"/>
-  </svg>
-);
-
-const QRIcon = () => (
-  <svg className="payment-icon qr" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v3h-2v-3zm3 3h3v2h-3v-2zm0 3h3v3h-3v-3zm-3 0h2v3h-2v-3zm-2-3h2v2h-2v-2z"/>
-  </svg>
-);
-
-// Components
-const Hero = ({ data, imageLoaded, onImageLoad }) => (
-  <motion.div className="hero" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-    {data.restaurantPhotoUrl && (
-      <img className={`hero-image ${imageLoaded ? 'loaded' : ''}`} src={data.restaurantPhotoUrl} alt="" onLoad={onImageLoad} />
-    )}
-    <div className="hero-overlay" />
-    <div className="hero-content">
-      <motion.h1 className="venue-name" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-        {data.storeName}
-      </motion.h1>
-      <motion.div className="venue-meta" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-        {data.rating && (
-          <span className="rating">
-            <span className="rating-star">★</span>
-            <span className="rating-value">{data.rating.toFixed(1)}</span>
-            {data.ratingCount && <span className="rating-count">({formatCount(data.ratingCount)})</span>}
-          </span>
-        )}
-        {data.placeType && <span className="venue-type">{data.placeType}</span>}
-        {data.date && (
-          <>
-            <span className="meta-dot" />
-            <span className="venue-date">{formatDate(data.date)}</span>
-          </>
-        )}
+// ── Hero (venue) ─────────────────────────────────────────
+const Hero = ({ data }) => {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className="hero">
+      {data.restaurantPhotoUrl && (
+        <img className={`hero-img ${loaded ? 'in' : ''}`} src={data.restaurantPhotoUrl} alt="" onLoad={() => setLoaded(true)} />
+      )}
+      <div className="hero-grad" />
+      <motion.div className="hero-body"
+        initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
+        <div className="hero-kicker">
+          <ReceiptGlyph /> <span>OnlyBills</span>
+        </div>
+        <h1 className="venue">{data.storeName}</h1>
+        <div className="venue-meta">
+          {data.rating != null && (
+            <span className="chip"><span className="star">★</span>{data.rating.toFixed(1)}
+              {data.ratingCount ? <span className="muted"> ({formatCount(data.ratingCount)})</span> : null}</span>
+          )}
+          {data.placeType && <span className="chip muted-chip">{data.placeType}</span>}
+          {data.date && <span className="chip muted-chip">{formatDate(data.date)}</span>}
+        </div>
       </motion.div>
     </div>
-  </motion.div>
-);
+  );
+};
 
-const TotalCard = ({ data }) => (
-  <motion.div className="total-card" variants={itemVariants}>
-    <div className="total-info">
-      <div className="total-label">Total Bill</div>
-      <div className="total-people">{data.people.length} {data.people.length === 1 ? 'person' : 'people'}</div>
+// ── "Who are you?" picker ────────────────────────────────
+const PersonPicker = ({ people, currency, onPick }) => (
+  <motion.section className="picker"
+    initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}>
+    <p className="picker-eyebrow">Tap your name</p>
+    <h2 className="picker-title">Who are you?</h2>
+    <p className="picker-sub">We&rsquo;ll show exactly what you ordered and your share to pay.</p>
+    <div className="picker-grid">
+      {people.map((person, i) => {
+        const d = getAvatarDisplay(person.name);
+        return (
+          <motion.button key={i} className="picker-chip" onClick={() => onPick(i)}
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.24 + i * 0.05 }} whileTap={{ scale: 0.96 }}>
+            <span className={`avatar ${d.isEmoji ? 'emoji' : ''}`} style={!d.isEmoji ? { background: person.color } : undefined}>{d.char}</span>
+            <span className="picker-name">{person.name}</span>
+            <span className="picker-amt">{money(person.total, currency)}</span>
+          </motion.button>
+        );
+      })}
     </div>
-    <motion.div
-      className="total-amount"
-      initial={{ scale: 0.8 }}
-      animate={{ scale: 1 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 20, delay: 0.3 }}
-    >
-      {formatCurrency(data.totalBill, data.currency)}
-    </motion.div>
+  </motion.section>
+);
+
+// ── Pay button ───────────────────────────────────────────
+const PayButton = ({ opt, index }) => (
+  <motion.a className="pay-btn" href={opt.href} target="_blank" rel="noopener noreferrer"
+    style={{ '--brand': opt.color }}
+    initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + index * 0.06 }}
+    whileTap={{ scale: 0.98 }}>
+    <span className="pay-mark">{opt.mark}</span>
+    <span className="pay-text">
+      <span className="pay-label">Pay with {opt.label}</span>
+      <span className="pay-note">{opt.prefilled && <span className="pre-dot" />}{opt.note}</span>
+    </span>
+    <ArrowIcon />
+  </motion.a>
+);
+
+// ── Bank card (copy) ─────────────────────────────────────
+const BankCard = ({ payment, onToast }) => {
+  const fields = (payment.bankDetails || []).filter((f) => f.label && f.value);
+  const copy = () => {
+    const lines = [];
+    if (payment.bankAccountName) lines.push(payment.bankAccountName);
+    fields.forEach((f) => lines.push(`${f.label}: ${f.value}`));
+    navigator.clipboard?.writeText(lines.join('\n'));
+    onToast('Bank details copied');
+  };
+  return (
+    <motion.button className="bank-card" onClick={copy} style={{ '--brand': 'var(--bank)' }}
+      initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.34 }} whileTap={{ scale: 0.99 }}>
+      <div className="bank-head">
+        <span className="pay-mark small">&pound;</span>
+        <span className="bank-title">Bank transfer</span>
+        <span className="bank-copy"><CopyIcon /> Copy</span>
+      </div>
+      <div className="bank-rows">
+        {payment.bankAccountName && (
+          <div className="bank-row"><span>Name</span><b>{payment.bankAccountName}</b></div>
+        )}
+        {fields.map((f, i) => (
+          <div className="bank-row" key={i}><span>{f.label}</span><b>{f.value}</b></div>
+        ))}
+      </div>
+    </motion.button>
+  );
+};
+
+// ── QR card ──────────────────────────────────────────────
+const QRCard = ({ payment, onOpen }) => (
+  <motion.div className="qr-card" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+    <img src={payment.qrCodeUrl} alt="Payment QR" onClick={() => onOpen(payment.qrCodeUrl)} />
+    <div className="qr-meta">
+      <b>{payment.qrCodeDescription || 'Scan to pay'}</b>
+      <span>Tap to enlarge</span>
+    </div>
   </motion.div>
 );
 
-const PersonCard = ({ person, currency }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const display = getAvatarDisplay(person.name);
-  const itemCount = person.items?.length || 0;
-  const hasFees = person.tax > 0 || person.serviceCharge > 0 || person.tip > 0;
+// ── Your-share receipt ticket (the centrepiece) ──────────
+const ShareTicket = ({ data, person, onChange, onToast, onQR }) => {
+  const d = getAvatarDisplay(person.name);
+  const cur = data.currency;
+  const payOpts = buildPayOptions(data, person);
+  const fees = [
+    person.tax > 0 && ['Tax', person.tax],
+    person.serviceCharge > 0 && ['Service', person.serviceCharge],
+    person.tip > 0 && ['Tip', person.tip],
+  ].filter(Boolean);
 
   return (
-    <motion.div className={`person-card ${isExpanded ? 'expanded' : ''}`} variants={itemVariants} layout>
-      <div className="person-header" onClick={() => setIsExpanded(!isExpanded)}>
-        <div className={`avatar ${display.isEmoji ? 'emoji' : ''}`} style={!display.isEmoji ? { background: person.color } : undefined}>
-          {display.char}
+    <motion.section className="ticket-wrap"
+      initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}>
+      <div className="ticket">
+        <div className="ticket-top">
+          <div className="ticket-who">
+            <span className={`avatar lg ${d.isEmoji ? 'emoji' : ''}`} style={!d.isEmoji ? { background: person.color } : undefined}>{d.char}</span>
+            <div>
+              <div className="ticket-eyebrow">Your share</div>
+              <div className="ticket-name">{person.name}</div>
+            </div>
+          </div>
+          <button className="change-btn" onClick={onChange}>Not you?</button>
         </div>
-        <div className="person-info">
-          <div className="person-name">{person.name}</div>
-          <div className="person-item-count">{itemCount} item{itemCount !== 1 ? 's' : ''}</div>
+
+        <div className="ticket-merchant">
+          <span>{data.storeName}</span>
+          <span className="muted">{formatDate(data.date)}</span>
         </div>
-        <span className="person-amount">{formatCurrency(person.total, currency)}</span>
-        <ChevronIcon />
+
+        <div className="ticket-items">
+          {(person.items || []).map((it, i) => (
+            <div className="tick-row" key={i}>
+              <span className="tick-name">{it.name}{it.quantity && it.quantity !== 1 ? ` ×${it.quantity}` : ''}</span>
+              <span className="tick-dots" />
+              <span className="tick-price">{money(it.price, cur)}</span>
+            </div>
+          ))}
+          {fees.map(([label, val], i) => (
+            <div className="tick-row muted" key={`f${i}`}>
+              <span className="tick-name">{label}</span>
+              <span className="tick-dots" />
+              <span className="tick-price">{money(val, cur)}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="perf" />
+
+        <div className="ticket-total">
+          <span>You owe</span>
+          <motion.span className="ticket-total-amt"
+            initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 340, damping: 18, delay: 0.15 }}>
+            {money(person.total, cur)}
+          </motion.span>
+        </div>
       </div>
 
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div className="person-body" initial="collapsed" animate="expanded" exit="collapsed" variants={expandVariants}>
-            <div className="person-body-inner">
-              {person.items?.length > 0 && (
-                <div className="items-list">
-                  {person.items.map((item, i) => (
-                    <motion.div key={i} className="item-row" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
-                      <span className="item-name">
-                        {item.name}
-                        {item.quantity && item.quantity !== 1 && <span className="item-quantity"> x{item.quantity}</span>}
-                      </span>
-                      <span className="item-price">{formatCurrency(item.price, currency)}</span>
-                    </motion.div>
-                  ))}
+      <div className="pay-stack">
+        {payOpts.map((opt, i) => <PayButton key={opt.key} opt={opt} index={i} />)}
+        {hasBank(data.payment) && <BankCard payment={data.payment} onToast={onToast} />}
+        {data.payment?.qrCodeUrl && <QRCard payment={data.payment} onOpen={onQR} />}
+        {payOpts.length === 0 && !hasBank(data.payment) && !data.payment?.qrCodeUrl && (
+          <div className="no-pay">The bill owner hasn&rsquo;t added a payment method yet.</div>
+        )}
+      </div>
+    </motion.section>
+  );
+};
+
+// ── Full breakdown (everyone) ────────────────────────────
+const PersonRow = ({ person, currency, index, isMe, onSelect }) => {
+  const [open, setOpen] = useState(false);
+  const d = getAvatarDisplay(person.name);
+  const count = person.items?.length || 0;
+  return (
+    <div className={`prow ${open ? 'open' : ''}`}>
+      <button className="prow-head" onClick={() => setOpen(!open)}>
+        <span className={`avatar sm ${d.isEmoji ? 'emoji' : ''}`} style={!d.isEmoji ? { background: person.color } : undefined}>{d.char}</span>
+        <span className="prow-info">
+          <span className="prow-name">{person.name}{isMe && <span className="you-tag">you</span>}</span>
+          <span className="prow-count">{count} item{count !== 1 ? 's' : ''}</span>
+        </span>
+        <span className="prow-amt">{money(person.total, currency)}</span>
+        <ChevronIcon />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div className="prow-body" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}>
+            <div className="prow-body-in">
+              {(person.items || []).map((it, i) => (
+                <div className="tick-row" key={i}>
+                  <span className="tick-name">{it.name}{it.quantity && it.quantity !== 1 ? ` ×${it.quantity}` : ''}</span>
+                  <span className="tick-dots" />
+                  <span className="tick-price">{money(it.price, currency)}</span>
+                </div>
+              ))}
+              {(person.tax > 0 || person.serviceCharge > 0 || person.tip > 0) && (
+                <div className="prow-fees">
+                  {person.tax > 0 && <div className="tick-row muted"><span className="tick-name">Tax</span><span className="tick-dots" /><span className="tick-price">{money(person.tax, currency)}</span></div>}
+                  {person.serviceCharge > 0 && <div className="tick-row muted"><span className="tick-name">Service</span><span className="tick-dots" /><span className="tick-price">{money(person.serviceCharge, currency)}</span></div>}
+                  {person.tip > 0 && <div className="tick-row muted"><span className="tick-name">Tip</span><span className="tick-dots" /><span className="tick-price">{money(person.tip, currency)}</span></div>}
                 </div>
               )}
-              {hasFees && (
-                <div className="fees-section">
-                  {person.tax > 0 && <div className="fee-row"><span className="fee-label">Tax</span><span className="fee-amount">{formatCurrency(person.tax, currency)}</span></div>}
-                  {person.serviceCharge > 0 && <div className="fee-row"><span className="fee-label">Service</span><span className="fee-amount">{formatCurrency(person.serviceCharge, currency)}</span></div>}
-                  {person.tip > 0 && <div className="fee-row"><span className="fee-label">Tip</span><span className="fee-amount">{formatCurrency(person.tip, currency)}</span></div>}
-                </div>
-              )}
+              {!isMe && <button className="prow-pay" onClick={() => onSelect(index)}>This is me &mdash; pay {money(person.total, currency)}</button>}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 };
 
-const PaymentSection = ({ payment, onQRClick }) => {
-  if (!payment) return null;
-
-  const hasBankDetails = payment.bankDetails?.length > 0 || payment.bankAccountName;
-  const hasPaypal = payment.paypalUsername;
-  const hasVenmo = payment.venmoHandle;
-  const hasQR = payment.qrCodeUrl;
-  const hasAnyPayment = hasBankDetails || hasPaypal || hasVenmo || hasQR;
-
-  if (!hasAnyPayment) return null;
-
+const Breakdown = ({ data, meIndex, onSelect }) => {
+  const [open, setOpen] = useState(false);
   return (
-    <motion.div className="section" variants={itemVariants}>
-      <div className="section-header">
-        <span className="section-title">Payment</span>
-      </div>
-      <div className="payment-card">
-        {hasBankDetails && (
-          <div className="payment-method">
-            <div className="payment-method-header">
-              <BankIcon />
-              <span className="payment-method-title">Bank Transfer</span>
-            </div>
-            <div className="payment-method-content">
-              {payment.bankAccountName && (
-                <div className="payment-row">
-                  <span className="payment-label">Account Name</span>
-                  <span className="payment-value">{payment.bankAccountName}</span>
-                </div>
-              )}
-              {payment.bankDetails?.map((field, i) => (
-                <div key={i} className="payment-row">
-                  <span className="payment-label">{field.label}</span>
-                  <span className="payment-value">{field.value}</span>
-                </div>
+    <section className="section">
+      <button className="section-toggle" onClick={() => setOpen(!open)}>
+        <span className="section-title">The whole bill</span>
+        <span className="section-right">
+          <span className="section-total">{money(data.totalBill, data.currency)}</span>
+          <span className={`section-caret ${open ? 'up' : ''}`}><ChevronIcon /></span>
+        </span>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }} style={{ overflow: 'hidden' }}>
+            <div className="prows">
+              {(data.people || []).map((person, i) => (
+                <PersonRow key={i} person={person} currency={data.currency} index={i} isMe={i === meIndex} onSelect={onSelect} />
               ))}
-            </div>
-          </div>
-        )}
-
-        {hasPaypal && (
-          <div className="payment-method">
-            <div className="payment-method-header">
-              <PayPalIcon />
-              <span className="payment-method-title">PayPal</span>
-            </div>
-            <div className="payment-method-content">
-              <div className="payment-row single">
-                <span className="payment-value highlight">{payment.paypalUsername}</span>
+              <div className="bill-total">
+                <span>{(data.people || []).length} people &middot; Total</span>
+                <b>{money(data.totalBill, data.currency)}</b>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
-
-        {hasVenmo && (
-          <div className="payment-method">
-            <div className="payment-method-header">
-              <VenmoIcon />
-              <span className="payment-method-title">Venmo</span>
-            </div>
-            <div className="payment-method-content">
-              <div className="payment-row single">
-                <span className="payment-value highlight">@{payment.venmoHandle.replace(/^@/, '')}</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {hasQR && (
-          <div className="payment-method qr-method">
-            <div className="payment-method-header">
-              <QRIcon />
-              <span className="payment-method-title">
-                {payment.qrCodeDescription || 'QR Code'}
-              </span>
-            </div>
-            <div className="payment-qr-container">
-              <img
-                className="payment-qr-image"
-                src={payment.qrCodeUrl}
-                alt="Payment QR Code"
-                onClick={() => onQRClick(payment.qrCodeUrl)}
-              />
-              <span className="payment-qr-hint">Tap to enlarge</span>
-            </div>
-          </div>
-        )}
-      </div>
-    </motion.div>
+      </AnimatePresence>
+    </section>
   );
 };
 
-const ReceiptSection = ({ imageUrl, onImageClick }) => {
+// ── Receipt photo ────────────────────────────────────────
+const ReceiptPhoto = ({ url, onOpen }) => {
   const [loaded, setLoaded] = useState(false);
   return (
-    <motion.div className="section" variants={itemVariants}>
-      <div className="section-header">
-        <span className="section-title">Receipt</span>
-      </div>
-      <div className="receipt-card">
-        <img className={`receipt-image ${loaded ? 'loaded' : ''}`} src={imageUrl} alt="Receipt" onLoad={() => setLoaded(true)} onClick={() => onImageClick(imageUrl)} />
-      </div>
-    </motion.div>
+    <section className="section">
+      <div className="section-label"><ReceiptGlyph /> The receipt</div>
+      <motion.div className="receipt-frame" initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ duration: 0.5 }}>
+        <img className={`receipt-img ${loaded ? 'in' : ''}`} src={url} alt="Receipt" onLoad={() => setLoaded(true)} onClick={() => onOpen(url)} />
+        <span className="receipt-hint">Tap to zoom</span>
+      </motion.div>
+    </section>
   );
 };
 
-const ImageModal = ({ imageUrl, onClose }) => (
-  <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
-    <button className="modal-close" onClick={onClose}>×</button>
-    <motion.img className="modal-image" src={imageUrl} alt="Receipt" initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} />
+// ── Image modal ──────────────────────────────────────────
+const ImageModal = ({ url, onClose }) => (
+  <motion.div className="modal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
+    <button className="modal-x" onClick={onClose} aria-label="Close">&times;</button>
+    <motion.img src={url} alt="" initial={{ scale: 0.92 }} animate={{ scale: 1 }} exit={{ scale: 0.92 }} onClick={(e) => e.stopPropagation()} />
   </motion.div>
 );
 
-const AppStoreBanner = ({ visible }) => (
-  <AnimatePresence>
-    {visible && (
-      <motion.div
-        className="app-banner"
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 100, opacity: 0 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-      >
-        <a href="https://apps.apple.com/app/onlybills" className="download-button">
-          <img src="app-icon.png" alt="OnlyBills" className="app-icon-img" />
-          <div className="download-text">
-            <span className="download-small">Download</span>
-            <span className="download-big">OnlyBills</span>
-          </div>
-        </a>
-      </motion.div>
-    )}
-  </AnimatePresence>
+// ── Footer ───────────────────────────────────────────────
+const Footer = () => (
+  <motion.footer className="footer" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+    <a className="dl-card" href="https://apps.apple.com/app/onlybills" target="_blank" rel="noopener noreferrer">
+      <img src="app-icon.png" alt="OnlyBills" />
+      <div className="dl-text">
+        <span className="dl-small">Split your own bills with</span>
+        <span className="dl-big">OnlyBills for iPhone</span>
+      </div>
+      <ArrowIcon />
+    </a>
+    <p className="footer-note">Scan a receipt &middot; split by item &middot; get paid back</p>
+  </motion.footer>
 );
 
-const LoadingState = () => (
-  <div className="container">
-    <div className="skeleton skeleton-hero" />
-    <div className="skeleton skeleton-total" />
-    <div className="skeleton skeleton-card" />
-    <div className="skeleton skeleton-card" />
-    <div className="skeleton skeleton-card" />
+// ── States ───────────────────────────────────────────────
+const Loading = () => (
+  <div className="wrap">
+    <div className="sk sk-hero" />
+    <div className="sk sk-ticket" />
+    <div className="sk sk-row" />
+    <div className="sk sk-row" />
   </div>
 );
 
-const ErrorState = ({ message }) => (
-  <div className="container">
-    <div className="error-container">
-      <img src="app-icon.png" alt="OnlyBills" className="error-app-icon" />
-      <h2 className="error-title">Not Found</h2>
-      <p className="error-message">{message}</p>
+const ErrorView = ({ message }) => (
+  <div className="wrap">
+    <div className="error">
+      <img src="app-icon.png" alt="OnlyBills" />
+      <h2>Nothing to see here</h2>
+      <p>{message}</p>
+      <a className="dl-card compact" href="https://apps.apple.com/app/onlybills"><span>Get OnlyBills</span><ArrowIcon /></a>
     </div>
   </div>
 );
 
+// ── App ──────────────────────────────────────────────────
 function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [heroLoaded, setHeroLoaded] = useState(false);
+  const [meIndex, setMeIndex] = useState(null);
   const [modalImage, setModalImage] = useState(null);
-  const [bannerVisible, setBannerVisible] = useState(true);
-
-  // Hide banner while scrolling, show when stopped
-  useEffect(() => {
-    let scrollTimeout;
-    const handleScroll = () => {
-      setBannerVisible(false);
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        setBannerVisible(true);
-      }, 300);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimeout);
-    };
-  }, []);
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
-    const fetchReceipt = async () => {
+    const preselect = (d, params) => {
+      const who = params.get('person');
+      if (who == null || !d.people) return;
+      const asIndex = Number(who);
+      if (Number.isInteger(asIndex) && d.people[asIndex]) { setMeIndex(asIndex); return; }
+      const idx = d.people.findIndex((p) => (p.name || '').toLowerCase() === who.toLowerCase());
+      if (idx >= 0) setMeIndex(idx);
+    };
+
+    const run = async () => {
       const params = new URLSearchParams(window.location.search);
       const id = params.get('id');
+      const wantsDemo = params.get('demo') === '1' || (!id && import.meta.env.DEV);
 
-      if (!id) {
-        setError('No receipt ID provided');
+      if (wantsDemo) {
+        setData(DEMO_DATA);
+        preselect(DEMO_DATA, params);
+        document.title = `${DEMO_DATA.storeName} — OnlyBills`;
         setLoading(false);
         return;
       }
+      if (!id) { setError('No receipt link provided.'); setLoading(false); return; }
 
       try {
-        const docRef = doc(db, 'sharedReceipts', id);
-        const docSnap = await getDoc(docRef);
-
-        if (!docSnap.exists()) {
-          setError('Receipt not found');
-          setLoading(false);
-          return;
-        }
-
-        const receiptData = docSnap.data();
-        setData(receiptData);
-        document.title = `${receiptData.storeName} - OnlyBills`;
-      } catch (err) {
-        console.error(err);
-        setError('Error loading receipt');
+        const snap = await getDoc(doc(db, 'sharedReceipts', id));
+        if (!snap.exists()) { setError('This bill link has expired or doesn’t exist.'); setLoading(false); return; }
+        const d = snap.data();
+        setData(d);
+        preselect(d, params);
+        document.title = `${d.storeName} — OnlyBills`;
+      } catch (e) {
+        console.error(e);
+        setError('Something went wrong loading this bill.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchReceipt();
+    run();
   }, []);
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && modalImage) setModalImage(null);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [modalImage]);
+    const onKey = (e) => { if (e.key === 'Escape') setModalImage(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
-  if (loading) return <div className="app"><LoadingState /><AppStoreBanner visible={true} /></div>;
-  if (error) return <div className="app"><ErrorState message={error} /><AppStoreBanner visible={true} /></div>;
+  const showToast = (msg) => {
+    setToast(msg);
+    clearTimeout(window.__t);
+    window.__t = setTimeout(() => setToast(null), 1600);
+  };
+
+  const selectMe = (i) => {
+    setMeIndex(i);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const me = useMemo(() => (data && meIndex != null ? data.people?.[meIndex] : null), [data, meIndex]);
+
+  if (loading) return <Loading />;
+  if (error) return <ErrorView message={error} />;
 
   return (
-    <div className="app">
-      <div className="container">
-        <Hero data={data} imageLoaded={heroLoaded} onImageLoad={() => setHeroLoaded(true)} />
+    <div className="wrap">
+      <Hero data={data} />
 
-        <motion.div variants={containerVariants} initial="hidden" animate="visible">
-          <TotalCard data={data} />
+      <AnimatePresence mode="wait">
+        {me ? (
+          <ShareTicket key="ticket" data={data} person={me}
+            onChange={() => setMeIndex(null)} onToast={showToast} onQR={setModalImage} />
+        ) : (
+          <PersonPicker key="picker" people={data.people || []} currency={data.currency} onPick={selectMe} />
+        )}
+      </AnimatePresence>
 
-          <div className="section">
-            <motion.div className="section-header" variants={itemVariants}>
-              <span className="section-title">Breakdown</span>
-              <span className="section-count">{data.people.length}</span>
-            </motion.div>
-            {data.people.map((person, index) => (
-              <PersonCard key={index} person={person} currency={data.currency} />
-            ))}
-          </div>
+      <Breakdown data={data} meIndex={meIndex} onSelect={selectMe} />
 
-          <PaymentSection payment={data.payment} onQRClick={setModalImage} />
+      {data.receiptImageUrl && <ReceiptPhoto url={data.receiptImageUrl} onOpen={setModalImage} />}
 
-          {data.receiptImageUrl && <ReceiptSection imageUrl={data.receiptImageUrl} onImageClick={setModalImage} />}
-
-          <motion.div className="footer" variants={itemVariants}>
-            <img src="app-icon.png" alt="OnlyBills" className="footer-app-icon" />
-            <span>Split with <a href="https://apps.apple.com/app/onlybills">OnlyBills</a></span>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      <AppStoreBanner visible={bannerVisible} />
+      <Footer />
 
       <AnimatePresence>
-        {modalImage && <ImageModal imageUrl={modalImage} onClose={() => setModalImage(null)} />}
+        {modalImage && <ImageModal url={modalImage} onClose={() => setModalImage(null)} />}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {toast && (
+          <motion.div className="toast" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 30, opacity: 0 }}>
+            <CheckIcon /> {toast}
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );
