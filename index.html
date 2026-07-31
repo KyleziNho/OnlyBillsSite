@@ -289,19 +289,23 @@
             <div class="summary-points">
                 <div class="summary-point">
                     <span class="summary-point-icon">✅</span>
-                    <span class="summary-point-text">All data stays on your device</span>
+                    <span class="summary-point-text">Your receipt history and settings stay on your device</span>
                 </div>
                 <div class="summary-point">
                     <span class="summary-point-icon">✅</span>
-                    <span class="summary-point-text">No personal information collected</span>
+                    <span class="summary-point-text">Receipt scanning sends the image to a secure AI service (Google Gemini)</span>
                 </div>
                 <div class="summary-point">
                     <span class="summary-point-icon">✅</span>
-                    <span class="summary-point-text">We don't sell or share your data</span>
+                    <span class="summary-point-text">Live Split shares only the items and names you choose, over an encrypted connection</span>
                 </div>
                 <div class="summary-point">
                     <span class="summary-point-icon">✅</span>
-                    <span class="summary-point-text">Receipt images processed securely</span>
+                    <span class="summary-point-text">We measure anonymous in-app usage to improve the app — no advertising ID, no cross-app tracking</span>
+                </div>
+                <div class="summary-point">
+                    <span class="summary-point-icon">✅</span>
+                    <span class="summary-point-text">We never sell your data or use it for advertising</span>
                 </div>
             </div>
         </div>
@@ -311,57 +315,71 @@
         <!-- Privacy Policy Sections -->
         <div class="policy-section">
             <h3 class="policy-title">Privacy Policy</h3>
-            <p class="policy-content">Last Updated: <span id="current-date">24 July 2026</span>
+            <p class="policy-content">Last Updated: <span id="current-date">27 July 2026</span>
 
-OnlyBills is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our app.</p>
+OnlyBills is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our app, including when receipt scanning, Live Split, and usage analytics use secure third-party cloud services.</p>
         </div>
 
         <div class="policy-section">
             <h3 class="policy-title">Information We Collect</h3>
-            <p class="policy-content">OnlyBills is designed with privacy in mind. We do not collect, store, or transmit any personally identifiable information (PII) to our servers or any third parties.
+            <p class="policy-content">OnlyBills is designed with privacy in mind. We do not run our own accounts system and we do not collect personal information for advertising or profiling.
 
-The app only accesses:
-• Your device camera (with your permission) to scan receipts
-• Your photo library (with your permission) to import receipt images
-• Your contacts (with your permission) to help you split bills with friends</p>
+The app accesses, with your permission:
+• Your device camera to scan receipts
+• Your photo library to import receipt images
+• Your contacts to help you split bills with friends
+
+Some features send data to secure third-party cloud services to work:
+• Receipt scanning uploads the receipt image to Google's Gemini API for analysis
+• Live Split stores the receipt's items, the display names people enter, and who claimed what in Google Firebase so guests can join and split in real time. Receipt images shared during Live Split may be stored in Firebase Storage.
+• Anonymous usage analytics are sent to Google Firebase Analytics — which screens you open, which onboarding steps you complete, whether a scan succeeded, and subscription events such as starting a trial. These are tied to a random app-install identifier, never to your name, email, or contacts, and no advertising identifier (IDFA) is collected. Receipt contents, item names, guest names, and payment handles are never included.</p>
         </div>
 
         <div class="policy-section">
             <h3 class="policy-title">How We Use Your Information</h3>
-            <p class="policy-content">All data processing happens locally on your device:
+            <p class="policy-content">We use your information only to make the app work:
 
-• Receipt images are analyzed using on-device processing or secure third-party APIs
-• Contact information is only used to display names and photos when splitting bills
-• All split calculations and history are stored locally on your device using Apple's secure data storage
+• Receipt images are sent to Google's Gemini API to read the items and prices, then returned to your device
+• During Live Split, the receipt items, the names guests enter, and their claims are stored in Google Firebase so everyone at the table can split the bill together in real time
+• Contact information is only used on your device to display names and photos when splitting bills
+• Your receipt history and settings are stored locally on your device using Apple's secure data storage
+• Anonymous usage analytics tell us which parts of the app people actually reach — for example how many people finish onboarding, or whether receipt scanning is failing — so we can fix what isn't working
 
 We do not:
-• Collect or store your personal information
-• Track your usage or behavior
+• Collect personal information for advertising or profiling
+• Collect an advertising identifier (IDFA) or track you across other apps and websites
+• Include receipt contents, guest names, or payment handles in analytics
 • Share your data with advertisers
 • Sell your information to third parties</p>
         </div>
 
         <div class="policy-section">
             <h3 class="policy-title">Data Storage</h3>
-            <p class="policy-content">All your data is stored locally on your device using Apple's secure frameworks:
+            <p class="policy-content">Most of your data stays on your device, stored using Apple's secure frameworks:
 • Receipt history
 • Contact selections
 • Split calculations
-• User preferences
+• Payment handles and user preferences
 
-Your data remains private and is never uploaded to external servers unless you explicitly share it through iOS sharing features.</p>
+Some data is stored off-device only when a feature needs it:
+• Receipt images are transmitted to Google's Gemini API for scanning and are not retained by us
+• When you start a Live Split, that bill's items, guest names, and claims are stored in Google Firebase for the life of the shared session so guests can join and update it. You can end and remove a live table from the app.
+• Anonymous usage analytics events are stored by Google Firebase Analytics under a random app-install identifier. Deleting the app resets that identifier.</p>
         </div>
 
         <div class="policy-section">
             <h3 class="policy-title">Third-Party Services</h3>
-            <p class="policy-content">OnlyBills may use third-party services for receipt analysis (such as Google's Gemini API). When using these services:
-• Receipt images are temporarily transmitted over encrypted connections
-• No personal information is included with the image
-• Third-party services process the receipt and return structured data
-• Images are not stored by these services beyond processing
+            <p class="policy-content">OnlyBills uses Google cloud services to power three things:
 
-You can review the privacy policies of these services:
-• Google Gemini: <a href="https://ai.google.dev/gemini-api/terms" target="_blank">https://ai.google.dev/gemini-api/terms</a></p>
+Google Gemini API (receipt scanning): receipt images are transmitted over an encrypted connection, analysed, and structured item data is returned to your device.
+
+Google Firebase (Live Split): when you share a bill, its items, the display names guests enter, and their claims are stored so everyone can split it in real time. Shared receipt images may be stored in Firebase Storage for the session.
+
+Google Firebase Analytics (product improvement): anonymous, aggregated usage events keyed to a random app-install identifier. No advertising identifier is collected and no receipt or contact data is included.
+
+All transfers use encrypted (HTTPS/TLS) connections. You can review these services' privacy policies:
+• Google Gemini: <a href="https://ai.google.dev/gemini-api/terms" target="_blank">https://ai.google.dev/gemini-api/terms</a>
+• Google Firebase / Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a></p>
         </div>
 
         <div class="policy-section">
@@ -396,7 +414,7 @@ Contacts Access: Optional, makes it easier to select friends when splitting bill
 
         <div class="policy-section">
             <h3 class="policy-title">Contact Us</h3>
-            <p class="policy-content">If you have questions about this Privacy Policy or our practices, please contact us through the App Store.</p>
+            <p class="policy-content">If you have questions about this Privacy Policy or our practices, or you want data from a Live Split session removed, email <a href="mailto:osullivan7791@gmail.com">osullivan7791@gmail.com</a>.</p>
         </div>
 
         <div class="policy-section">
@@ -404,8 +422,9 @@ Contacts Access: Optional, makes it easier to select friends when splitting bill
             <p class="policy-content">You have complete control over your data:
 • You can delete all app data at any time through iOS Settings
 • You can revoke permissions at any time through iOS Settings
-• You can request data deletion by uninstalling the app
-• No data is retained after uninstallation</p>
+• You can end a Live Split from the app, which removes that shared table
+• Deleting the app removes everything stored on your device and resets your anonymous analytics identifier
+• You can email <a href="mailto:osullivan7791@gmail.com">osullivan7791@gmail.com</a> to request deletion of any data held for a Live Split session</p>
         </div>
 
         <!-- Footer -->
@@ -424,7 +443,7 @@ Contacts Access: Optional, makes it easier to select friends when splitting bill
                     <span>LinkedIn</span>
                 </a>
             </div>
-            <p class="footer-text">© 2024 OnlyBills. All rights reserved.</p>
+            <p class="footer-text">© 2026 OnlyBills. All rights reserved.</p>
         </div>
     </div>
 
