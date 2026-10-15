@@ -433,6 +433,28 @@
   text-shadow: none;
 }
 .avatar.is-emoji::after { display: none; }
+/* A face: the character's own pastel disc fills the circle; a hairline rim holds its
+   edge on glass and in dark mode. The colour behind shows only while it loads. */
+.avatar.is-face {
+  background-image: none;
+  background-color: color-mix(in srgb, var(--av) 22%, var(--surface));
+}
+.avatar.is-face::after {
+  background: none;
+  box-shadow: inset 0 0 0 max(0.5px, calc(var(--s) * 0.012)) rgba(0, 0, 0, 0.06);
+}
+.avatar-face {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+@media (prefers-color-scheme: dark) {
+  .avatar.is-face::after { box-shadow: inset 0 0 0 max(0.5px, calc(var(--s) * 0.012)) rgba(255, 255, 255, 0.14); }
+}
 .avatar-silhouette { width: 60%; height: 60%; color: rgba(255, 255, 255, 0.92); transform: translateY(6%); }
 .avatar.is-ringed { box-shadow: 0 0 0 2px var(--ring, var(--surface)); overflow: visible; }
 .avatar.is-arriving { animation: av-pop 560ms var(--spring) backwards; }

@@ -4,7 +4,8 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { normalizeStatic, hasAnyPayMethod } from '../lib/bill.js';
 import { cleanVenueName, formatMoney, plural } from '../lib/format.js';
 import { withViewTransition } from '../lib/motion.js';
-import { Avatar } from '../components/Avatar.jsx';
+import { Avatar, FacesProvider } from '../components/Avatar.jsx';
+import { assignFaces, faceKey } from '../lib/faces.js';
 import { Money } from '../components/Money.jsx';
 import { Row, Section } from '../components/Section.jsx';
 import { HeroArt } from '../components/HeroArt.jsx';
@@ -31,6 +32,11 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
   const [toast, showToast] = useToast();
   const headerRef = useRef(null);
   const me = meIndex != null ? bill.people[meIndex] : null;
+  // Distinct faces for the bill's people, in bill order — as the app assigns them.
+  const faces = useMemo(() => {
+    const picked = assignFaces(bill.people.map((p, i) => ({ key: faceKey({ name: p.name, id: `p${i}` }) })));
+    return Object.fromEntries(picked.map((f, i) => [`p${i}`, f]));
+  }, [bill.people]);
   const venue = cleanVenueName(bill.storeName);
 
   const pick = (i) => {
@@ -41,6 +47,7 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
   const closeViewer = useCallback(() => setViewer(null), []);
 
   return (
+    <FacesProvider value={faces}>
     <div className="app-shell">
       <main className="page">
         <Backdrop photo={bill.restaurantPhotoUrl} />
@@ -54,7 +61,7 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
           <>
             <section className="card share-card" style={{ viewTransitionName: 'share' }} aria-label="Your share">
               <div className="share-head">
-                <Avatar name={me.name} color={me.color} size={40} />
+                <Avatar id={`p${meIndex}`} name={me.name} color={me.color} size={40} />
                 <div className="share-who">
                   <span className="eyebrow">Your share</span>
                   <span className="share-name">{me.name}</span>
@@ -91,7 +98,7 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
             <Section title="Everyone on the bill" labelId="people-title">
               {bill.people.map((p, i) => (
                 <Row key={p.id} index={i} onClick={() => pick(i)} inset="leading"
-                  leading={<Avatar name={p.name} color={p.color} size={36} />}
+                  leading={<Avatar id={`p${i}`} name={p.name} color={p.color} size={36} />}
                   title={p.name} subtitle={plural(p.items.length, 'item')}
                   trailing={<><Money value={p.total} currency={bill.currency} roll={false} className="row-money" /><ChevronRight size={16} className="chev" /></>} />
               ))}
@@ -140,6 +147,7 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
       <ImageViewer url={viewer} alt="Receipt" onClose={closeViewer} />
       <Toast toast={toast} />
     </div>
+    </FacesProvider>
   );
 }
 
@@ -154,7 +162,7 @@ function WholeBill({ bill, meIndex, onPick }) {
           <div key={p.id} className={`disclosure ${expanded ? 'is-open' : ''}`}>
             <Row onClick={() => setOpen(expanded ? null : i)} inset="leading" index={i}
               aria-expanded={expanded}
-              leading={<Avatar name={p.name} color={p.color} size={36} />}
+              leading={<Avatar id={`p${i}`} name={p.name} color={p.color} size={36} />}
               title={<>{p.name}{i === meIndex && <span className="you-tag">You</span>}</>}
               subtitle={plural(p.items.length, 'item')}
               trailing={<><Money value={p.total} currency={bill.currency} roll={false} className="row-money" /><ChevronDown size={16} className="chev disclosure-chev" /></>} />

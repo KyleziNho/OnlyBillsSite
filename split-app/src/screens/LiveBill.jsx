@@ -9,7 +9,8 @@ import { cleanVenueName, formatMoney, haptic, plural, roundMoney } from '../lib/
 import { exponent, parseAmount } from '../lib/money.js';
 import { DELETE, NOW, subscribeShared, updateShared } from '../lib/store.js';
 import { useOnline, withViewTransition } from '../lib/motion.js';
-import { Avatar, AvatarStack } from '../components/Avatar.jsx';
+import { Avatar, AvatarStack, FacesProvider } from '../components/Avatar.jsx';
+import { tableFaces } from '../lib/faces.js';
 import { Money } from '../components/Money.jsx';
 import { Row, Section } from '../components/Section.jsx';
 import { HeroArt } from '../components/HeroArt.jsx';
@@ -141,6 +142,8 @@ export default function LiveBill({ docId, initialData, demo = null }) {
 
   // ── Derived ─────────────────────────────────────────────
   const totals = useMemo(() => liveTotals(bill), [bill]);
+  // One distinct face per guest — the same faces the host's phone shows (faces.js).
+  const faces = useMemo(() => tableFaces(bill.guests), [bill.guests]);
   const host = bill.guests.find((g) => g.isHost);
   const hostName = host?.name || 'the host';
   const me = identity ? bill.guests.find((g) => g.id === identity.gid) : null;
@@ -311,6 +314,7 @@ export default function LiveBill({ docId, initialData, demo = null }) {
   }
 
   return (
+    <FacesProvider value={faces}>
     <div className="app-shell">
       <main className={`page phase-${phase}`}>
         <Backdrop photo={bill.restaurantPhotoUrl} />
@@ -382,6 +386,7 @@ export default function LiveBill({ docId, initialData, demo = null }) {
       <Toast toast={toast} />
       <StatusPill kind={!online ? 'offline' : conn} />
     </div>
+    </FacesProvider>
   );
 }
 
@@ -432,7 +437,7 @@ function JoinCard({ bill, totals, host, inputRef, name, setName, onJoin, onPick 
         </form>
         {host && (
           <p className="join-host">
-            <Avatar name={host.name} color={host.color} size={20} />
+            <Avatar id={host.id} name={host.name} color={host.color} size={20} />
             <span><strong>{host.name}</strong> is hosting · pays the bill</span>
           </p>
         )}
@@ -445,7 +450,7 @@ function JoinCard({ bill, totals, host, inputRef, name, setName, onJoin, onPick 
             const n = bill.items.filter((it) => it.claimedBy.includes(g.id)).length;
             return (
               <Row key={g.id} index={i} onClick={() => onPick(g)} inset="leading"
-                leading={<Avatar name={g.name} color={g.color} size={36} />}
+                leading={<Avatar id={g.id} name={g.name} color={g.color} size={36} />}
                 title={g.name}
                 subtitle={g.addedByHost ? `Added by ${host?.name || 'the host'}` : n ? `${plural(n, 'item')} · ${formatMoney(totals.totalFor(g.id), bill.currency)}` : 'Just joined'}
                 trailing={<span className="link-label">That’s me</span>}
@@ -465,7 +470,7 @@ function FindYourself({ bill, totals, hostName, onPick }) {
     <Section title="Find your name" labelId="find-title" footer={`Not listed? Ask ${hostName} what you owe.`}>
       {people.map((g, i) => (
         <Row key={g.id} index={i} onClick={() => onPick(g)} inset="leading"
-          leading={<Avatar name={g.name} color={g.color} size={36} />}
+          leading={<Avatar id={g.id} name={g.name} color={g.color} size={36} />}
           title={g.name}
           subtitle={bill.paid[g.id] ? <span className="paid-label"><CheckIcon size={13} strokeWidth={3} />Paid</span> : null}
           trailing={<><Money value={totals.totalFor(g.id)} currency={bill.currency} roll={false} className="row-money" /><ChevronRight size={16} className="chev" /></>} />
@@ -490,7 +495,7 @@ function ShareCard({ me, bill, totals, myItems, myTotal, isPaid, paidAmt, topUp,
   return (
     <section className={`card share-card ${isPaid ? 'is-paid' : ''}`} style={{ viewTransitionName: 'share' }} aria-label="Your share">
       <div className="share-head">
-        <Avatar name={me.name} color={me.color} size={40} />
+        <Avatar id={me.id} name={me.name} color={me.color} size={40} />
         <div className="share-who">
           <span className="eyebrow">Your share</span>
           <span className="share-name">{me.name}</span>
@@ -668,7 +673,7 @@ function TableSection({ bill, totals, me }) {
         else sub = n ? plural(n, 'item') : 'Nothing claimed yet';
         return (
           <Row key={g.id} index={i} inset="leading" className={isMe ? 'is-me' : ''}
-            leading={<Avatar name={g.name} color={g.color} size={36} pop />}
+            leading={<Avatar id={g.id} name={g.name} color={g.color} size={36} pop />}
             title={<>{g.name}{isMe && <span className="you-tag">You</span>}</>}
             subtitle={sub}
             trailing={<Money value={total} currency={bill.currency} className="row-money" />} />

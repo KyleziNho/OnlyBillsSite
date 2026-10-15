@@ -1,0 +1,818 @@
+{
+  "version": 1,
+  "faces": [
+    "blue-1",
+    "blue-2",
+    "blue-3",
+    "purple-1",
+    "purple-2",
+    "purple-3",
+    "pink-1",
+    "pink-2",
+    "pink-3",
+    "red-1",
+    "red-2",
+    "red-3",
+    "orange-1",
+    "orange-2",
+    "orange-3",
+    "yellow-1",
+    "yellow-2",
+    "yellow-3",
+    "green-1",
+    "green-2",
+    "green-3",
+    "teal-1",
+    "teal-2",
+    "teal-3"
+  ],
+  "fnv": [
+    {
+      "input": "",
+      "hash": 2166136261
+    },
+    {
+      "input": "a",
+      "hash": 3826002220
+    },
+    {
+      "input": "foobar",
+      "hash": 3214735720
+    },
+    {
+      "input": "name:sam",
+      "hash": 1474336243
+    },
+    {
+      "input": "Ünïcödé ✓",
+      "hash": 1307316841
+    }
+  ],
+  "names": [
+    {
+      "name": "Sam",
+      "contactId": null,
+      "id": null,
+      "normalized": "sam",
+      "key": "name:sam",
+      "hash": 1474336243,
+      "face": "green-2",
+      "candidates": [
+        "green-2",
+        "green-3",
+        "green-1",
+        "teal-2",
+        "teal-3",
+        "teal-1"
+      ]
+    },
+    {
+      "name": "sam ",
+      "contactId": null,
+      "id": null,
+      "normalized": "sam",
+      "key": "name:sam",
+      "hash": 1474336243,
+      "face": "green-2",
+      "candidates": [
+        "green-2",
+        "green-3",
+        "green-1",
+        "teal-2",
+        "teal-3",
+        "teal-1"
+      ]
+    },
+    {
+      "name": "  SAM  ",
+      "contactId": null,
+      "id": null,
+      "normalized": "sam",
+      "key": "name:sam",
+      "hash": 1474336243,
+      "face": "green-2",
+      "candidates": [
+        "green-2",
+        "green-3",
+        "green-1",
+        "teal-2",
+        "teal-3",
+        "teal-1"
+      ]
+    },
+    {
+      "name": "Sam Jones",
+      "contactId": null,
+      "id": null,
+      "normalized": "sam jones",
+      "key": "name:sam jones",
+      "hash": 907095392,
+      "face": "pink-3",
+      "candidates": [
+        "pink-3",
+        "pink-1",
+        "pink-2",
+        "red-3",
+        "red-1",
+        "red-2"
+      ]
+    },
+    {
+      "name": "Priya",
+      "contactId": null,
+      "id": null,
+      "normalized": "priya",
+      "key": "name:priya",
+      "hash": 2986167811,
+      "face": "green-2",
+      "candidates": [
+        "green-2",
+        "green-3",
+        "green-1",
+        "teal-2",
+        "teal-3",
+        "teal-1"
+      ]
+    },
+    {
+      "name": "Priya Shah",
+      "contactId": null,
+      "id": null,
+      "normalized": "priya shah",
+      "key": "name:priya shah",
+      "hash": 676810019,
+      "face": "red-3",
+      "candidates": [
+        "red-3",
+        "red-1",
+        "red-2",
+        "orange-3",
+        "orange-1",
+        "orange-2"
+      ]
+    },
+    {
+      "name": "Jordan",
+      "contactId": null,
+      "id": null,
+      "normalized": "jordan",
+      "key": "name:jordan",
+      "hash": 773463058,
+      "face": "red-2",
+      "candidates": [
+        "red-2",
+        "red-3",
+        "red-1",
+        "orange-2",
+        "orange-3",
+        "orange-1"
+      ]
+    },
+    {
+      "name": "Mo",
+      "contactId": null,
+      "id": null,
+      "normalized": "mo",
+      "key": "name:mo",
+      "hash": 2987438524,
+      "face": "purple-2",
+      "candidates": [
+        "purple-2",
+        "purple-3",
+        "purple-1",
+        "pink-2",
+        "pink-3",
+        "pink-1"
+      ]
+    },
+    {
+      "name": "Ellie",
+      "contactId": null,
+      "id": null,
+      "normalized": "ellie",
+      "key": "name:ellie",
+      "hash": 1675243393,
+      "face": "blue-2",
+      "candidates": [
+        "blue-2",
+        "blue-3",
+        "blue-1",
+        "purple-2",
+        "purple-3",
+        "purple-1"
+      ]
+    },
+    {
+      "name": "Tom",
+      "contactId": null,
+      "id": null,
+      "normalized": "tom",
+      "key": "name:tom",
+      "hash": 2109348816,
+      "face": "blue-1",
+      "candidates": [
+        "blue-1",
+        "blue-2",
+        "blue-3",
+        "purple-1",
+        "purple-2",
+        "purple-3"
+      ]
+    },
+    {
+      "name": "Alex Tester",
+      "contactId": null,
+      "id": null,
+      "normalized": "alex tester",
+      "key": "name:alex tester",
+      "hash": 2400857215,
+      "face": "pink-2",
+      "candidates": [
+        "pink-2",
+        "pink-3",
+        "pink-1",
+        "red-2",
+        "red-3",
+        "red-1"
+      ]
+    },
+    {
+      "name": "José García",
+      "contactId": null,
+      "id": null,
+      "normalized": "jose garcia",
+      "key": "name:jose garcia",
+      "hash": 23003420,
+      "face": "green-3",
+      "candidates": [
+        "green-3",
+        "green-1",
+        "green-2",
+        "teal-3",
+        "teal-1",
+        "teal-2"
+      ]
+    },
+    {
+      "name": "JOSE GARCIA",
+      "contactId": null,
+      "id": null,
+      "normalized": "jose garcia",
+      "key": "name:jose garcia",
+      "hash": 23003420,
+      "face": "green-3",
+      "candidates": [
+        "green-3",
+        "green-1",
+        "green-2",
+        "teal-3",
+        "teal-1",
+        "teal-2"
+      ]
+    },
+    {
+      "name": "Zoë",
+      "contactId": null,
+      "id": null,
+      "normalized": "zoe",
+      "key": "name:zoe",
+      "hash": 2116394190,
+      "face": "pink-1",
+      "candidates": [
+        "pink-1",
+        "pink-2",
+        "pink-3",
+        "red-1",
+        "red-2",
+        "red-3"
+      ]
+    },
+    {
+      "name": "Łukasz",
+      "contactId": null,
+      "id": null,
+      "normalized": "łukasz",
+      "key": "name:łukasz",
+      "hash": 932398759,
+      "face": "pink-2",
+      "candidates": [
+        "pink-2",
+        "pink-3",
+        "pink-1",
+        "red-2",
+        "red-3",
+        "red-1"
+      ]
+    },
+    {
+      "name": "Søren",
+      "contactId": null,
+      "id": null,
+      "normalized": "søren",
+      "key": "name:søren",
+      "hash": 1344274983,
+      "face": "yellow-1",
+      "candidates": [
+        "yellow-1",
+        "yellow-2",
+        "yellow-3",
+        "green-1",
+        "green-2",
+        "green-3"
+      ]
+    },
+    {
+      "name": "İlker",
+      "contactId": null,
+      "id": null,
+      "normalized": "ilker",
+      "key": "name:ilker",
+      "hash": 1682543001,
+      "face": "red-1",
+      "candidates": [
+        "red-1",
+        "red-2",
+        "red-3",
+        "orange-1",
+        "orange-2",
+        "orange-3"
+      ]
+    },
+    {
+      "name": "ΣΩΚΡΑΤΗΣ",
+      "contactId": null,
+      "id": null,
+      "normalized": "σωκρατησ",
+      "key": "name:σωκρατησ",
+      "hash": 1984960369,
+      "face": "blue-2",
+      "candidates": [
+        "blue-2",
+        "blue-3",
+        "blue-1",
+        "purple-2",
+        "purple-3",
+        "purple-1"
+      ]
+    },
+    {
+      "name": "Ｓａｍ",
+      "contactId": null,
+      "id": null,
+      "normalized": "sam",
+      "key": "name:sam",
+      "hash": 1474336243,
+      "face": "green-2",
+      "candidates": [
+        "green-2",
+        "green-3",
+        "green-1",
+        "teal-2",
+        "teal-3",
+        "teal-1"
+      ]
+    },
+    {
+      "name": "Anne-Marie",
+      "contactId": null,
+      "id": null,
+      "normalized": "anne-marie",
+      "key": "name:anne-marie",
+      "hash": 528168317,
+      "face": "purple-3",
+      "candidates": [
+        "purple-3",
+        "purple-1",
+        "purple-2",
+        "pink-3",
+        "pink-1",
+        "pink-2"
+      ]
+    },
+    {
+      "name": "O'Brien",
+      "contactId": null,
+      "id": null,
+      "normalized": "o'brien",
+      "key": "name:o'brien",
+      "hash": 1275684402,
+      "face": "green-1",
+      "candidates": [
+        "green-1",
+        "green-2",
+        "green-3",
+        "teal-1",
+        "teal-2",
+        "teal-3"
+      ]
+    },
+    {
+      "name": "王小明",
+      "contactId": null,
+      "id": null,
+      "normalized": "王小明",
+      "key": "name:王小明",
+      "hash": 1739368008,
+      "face": "blue-1",
+      "candidates": [
+        "blue-1",
+        "blue-2",
+        "blue-3",
+        "purple-1",
+        "purple-2",
+        "purple-3"
+      ]
+    },
+    {
+      "name": "🍕 Pizza Club",
+      "contactId": null,
+      "id": null,
+      "normalized": "🍕 pizza club",
+      "key": "name:🍕 pizza club",
+      "hash": 4178700379,
+      "face": "green-2",
+      "candidates": [
+        "green-2",
+        "green-3",
+        "green-1",
+        "teal-2",
+        "teal-3",
+        "teal-1"
+      ]
+    },
+    {
+      "name": "Sam Jones",
+      "contactId": null,
+      "id": null,
+      "normalized": "sam jones",
+      "key": "name:sam jones",
+      "hash": 907095392,
+      "face": "pink-3",
+      "candidates": [
+        "pink-3",
+        "pink-1",
+        "pink-2",
+        "red-3",
+        "red-1",
+        "red-2"
+      ]
+    },
+    {
+      "name": "Nadia\tRossi\n",
+      "contactId": null,
+      "id": null,
+      "normalized": "nadia rossi",
+      "key": "name:nadia rossi",
+      "hash": 2418809469,
+      "face": "teal-1",
+      "candidates": [
+        "teal-1",
+        "teal-2",
+        "teal-3",
+        "blue-1",
+        "blue-2",
+        "blue-3"
+      ]
+    },
+    {
+      "name": "élodie",
+      "contactId": null,
+      "id": null,
+      "normalized": "elodie",
+      "key": "name:elodie",
+      "hash": 850673560,
+      "face": "yellow-2",
+      "candidates": [
+        "yellow-2",
+        "yellow-3",
+        "yellow-1",
+        "green-2",
+        "green-3",
+        "green-1"
+      ]
+    },
+    {
+      "name": "",
+      "contactId": "ABC-123:ABPerson",
+      "id": null,
+      "normalized": "",
+      "key": "contact:ABC-123:ABPerson",
+      "hash": 3420861312,
+      "face": "blue-1",
+      "candidates": [
+        "blue-1",
+        "blue-2",
+        "blue-3",
+        "purple-1",
+        "purple-2",
+        "purple-3"
+      ]
+    },
+    {
+      "name": "   ",
+      "contactId": null,
+      "id": "gst_k3j2h1",
+      "normalized": "",
+      "key": "id:gst_k3j2h1",
+      "hash": 79785004,
+      "face": "purple-2",
+      "candidates": [
+        "purple-2",
+        "purple-3",
+        "purple-1",
+        "pink-2",
+        "pink-3",
+        "pink-1"
+      ]
+    },
+    {
+      "name": "",
+      "contactId": null,
+      "id": "6F9619FF-8B86-D011-B42D-00C04FC964FF",
+      "normalized": "",
+      "key": "id:6f9619ff-8b86-d011-b42d-00c04fc964ff",
+      "hash": 3123907774,
+      "face": "teal-2",
+      "candidates": [
+        "teal-2",
+        "teal-3",
+        "teal-1",
+        "blue-2",
+        "blue-3",
+        "blue-1"
+      ]
+    },
+    {
+      "name": "",
+      "contactId": null,
+      "id": null,
+      "normalized": "",
+      "key": null,
+      "hash": null,
+      "face": null,
+      "candidates": []
+    }
+  ],
+  "groups": [
+    {
+      "label": "owed seed",
+      "members": [
+        {
+          "key": "name:alex tester"
+        },
+        {
+          "key": "name:sam"
+        },
+        {
+          "key": "name:priya"
+        },
+        {
+          "key": "name:jordan"
+        },
+        {
+          "key": "name:sam jones"
+        },
+        {
+          "key": "name:ellie"
+        },
+        {
+          "key": "name:tom"
+        },
+        {
+          "key": "name:mo"
+        }
+      ],
+      "faces": [
+        "pink-2",
+        "green-2",
+        "green-3",
+        "red-2",
+        "pink-3",
+        "blue-2",
+        "blue-1",
+        "purple-2"
+      ]
+    },
+    {
+      "label": "same name twice → distinct",
+      "members": [
+        {
+          "key": "name:sam"
+        },
+        {
+          "key": "name:sam"
+        },
+        {
+          "key": "name:sam"
+        }
+      ],
+      "faces": [
+        "green-2",
+        "green-3",
+        "green-1"
+      ]
+    },
+    {
+      "label": "chosen faces reserved first",
+      "members": [
+        {
+          "key": "name:sam"
+        },
+        {
+          "key": "name:priya",
+          "chosen": "green-2"
+        },
+        {
+          "key": "name:jordan"
+        }
+      ],
+      "faces": [
+        "green-3",
+        "green-2",
+        "red-2"
+      ]
+    },
+    {
+      "label": "photos use no face",
+      "members": [
+        {
+          "key": "name:sam",
+          "hasPhoto": true
+        },
+        {
+          "key": "name:sam"
+        },
+        {
+          "key": "name:jordan",
+          "hasPhoto": true,
+          "chosen": "red-2"
+        }
+      ],
+      "faces": [
+        null,
+        "green-2",
+        null
+      ]
+    },
+    {
+      "label": "no identity → initials",
+      "members": [
+        {
+          "key": null
+        },
+        {
+          "key": "name:mo"
+        }
+      ],
+      "faces": [
+        null,
+        "purple-2"
+      ]
+    },
+    {
+      "label": "26 people (faces repeat past 24)",
+      "members": [
+        {
+          "key": "name:guest 1"
+        },
+        {
+          "key": "name:guest 2"
+        },
+        {
+          "key": "name:guest 3"
+        },
+        {
+          "key": "name:guest 4"
+        },
+        {
+          "key": "name:guest 5"
+        },
+        {
+          "key": "name:guest 6"
+        },
+        {
+          "key": "name:guest 7"
+        },
+        {
+          "key": "name:guest 8"
+        },
+        {
+          "key": "name:guest 9"
+        },
+        {
+          "key": "name:guest 10"
+        },
+        {
+          "key": "name:guest 11"
+        },
+        {
+          "key": "name:guest 12"
+        },
+        {
+          "key": "name:guest 13"
+        },
+        {
+          "key": "name:guest 14"
+        },
+        {
+          "key": "name:guest 15"
+        },
+        {
+          "key": "name:guest 16"
+        },
+        {
+          "key": "name:guest 17"
+        },
+        {
+          "key": "name:guest 18"
+        },
+        {
+          "key": "name:guest 19"
+        },
+        {
+          "key": "name:guest 20"
+        },
+        {
+          "key": "name:guest 21"
+        },
+        {
+          "key": "name:guest 22"
+        },
+        {
+          "key": "name:guest 23"
+        },
+        {
+          "key": "name:guest 24"
+        },
+        {
+          "key": "name:guest 25"
+        },
+        {
+          "key": "name:guest 26"
+        }
+      ],
+      "faces": [
+        "yellow-1",
+        "blue-3",
+        "orange-2",
+        "pink-3",
+        "green-2",
+        "pink-1",
+        "yellow-3",
+        "green-3",
+        "pink-2",
+        "purple-3",
+        "red-2",
+        "teal-3",
+        "orange-1",
+        "blue-2",
+        "orange-3",
+        "purple-1",
+        "yellow-2",
+        "purple-2",
+        "green-1",
+        "teal-2",
+        "red-1",
+        "blue-1",
+        "red-3",
+        "teal-1",
+        "purple-3",
+        "green-3"
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "label": "host + guests (unsorted input)",
+      "guests": [
+        {
+          "id": "gst_zz9",
+          "name": "Priya"
+        },
+        {
+          "id": "gst_host",
+          "name": "Alex Tester"
+        },
+        {
+          "id": "gst_a01",
+          "name": "Sam"
+        },
+        {
+          "id": "gst_B02",
+          "name": "sam"
+        },
+        {
+          "id": "gst_m55",
+          "name": "Jordan"
+        }
+      ],
+      "faces": {
+        "gst_host": "pink-2",
+        "gst_B02": "green-2",
+        "gst_a01": "green-3",
+        "gst_m55": "red-2",
+        "gst_zz9": "green-1"
+      }
+    }
+  ]
+}
