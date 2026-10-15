@@ -1,452 +1,637 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OnlyBills - Privacy Policy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>OnlyBills · Privacy Policy</title>
+    <meta name="description" content="How OnlyBills handles your information: receipt history stays on your device, receipt scanning uses Google Gemini, Live Split uses Google Firebase, and we never sell your data.">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#e9f0fb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#050b14" media="(prefers-color-scheme: dark)">
+    <meta name="apple-itunes-app" content="app-id=6754412082">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="canonical" href="https://onlybills.app/">
+    <link rel="icon" type="image/png" sizes="64x64" href="split/favicon.png">
+    <link rel="apple-touch-icon" href="split/apple-touch-icon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="OnlyBills">
+    <meta property="og:url" content="https://onlybills.app/">
+    <meta property="og:title" content="OnlyBills · Privacy Policy">
+    <meta property="og:description" content="How OnlyBills handles your information. Your receipt history stays on your device, and we never sell your data.">
+    <meta property="og:image" content="https://onlybills.app/split/app-icon.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="OnlyBills · Privacy Policy">
+    <meta name="twitter:description" content="How OnlyBills handles your information. Your receipt history stays on your device, and we never sell your data.">
+    <meta name="twitter:image" content="https://onlybills.app/split/app-icon.png">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* OnlyBills design language — mirrors split-app/src/design/tokens.css
+           (system font, light/dark, one blue accent, inset grouped surfaces). */
+        :root {
+            color-scheme: light dark;
+
+            --accent: #4595ff;
+            --accent-text: #0a66d6;
+            --accent-soft: rgba(69, 149, 255, 0.14);
+            --positive: #24a148;
+            --positive-soft: rgba(52, 199, 89, 0.16);
+
+            --bg: #f2f2f7;
+            --surface: #ffffff;
+            --fill: rgba(120, 120, 128, 0.12);
+            --hairline: rgba(60, 60, 67, 0.16);
+
+            --text: #000000;
+            --text-body: rgba(0, 0, 0, 0.84);
+            --text-2: rgba(60, 60, 67, 0.74);
+            --meta-text: rgba(60, 60, 67, 0.86);
+
+            --glass-bg: rgba(242, 242, 247, 0.72);
+            --glass-edge: rgba(60, 60, 67, 0.12);
+            --glass-blur: blur(24px) saturate(180%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --wash: rgba(69, 149, 255, 0.16);
+            --focus-ring: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent-text);
+
+            --r-sm: 12px;
+            --r-lg: 26px;
+            --r-pill: 999px;
+            --gutter: 16px;
+            --col: 680px;
+
+            --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui,
+                    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --accent: #4b9bff;
+                --accent-text: #74b4ff;
+                --accent-soft: rgba(75, 155, 255, 0.20);
+                --positive: #30d158;
+                --positive-soft: rgba(48, 209, 88, 0.18);
+
+                --bg: #000000;
+                --surface: #1c1c1e;
+                --fill: rgba(120, 120, 128, 0.28);
+                --hairline: rgba(84, 84, 88, 0.55);
+
+                --text: #ffffff;
+                --text-body: rgba(255, 255, 255, 0.86);
+                --text-2: rgba(235, 235, 245, 0.64);
+                --meta-text: rgba(235, 235, 245, 0.70);
+
+                --glass-bg: rgba(20, 20, 22, 0.66);
+                --glass-edge: rgba(255, 255, 255, 0.10);
+                --card-shadow: none;
+                --wash: rgba(75, 155, 255, 0.22);
+            }
+        }
+
+        @media (min-width: 400px) { :root { --gutter: 20px; } }
+
+        /* ── Base ─────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            background: var(--bg);
+            scroll-behavior: smooth;
+            scroll-padding-top: 84px;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Rounded', 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-            line-height: 1.6;
+            margin: 0;
+            min-height: 100dvh;
+            background: var(--bg);
+            color: var(--text);
+            font: 400 17px/1.6 var(--font);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            overflow-x: clip;
+            position: relative;
         }
 
-        .container {
-            max-width: 600px;
+        /* The app's top-of-page accent wash */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 560px;
+            background:
+                radial-gradient(900px 420px at 50% -120px, var(--wash), transparent 72%),
+                radial-gradient(520px 320px at 85% -60px, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        h1, h2, h3, p, ul { margin: 0; padding: 0; }
+        img { display: block; max-width: 100%; }
+        a { color: var(--accent-text); text-decoration: none; }
+        a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+        :focus { outline: none; }
+        :focus-visible {
+            outline: none;
+            box-shadow: var(--focus-ring);
+            border-radius: 8px;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 12px;
+            top: -80px;
+            z-index: 20;
+            padding: 10px 16px;
+            border-radius: var(--r-pill);
+            background: var(--surface);
+            color: var(--accent-text);
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+            transition: top 200ms var(--ease-out);
+        }
+        .skip-link:focus-visible { top: 12px; text-decoration: none; }
+
+        /* ── Top bar: the only glass on the page ─────────────── */
+        .bar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            padding-top: env(safe-area-inset-top);
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: 0.5px solid var(--glass-edge);
+        }
+        .bar-inner {
+            max-width: calc(var(--col) + 2 * var(--gutter));
             margin: 0 auto;
-            padding: 20px 16px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 32px;
-            padding-top: 20px;
-        }
-
-        .app-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 16px;
-            border-radius: 18px;
-            overflow: hidden;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 10px max(var(--gutter), env(safe-area-inset-right)) 10px max(var(--gutter), env(safe-area-inset-left));
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-            font-size: 40px;
-        }
-
-        .app-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .app-icon-fallback {
-            display: none;
-        }
-
-        .app-icon img[src=""]:after,
-        .app-icon img:not([src]) {
-            display: none;
-        }
-
-        .app-title {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            letter-spacing: -0.02em;
-        }
-
-        .app-subtitle {
-            font-size: 16px;
-            color: #888888;
-            font-weight: 500;
-        }
-
-        .tldr-section {
-            background: linear-gradient(135deg, rgba(0, 122, 255, 0.15) 0%, rgba(0, 122, 255, 0.05) 100%);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 32px;
-            border: 1px solid rgba(0, 122, 255, 0.2);
-        }
-
-        .tldr-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 18px;
-        }
-
-        .tldr-icon {
-            font-size: 24px;
-        }
-
-        .tldr-title {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
-
-        .summary-points {
-            display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             gap: 12px;
         }
-
-        .summary-point {
+        .brand {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 10px;
-        }
-
-        .summary-point-icon {
-            font-size: 16px;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-
-        .summary-point-text {
-            font-size: 15px;
-            font-weight: 500;
-            line-height: 1.5;
-        }
-
-        .divider {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin: 32px 0;
-        }
-
-        .policy-section {
-            margin-bottom: 32px;
-        }
-
-        .policy-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 12px;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 17px;
             letter-spacing: -0.01em;
         }
-
-        .policy-content {
+        .brand:hover { text-decoration: none; }
+        .brand-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            box-shadow: 0 0 0 0.5px var(--hairline), 0 2px 6px rgba(20, 60, 140, 0.18);
+        }
+        .store-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 36px;
+            padding: 0 14px 0 12px;
+            border-radius: var(--r-pill);
+            background: var(--accent-soft);
+            color: var(--accent-text);
             font-size: 15px;
-            color: #cccccc;
-            line-height: 1.7;
-            white-space: pre-line;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background-color 200ms var(--ease-out), transform 200ms var(--ease-out);
+        }
+        .store-link svg { width: 16px; height: 16px; flex: none; }
+        .store-link:hover { text-decoration: none; background: color-mix(in srgb, var(--accent) 22%, transparent); }
+        .store-link:active { transform: scale(0.97); }
+        .store-long { display: none; }
+        @media (min-width: 560px) {
+            .store-long { display: inline; }
+            .store-short { display: none; }
         }
 
-        .policy-content a {
-            color: #007AFF;
-            text-decoration: none;
-            transition: opacity 0.2s;
+        /* ── Layout ──────────────────────────────────────── */
+        .layout {
+            position: relative;
+            z-index: 1;
+            max-width: calc(var(--col) + 2 * var(--gutter));
+            margin: 0 auto;
+            padding: 0 max(var(--gutter), env(safe-area-inset-right)) 0 max(var(--gutter), env(safe-area-inset-left));
         }
 
-        .policy-content a:hover {
-            opacity: 0.7;
+        .hero { padding: 36px 0 24px; }
+        .hero h1 {
+            font-size: 34px;
+            line-height: 41px;
+            font-weight: 700;
+            letter-spacing: -0.022em;
         }
 
+        /* ── TL;DR: an inset grouped card ─────────────────── */
+        .summary {
+            background: var(--surface);
+            border-radius: var(--r-lg);
+            box-shadow: var(--card-shadow), 0 0 0 0.5px var(--hairline);
+            padding: 20px 20px 6px;
+            margin-bottom: 40px;
+        }
+        .summary h2 {
+            font-size: 13px;
+            line-height: 18px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-2);
+            margin-bottom: 6px;
+        }
+        .summary ul { list-style: none; }
+        .summary li {
+            position: relative;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 12px 0;
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 500;
+            color: var(--text);
+        }
+        .summary li + li::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 36px;
+            right: 0;
+            height: 0.5px;
+            background: var(--hairline);
+        }
+        .check {
+            flex: none;
+            width: 24px;
+            height: 24px;
+            margin-top: -1px;
+            border-radius: 50%;
+            background: var(--positive-soft);
+            color: var(--positive);
+            display: grid;
+            place-items: center;
+        }
+        .check svg { width: 13px; height: 13px; }
+
+        /* ── Policy document ──────────────────────────────── */
+        .policy-section {
+            padding: 32px 0;
+            border-top: 0.5px solid var(--hairline);
+        }
+        .policy-section h2 {
+            font-size: 22px;
+            line-height: 28px;
+            font-weight: 700;
+            letter-spacing: -0.012em;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+        .policy-section p,
+        .policy-section li {
+            color: var(--text-body);
+            font-size: 17px;
+            line-height: 1.62;
+        }
+        .policy-section p + p,
+        .policy-section ul + p,
+        .policy-section p + ul { margin-top: 14px; }
+        .policy-section p + ul { margin-top: 10px; }
+        .policy-section strong { color: var(--text); font-weight: 600; }
+        .policy-section a { overflow-wrap: anywhere; }
+
+        .meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 16px;
+            padding: 4px 12px;
+            border-radius: var(--r-pill);
+            background: var(--fill);
+            color: var(--meta-text) !important;
+            font-size: 13px !important;
+            line-height: 20px !important;
+            font-weight: 500;
+        }
+        .meta + p { margin-top: 0 !important; }
+
+        .doc-list { list-style: none; }
+        .doc-list li {
+            position: relative;
+            padding-left: 22px;
+        }
+        .doc-list li + li { margin-top: 6px; }
+        /* The policy's own bullet characters, kept in the text and styled as markers */
+        .bullet {
+            position: absolute;
+            left: 4px;
+            top: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* ── Footer ─────────────────────────────────────── */
         .footer {
-            margin-top: 48px;
-            padding-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 8px;
+            padding: 32px 0 calc(40px + env(safe-area-inset-bottom));
+            border-top: 0.5px solid var(--hairline);
             text-align: center;
         }
-
         .social-links {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-bottom: 20px;
         }
-
         .social-link {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
-            color: #ffffff;
-            text-decoration: none;
+            min-height: 44px;
+            padding: 0 18px;
+            border-radius: var(--r-pill);
+            background: var(--surface);
+            box-shadow: 0 0 0 0.5px var(--hairline);
+            color: var(--text);
             font-size: 15px;
             font-weight: 500;
-            padding: 12px 24px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-            max-width: 280px;
+            transition: transform 200ms var(--ease-out), background-color 200ms var(--ease-out);
         }
-
-        .social-link:active {
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(0.98);
-        }
-
-        .social-icon {
-            font-size: 18px;
-        }
-
+        .social-link:hover { text-decoration: none; background: color-mix(in srgb, var(--surface) 88%, var(--accent)); }
+        .social-link:active { transform: scale(0.97); }
+        .social-icon { width: 18px; height: 18px; color: var(--text-2); }
         .footer-text {
-            color: #666666;
+            color: var(--text-2);
             font-size: 13px;
-            margin-top: 20px;
+            line-height: 18px;
         }
 
-        /* Tablet and Desktop */
+        /* ── Table of contents: desktop only ──────────────── */
+        .toc { display: none; }
+
         @media (min-width: 768px) {
-            .container {
-                padding: 40px 24px;
-            }
+            .hero { padding: 64px 0 32px; }
+            .hero h1 { font-size: 48px; line-height: 54px; letter-spacing: -0.028em; }
+            .summary { padding: 24px 28px 8px; margin-bottom: 48px; }
+            .summary li { font-size: 17px; }
+            .policy-section { padding: 40px 0; }
+            .policy-section h2 { font-size: 26px; line-height: 32px; margin-bottom: 14px; }
+        }
 
-            .header {
-                margin-bottom: 48px;
-                padding-top: 32px;
+        @media (min-width: 1180px) {
+            .layout {
+                max-width: none;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) var(--col) minmax(0, 1fr);
+                column-gap: 56px;
             }
+            .layout > * { grid-column: 2; }
+            .toc {
+                display: block;
+                grid-column: 1;
+                grid-row: 1 / span 20;
+                justify-self: end;
+                width: 210px;
+                position: sticky;
+                top: 92px;
+                align-self: start;
+                margin-top: 76px;
+            }
+            .toc p {
+                font-size: 13px;
+                line-height: 18px;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                color: var(--text-2);
+                margin: 0 0 10px 12px;
+            }
+            .toc ul { list-style: none; }
+            .toc a {
+                display: block;
+                padding: 5px 12px;
+                border-radius: 10px;
+                color: var(--text-2);
+                font-size: 14px;
+                line-height: 20px;
+                transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out);
+            }
+            .toc a:hover { text-decoration: none; background: var(--fill); color: var(--text); }
+        }
 
-            .app-icon {
-                width: 80px;
-                height: 80px;
-                border-radius: 20px;
-            }
-
-            .app-title {
-                font-size: 40px;
-            }
-
-            .app-subtitle {
-                font-size: 18px;
-            }
-
-            .tldr-section {
-                padding: 28px;
-            }
-
-            .tldr-title {
-                font-size: 26px;
-            }
-
-            .policy-title {
-                font-size: 26px;
-            }
-
-            .policy-content {
-                font-size: 16px;
-            }
-
-            .social-links {
-                flex-direction: row;
-                justify-content: center;
-                gap: 16px;
-            }
-
-            .social-link {
-                width: auto;
-            }
-
-            .social-link:hover {
-                background: rgba(255, 255, 255, 0.1);
-                transform: translateY(-2px);
-            }
-
-            .footer {
-                margin-top: 64px;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="app-icon" id="appIcon">
-                <img src="appstore.png" alt="OnlyBills App Icon" onerror="this.style.display='none'; document.getElementById('iconFallback').style.display='block';" />
-                <span id="iconFallback" style="display:none;">🧾</span>
-            </div>
-            <h1 class="app-title">OnlyBills</h1>
-            <p class="app-subtitle">Privacy Policy</p>
+    <a class="skip-link" href="#policy" data-chrome>Skip to policy</a>
+
+    <!-- Header -->
+    <header class="bar">
+        <div class="bar-inner">
+            <a class="brand" href="./" aria-label="OnlyBills home">
+                <picture>
+                    <source srcset="split/app-icon-dark-64.png 1x, split/app-icon-dark-128.png 2x" media="(prefers-color-scheme: dark)">
+                    <img class="brand-icon" src="split/app-icon-64.png" srcset="split/app-icon-64.png 1x, split/app-icon-128.png 2x" width="32" height="32" alt="">
+                </picture>
+                <span class="app-title">OnlyBills</span>
+            </a>
+            <a class="store-link" href="https://apps.apple.com/app/onlybills/id6754412082" target="_blank" rel="noopener noreferrer" data-chrome>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.27-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.78.74 2.99.72 1.24-.02 2.02-1.12 2.77-2.23.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.4-.92-2.41-3.68zM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.05-.52 2.69-1.28z"/></svg>
+                <span class="store-long">Download on the App Store</span><span class="store-short">App Store</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="layout">
+        <nav class="toc" aria-label="On this page" data-chrome>
+            <p>On this page</p>
+            <ul>
+                <li><a href="#overview">Privacy Policy</a></li>
+                <li><a href="#information-we-collect">Information We Collect</a></li>
+                <li><a href="#how-we-use">How We Use Your Information</a></li>
+                <li><a href="#data-storage">Data Storage</a></li>
+                <li><a href="#third-party-services">Third-Party Services</a></li>
+                <li><a href="#permissions">Permissions</a></li>
+                <li><a href="#data-security">Data Security</a></li>
+                <li><a href="#childrens-privacy">Children's Privacy</a></li>
+                <li><a href="#changes">Changes to This Policy</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#your-rights">Your Rights</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero">
+            <h1 class="app-subtitle">Privacy Policy</h1>
         </div>
 
-        <!-- TL;DR Section -->
-        <div class="tldr-section">
-            <div class="tldr-header">
-                <span class="tldr-icon">📄</span>
-                <h2 class="tldr-title">TL;DR</h2>
-            </div>
-            <div class="summary-points">
-                <div class="summary-point">
-                    <span class="summary-point-icon">✅</span>
-                    <span class="summary-point-text">Your receipt history and settings stay on your device</span>
-                </div>
-                <div class="summary-point">
-                    <span class="summary-point-icon">✅</span>
-                    <span class="summary-point-text">Receipt scanning sends the image to a secure AI service (Google Gemini)</span>
-                </div>
-                <div class="summary-point">
-                    <span class="summary-point-icon">✅</span>
-                    <span class="summary-point-text">Live Split shares only the items and names you choose, over an encrypted connection</span>
-                </div>
-                <div class="summary-point">
-                    <span class="summary-point-icon">✅</span>
-                    <span class="summary-point-text">We measure anonymous in-app usage to improve the app — no advertising ID, no cross-app tracking</span>
-                </div>
-                <div class="summary-point">
-                    <span class="summary-point-icon">✅</span>
-                    <span class="summary-point-text">We never sell your data or use it for advertising</span>
-                </div>
-            </div>
-        </div>
+        <main id="policy" tabindex="-1">
+            <!-- TL;DR Section -->
+            <section class="summary" aria-labelledby="tldr">
+                <h2 id="tldr">TL;DR</h2>
+                <ul>
+                    <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Your receipt history and settings stay on your device</span></li>
+                    <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Receipt scanning sends the image to a secure AI service (Google Gemini)</span></li>
+                    <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Live Split shares only the items and names you choose, over an encrypted connection</span></li>
+                    <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>We measure anonymous in-app usage to improve the app — no advertising ID, no cross-app tracking</span></li>
+                    <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>We never sell your data or use it for advertising</span></li>
+                </ul>
+            </section>
 
-        <div class="divider"></div>
+            <!-- Privacy Policy Sections -->
+            <section class="policy-section" id="overview" aria-labelledby="h-overview">
+                <h2 id="h-overview">Privacy Policy</h2>
+                <p class="meta">Last Updated: <span id="current-date">27 July 2026</span></p>
+                <p>OnlyBills is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our app, including when receipt scanning, Live Split, and usage analytics use secure third-party cloud services.</p>
+            </section>
 
-        <!-- Privacy Policy Sections -->
-        <div class="policy-section">
-            <h3 class="policy-title">Privacy Policy</h3>
-            <p class="policy-content">Last Updated: <span id="current-date">27 July 2026</span>
+            <section class="policy-section" id="information-we-collect" aria-labelledby="h-collect">
+                <h2 id="h-collect">Information We Collect</h2>
+                <p>OnlyBills is designed with privacy in mind. We do not run our own accounts system and we do not collect personal information for advertising or profiling.</p>
+                <p>The app accesses, with your permission:</p>
+                <ul class="doc-list">
+                    <li><span class="bullet" aria-hidden="true">•</span> Your device camera to scan receipts</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Your photo library to import receipt images</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Your contacts to help you split bills with friends</li>
+                </ul>
+                <p>Some features send data to secure third-party cloud services to work:</p>
+                <ul class="doc-list">
+                    <li><span class="bullet" aria-hidden="true">•</span> Receipt scanning uploads the receipt image to Google's Gemini API for analysis</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Live Split stores the receipt's items, the display names people enter, and who claimed what in Google Firebase so guests can join and split in real time. Receipt images shared during Live Split may be stored in Firebase Storage.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics are sent to Google Firebase Analytics — which screens you open, which onboarding steps you complete, whether a scan succeeded, and subscription events such as starting a trial. These are tied to a random app-install identifier, never to your name, email, or contacts, and no advertising identifier (IDFA) is collected. Receipt contents, item names, guest names, and payment handles are never included.</li>
+                </ul>
+            </section>
 
-OnlyBills is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our app, including when receipt scanning, Live Split, and usage analytics use secure third-party cloud services.</p>
-        </div>
+            <section class="policy-section" id="how-we-use" aria-labelledby="h-use">
+                <h2 id="h-use">How We Use Your Information</h2>
+                <p>We use your information only to make the app work:</p>
+                <ul class="doc-list">
+                    <li><span class="bullet" aria-hidden="true">•</span> Receipt images are sent to Google's Gemini API to read the items and prices, then returned to your device</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> During Live Split, the receipt items, the names guests enter, and their claims are stored in Google Firebase so everyone at the table can split the bill together in real time</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Contact information is only used on your device to display names and photos when splitting bills</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Your receipt history and settings are stored locally on your device using Apple's secure data storage</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics tell us which parts of the app people actually reach — for example how many people finish onboarding, or whether receipt scanning is failing — so we can fix what isn't working</li>
+                </ul>
+                <p>We do not:</p>
+                <ul class="doc-list">
+                    <li><span class="bullet" aria-hidden="true">•</span> Collect personal information for advertising or profiling</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Collect an advertising identifier (IDFA) or track you across other apps and websites</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Include receipt contents, guest names, or payment handles in analytics</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Share your data with advertisers</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Sell your information to third parties</li>
+                </ul>
+            </section>
 
-        <div class="policy-section">
-            <h3 class="policy-title">Information We Collect</h3>
-            <p class="policy-content">OnlyBills is designed with privacy in mind. We do not run our own accounts system and we do not collect personal information for advertising or profiling.
+            <section class="policy-section" id="data-storage" aria-labelledby="h-storage">
+                <h2 id="h-storage">Data Storage</h2>
+                <p>Most of your data stays on your device, stored using Apple's secure frameworks:</p>
+                <ul class="doc-list">
+                    <li><span class="bullet" aria-hidden="true">•</span> Receipt history</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Contact selections</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Split calculations</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Payment handles and user preferences</li>
+                </ul>
+                <p>Some data is stored off-device only when a feature needs it:</p>
+                <ul class="doc-list">
+                    <li><span class="bullet" aria-hidden="true">•</span> Receipt images are transmitted to Google's Gemini API for scanning and are not retained by us</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> When you start a Live Split, that bill's items, guest names, and claims are stored in Google Firebase for the life of the shared session so guests can join and update it. You can end and remove a live table from the app.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics events are stored by Google Firebase Analytics under a random app-install identifier. Deleting the app resets that identifier.</li>
+                </ul>
+            </section>
 
-The app accesses, with your permission:
-• Your device camera to scan receipts
-• Your photo library to import receipt images
-• Your contacts to help you split bills with friends
+            <section class="policy-section" id="third-party-services" aria-labelledby="h-third">
+                <h2 id="h-third">Third-Party Services</h2>
+                <p>OnlyBills uses Google cloud services to power three things:</p>
+                <p><strong>Google Gemini API (receipt scanning):</strong> receipt images are transmitted over an encrypted connection, analysed, and structured item data is returned to your device.</p>
+                <p><strong>Google Firebase (Live Split):</strong> when you share a bill, its items, the display names guests enter, and their claims are stored so everyone can split it in real time. Shared receipt images may be stored in Firebase Storage for the session.</p>
+                <p><strong>Google Firebase Analytics (product improvement):</strong> anonymous, aggregated usage events keyed to a random app-install identifier. No advertising identifier is collected and no receipt or contact data is included.</p>
+                <p>All transfers use encrypted (HTTPS/TLS) connections. You can review these services' privacy policies:</p>
+                <ul class="doc-list">
+                    <li><span class="bullet" aria-hidden="true">•</span> Google Gemini: <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener noreferrer">https://ai.google.dev/gemini-api/terms</a></li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Google Firebase / Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></li>
+                </ul>
+            </section>
 
-Some features send data to secure third-party cloud services to work:
-• Receipt scanning uploads the receipt image to Google's Gemini API for analysis
-• Live Split stores the receipt's items, the display names people enter, and who claimed what in Google Firebase so guests can join and split in real time. Receipt images shared during Live Split may be stored in Firebase Storage.
-• Anonymous usage analytics are sent to Google Firebase Analytics — which screens you open, which onboarding steps you complete, whether a scan succeeded, and subscription events such as starting a trial. These are tied to a random app-install identifier, never to your name, email, or contacts, and no advertising identifier (IDFA) is collected. Receipt contents, item names, guest names, and payment handles are never included.</p>
-        </div>
+            <section class="policy-section" id="permissions" aria-labelledby="h-permissions">
+                <h2 id="h-permissions">Permissions</h2>
+                <p>OnlyBills requests the following permissions:</p>
+                <p><strong>Camera Access:</strong> Required to scan receipts. You can deny this and manually enter receipts instead.</p>
+                <p><strong>Photo Library Access:</strong> Optional, allows you to import existing receipt images.</p>
+                <p><strong>Contacts Access:</strong> Optional, makes it easier to select friends when splitting bills. You can use the app without granting contacts access.</p>
+            </section>
 
-        <div class="policy-section">
-            <h3 class="policy-title">How We Use Your Information</h3>
-            <p class="policy-content">We use your information only to make the app work:
+            <section class="policy-section" id="data-security" aria-labelledby="h-security">
+                <h2 id="h-security">Data Security</h2>
+                <p>We take data security seriously:</p>
+                <ul class="doc-list">
+                    <li><span class="bullet" aria-hidden="true">•</span> All local data is encrypted using Apple's secure data storage APIs</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Network transmissions use industry-standard encryption (HTTPS/TLS)</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> We follow Apple's security guidelines and best practices</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> No data is accessible to us or any third parties without your explicit action</li>
+                </ul>
+            </section>
 
-• Receipt images are sent to Google's Gemini API to read the items and prices, then returned to your device
-• During Live Split, the receipt items, the names guests enter, and their claims are stored in Google Firebase so everyone at the table can split the bill together in real time
-• Contact information is only used on your device to display names and photos when splitting bills
-• Your receipt history and settings are stored locally on your device using Apple's secure data storage
-• Anonymous usage analytics tell us which parts of the app people actually reach — for example how many people finish onboarding, or whether receipt scanning is failing — so we can fix what isn't working
+            <section class="policy-section" id="childrens-privacy" aria-labelledby="h-children">
+                <h2 id="h-children">Children's Privacy</h2>
+                <p>OnlyBills is not directed to children under 13. We do not knowingly collect information from children under 13. If you are a parent or guardian and believe your child has provided us with information, please contact us.</p>
+            </section>
 
-We do not:
-• Collect personal information for advertising or profiling
-• Collect an advertising identifier (IDFA) or track you across other apps and websites
-• Include receipt contents, guest names, or payment handles in analytics
-• Share your data with advertisers
-• Sell your information to third parties</p>
-        </div>
+            <section class="policy-section" id="changes" aria-labelledby="h-changes">
+                <h2 id="h-changes">Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any changes by updating the "Last Updated" date at the top of this policy. Your continued use of the app after changes indicates acceptance of the updated policy.</p>
+            </section>
 
-        <div class="policy-section">
-            <h3 class="policy-title">Data Storage</h3>
-            <p class="policy-content">Most of your data stays on your device, stored using Apple's secure frameworks:
-• Receipt history
-• Contact selections
-• Split calculations
-• Payment handles and user preferences
+            <section class="policy-section" id="contact" aria-labelledby="h-contact">
+                <h2 id="h-contact">Contact Us</h2>
+                <p>If you have questions about this Privacy Policy or our practices, or you want data from a Live Split session removed, email <a href="mailto:osullivan7791@gmail.com">osullivan7791@gmail.com</a>.</p>
+            </section>
 
-Some data is stored off-device only when a feature needs it:
-• Receipt images are transmitted to Google's Gemini API for scanning and are not retained by us
-• When you start a Live Split, that bill's items, guest names, and claims are stored in Google Firebase for the life of the shared session so guests can join and update it. You can end and remove a live table from the app.
-• Anonymous usage analytics events are stored by Google Firebase Analytics under a random app-install identifier. Deleting the app resets that identifier.</p>
-        </div>
-
-        <div class="policy-section">
-            <h3 class="policy-title">Third-Party Services</h3>
-            <p class="policy-content">OnlyBills uses Google cloud services to power three things:
-
-Google Gemini API (receipt scanning): receipt images are transmitted over an encrypted connection, analysed, and structured item data is returned to your device.
-
-Google Firebase (Live Split): when you share a bill, its items, the display names guests enter, and their claims are stored so everyone can split it in real time. Shared receipt images may be stored in Firebase Storage for the session.
-
-Google Firebase Analytics (product improvement): anonymous, aggregated usage events keyed to a random app-install identifier. No advertising identifier is collected and no receipt or contact data is included.
-
-All transfers use encrypted (HTTPS/TLS) connections. You can review these services' privacy policies:
-• Google Gemini: <a href="https://ai.google.dev/gemini-api/terms" target="_blank">https://ai.google.dev/gemini-api/terms</a>
-• Google Firebase / Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a></p>
-        </div>
-
-        <div class="policy-section">
-            <h3 class="policy-title">Permissions</h3>
-            <p class="policy-content">OnlyBills requests the following permissions:
-
-Camera Access: Required to scan receipts. You can deny this and manually enter receipts instead.
-
-Photo Library Access: Optional, allows you to import existing receipt images.
-
-Contacts Access: Optional, makes it easier to select friends when splitting bills. You can use the app without granting contacts access.</p>
-        </div>
-
-        <div class="policy-section">
-            <h3 class="policy-title">Data Security</h3>
-            <p class="policy-content">We take data security seriously:
-• All local data is encrypted using Apple's secure data storage APIs
-• Network transmissions use industry-standard encryption (HTTPS/TLS)
-• We follow Apple's security guidelines and best practices
-• No data is accessible to us or any third parties without your explicit action</p>
-        </div>
-
-        <div class="policy-section">
-            <h3 class="policy-title">Children's Privacy</h3>
-            <p class="policy-content">OnlyBills is not directed to children under 13. We do not knowingly collect information from children under 13. If you are a parent or guardian and believe your child has provided us with information, please contact us.</p>
-        </div>
-
-        <div class="policy-section">
-            <h3 class="policy-title">Changes to This Policy</h3>
-            <p class="policy-content">We may update this Privacy Policy from time to time. We will notify you of any changes by updating the "Last Updated" date at the top of this policy. Your continued use of the app after changes indicates acceptance of the updated policy.</p>
-        </div>
-
-        <div class="policy-section">
-            <h3 class="policy-title">Contact Us</h3>
-            <p class="policy-content">If you have questions about this Privacy Policy or our practices, or you want data from a Live Split session removed, email <a href="mailto:osullivan7791@gmail.com">osullivan7791@gmail.com</a>.</p>
-        </div>
-
-        <div class="policy-section">
-            <h3 class="policy-title">Your Rights</h3>
-            <p class="policy-content">You have complete control over your data:
-• You can delete all app data at any time through iOS Settings
-• You can revoke permissions at any time through iOS Settings
-• You can end a Live Split from the app, which removes that shared table
-• Deleting the app removes everything stored on your device and resets your anonymous analytics identifier
-• You can email <a href="mailto:osullivan7791@gmail.com">osullivan7791@gmail.com</a> to request deletion of any data held for a Live Split session</p>
-        </div>
+            <section class="policy-section" id="your-rights" aria-labelledby="h-rights">
+                <h2 id="h-rights">Your Rights</h2>
+                <p>You have complete control over your data:</p>
+                <ul class="doc-list">
+                    <li><span class="bullet" aria-hidden="true">•</span> You can delete all app data at any time through iOS Settings</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> You can revoke permissions at any time through iOS Settings</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> You can end a Live Split from the app, which removes that shared table</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Deleting the app removes everything stored on your device and resets your anonymous analytics identifier</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> You can email <a href="mailto:osullivan7791@gmail.com">osullivan7791@gmail.com</a> to request deletion of any data held for a Live Split session</li>
+                </ul>
+            </section>
+        </main>
 
         <!-- Footer -->
-        <div class="footer">
+        <footer class="footer">
             <div class="social-links">
-                <a href="https://github.com/KyleziNho" target="_blank" class="social-link">
-                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <a href="https://github.com/KyleziNho" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
                     <span>GitHub</span>
                 </a>
-                <a href="https://www.linkedin.com/in/kos33/" target="_blank" class="social-link">
-                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <a href="https://www.linkedin.com/in/kos33/" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                     </svg>
                     <span>LinkedIn</span>
                 </a>
             </div>
             <p class="footer-text">© 2026 OnlyBills. All rights reserved.</p>
-        </div>
+        </footer>
     </div>
-
-
 </body>
 </html>
