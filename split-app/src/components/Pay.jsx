@@ -1,0 +1,173 @@
+// Paying the host. One big primary button for the host's default method — "Pay Kyle
+// £11.00" — with a small "via Monzo" chip and one line on what the guest can actually pay
+// with (people kept assuming they needed the host's app). Then "Other ways to pay": the
+// remaining links, and bank details ALWAYS (copy per line), plus an optional payment QR.
+// Docs without `payment.defaultMethod` (older apps) lead with the first link, as before.
+import { useState } from 'react';
+import { bankRows, payPlan, payeeOf, CAPABILITY } from '../lib/bill.js';
+import { formatMoney, haptic } from '../lib/format.js';
+import { Row, Section } from './Section.jsx';
+import { ArrowUpRight, BankIcon, CheckIcon, CopyIcon, QrIcon } from './Icons.jsx';
+import { HeroArt } from './HeroArt.jsx';
+
+const Logo = ({ opt, size = 36 }) => (opt.logo
+  ? <img className="pay-logo" src={opt.logo} alt="" width={size} height={size} style={{ width: size, height: size }} />
+  : <span className="pay-logo pay-mark" style={{ background: opt.tint, width: size, height: size }}>{opt.mark}</span>);
+
+export function PayOption({ opt, index, onOpen }) {
+  return (
+    <Row
+      href={opt.href} target="_blank" rel="noopener noreferrer" index={index}
+      className="pay-option" inset="leading"
+      onClick={() => { haptic(6); onOpen?.(opt); }}
+      leading={<Logo opt={opt} />}
+      title={opt.label}
+      subtitle={<>{opt.capability}<span className="pay-option-note">{opt.note}</span></>}
+      trailing={<span className="pay-go" aria-hidden="true"><ArrowUpRight size={15} strokeWidth={2.4} /></span>}
+      aria-label={`${opt.label}: ${opt.capability}. ${opt.note}. Opens ${opt.label}.`}
+    />
+  );
+}
+
+/** "via [logo] Monzo" — the rail, kept small and secondary to the person + amount. */
+function ViaChip({ opt }) {
+  return (
+    <span className="via-chip">
+      <span className="via-word">via</span>
+      {opt ? <Logo opt={opt} size={18} /> : <span className="via-bank" aria-hidden="true"><BankIcon size={13} /></span>}
+      <span className="via-name">{opt ? opt.label : 'Bank transfer'}</span>
+    </span>
+  );
+}
+
+function useCopy(onCopied) {
+  const [hit, setHit] = useState(null);
+  const copy = async (r, i) => {
+    let ok = true;
+    try { await navigator.clipboard.writeText(r.value); }
+    catch {
+      // iOS in-app browsers sometimes block the async clipboard — fall back.
+      try {
+        const ta = Object.assign(document.createElement('textarea'), { value: r.value });
+        ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); ok = document.execCommand('copy'); ta.remove();
+      } catch { ok = false; }
+    }
+    haptic(6);
+    setHit(i);
+    setTimeout(() => setHit((cur) => (cur === i ? null : cur)), 1400);
+    onCopied?.(r.label, ok);
+  };
+  return [hit, copy];
+}
+
+function BankRowsList({ rows, onCopied }) {
+  const [hit, copy] = useCopy(onCopied);
+  return rows.map((r, i) => (
+    <Row key={i} index={i} onClick={() => copy(r, i)} className={`bank-row ${hit === i ? 'is-copied' : ''}`}
+      aria-label={`Copy ${r.label}: ${r.value}`}
+      trailing={
+        <span className="copy-chip" aria-hidden="true">
+          <span className="copy-state copy-idle"><CopyIcon size={15} />Copy</span>
+          <span className="copy-state copy-done"><CheckIcon size={15} strokeWidth={2.8} />Copied</span>
+        </span>
+      }>
+      <span className="bank-label">{r.label}</span>
+      <span className="bank-value">{r.value}</span>
+    </Row>
+  ));
+}
+
+export function BankDetails({ payment, onCopied, title = 'Bank transfer' }) {
+  const rows = bankRows(payment);
+  if (!rows.length) return null;
+  return (
+    <Section className="bank"
+      title={<><BankIcon size={15} /> {title}</>}
+      trailing={<span className="quiet">{CAPABILITY.bank}</span>}
+      footer="Tap a line to copy it.">
+      <BankRowsList rows={rows} onCopied={onCopied} />
+    </Section>
+  );
+}
+
+/** The one primary way to pay. */
+function PrimaryPay({ plan, payment, amount, currency, payee, onCopied }) {
+  const shown = formatMoney(amount, currency);
+  const label = payee ? `Pay ${payee} ${shown}` : `Pay ${shown}`;
+  if (plan.primary.kind === 'link') {
+    const opt = plan.primary.opt;
+    return (
+      <div className="pay-primary" data-method={opt.key}>
+        <a className="btn btn-accent pay-primary-btn" href={opt.href} target="_blank" rel="noopener noreferrer"
+          onClick={() => haptic(8)} aria-label={`${label} via ${opt.label}. ${opt.capability}. Opens ${opt.label}.`}>
+          <span className="btn-label">{label}</span>
+          <ArrowUpRight size={17} strokeWidth={2.4} />
+        </a>
+        <div className="pay-primary-meta">
+          <ViaChip opt={opt} />
+          <span className="pay-capability">{opt.capability}</span>
+        </div>
+        <p className="pay-primary-note">{opt.note}</p>
+      </div>
+    );
+  }
+  // Bank transfer leads: the details ARE the action.
+  return (
+    <div className="pay-primary is-bank" data-method="bank">
+      <div className="pay-primary-head">
+        <span className="pay-primary-title">{label}</span>
+        <div className="pay-primary-meta">
+          <ViaChip />
+          <span className="pay-capability">{CAPABILITY.bank}</span>
+        </div>
+      </div>
+      <Section className="bank" footer="Tap a line to copy it.">
+        <BankRowsList rows={bankRows(payment)} onCopied={onCopied} />
+      </Section>
+    </div>
+  );
+}
+
+/** Everything a guest needs to pay `amount`. */
+export function PayMethods({ payment, amount, currency, reference, payee, onCopied, onOpenQr }) {
+  const plan = payPlan(payment, { amount, currency, reference });
+  const name = payeeOf(payment, payee);
+  const qr = payment?.qrCodeUrl;
+  if (!plan.primary && !qr) {
+    return (
+      <div className="card no-pay">
+        <HeroArt name="payout" size={92} />
+        <p><strong>{name ? `${name} hasn’t` : 'No one has'} added a way to pay yet.</strong>
+          <br />Settle up in person or ask for their details.</p>
+      </div>
+    );
+  }
+  const hasOthers = plan.others.length > 0 || plan.bank;
+  return (
+    <>
+      {plan.primary && (
+        <PrimaryPay plan={plan} payment={payment} amount={amount} currency={currency} payee={name} onCopied={onCopied} />
+      )}
+      {hasOthers && (
+        <div className="pay-others">
+          <h2 className="pay-others-title">Other ways to pay</h2>
+          {plan.others.length > 0 && (
+            <Section className="pay-apps">
+              {plan.others.map((o, i) => <PayOption key={o.key} opt={o} index={i} />)}
+            </Section>
+          )}
+          {plan.bank && <BankDetails payment={payment} onCopied={onCopied} />}
+        </div>
+      )}
+      {qr && (
+        <Section title="Scan to pay">
+          <Row onClick={() => onOpenQr?.(qr)} inset="leading"
+            leading={<img className="pay-logo pay-qr" src={qr} alt="" referrerPolicy="no-referrer" />}
+            title={payment.qrCodeDescription || 'Payment QR code'} subtitle="Tap to enlarge"
+            trailing={<QrIcon size={18} className="quiet" />} />
+        </Section>
+      )}
+    </>
+  );
+}
