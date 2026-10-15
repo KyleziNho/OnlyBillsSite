@@ -13,7 +13,7 @@ import StaticBill from './screens/StaticBill.jsx';
 const loadDemo = () => import('./demoData.js');
 
 const setTitle = (storeName) => {
-  document.title = storeName ? `${cleanVenueName(storeName)} — OnlyBills` : 'Your share — OnlyBills';
+  document.title = storeName ? `${cleanVenueName(storeName)} · OnlyBills` : 'Your share · OnlyBills';
 };
 
 const preselect = (people, who) => {
@@ -88,7 +88,7 @@ export default function App() {
       return (
         <StatePage art="receipts" title={page.reason === 'nolink' ? 'No bill here yet' : 'We can’t find this bill'}
           body={page.reason === 'nolink'
-            ? 'Open the link or scan the QR code from whoever paid, and your share will be waiting.'
+            ? 'Open the link or scan the QR code from whoever paid to see your share.'
             : 'The link may be mistyped, or the bill was taken down. Ask whoever shared it to send it again.'}
           secondary={GET_APP} />
       );

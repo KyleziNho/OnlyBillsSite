@@ -93,7 +93,7 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
             <section className="card join-card" style={{ viewTransitionName: 'share' }}>
               <HeroArt name="receipts" size={124} eager />
               <h2 className="join-title">Who are you?</h2>
-              <p className="join-sub">Tap your name to see exactly what you had and your share to pay.</p>
+              <p className="join-sub">Tap your name to see what you had and what you owe.</p>
             </section>
             <Section title="Everyone on the bill" labelId="people-title">
               {bill.people.map((p, i) => (
@@ -137,7 +137,7 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
               <p className="pay-hero-sub">{me.name}’s share at {venue}</p>
             </div>
             <PayMethods payment={bill.payment} amount={me.total} currency={bill.currency} reference={venue}
-              onCopied={(label, ok) => showToast(ok ? `${label} copied` : 'Couldn’t copy — hold to select', { tone: ok ? undefined : 'quiet' })}
+              onCopied={(label, ok) => showToast(ok ? `${label} copied` : 'Couldn’t copy. Press and hold to select it', { tone: ok ? undefined : 'quiet' })}
               onOpenQr={setViewer} />
             {hasAnyPayMethod(bill.payment) && <p className="pay-note">Payments go straight to whoever paid the bill.</p>}
           </div>

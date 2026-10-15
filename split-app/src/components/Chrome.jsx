@@ -141,7 +141,7 @@ export function StatusPill({ kind }) {
       <div className={`status-pill glass ${closing ? 'is-closing' : ''}`}
         onAnimationEnd={(e) => { if (e.target === e.currentTarget && closing) onExited(); }}>
         <WifiOffIcon size={15} />
-        {k === 'offline' ? 'Offline — your taps will sync' : 'Reconnecting…'}
+        {k === 'offline' ? 'Offline. Your taps will sync later' : 'Reconnecting…'}
       </div>
     </div>,
     document.body,

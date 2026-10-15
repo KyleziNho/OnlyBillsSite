@@ -253,9 +253,9 @@ export const normalizeStatic = (data) => ({
 // needed the host's app, so every option says what actually works. PayPal is honest:
 // guest card checkout isn't guaranteed. Mirrors PaymentMethodType.guestCapability (iOS).
 export const CAPABILITY = {
-  monzo: 'Card, Apple Pay or bank transfer — no Monzo account needed',
-  starling: 'Card or Apple Pay — no Starling account needed',
-  revolut: 'Pay by card — no Revolut account needed',
+  monzo: 'Card, Apple Pay or bank transfer. No Monzo account needed',
+  starling: 'Card or Apple Pay. No Starling account needed',
+  revolut: 'Pay by card. No Revolut account needed',
   paypal: 'PayPal account may be needed',
   venmo: 'Venmo account needed',
   bank: 'From any banking app',

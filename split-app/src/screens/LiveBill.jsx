@@ -120,7 +120,7 @@ export default function LiveBill({ docId, initialData, demo = null }) {
       if (demo.denyEdits && !paymentOnly) {
         setDenied(true);
         setBill(normalizeLive(demo.data));
-        showToast('This table has closed — claims are locked', { tone: 'quiet' });
+        showToast('This table has closed, so claims are locked', { tone: 'quiet' });
       }
       return true;
     }
@@ -131,10 +131,10 @@ export default function LiveBill({ docId, initialData, demo = null }) {
       console.error(e);
       if (e?.code === 'permission-denied') {
         if (!paymentOnly) setDenied(true);
-        showToast(paymentOnly ? 'Couldn’t save that — the table has closed' : 'This table has closed — claims are locked', { tone: 'quiet' });
+        showToast(paymentOnly ? 'Couldn’t save that because the table has closed' : 'This table has closed, so claims are locked', { tone: 'quiet' });
       } else {
         setConn('reconnecting');
-        showToast('Couldn’t save — check your connection', { tone: 'quiet' });
+        showToast('Couldn’t save. Check your connection.', { tone: 'quiet' });
       }
       return false;
     }
@@ -267,7 +267,7 @@ export default function LiveBill({ docId, initialData, demo = null }) {
     // with its own mount animations once the sheet has cleared (no page-wide snapshot).
     setBill((b) => ({ ...b, paid: { ...b.paid, [me.id]: 'confirmed' }, paidAmount: { ...b.paidAmount, [me.id]: amount } }));
     write({ [`paid.${me.id}`]: 'confirmed', [`paidAmount.${me.id}`]: amount }, { paymentOnly: true });
-    showToast(owesTopUp ? 'All square again — thanks!' : `Marked as paid — ${hostName} will see it`);
+    showToast(owesTopUp ? 'All square again, thanks' : `Marked as paid. ${hostName === 'the host' ? 'The host' : hostName} will see it.`);
   };
 
   const unmarkPaid = () => {
@@ -280,10 +280,10 @@ export default function LiveBill({ docId, initialData, demo = null }) {
       return { ...b, paid, paidAmount };
     });
     write({ [`paid.${me.id}`]: DELETE, [`paidAmount.${me.id}`]: DELETE }, { paymentOnly: true });
-    showToast('Okay — marked as not paid', { tone: 'quiet' });
+    showToast('Marked as not paid', { tone: 'quiet' });
   };
 
-  const onCopied = (label, ok) => showToast(ok ? `${label} copied` : `Couldn’t copy — hold to select`, { tone: ok ? undefined : 'quiet' });
+  const onCopied = (label, ok) => showToast(ok ? `${label} copied` : 'Couldn’t copy. Press and hold to select it', { tone: ok ? undefined : 'quiet' });
 
   const closeSheet = useCallback(() => setSheet(null), []);
   const closeViewer = useCallback(() => setViewer(null), []);
@@ -398,7 +398,7 @@ function PhaseBanner({ phase, hostName, canPay, joined, gone }) {
     <section className={`card banner banner-${phase}`} style={{ viewTransitionName: 'banner' }}>
       <HeroArt name={closed ? 'allclear' : 'scan'} size={84} eager />
       <div className="banner-text">
-        <h2 className="banner-title">{closed ? 'Settled — totals are final' : 'This table has closed'}</h2>
+        <h2 className="banner-title">{closed ? 'Totals are final' : 'This table has closed'}</h2>
         <p className="banner-body">
           {closed ? `${host} finished the table.` : gone ? 'It’s no longer live.' : 'Claims are locked now.'}{' '}
           {canPay
@@ -513,7 +513,7 @@ function ShareCard({ me, bill, totals, myItems, myTotal, isPaid, paidAmt, topUp,
           {topUp > 0
             ? <button type="button" className="text-btn topup" onClick={onOpenPay}><PlusIcon size={14} strokeWidth={2.8} />{formatMoney(topUp, bill.currency)} since you paid</button>
             : paidAmt != null && paidAmt - myTotal > 0.005
-              ? <span className="overpaid">You paid {formatMoney(paidAmt, bill.currency)} — {formatMoney(paidAmt - myTotal, bill.currency)} over your share now. Sort it with {hostName}.</span>
+              ? <span className="overpaid">You paid {formatMoney(paidAmt, bill.currency)}, which is {formatMoney(paidAmt - myTotal, bill.currency)} over your share now. Sort it out with {hostName}.</span>
               : <span>You paid {hostName} {formatMoney(paidAmt ?? myTotal, bill.currency)}</span>}
         </p>
       )}
@@ -614,7 +614,7 @@ function BillSection({ bill, totals, me, canEdit, phase, editMode, setEditMode, 
   return (
     <Section title="The bill" trailing={trailing} className={`bill-section ${editMode ? 'is-editing' : ''}`} id="the-bill" labelId="bill-title">
       {bill.items.length === 0 && (
-        <div className="row empty-row"><span className="row-body"><span className="row-sub">No items yet — the host is still adding them.</span></span></div>
+        <div className="row empty-row"><span className="row-body"><span className="row-sub">No items yet. The host is still adding them.</span></span></div>
       )}
       {bill.items.map((item, i) => (
         <ItemRow key={item.id} item={item} index={i} bill={bill} me={me}
@@ -723,7 +723,7 @@ function PaySheetBody({ bill, totals, me, myItems, myTotal, mode, paidAmt, topUp
       </Section>
 
       {!settled && hasAnyPayMethod(bill.payment) && (
-        <p className="pay-note">Paid? Tap “I’ve paid” so {hostName} knows — it ticks you off on their phone.</p>
+        <p className="pay-note">Once you’ve paid, tap “I’ve paid”. It ticks you off on {hostName}’s phone.</p>
       )}
     </div>
   );
@@ -779,7 +779,7 @@ function EditForm({ item, currency, onSave, onDelete }) {
           </span>
         </div>
       </div>
-      <p className="section-foot">Price is for the whole line — {qty > 1 ? `all ${qty} together` : 'as printed on the receipt'}.</p>
+      <p className="section-foot">{qty > 1 ? `Enter the price for all ${qty} together.` : 'Enter the price as printed on the receipt.'}</p>
       <Button tone="accent" type="submit" disabled={!valid}>{isNew ? 'Add to the bill' : 'Save changes'}</Button>
       {!isNew && (
         <button type="button" className="text-btn danger center" onClick={() => onDelete(item)}>Remove from the bill</button>
