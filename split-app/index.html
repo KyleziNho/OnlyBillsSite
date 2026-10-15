@@ -1,22 +1,41 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="app-icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#0b0a0d" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta property="og:title" content="Your share of the bill — OnlyBills" />
-    <meta property="og:description" content="See exactly what you ordered and pay your share in one tap." />
-    <meta property="og:type" content="website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Your share — OnlyBills</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta name="description" content="See exactly what you had and pay your share of the bill in one tap." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#dce7f8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1626" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-title" content="OnlyBills" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="OnlyBills" />
+    <meta property="og:title" content="Your share of the bill" />
+    <meta property="og:description" content="Tap what you had, see your share, pay in one tap." />
+    <meta property="og:image" content="https://onlybills.app/split/app-icon.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Your share of the bill" />
+    <meta name="twitter:description" content="Tap what you had, see your share, pay in one tap." />
+    <meta name="twitter:image" content="https://onlybills.app/split/app-icon.png" />
+
+    <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin />
+    <style>
+      /* First paint before the CSS bundle: right canvas, no white flash in dark mode. */
+      html { background: #f2f2f7; color-scheme: light dark; }
+      @media (prefers-color-scheme: dark) { html { background: #000; } }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    <noscript><p style="font: 17px -apple-system, system-ui, sans-serif; padding: 24px;">Turn on JavaScript to see your share of the bill.</p></noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
