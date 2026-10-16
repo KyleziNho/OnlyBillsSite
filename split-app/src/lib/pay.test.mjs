@@ -29,7 +29,7 @@ test('links keep their formats; best payer experience first', () => {
 
 test('capability copy is accurate and never implies the host app is needed', () => {
   assert.equal(CAPABILITY.monzo, 'Card, Apple Pay or bank transfer. No Monzo account needed');
-  assert.equal(CAPABILITY.revolut, 'Pay by card. No Revolut account needed');
+  assert.equal(CAPABILITY.revolut, 'Card or Apple Pay. No Revolut account needed');
   assert.equal(CAPABILITY.paypal, 'PayPal account may be needed');
   assert.equal(CAPABILITY.bank, 'From any banking app');
 });

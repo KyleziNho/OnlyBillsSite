@@ -255,7 +255,7 @@ export const normalizeStatic = (data) => ({
 export const CAPABILITY = {
   monzo: 'Card, Apple Pay or bank transfer. No Monzo account needed',
   starling: 'Card or Apple Pay. No Starling account needed',
-  revolut: 'Pay by card. No Revolut account needed',
+  revolut: 'Card or Apple Pay. No Revolut account needed',
   paypal: 'PayPal account may be needed',
   venmo: 'Venmo account needed',
   bank: 'From any banking app',
