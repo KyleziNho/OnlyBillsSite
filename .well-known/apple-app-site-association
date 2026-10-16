@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["M6F6NHCYNY.guava.SplitSwift"],
+        "components": [
+          { "/": "/split/", "?": { "id": "?*" }, "comment": "Live table (QR, share sheet): https://onlybills.app/split/?id=<id>" },
+          { "/": "/split", "?": { "id": "?*" }, "comment": "Same, without the trailing slash" },
+          { "/": "/split.html", "?": { "id": "?*" }, "comment": "Legacy prototype link, still printed on old shares" }
+        ]
+      }
+    ]
+  },
+  "appclips": {
+    "apps": ["M6F6NHCYNY.guava.SplitSwift.Clip"]
+  }
+}
