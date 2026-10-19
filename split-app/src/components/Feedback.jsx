@@ -67,8 +67,8 @@ function FeedbackSheet({ open, onClose, screen }) {
         </div>
       ) : (
         <form id="feedback-form" className="feedback-form" onSubmit={send}>
+          <img className="maker-hero" src="maker-hero.jpg" alt="Kyle at Marina Bay, Singapore" width="944" height="1300" />
           <div className="maker-intro">
-            <MakerMark size={56} />
             <div>
               <h2>hey there!</h2>
               <p>i’m kyle, a student at bath - onlybills is a little project of mine. any feedback really helps!</p>
