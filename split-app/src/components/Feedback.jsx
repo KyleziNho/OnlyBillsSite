@@ -69,7 +69,7 @@ function FeedbackSheet({ open, onClose, screen }) {
             <MakerFace size={56} />
             <div>
               <h2>hey there!</h2>
-              <p>i’m kyle, an msc cs student at bath and i built onlybills myself! your feedback helps me make it better.</p>
+              <p>i’m kyle, a student at bath - onlybills is a little project of mine. any feedback really helps!</p>
             </div>
           </div>
           <label className="sr-only" htmlFor="feedback-message">Your message</label>
