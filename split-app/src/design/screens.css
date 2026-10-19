@@ -570,7 +570,6 @@
   color: var(--text-2);
   cursor: pointer;
 }
-.maker-heart { color: var(--negative, #ff3b30); opacity: 0.7; }
 .maker-face { border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 2px var(--bg, transparent); }
 .maker-intro { display: flex; gap: 14px; align-items: flex-start; margin: 4px 0 18px; }
 .maker-intro h2 { margin: 0 0 4px; font-size: 22px; line-height: 28px; font-weight: 700; color: var(--text); }

@@ -10,14 +10,14 @@ function MakerFace({ size = 56 }) {
   return <img className="maker-face" src="maker-face.jpg" alt="" width={size} height={size} style={{ width: size, height: size }} />;
 }
 
-/** "Made with ♥ by Kyle · Say hi" at the foot of the page; opens the note. */
+/** "Made by Kyle" with his face at the foot of the page; opens the note. */
 export function MakerNote({ screen }) {
   const [open, setOpen] = useState(false);
   return (
     <>
       <button type="button" className="maker-line" onClick={() => setOpen(true)}>
-        <MakerFace size={20} />
-        <span>Made with <span className="maker-heart" aria-hidden="true">♥</span> by Kyle · Say hi</span>
+        <MakerFace size={22} />
+        <span>Made by Kyle</span>
       </button>
       <FeedbackSheet open={open} onClose={() => setOpen(false)} screen={screen} />
     </>
