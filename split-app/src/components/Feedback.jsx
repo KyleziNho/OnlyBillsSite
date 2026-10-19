@@ -5,18 +5,20 @@ import { useState } from 'react';
 import { feedbackDoc, MAX_CONTACT, MAX_MESSAGE } from '../lib/feedback.js';
 import { Sheet } from './Sheet.jsx';
 import { Button } from './Glass.jsx';
+import { CodeIcon } from './Icons.jsx';
 
-function MakerFace({ size = 56 }) {
-  return <img className="maker-face" src="maker-face.jpg" alt="" width={size} height={size} style={{ width: size, height: size }} />;
+/** Kyle's mark: </> in a soft accent circle (no photo). */
+function MakerMark({ size = 56 }) {
+  return <span className="maker-mark" style={{ width: size, height: size }}><CodeIcon size={Math.round(size * 0.42)} strokeWidth={2.4} /></span>;
 }
 
-/** "Made by Kyle" with his face at the foot of the page; opens the note. */
+/** "</> Made by Kyle" at the foot of the page; opens the note. */
 export function MakerNote({ screen }) {
   const [open, setOpen] = useState(false);
   return (
     <>
       <button type="button" className="maker-line" onClick={() => setOpen(true)}>
-        <MakerFace size={22} />
+        <CodeIcon size={13} strokeWidth={2.6} />
         <span>Made by Kyle</span>
       </button>
       <FeedbackSheet open={open} onClose={() => setOpen(false)} screen={screen} />
@@ -59,14 +61,14 @@ function FeedbackSheet({ open, onClose, screen }) {
           </Button>}>
       {sent ? (
         <div className="feedback-thanks" role="status">
-          <MakerFace size={88} />
+          <MakerMark size={80} />
           <h2>got it, thanks!</h2>
           <p>{contact.trim() ? 'i’ll get back to you soon!' : 'i really appreciate you taking the time to share your thoughts.'}</p>
         </div>
       ) : (
         <form id="feedback-form" className="feedback-form" onSubmit={send}>
-          <img className="maker-hero" src="maker-pub.jpg" alt="Kyle, on the right, with a mate at the pub" width="1200" height="1600" />
           <div className="maker-intro">
+            <MakerMark size={56} />
             <div>
               <h2>hey there!</h2>
               <p>i’m kyle, a student at bath - onlybills is a little project of mine. any feedback really helps!</p>

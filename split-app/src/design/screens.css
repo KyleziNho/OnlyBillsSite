@@ -570,9 +570,8 @@
   color: var(--text-2);
   cursor: pointer;
 }
-.maker-face { border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 2px var(--bg, transparent); }
-.maker-hero { display: block; width: 100%; height: auto; border-radius: var(--r-lg); margin-top: 4px; }
-.maker-intro { display: flex; gap: 14px; align-items: flex-start; margin: 14px 0 18px; }
+.maker-mark { display: inline-flex; align-items: center; justify-content: center; flex: none; border-radius: 50%; color: var(--accent-text); background: var(--accent-soft); }
+.maker-intro { display: flex; gap: 14px; align-items: flex-start; margin: 4px 0 18px; }
 .maker-intro h2 { margin: 0 0 4px; font-size: 22px; line-height: 28px; font-weight: 700; color: var(--text); }
 .maker-intro p { margin: 0; font-size: var(--fs-callout, 16px); line-height: 1.35; color: var(--text-2); }
 .feedback-form { display: flex; flex-direction: column; gap: 8px; padding-bottom: 8px; }
