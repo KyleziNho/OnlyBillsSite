@@ -60,25 +60,25 @@ function FeedbackSheet({ open, onClose, screen }) {
       {sent ? (
         <div className="feedback-thanks" role="status">
           <MakerFace size={88} />
-          <h2>thank you!</h2>
-          <p>{contact.trim() ? 'got it, i’ll get back to you' : 'got it. this is genuinely how onlybills gets better'}</p>
+          <h2>got it, thanks!</h2>
+          <p>{contact.trim() ? 'i’ll get back to you soon!' : 'i really appreciate you taking the time to share your thoughts.'}</p>
         </div>
       ) : (
         <form id="feedback-form" className="feedback-form" onSubmit={send}>
           <div className="maker-intro">
             <MakerFace size={56} />
             <div>
-              <h2>hey, i’m kyle</h2>
-              <p>i’m doing an msc in cs at bath and made onlybills on my own. if something’s confusing or broken, or there’s something you’d want, just tell me. i read all of these</p>
+              <h2>hey there!</h2>
+              <p>i’m kyle, an msc cs student at bath and i built onlybills myself! your feedback helps me make it better.</p>
             </div>
           </div>
           <label className="sr-only" htmlFor="feedback-message">Your message</label>
           <textarea id="feedback-message" className="field feedback-message" rows={5} maxLength={MAX_MESSAGE}
-            placeholder="what’s up?" value={message} onChange={(e) => setMessage(e.target.value)} />
-          <label className="sr-only" htmlFor="feedback-contact">email or number if you want a reply</label>
+            placeholder="your message..." value={message} onChange={(e) => setMessage(e.target.value)} />
+          <label className="sr-only" htmlFor="feedback-contact">email or number (optional)</label>
           <input id="feedback-contact" className="field" type="text" inputMode="email" autoComplete="email" maxLength={MAX_CONTACT}
-            placeholder="email or number if you want a reply" value={contact} onChange={(e) => setContact(e.target.value)} />
-          <p className="feedback-hint">optional, only i see it</p>
+            placeholder="email or number (optional)" value={contact} onChange={(e) => setContact(e.target.value)} />
+          <p className="feedback-hint">it’s private, only i see it</p>
           {state === 'failed' && <p className="feedback-error" role="alert">Couldn’t send that. Check your connection and try again.</p>}
         </form>
       )}
