@@ -7,7 +7,7 @@ import { Sheet } from './Sheet.jsx';
 import { Button } from './Glass.jsx';
 
 function MakerFace({ size = 56 }) {
-  return <img className="maker-face" src="maker-face.jpg" alt="" width={size} height={size} style={{ width: size, height: size }} />;
+  return <img className="maker-face" src="maker-face.png" alt="" width={size} height={size} style={{ width: size, height: size }} />;
 }
 
 /** "Made by Kyle" with his face at the foot of the page; opens the note. */
@@ -60,25 +60,25 @@ function FeedbackSheet({ open, onClose, screen }) {
       {sent ? (
         <div className="feedback-thanks" role="status">
           <MakerFace size={88} />
-          <h2>Thank you!</h2>
-          <p>{contact.trim() ? 'It’s with me now, and I’ll get back to you.' : 'It’s with me now. Notes like this are how OnlyBills gets better.'}</p>
+          <h2>thank you!</h2>
+          <p>{contact.trim() ? 'got it, i’ll get back to you' : 'got it. this is genuinely how onlybills gets better'}</p>
         </div>
       ) : (
         <form id="feedback-form" className="feedback-form" onSubmit={send}>
           <div className="maker-intro">
             <MakerFace size={56} />
             <div>
-              <h2>Hi, I’m Kyle</h2>
-              <p>I’m an MSc Computer Science student at Bath and I built OnlyBills on my own. Tell me what’s confusing, what’s broken, or what you’d love next. I read every message.</p>
+              <h2>hey, i’m kyle</h2>
+              <p>i’m doing an msc in cs at bath and made onlybills on my own. if something’s confusing or broken, or there’s something you’d want, just tell me. i read all of these</p>
             </div>
           </div>
           <label className="sr-only" htmlFor="feedback-message">Your message</label>
           <textarea id="feedback-message" className="field feedback-message" rows={5} maxLength={MAX_MESSAGE}
-            placeholder="What’s on your mind?" value={message} onChange={(e) => setMessage(e.target.value)} />
-          <label className="sr-only" htmlFor="feedback-contact">Email or number, if you’d like a reply</label>
+            placeholder="what’s up?" value={message} onChange={(e) => setMessage(e.target.value)} />
+          <label className="sr-only" htmlFor="feedback-contact">email or number if you want a reply</label>
           <input id="feedback-contact" className="field" type="text" inputMode="email" autoComplete="email" maxLength={MAX_CONTACT}
-            placeholder="Email or number, if you’d like a reply" value={contact} onChange={(e) => setContact(e.target.value)} />
-          <p className="feedback-hint">Optional. Only I see it.</p>
+            placeholder="email or number if you want a reply" value={contact} onChange={(e) => setContact(e.target.value)} />
+          <p className="feedback-hint">optional, only i see it</p>
           {state === 'failed' && <p className="feedback-error" role="alert">Couldn’t send that. Check your connection and try again.</p>}
         </form>
       )}
