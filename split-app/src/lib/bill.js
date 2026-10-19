@@ -42,12 +42,68 @@ export const isPaidValue = (v) => {
   return s !== '' && !['owes', 'owing', 'unpaid', 'false', 'no', 'none'].includes(s);
 };
 
-/** A claim value: `true` today; spec allows a quantity number later. Count claimers. */
-const isClaim = (v) => v === true || (typeof v === 'number' && v > 0);
+/**
+ * A claim value `items.<id>.claimedBy.<gid>`: `true` = 1 unit, a positive number = that
+ * many units (may be fractional, e.g. 0.5 from a leftover split). Anything else = no claim.
+ * Mirrors GuestCore/LiveBill.swift.
+ */
+export const claimUnits = (v) => (v === true ? 1 : typeof v === 'number' && Number.isFinite(v) && v > 0 ? v : 0);
+
+/** Unit tolerance shared with the app: |x| < 1e-6 counts as 0. */
+export const UNIT_EPS = 1e-6;
+
+/** Units `gid` holds on a normalised item (0 when they haven't claimed it). */
+export const unitsOf = (item, gid) => {
+  if (item.claims) return item.claims[gid] || 0;
+  return item.claimedBy?.includes(gid) ? 1 : 0;
+};
+
+/** Σ units claimed on an item. */
+export const claimedUnits = (item) =>
+  (item.claimedBy || []).reduce((s, gid) => s + unitsOf(item, gid), 0);
+
+/** Units nobody has claimed yet: max(0, qty − claimed), snapped to 0 within 1e-6. */
+export const unitsLeft = (item) => {
+  const left = Math.max(0, item.qty - claimedUnits(item));
+  return left < UNIT_EPS ? 0 : left;
+};
+
+/** "Up for grabs": some of a positively priced item is still unclaimed. */
+export const isUpForGrabs = (item) => unitsLeft(item) > 0 && item.price > 0;
+
+/** Whole-unit quantity of 2 or more: the rows that get a units stepper. */
+export const isMultiUnit = (item) => item.qty >= 2 && Math.abs(item.qty - Math.round(item.qty)) < UNIT_EPS;
+
+/** A copy of `item` with `gid` holding `units` (≤ 0 removes their claim). */
+export const withClaim = (item, gid, units) => {
+  const claims = {};
+  (item.claimedBy || []).forEach((g) => { claims[g] = unitsOf(item, g); });
+  if (units > UNIT_EPS) claims[gid] = units; else delete claims[gid];
+  return { ...item, claims, claimedBy: Object.keys(claims).sort() };
+};
+
+/** Units for display: whole numbers as is, fractions to at most 2 places ("0.5"). */
+export const formatUnits = (u) => {
+  const r = Math.round(u);
+  return Math.abs(u - r) < UNIT_EPS ? String(r) : String(Number(u.toFixed(2)));
+};
+
+/** The Firestore value for a claim of `units`: `true` for one (what older apps write), else the number. */
+export const claimValue = (units) => (Math.abs(units - 1) < UNIT_EPS ? true : units);
 
 const num = (v, d = 0) => (typeof v === 'number' && Number.isFinite(v) ? v : d);
 
 // ── Live (schemaVersion 2) ────────────────────────────────
+/** claimedBy: who claimed (sorted ids, as before); claims: gid → units. */
+const parseClaims = (raw) => {
+  const claims = {};
+  Object.entries(raw && typeof raw === 'object' ? raw : {}).forEach(([k, v]) => {
+    const u = claimUnits(v);
+    if (u > 0) claims[k] = u;
+  });
+  return { claimedBy: Object.keys(claims).sort(), claims };
+};
+
 export const normalizeLive = (data) => {
   const items = Object.entries(data.items || {})
     .filter(([, it]) => it && typeof it === 'object')
@@ -59,7 +115,7 @@ export const normalizeLive = (data) => {
       // Item-level discount already taken off `price` (additive field; display + parity).
       discount: Math.max(0, num(it.discount)),
       qty: num(it.qty, 1) > 0 ? num(it.qty, 1) : 1,
-      claimedBy: Object.entries(it.claimedBy || {}).filter(([, v]) => isClaim(v)).map(([k]) => k).sort(),
+      ...parseClaims(it.claimedBy),
     }))
     .sort((a, b) => (a.order - b.order) || (a.id < b.id ? -1 : 1));
 
@@ -133,7 +189,8 @@ export const liveEngineBill = (bill) => {
     },
     allocations: items.map((it) => {
       const row = {};
-      guests.forEach((g, p) => { if (it.claimedBy.includes(g.id)) row[p] = 1; });
+      // Each claimer holds their units (true = 1); over-claims scale down in the engine.
+      guests.forEach((g, p) => { const u = unitsOf(it, g.id); if (u > 0) row[p] = u; });
       return row;
     }),
   };
@@ -174,7 +231,8 @@ export const liveTotals = (bill) => {
     return share && i >= 0 ? amt(share.lines[i]) : 0;
   };
 
-  const unclaimed = items.filter((it) => it.claimedBy.length === 0 && it.price > 0);
+  // Items with units still unclaimed (a single claimer on a ×2 naan leaves one up for grabs).
+  const unclaimed = items.filter(isUpForGrabs);
   const unclaimedValue = amt(split.unassigned.total);
 
   return {

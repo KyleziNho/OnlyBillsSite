@@ -9,7 +9,9 @@ import { fileURLToPath } from 'node:url';
 import {
   billMath, chargeKind, linkAmountMinor, parseAmount, splitBill, toMinor, scale,
 } from './money.js';
-import { liveTotals, normalizeLive, percentChargeRefresh } from './bill.js';
+import {
+  claimValue, claimedUnits, isMultiUnit, liveTotals, normalizeLive, percentChargeRefresh, unitsLeft, unitsOf, withClaim,
+} from './bill.js';
 import { linkAmount } from './format.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -91,6 +93,11 @@ test('live docs: liveTotals == LiveBill (shared expectations)', () => {
     assert.equal(toMinor(t.unclaimedValue, cur), e.unclaimed, `${c.id} unclaimed`);
     for (const [gid, minor] of Object.entries(e.guests)) assert.equal(t.totalMinorFor(gid), minor, `${c.id} ${gid}`);
     assert.deepEqual(t.charges.map((ch) => toMinor(ch.amount, cur)), e.chargeAmounts, `${c.id} charge amounts`);
+    if (e.unitsLeft) {
+      for (const [iid, left] of Object.entries(e.unitsLeft)) {
+        assert.ok(Math.abs(unitsLeft(bill.items.find((it) => it.id === iid)) - left) < 1e-9, `${c.id} ${iid} units left`);
+      }
+    }
     const sumGuests = Object.values(e.guests).reduce((s, x) => s + x, 0);
     assert.equal(sumGuests + toMinor(t.unclaimedValue, cur), toMinor(t.grandTotal, cur), `${c.id} sums to the bill`);
   }
@@ -175,4 +182,90 @@ test('property: Σ shares == total, non-negative, deterministic, item savings on
       });
     });
   }
+});
+
+// ── Multi-quantity claims (claim value = units) ──────────
+const naanDoc = (claimedBy, extraGuests = {}) => normalizeLive({
+  schemaVersion: 2, currency: 'GBP',
+  items: { itm_000: { order: 0, name: 'Garlic naan', price: 8, qty: 2, claimedBy } },
+  guests: { gst_host: { name: 'Kyle', joinedAt: { seconds: 1 } }, ...extraGuests },
+});
+const G = (name, s) => ({ name, joinedAt: { seconds: s } });
+
+test('multi-qty (a): one true claim on ×2 naan pays one unit, one left, not all claimed', () => {
+  const bill = naanDoc({ gst_sam: true }, { gst_sam: G('Sam', 2) });
+  const t = liveTotals(bill);
+  assert.equal(t.totalMinorFor('gst_sam'), 400);
+  assert.equal(unitsLeft(bill.items[0]), 1);
+  assert.equal(t.unclaimed.length, 1, 'still up for grabs');
+  assert.equal(toMinor(t.unclaimedValue, 'GBP'), 400);
+});
+
+test('multi-qty (b): claim value 2 pays both units, none left', () => {
+  const bill = naanDoc({ gst_sam: 2 }, { gst_sam: G('Sam', 2) });
+  const t = liveTotals(bill);
+  assert.equal(t.totalMinorFor('gst_sam'), 800);
+  assert.equal(unitsLeft(bill.items[0]), 0);
+  assert.equal(t.unclaimed.length, 0);
+});
+
+test('multi-qty (c): two true claims on ×2 take one each', () => {
+  const bill = naanDoc({ gst_sam: true, gst_jo: true }, { gst_sam: G('Sam', 2), gst_jo: G('Jo', 3) });
+  const t = liveTotals(bill);
+  assert.equal(t.totalMinorFor('gst_sam'), 400);
+  assert.equal(t.totalMinorFor('gst_jo'), 400);
+  assert.equal(t.unclaimed.length, 0);
+});
+
+test('multi-qty (d): fractional leftover claims 1 / 0.5 / 0.5 split £8.00 as £4/£2/£2', () => {
+  const bill = naanDoc({ gst_jon: 1, gst_sam: 0.5, gst_maya: 0.5 },
+    { gst_jon: G('Jon', 2), gst_sam: G('Sam', 3), gst_maya: G('Maya', 4) });
+  const t = liveTotals(bill);
+  assert.deepEqual(['gst_jon', 'gst_sam', 'gst_maya'].map(t.totalMinorFor), [400, 200, 200]);
+  assert.equal(claimedUnits(bill.items[0]), 2);
+  assert.equal(unitsLeft(bill.items[0]), 0);
+  assert.equal(t.unclaimed.length, 0);
+});
+
+test('multi-qty (e): qty-1 item with two true claims still halves', () => {
+  const bill = normalizeLive({
+    currency: 'GBP',
+    items: { itm_000: { order: 0, name: 'Pasta', price: 16, qty: 1, claimedBy: { gst_host: true, gst_sam: true } } },
+    guests: { gst_host: G('Kyle', 1), gst_sam: G('Sam', 2) },
+  });
+  const t = liveTotals(bill);
+  assert.equal(t.totalMinorFor('gst_host'), 800);
+  assert.equal(t.totalMinorFor('gst_sam'), 800);
+  assert.equal(unitsLeft(bill.items[0]), 0, 'over-claim leaves nothing');
+});
+
+test('claim values: true = 1, positive numbers keep their units, anything else is no claim', () => {
+  const bill = naanDoc({ a: true, b: 2, c: 0.5, d: false, e: 0, f: -1, g: '2', h: null });
+  const it = bill.items[0];
+  assert.deepEqual(it.claimedBy, ['a', 'b', 'c']);
+  assert.deepEqual(it.claims, { a: 1, b: 2, c: 0.5 });
+  assert.equal(unitsOf(it, 'd'), 0);
+  assert.ok(isMultiUnit(it));
+  assert.ok(!isMultiUnit({ qty: 1 }) && !isMultiUnit({ qty: 2.5 }));
+});
+
+test('unitsLeft snaps within 1e-6 of zero', () => {
+  const it = naanDoc({ a: 1 / 3, b: 1 / 3, c: 1 / 3 + 1, }).items[0];
+  assert.equal(unitsLeft(it), 0);
+  assert.equal(unitsLeft({ ...it, qty: 2 + 5e-7 }), 0);
+});
+
+test('stepper writes: withClaim + claimValue (true for one unit, numbers otherwise, delete at 0)', () => {
+  const it = naanDoc({ gst_sam: true }).items[0];
+  const up = withClaim(it, 'gst_sam', unitsOf(it, 'gst_sam') + 1);
+  assert.equal(unitsOf(up, 'gst_sam'), 2);
+  assert.equal(claimValue(2), 2);
+  assert.equal(claimValue(1), true);
+  const down = withClaim(up, 'gst_sam', 1);
+  assert.equal(unitsOf(down, 'gst_sam'), 1);
+  const gone = withClaim(down, 'gst_sam', 0);
+  assert.deepEqual(gone.claimedBy, []);
+  assert.equal(unitsLeft(gone), 2);
+  // A legacy-shaped item (no claims map) still reads as one unit per claimer.
+  assert.equal(unitsLeft({ qty: 2, claimedBy: ['x'] }), 1);
 });

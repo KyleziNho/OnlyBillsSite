@@ -5943,6 +5943,281 @@
     },
     "chargeAmounts": []
    }
+  },
+  {
+   "id": "L-multi-qty-true-is-one-unit",
+   "note": "x2 naan, one true claim: pays 1 unit, 1 left up for grabs (not all claimed)",
+   "doc": {
+    "schemaVersion": 2,
+    "storeName": "Test",
+    "currency": "GBP",
+    "items": {
+     "itm_000": {
+      "order": 0,
+      "name": "Garlic naan",
+      "price": 8,
+      "qty": 2,
+      "claimedBy": {
+       "gst_sam": true
+      }
+     }
+    },
+    "charges": {},
+    "guests": {
+     "gst_host": {
+      "name": "Kyle",
+      "joinedAt": {
+       "seconds": 1
+      }
+     },
+     "gst_sam": {
+      "name": "Sam",
+      "joinedAt": {
+       "seconds": 2
+      }
+     }
+    },
+    "paid": {}
+   },
+   "expect": {
+    "itemsSubtotal": 800,
+    "chargesNet": 0,
+    "grandTotal": 800,
+    "unclaimed": 400,
+    "guests": {
+     "gst_host": 0,
+     "gst_sam": 400
+    },
+    "chargeAmounts": [],
+    "unitsLeft": {
+     "itm_000": 1
+    }
+   }
+  },
+  {
+   "id": "L-multi-qty-numeric-units",
+   "note": "x2 naan, claim value 2: pays both, 0 left",
+   "doc": {
+    "schemaVersion": 2,
+    "storeName": "Test",
+    "currency": "GBP",
+    "items": {
+     "itm_000": {
+      "order": 0,
+      "name": "Garlic naan",
+      "price": 8,
+      "qty": 2,
+      "claimedBy": {
+       "gst_sam": 2
+      }
+     }
+    },
+    "charges": {},
+    "guests": {
+     "gst_host": {
+      "name": "Kyle",
+      "joinedAt": {
+       "seconds": 1
+      }
+     },
+     "gst_sam": {
+      "name": "Sam",
+      "joinedAt": {
+       "seconds": 2
+      }
+     }
+    },
+    "paid": {}
+   },
+   "expect": {
+    "itemsSubtotal": 800,
+    "chargesNet": 0,
+    "grandTotal": 800,
+    "unclaimed": 0,
+    "guests": {
+     "gst_host": 0,
+     "gst_sam": 800
+    },
+    "chargeAmounts": [],
+    "unitsLeft": {
+     "itm_000": 0
+    }
+   }
+  },
+  {
+   "id": "L-multi-qty-one-each",
+   "note": "x2 naan, two true claims: one unit each, 0 left",
+   "doc": {
+    "schemaVersion": 2,
+    "storeName": "Test",
+    "currency": "GBP",
+    "items": {
+     "itm_000": {
+      "order": 0,
+      "name": "Garlic naan",
+      "price": 8,
+      "qty": 2,
+      "claimedBy": {
+       "gst_sam": true,
+       "gst_jo": true
+      }
+     }
+    },
+    "charges": {},
+    "guests": {
+     "gst_host": {
+      "name": "Kyle",
+      "joinedAt": {
+       "seconds": 1
+      }
+     },
+     "gst_sam": {
+      "name": "Sam",
+      "joinedAt": {
+       "seconds": 2
+      }
+     },
+     "gst_jo": {
+      "name": "Jo",
+      "joinedAt": {
+       "seconds": 3
+      }
+     }
+    },
+    "paid": {}
+   },
+   "expect": {
+    "itemsSubtotal": 800,
+    "chargesNet": 0,
+    "grandTotal": 800,
+    "unclaimed": 0,
+    "guests": {
+     "gst_host": 0,
+     "gst_sam": 400,
+     "gst_jo": 400
+    },
+    "chargeAmounts": [],
+    "unitsLeft": {
+     "itm_000": 0
+    }
+   }
+  },
+  {
+   "id": "L-multi-qty-fractional-leftover",
+   "note": "x2 naan 8.00, Jon 1 + Sam 0.5 + Maya 0.5 (leftover split): 4.00/2.00/2.00",
+   "doc": {
+    "schemaVersion": 2,
+    "storeName": "Test",
+    "currency": "GBP",
+    "items": {
+     "itm_000": {
+      "order": 0,
+      "name": "Garlic naan",
+      "price": 8,
+      "qty": 2,
+      "claimedBy": {
+       "gst_jon": 1,
+       "gst_sam": 0.5,
+       "gst_maya": 0.5
+      }
+     }
+    },
+    "charges": {},
+    "guests": {
+     "gst_host": {
+      "name": "Kyle",
+      "joinedAt": {
+       "seconds": 1
+      }
+     },
+     "gst_jon": {
+      "name": "Jon",
+      "joinedAt": {
+       "seconds": 2
+      }
+     },
+     "gst_sam": {
+      "name": "Sam",
+      "joinedAt": {
+       "seconds": 3
+      }
+     },
+     "gst_maya": {
+      "name": "Maya",
+      "joinedAt": {
+       "seconds": 4
+      }
+     }
+    },
+    "paid": {}
+   },
+   "expect": {
+    "itemsSubtotal": 800,
+    "chargesNet": 0,
+    "grandTotal": 800,
+    "unclaimed": 0,
+    "guests": {
+     "gst_host": 0,
+     "gst_jon": 400,
+     "gst_sam": 200,
+     "gst_maya": 200
+    },
+    "chargeAmounts": [],
+    "unitsLeft": {
+     "itm_000": 0
+    }
+   }
+  },
+  {
+   "id": "L-qty-one-two-claimers-halves",
+   "note": "qty 1 with two true claims: over-claim halves (unchanged)",
+   "doc": {
+    "schemaVersion": 2,
+    "storeName": "Test",
+    "currency": "GBP",
+    "items": {
+     "itm_000": {
+      "order": 0,
+      "name": "Pasta",
+      "price": 16,
+      "qty": 1,
+      "claimedBy": {
+       "gst_host": true,
+       "gst_sam": true
+      }
+     }
+    },
+    "charges": {},
+    "guests": {
+     "gst_host": {
+      "name": "Kyle",
+      "joinedAt": {
+       "seconds": 1
+      }
+     },
+     "gst_sam": {
+      "name": "Sam",
+      "joinedAt": {
+       "seconds": 2
+      }
+     }
+    },
+    "paid": {}
+   },
+   "expect": {
+    "itemsSubtotal": 1600,
+    "chargesNet": 0,
+    "grandTotal": 1600,
+    "unclaimed": 0,
+    "guests": {
+     "gst_host": 800,
+     "gst_sam": 800
+    },
+    "chargeAmounts": [],
+    "unitsLeft": {
+     "itm_000": 0
+    }
+   }
   }
  ],
  "random": [
