@@ -556,6 +556,33 @@
 }
 .page > .footer:last-child { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
 
+/* ── Made by Kyle: the footer line + the note sheet ───────── */
+.maker-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 18px auto 0;
+  padding: 8px 12px;
+  border: 0;
+  background: none;
+  font-size: var(--fs-caption, 12px);
+  color: var(--text-2);
+  cursor: pointer;
+}
+.maker-heart { color: var(--negative, #ff3b30); opacity: 0.7; }
+.maker-face { border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 2px var(--bg, transparent); }
+.maker-intro { display: flex; gap: 14px; align-items: flex-start; margin: 4px 0 18px; }
+.maker-intro h2 { margin: 0 0 4px; font-size: 22px; line-height: 28px; font-weight: 700; color: var(--text); }
+.maker-intro p { margin: 0; font-size: var(--fs-callout, 16px); line-height: 1.35; color: var(--text-2); }
+.feedback-form { display: flex; flex-direction: column; gap: 8px; padding-bottom: 8px; }
+.feedback-message { height: auto; min-height: 132px; padding: 14px 18px; resize: vertical; font-family: inherit; line-height: 1.4; }
+.feedback-hint { margin: 0 4px; font-size: var(--fs-footnote); color: var(--text-2); }
+.feedback-error { margin: 4px; font-size: var(--fs-footnote); color: var(--negative-text); }
+.feedback-thanks { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 28px 12px 20px; }
+.feedback-thanks h2 { margin: 6px 0 0; font-size: 22px; font-weight: 700; color: var(--text); }
+.feedback-thanks p { margin: 0; max-width: 32ch; color: var(--text-2); }
+
 /* ── Small phones (SE / 360-wide Android) ──────────────────── */
 @media (max-width: 374px) {
   .venue-name { font-size: 25px; line-height: 30px; }

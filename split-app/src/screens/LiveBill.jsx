@@ -363,7 +363,7 @@ export default function LiveBill({ docId, initialData, demo = null }) {
           </Section>
         )}
 
-        <Footer />
+        <Footer screen={`live:${phase}${me ? ':joined' : ''}`} />
 
         {cta && <GlassBar>{cta}</GlassBar>}
       </main>

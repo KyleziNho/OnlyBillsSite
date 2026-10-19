@@ -8,6 +8,7 @@ import { HeroArt } from './HeroArt.jsx';
 import { Avatar } from './Avatar.jsx';
 import { Button, GlassIconButton } from './Glass.jsx';
 import { ArrowUpRight, CheckIcon, CloseIcon, StarIcon, WifiOffIcon } from './Icons.jsx';
+import { MakerNote } from './Feedback.jsx';
 
 /** Soft accent wash at the top of the page; with a venue photo, a blurred, saturated
  *  pool of it behind the header (VenueBackdrop on iOS). */
@@ -149,10 +150,10 @@ export function StatusPill({ kind }) {
 }
 
 // ── Footer ────────────────────────────────────────────────
-export function Footer() {
+export function Footer({ screen }) {
   return (
     <footer className="footer">
-      <a className="get-app" href="https://apps.apple.com/app/onlybills" target="_blank" rel="noopener noreferrer">
+      <a className="get-app" href="https://apps.apple.com/app/onlybills/id6754412082" target="_blank" rel="noopener noreferrer">
         <picture>
           <source srcSet="app-icon-dark-128.png" media="(prefers-color-scheme: dark)" />
           <img src="app-icon-128.png" alt="" width="44" height="44" loading="lazy" />
@@ -164,6 +165,7 @@ export function Footer() {
         <span className="get-app-cta">Get <ArrowUpRight size={14} strokeWidth={2.4} /></span>
       </a>
       <p className="footer-note">Payments go straight to whoever paid the bill. OnlyBills never holds your money.</p>
+      <MakerNote screen={screen} />
     </footer>
   );
 }
