@@ -7,9 +7,9 @@ import { Sheet } from './Sheet.jsx';
 import { Button } from './Glass.jsx';
 import { CodeIcon } from './Icons.jsx';
 
-/** Kyle's mark: </> in a soft accent circle (no photo). */
-function MakerMark({ size = 56 }) {
-  return <span className="maker-mark" style={{ width: size, height: size }}><CodeIcon size={Math.round(size * 0.42)} strokeWidth={2.4} /></span>;
+/** Kyle's round photo. */
+function MakerAvatar({ size = 56 }) {
+  return <img className="maker-avatar" src="maker-avatar.jpg" alt="" width={size} height={size} style={{ width: size, height: size }} />;
 }
 
 /** "</> Made by Kyle" at the foot of the page; opens the note. */
@@ -61,7 +61,7 @@ function FeedbackSheet({ open, onClose, screen }) {
           </Button>}>
       {sent ? (
         <div className="feedback-thanks" role="status">
-          <MakerMark size={80} />
+          <MakerAvatar size={80} />
           <h2>got it, thanks!</h2>
           <p>{contact.trim() ? 'i’ll get back to you soon!' : 'i really appreciate you taking the time to share your thoughts.'}</p>
         </div>
