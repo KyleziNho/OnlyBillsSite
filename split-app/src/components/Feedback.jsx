@@ -7,7 +7,7 @@ import { Sheet } from './Sheet.jsx';
 import { Button } from './Glass.jsx';
 
 function MakerFace({ size = 56 }) {
-  return <img className="maker-face" src="maker-face.png" alt="" width={size} height={size} style={{ width: size, height: size }} />;
+  return <img className="maker-face" src="maker-face.jpg" alt="" width={size} height={size} style={{ width: size, height: size }} />;
 }
 
 /** "Made by Kyle" with his face at the foot of the page; opens the note. */
