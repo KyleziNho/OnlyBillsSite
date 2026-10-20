@@ -80,7 +80,8 @@ export const ORG = {
  * JSON-LD nodes for this page; Organization + WebSite are always included.
  */
 export function layout({ path, title, description, body, schema = [], ogImage, ogType = 'website', current, assetsV, extraHead = '', noindex = false }) {
-  const fullTitle = title.includes('OnlyBills') ? title : `${title} · OnlyBills`;
+  // Brand suffix only when the title still fits in a search result (~60 characters).
+  const fullTitle = title.includes('OnlyBills') || title.length > 48 ? title : `${title} · OnlyBills`;
   const img = ogImage || abs('/assets/img/og-card.jpg');
   const graph = { '@context': 'https://schema.org', '@graph': [ORG, { '@type': 'WebSite', '@id': SITE.url + '/#site', url: SITE.url + '/', name: 'OnlyBills', publisher: { '@id': SITE.url + '/#org' }, inLanguage: 'en-GB' }, ...schema] };
   const nav = NAV.map(([href, label]) => `<a href="${href}"${current === href ? ' aria-current="page"' : ''}>${label}</a>`).join('');

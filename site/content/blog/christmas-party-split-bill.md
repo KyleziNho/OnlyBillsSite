@@ -23,7 +23,7 @@ Those numbers matter in December, when invitations stack up. Put the price in th
 
 Most restaurants change how they take group bookings from late November. Ask about each of these when you book:
 
-- **Deposit:** often £10 to £20 a head, taken when you book and knocked off the final bill. Usually non-refundable after a cut-off date.
+- **Deposit:** usually a set amount per head, taken when you book and knocked off the final bill. Usually non-refundable after a cut-off date.
 - **Set or festive menu:** a fixed price per head, often two or three courses.
 - **Pre-order:** everyone's choices sent a week or two ahead. Once sent, the restaurant may charge for those meals whether people turn up or not.
 - **Drinks package:** a fixed price for, say, a glass of fizz on arrival and half a bottle of wine each.

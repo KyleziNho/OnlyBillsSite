@@ -1,7 +1,7 @@
 ---
 title: How to split a bill fairly
 seoTitle: How to split a bill fairly: even, itemised or hybrid
-description: Three fair ways to split a restaurant bill (even, itemised and hybrid), when to use each, and one £159.19 dinner worked out all three ways.
+description: Three fair ways to split a restaurant bill (even, itemised and hybrid), when to use each, and one £159.19 dinner for four worked out all three ways.
 date: 2026-10-21
 category: Guides
 art: receipts

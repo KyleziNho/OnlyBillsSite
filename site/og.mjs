@@ -11,7 +11,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
 const OUT = path.join(HERE, 'static/og');
 fs.mkdirSync(OUT, { recursive: true });
-const only = process.argv[2]; // optional slug
+const only = process.argv.slice(2).find((a) => !a.startsWith('--')); // optional slug
 const force = process.argv.includes('--force');
 
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
