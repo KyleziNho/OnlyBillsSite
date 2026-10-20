@@ -1,0 +1,176 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   OnlyBills web design tokens — mirrors the iOS design system
+   (SplitSwift/SplitSwift/Design/DesignSystem.swift) so the guest page feels
+   like the app opened in a browser.
+
+   • System-adaptive: light and dark are both first-class (prefers-color-scheme).
+   • One accent (OnlyBills blue). Green = paid/settled, red = owed. Nothing else shouts.
+   • Content sits in inset grouped surfaces with hairlines (the Apple Pay sheet).
+   • Only floating chrome is glass (sticky bars, pills, sheets) — never content.
+   • SF Pro for words via the system stack; SF Pro Rounded for money via ui-rounded.
+   ────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  color-scheme: light dark;
+
+  /* Colour — iOS system values (light) */
+  --accent: #4595ff;
+  --accent-pressed: #2f80ee;
+  --accent-soft: rgba(69, 149, 255, 0.14);
+  --positive: #34c759;
+  --positive-fill: #1a8f45;            /* deep enough for white text */
+  --positive-soft: rgba(52, 199, 89, 0.14);
+  --negative: #ff3b30;
+  --negative-text: #d70015;            /* destructive text, 5.4:1 on #f2f2f7 */
+  --warning: #ff9500;
+
+  --bg: #f2f2f7;                       /* systemGroupedBackground */
+  --surface: #ffffff;                  /* secondarySystemGroupedBackground */
+  --surface-raised: #f2f2f7;           /* tertiarySystemGroupedBackground */
+  --fill: rgba(120, 120, 128, 0.16);   /* systemFill */
+  --separator: rgba(60, 60, 67, 0.29);
+  --hairline: rgba(60, 60, 67, 0.18);
+
+  --text: #000000;
+  --text-2: rgba(60, 60, 67, 0.74);    /* secondaryLabel, nudged to WCAG AA (4.7:1 on white) */
+  --text-3: rgba(60, 60, 67, 0.30);    /* tertiaryLabel */
+  --on-accent: #ffffff;
+
+  /* Accessible siblings of the accent/positive: text and filled controls that
+     carry white labels need ≥4.5:1, which the bright system tints don't reach. */
+  --accent-text: #0a66d6;              /* links / text buttons (5.4:1 on white) */
+  --accent-fill: #0a66d6;              /* primary capsule fill (white text 5.4:1) */
+  --positive-text: #146c37;            /* "Paid" labels (≥4.5:1 on white and on positive-soft) */
+  --positive-btn-hi: #188243;          /* green capsule gradient (white text ≥4.8:1) */
+  --positive-btn-lo: #126a34;
+  --check-on: #24a148;                 /* claimed circle — 3.3:1 against white (non-text AA) */
+  --ring-idle: rgba(60, 60, 67, 0.55); /* unclaimed circle — systemGray, 3:1 */
+
+  /* Glass (floating chrome only) */
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-edge: rgba(0, 0, 0, 0.06);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --glass-blur: blur(24px) saturate(180%);
+  --glass-specular: rgba(255, 255, 255, 0.95);   /* top rim highlight */
+  --glass-rim-low: rgba(255, 255, 255, 0.28);    /* bottom rim catch-light */
+  --glass-tint: rgba(255, 255, 255, 0.18);       /* inner sheen gradient top */
+  --scrim: rgba(0, 0, 0, 0.28);
+
+  /* Depth */
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  --wash: rgba(69, 149, 255, 0.14);    /* the top-of-page accent wash */
+  --photo-wash-opacity: 0.5;           /* venue photo behind the header (a tint under a veil) */
+  --sheet-bg: #f2f2f7;                 /* sheets sit on the grouped background */
+  --sheet-surface: #ffffff;            /* grouped rows inside a sheet */
+  --skeleton: rgba(120, 120, 128, 0.12);
+  --focus-ring: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent-text);
+
+  /* Geometry */
+  --r-sm: 12px;
+  --r-md: 20px;
+  --r-lg: 26px;                        /* grouped containers, cards */
+  --r-xl: 34px;                        /* sheets, hero cards */
+  --r-pill: 999px;
+
+  --s-xs: 4px;
+  --s-s: 8px;
+  --s-m: 12px;
+  --s-l: 16px;
+  --s-xl: 24px;
+  --s-xxl: 32px;
+  --gutter: 16px;                      /* 16pt on phones (iOS insetGrouped); 20 ≥ 400px */
+  --col: 440px;                        /* desktop column */
+  --row-min: 52px;
+  --cta-h: 54px;
+
+  /* Type */
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui,
+          "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-rounded: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --fs-large-title: 34px;  --lh-large-title: 41px;
+  --fs-title: 22px;        --lh-title: 28px;
+  --fs-headline: 17px;     /* semibold */
+  --fs-body: 17px;         --lh-body: 22px;
+  --fs-callout: 16px;
+  --fs-subhead: 15px;
+  --fs-footnote: 13px;     --lh-footnote: 18px;
+  --fs-caption: 12px;
+
+  /* Motion — springs approximated with linear() where supported */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snappy: cubic-bezier(0.2, 0.9, 0.25, 1);
+  --spring: linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%,
+                   0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%,
+                   1.001 85.9%, 1);
+  --dur-snappy: 280ms;
+  --dur-smooth: 400ms;
+  --dur-bouncy: 450ms;
+
+  /* Person colours — PersonColor in Models/Person.swift */
+  --p-blue: rgb(77, 128, 255);
+  --p-purple: rgb(153, 102, 255);
+  --p-pink: rgb(255, 102, 179);
+  --p-red: rgb(255, 77, 77);
+  --p-orange: rgb(255, 153, 51);
+  --p-yellow: rgb(255, 204, 51);
+  --p-green: rgb(77, 204, 128);
+  --p-teal: rgb(77, 179, 204);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #4b9bff;
+    --accent-pressed: #6aaeff;
+    --accent-soft: rgba(75, 155, 255, 0.20);
+    --positive: #30d158;
+    --positive-soft: rgba(48, 209, 88, 0.18);
+    --negative: #ff453a;
+    --negative-text: #ff6961;
+    --warning: #ff9f0a;
+
+    --bg: #000000;
+    --surface: #1c1c1e;
+    --surface-raised: #2c2c2e;
+    --fill: rgba(120, 120, 128, 0.36);
+    --separator: rgba(84, 84, 88, 0.65);
+    --hairline: rgba(84, 84, 88, 0.45);
+
+    --text: #ffffff;
+    --text-2: rgba(235, 235, 245, 0.62);
+    --text-3: rgba(235, 235, 245, 0.30);
+
+    --accent-text: #74b4ff;            /* 7.6:1 on #1c1c1e, 4.6:1 on accent-soft in sheets */
+    --accent-fill: #1668dc;            /* white text 5.2:1 */
+    --positive-text: #30d158;
+    --positive-btn-hi: #1c8a47;
+    --positive-btn-lo: #146c37;
+    --check-on: #30d158;
+    --ring-idle: rgba(235, 235, 245, 0.45);
+
+    --glass-bg: rgba(44, 44, 46, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.14);
+    --glass-edge: rgba(0, 0, 0, 0.4);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --glass-specular: rgba(255, 255, 255, 0.34);
+    --glass-rim-low: rgba(255, 255, 255, 0.08);
+    --glass-tint: rgba(255, 255, 255, 0.07);
+    --scrim: rgba(0, 0, 0, 0.55);
+
+    --card-shadow: none;
+    --wash: rgba(75, 155, 255, 0.22);
+    --photo-wash-opacity: 0.42;
+    --sheet-bg: #1c1c1e;
+    --sheet-surface: #2c2c2e;
+    --skeleton: rgba(120, 120, 128, 0.2);
+  }
+}
+
+/* Reduce motion: keep fades, drop movement. Components should also check
+   matchMedia('(prefers-reduced-motion: reduce)') before springing. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --spring: ease-out;
+    --dur-bouncy: 200ms;
+  }
+}

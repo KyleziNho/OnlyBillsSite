@@ -1,0 +1,174 @@
+# Writing for onlybills.app
+
+How articles (`content/blog/`) and tutorials (`content/how-to/`) are written. The build
+(`node build.mjs` in this folder) turns each Markdown file into a page with SEO tags,
+structured data, related links and the app call to action. Read
+`~/Desktop/Projects/Apps/OnlyBills/SplitSwift/DESIGN.md` §9 (copy voice) too.
+
+## File format
+
+`content/blog/<slug>.md` → `onlybills.app/blog/<slug>/`. Slugs are short, lowercase, hyphenated
+and keyword-led (`how-much-to-tip-uk`, not `my-thoughts-on-tipping`).
+
+```markdown
+---
+title: How much should you tip in the UK?
+seoTitle: How much to tip in the UK in 2026 (restaurants, pubs, taxis)
+description: One or two plain sentences, 140 to 160 characters, that answer the search and make someone click.
+date: 2026-10-21
+category: Etiquette
+art: paid
+related: is-service-charge-mandatory-uk, split-service-charge-fairly
+---
+
+Opening paragraph: answer the question in the first two sentences. No throat-clearing.
+
+## A question-shaped heading people search for
+
+Body...
+```
+
+Frontmatter (one `key: value` per line, no quotes needed):
+- `title` (required): the H1. Sentence case, ideally ≤ 60 characters.
+- `seoTitle` (optional): the `<title>` if it should differ (≤ 60 chars; " · OnlyBills" is added).
+- `description` (required): the meta description, 140 to 160 characters.
+- `date` (required), `updated` (optional): `YYYY-MM-DD`.
+- `category` (blog): one of `Money`, `Etiquette`, `Research`, `Occasions`, `Guides`, `Comparisons`.
+- `art`: hero illustration, one of `scan, claim, paid, receipts, pass, payout, allclear, camera`.
+- `related`: comma-separated slugs of other articles or tutorials (2 to 4).
+- `order` (how-to only): position in the tutorials list.
+- `summary` (how-to only): one short line for the tutorials index.
+
+## Special blocks
+
+Write these on their own lines; everything else is normal Markdown (tables are fine).
+
+```
+:::stat 38% | of Brits feel they lose money when the bill is split equally | OpenTable UK survey, 2016
+```
+One big highlighted number. The third part is the short source credit (always give one).
+
+```
+:::stats
+- 80% | would rather pay for what they ordered | Gneezy et al., 2004
+- 6m 45s | average time to settle a group bill | comparethemarket, 2019
+:::
+```
+A row of 2 or 3 stat cards.
+
+```
+:::shot guest-05-live | Friends tick what they had and see their share add up.
+```
+An app screenshot in a phone frame, light and dark versions picked automatically. Available now:
+`guest-01-join` (join a table: "Who are you?"), `guest-02-claimed` (items ticked),
+`guest-03-pay-sheet` (pay sheet with Monzo/bank options), `guest-04-paid` ("Paid"),
+`guest-05-live` (live table: your share £22.22, shared Garlic Naan split 3 ways).
+More (host side: home, scan, check, assign, QR table, summary, Owed, payout setup) are on the way;
+the list is in `static/shots/`.
+
+```
+:::note
+A short aside or tip. One or two sentences of Markdown.
+:::
+```
+
+```
+:::cta Stop doing the maths at the table
+```
+The app call to action card (heading is optional). The page already ends with one, so use at most
+one in the body, at a natural point, and only in articles where the app solves the problem.
+
+```
+:::tool split
+```
+A link card to a free tool: `split` (split the bill calculator), `overpay` (how much does
+splitting equally cost you), `tip` (service charge and tip calculator).
+
+## FAQ and sources (special sections)
+
+End articles with these two H2 sections when relevant. The build turns them into FAQ structured
+data and a tidy source list.
+
+```markdown
+## FAQ
+
+### Is service charge compulsory in the UK?
+No. It's optional, even when it's added to the bill automatically...
+
+### Second question?
+Answer.
+
+## Sources
+
+- [OpenTable UK: Brits lose £38,782 over a lifetime splitting the bill (2016)](https://...)
+- [Gneezy, Haruvy and Yafe, The Inefficiency of Splitting the Bill, Economic Journal (2004)](https://...)
+```
+
+## Voice (non-negotiable)
+
+- British English and £. Plain, short, warm: a friend who's good with money.
+- **No em dashes or en dashes anywhere** (— or –). The build fails on them. Use full stops,
+  commas, colons or brackets. Number ranges: "2 to 4", not "2–4".
+- No hype or filler: effortless, seamless, magic, instantly, in seconds, unlock, elevate,
+  delightful, game-changer, "Say goodbye to", "In today's world", "Let's dive in", "navigate".
+  No rhetorical rule-of-three lists for rhythm.
+- Sentence case for every heading.
+- Answer first. Headings should be phrased the way people search ("How do you split a bill
+  when someone didn't drink?").
+- Useful even to someone who never downloads the app: real advice, real numbers, worked examples
+  with actual £ amounts, message templates people can copy. Mention OnlyBills where it truly
+  helps, not in every paragraph. Never trash competitors; be fair and accurate about them.
+- Length: articles 1,000 to 1,800 words. Tutorials 400 to 900 words. Short paragraphs, lots of
+  subheadings, a table or worked example where it helps.
+
+## Facts and claims
+
+UK advertising rules (CAP code) need claims backed up. So:
+- Every statistic gets an inline credit (survey, year) and a link in `## Sources`. Prefer the
+  primary source. If you can't verify a figure, don't use it.
+- Say "estimated" or "about" for self-reported survey numbers. Note when a study is old or small
+  (e.g. the £8.73 figure is from a 2016 OpenTable survey; the Gneezy restaurant study was small,
+  groups of six students in Israel).
+- Never invent quotes, people, surveys or reviews.
+
+### Key stats the founder supplied (verify before use)
+
+- OpenTable UK survey (2016): 2 in 3 Brits happy to split equally, but 38% feel they lose money
+  doing it, about £8.73 per meal, about £38,782 over a lifetime. 58% split equally just because
+  it's easier to pay; a third go along with it so others don't think they're tight.
+- Gneezy, Haruvy and Yafe (2004), The Inefficiency of Splitting the Bill: diners ordered about
+  37 shekels' worth paying individually, 51 splitting equally, 82 when the meal was free
+  (about 38% more when splitting). 80% said they'd prefer paying individually. Tim Harford wrote
+  about it ("Free-riding à la carte").
+- comparethemarket survey (reported by the Yorkshire Post / Farming Life): 43% feel awkward about
+  how to pay when eating out; average 6 min 45 sec to settle the bill; 52% have been embarrassed
+  by how companions handled payment; 13% have fallen out with someone over the bill.
+- Confused.com: half of Brits have turned down an invitation because of cost, 63% in London.
+- Caterer & Licensee: a third only go to social events for special occasions because of cost.
+- Employment (Allocation of Tips) Act 2023, in force 1 October 2024: employers must pass all tips,
+  gratuities and service charges to workers, fairly, without deductions.
+
+## What OnlyBills is (only claim these)
+
+- iPhone and iPad app for splitting restaurant, pub and group bills. Made in the UK by Kyle, a
+  student at the University of Bath, on his own.
+- The host scans the receipt and it reads every line (AI receipt reading). You check it adds up,
+  then either:
+  - **share a live table**: friends scan a QR code or open a link and tick the items they had on
+    their own phone. No app download needed (it opens on the web or as an App Clip). Everyone
+    sees their share add up live, and who's claimed what.
+  - or **assign items yourself** to each person.
+- Shared items (a bottle of wine, sides) split between the people who shared them. Service charge,
+  tips, discounts and other extras are spread across everyone fairly (in proportion). Always exact
+  to the penny; the shares add up to the bill.
+- Friends pay the host back with a link: Monzo ("Card, Apple Pay or bank transfer. No Monzo
+  account needed"), Starling and Revolut ("Card or Apple Pay. No Starling/Revolut account
+  needed"), PayPal ("PayPal account may be needed") or bank transfer ("From any banking app").
+  Never imply friends need the host's bank app.
+- **Owed** tracks who still owes you across bills, with their faces.
+- Price: your first split is free. Then £0.99 a month or £5.99 a year (with a free trial).
+  Never obscure price, trial or renewal.
+- App Store: https://apps.apple.com/app/onlybills/id6754412082
+- Don't claim: Android, multiple currencies, splitting rent/utilities/ongoing household bills,
+  automatic bank integration, payment processing by OnlyBills itself (it hands off to the bank or
+  PayPal), or anything you can't see in the list above.
