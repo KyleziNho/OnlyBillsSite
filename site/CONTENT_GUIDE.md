@@ -51,7 +51,7 @@ One big highlighted number. The third part is the short source credit (always gi
 ```
 :::stats
 - 80% | would rather pay for what they ordered | Gneezy et al., 2004
-- 6m 45s | average time to settle a group bill | comparethemarket, 2019
+- 6m 45s | average time to settle a group bill | comparethemarket, 2021
 :::
 ```
 A row of 2 or 3 stat cards.

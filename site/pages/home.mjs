@@ -73,7 +73,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         <h2 class="h2">It reads the receipt for you.</h2>
         <p class="lede">Point your camera at the bill. Every dish, price and service charge comes through, and you can see straight away that it adds up.</p>
         <ul class="ticks">
-          <li>Handles long receipts, quantities and discounts</li>
+          <li>Reads quantities, service charge and discounts</li>
           <li>Fix any line with a tap before you share</li>
           <li>No receipt? Type the bill in instead</li>
         </ul>
