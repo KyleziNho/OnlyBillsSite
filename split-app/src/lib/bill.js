@@ -164,7 +164,9 @@ export const normalizeLive = (data) => {
     payment: data.payment || null,
     locked,
     status,
-    closed: locked || status === 'closed',
+    closed: locked || status === 'closed' || status === 'hostSplit',
+    // The host took the bill to split it themselves ("Split it myself instead" in the app).
+    hostSplit: status === 'hostSplit',
     closedAt: toDate(data.closedAt)?.getTime() ?? null,
     expiresAt: toDate(data.expiresAt)?.getTime() ?? null,
     items, charges, guests, paid, paidAmount,
@@ -259,10 +261,15 @@ const HOUR = 36e5;
 /**
  * Where the table is in its life, from the guest's side.
  *  open     — claims, edits, joins, payments
- *  closed   — host finished (locked / status:"closed"); payments only, for 7 days
+ *  closed   — host finished (locked / status:"closed"); payments only, for 7 days.
+ *             hostSplit: the host is splitting it themselves (status:"hostSplit");
+ *             nothing to pay here, they send everyone what they owe.
  *  expired  — past expiresAt without being finished; payments only
  */
 export const tablePhase = (bill, { now = Date.now(), denied = false } = {}) => {
+  if (bill.hostSplit) {
+    return { phase: 'closed', canEdit: false, canPay: false, hostSplit: true };
+  }
   if (bill.closed) {
     const payWindowOpen = !bill.closedAt || now < bill.closedAt + 7 * 24 * HOUR;
     return { phase: 'closed', canEdit: false, canPay: payWindowOpen };

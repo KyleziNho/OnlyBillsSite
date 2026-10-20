@@ -97,7 +97,9 @@ export default function LiveBill({ docId, initialData, demo = null }) {
         });
         if (next.closed && !prev.closed) {
           const host = next.guests.find((g) => g.isHost);
-          showToast(`${host?.name || 'The host'} finished the table`);
+          showToast(next.hostSplit
+            ? `${host?.name || 'The host'}’s splitting this one`
+            : `${host?.name || 'The host'} finished the table`);
         }
       }
       prevRef.current = next;
@@ -112,7 +114,7 @@ export default function LiveBill({ docId, initialData, demo = null }) {
 
   // ── Writes ──────────────────────────────────────────────
   const phaseInfo = tablePhase(bill, { now, denied: denied || gone });
-  const { phase, canEdit, canPay } = phaseInfo;
+  const { phase, canEdit, canPay, hostSplit } = phaseInfo;
 
   const write = useCallback(async (fields, { optimistic, paymentOnly = false } = {}) => {
     if (optimistic) setBill(optimistic);
@@ -326,11 +328,11 @@ export default function LiveBill({ docId, initialData, demo = null }) {
         <Backdrop photo={bill.restaurantPhotoUrl} />
         <CompactBar headerRef={headerRef} bill={bill}
           trailing={me && myItems.length > 0 ? <Money value={myTotal} currency={bill.currency} className="compact-money" /> : null} />
-        <VenueHeader bill={bill} headerRef={headerRef} badge={<LiveBadge phase={phase} />}
+        <VenueHeader bill={bill} headerRef={headerRef} badge={<LiveBadge phase={hostSplit ? 'expired' : phase} />}
           extraMeta={bill.guests.length > 1 ? `${bill.guests.length} at the table` : null} />
 
         {phase !== 'open' && (
-          <PhaseBanner phase={phase} hostName={hostName} canPay={canPay} joined={!!me} gone={gone} />
+          <PhaseBanner phase={phase} hostName={hostName} canPay={canPay} joined={!!me} gone={gone} hostSplit={hostSplit} />
         )}
 
         {me ? (
@@ -397,9 +399,21 @@ export default function LiveBill({ docId, initialData, demo = null }) {
 }
 
 // ── Banners ──────────────────────────────────────────────
-function PhaseBanner({ phase, hostName, canPay, joined, gone }) {
+function PhaseBanner({ phase, hostName, canPay, joined, gone, hostSplit }) {
   const closed = phase === 'closed';
   const host = hostName === 'the host' ? 'The host' : hostName;
+  // The host took the bill to split it themselves: nothing to do here.
+  if (hostSplit) {
+    return (
+      <section className="card banner banner-expired" style={{ viewTransitionName: 'banner' }}>
+        <HeroArt name="scan" size={84} eager />
+        <div className="banner-text">
+          <h2 className="banner-title">{host}’s splitting this one</h2>
+          <p className="banner-body">The table has closed. {host} will send you what you owe.</p>
+        </div>
+      </section>
+    );
+  }
   return (
     <section className={`card banner banner-${phase}`} style={{ viewTransitionName: 'banner' }}>
       <HeroArt name={closed ? 'allclear' : 'scan'} size={84} eager />
