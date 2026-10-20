@@ -118,7 +118,7 @@ Splitting equally, Chloe pays £15.75 more than her food and service cost, and A
 
 ## Can you use more than one?
 
-Yes, and plenty of people do. A common setup on a trip: a balance app like Splitwise or Tricount for the villa, car hire and supermarket runs, and an itemised split for each big group dinner. For trips specifically, see [how to split costs on a group holiday](/blog/split-bill-on-holiday/).
+Yes, and plenty of people do. A common setup on a trip: a balance app like Splitwise or Tricount for the villa, car hire and supermarket runs, and an itemised split for each big group dinner. That way the trip's running costs and each dinner's itemised shares stay separate, and nobody argues about the lobster at 1am.
 
 ## FAQ
 

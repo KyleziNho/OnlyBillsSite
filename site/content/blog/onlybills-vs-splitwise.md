@@ -47,7 +47,7 @@ OnlyBills only does one thing: split a bill like the one in front of you at a re
 
 Where it differs from Splitwise Itemize:
 
-**Getting paid back.** Each friend sees their exact amount and pays you with a link for the bank you already use. With Monzo that's card, Apple Pay or bank transfer, with no Monzo account needed. With Starling or Revolut it's card or Apple Pay, no account needed. There's PayPal (a PayPal account may be needed) and plain bank transfer from any banking app. Nobody has to join your bank or download anything to pay; only the PayPal option may ask for an account. OnlyBills doesn't hold the money: it hands off to your bank or PayPal. The steps are in [how to get paid back](/how-to/get-paid-back/).
+**Getting paid back.** Each friend sees their exact amount and pays you with a link for the bank you already use. With Monzo that's card, Apple Pay or bank transfer, with no Monzo account needed. With Starling or Revolut it's card or Apple Pay, no account needed. There's PayPal (a PayPal account may be needed) and plain bank transfer from any banking app. Nobody has to join your bank or download anything to pay; only the PayPal option may ask for an account. OnlyBills doesn't hold the money: it hands off to your bank or PayPal.
 
 **UK bills.** It's built around how UK receipts look: a discretionary 12.5% service charge, a discount, a cover charge. They're spread across everyone in proportion to what they had, and the shares are exact to the penny and always add up to the bill. (Why proportional is fairer is explained in [how to split service charge and tips fairly](/blog/split-service-charge-fairly/).)
 

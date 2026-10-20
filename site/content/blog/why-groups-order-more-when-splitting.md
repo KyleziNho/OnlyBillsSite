@@ -15,7 +15,7 @@ Economists call this the diner's dilemma. It's a neat explanation for why "let's
 :::stats
 - 37 → 51 | average shekels spent per person: paying for yourself vs splitting equally | Gneezy et al., 2004
 - 82 | average shekels spent when the meal was free | Gneezy et al., 2004
-- 80% | said they'd prefer to pay for what they ordered | Gneezy et al., 2004
+- 80% | of those asked (19 of 24) would rather pay for what they ordered | Gneezy et al., 2004
 :::
 
 ## What is the diner's dilemma?

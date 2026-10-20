@@ -43,7 +43,7 @@ Here are the three common ways to split it:
 
 All three add up to £109.50.
 
-The middle option is the one most groups land on. The food is split four ways (£66 ÷ 4 = £16.50 each), then each person adds their own drinks. It isn't perfect, but it fixes almost all of Priya's overpayment with very little maths.
+The middle option is the one most groups land on. The food is split four ways (£66 ÷ 4 = £16.50 each), then each person adds their own drinks. It isn't perfect, but it fixes almost all of Priya's overpayment with very little maths. If you want to check a split like this yourself, the [split the bill calculator](/tools/split-bill-calculator/) handles shared items and own drinks.
 
 If there's a service charge, spread it in proportion to each person's total rather than equally, so the person who had less also pays less service. Our guide to [splitting service charge fairly](/blog/split-service-charge-fairly/) shows how.
 
@@ -60,7 +60,7 @@ Some trickier cases:
 
 ## Why non-drinkers don't say anything
 
-Nobody wants to be the person counting the drinks. In OpenTable's 2016 survey, 34% of UK diners said they agree to split so others don't think they're tight, and 54% said they avoid splitting when others drink a lot. That second number suggests plenty of people mind, they just don't say so at the table.
+Nobody wants to be the person counting the drinks. In a 2016 OpenTable survey, 34% of UK diners said they split so others don't think they're tight, and 54% said they avoid splitting when others drink a lot. That second number suggests plenty of people mind, they just don't say so at the table.
 
 If you don't drink, you're allowed to ask. If you do drink, the kind thing is to offer before they have to.
 
@@ -96,14 +96,14 @@ Many restaurants will do a food only price for set menus if you ask in advance.
 
 Sometimes the table just wants to split it and move on. A few options:
 
-- **Let it go if the gap is small.** If you'd only be paying £2 or £3 over, it may not be worth the conversation.
+- **Let it go if the gap is small.** If you'd only be paying £2 or £3 over, it may not be worth the conversation. (We use a [£5 rule of thumb](/blog/is-splitting-the-bill-equally-fair/) for when equal stops being fair.)
 - **Pay your bit and step back.** "I'll put in £20 for mine, you lot sort the rest." Most people won't argue with that.
 - **Take turns.** If you eat with the same group often and someone drinks much more, they could pick up the non-drinker's next coffee or round. Only works if everyone's honest about it.
 - **Go somewhere drinks matter less.** A café, brunch or a curry house often has a smaller gap between drinkers and non-drinkers than a wine bar.
 
 :::cta Food split, drinks to whoever had them
 
-This is the kind of split OnlyBills is built for. Scan the receipt, then share a live table: everyone ticks their own drinks and the dishes they shared, on their own phone, without downloading anything. A bottle of wine splits between the people who ticked it. The service charge spreads in proportion. Your first split is free, then £0.99 a month or £5.99 a year.
+This is the kind of split OnlyBills is built for. Scan the receipt, then share a live table: everyone ticks their own drinks and the dishes they shared, on their own phone, without downloading anything. A bottle of wine splits between the people who ticked it. The service charge spreads in proportion. Your first split is free, then £0.99 a month or £5.99 a year (with a free trial).
 
 :::shot guest-02-claimed | Each person ticks only the drinks and dishes they had.
 
@@ -128,4 +128,4 @@ Either include them in the bottle split or agree they pay roughly one glass's wo
 ## Sources
 
 - [Drinkaware: Alcohol consumption in the UK (Health Survey for England 2024 figures)](https://www.drinkaware.co.uk/research/data/consumption-uk/)
-- [OpenTable UK: Going Dutch could cost diners almost £39,000 over a lifetime (2016)](https://www.opentable.co.uk/blog/going-dutch/)
+- [OpenTable UK: "Going Dutch" could cost diners almost £39,000 over a lifetime (24 May 2016, archived copy)](https://web.archive.org/web/20260114232737/https://press.opentable.co.uk/going-dutch-could-cost-diners-almost-39000-over-a-lifetime/)

@@ -98,7 +98,7 @@ You don't need everyone on the same bank to get paid back. You have three option
 
 :::shot guest-03-pay-sheet | In OnlyBills, friends see their exact share and pick how to pay you.
 
-OnlyBills puts these together. After friends tick what they had, they see their exact share and a pay sheet. If you've added your Monzo link, they can pay by card, Apple Pay or bank transfer, with no Monzo account needed. With Starling or Revolut it's card or Apple Pay, no account needed. PayPal (a PayPal account may be needed) and bank transfer (from any banking app) are there too. OnlyBills doesn't handle the money: it hands off to your bank or PayPal. Setting up your links takes a minute; see [how to get paid back](/how-to/get-paid-back/).
+OnlyBills puts these together. After friends tick what they had, they see their exact share and a pay sheet. If you've added your Monzo link, they can pay by card, Apple Pay or bank transfer, with no Monzo account needed. With Starling or Revolut it's card or Apple Pay, no account needed. PayPal (a PayPal account may be needed) and bank transfer (from any banking app) are there too. OnlyBills doesn't handle the money: it hands off to your bank or PayPal. To add your links, see [how to get paid back](/how-to/get-paid-back/).
 
 :::cta Get paid back for what everyone actually had
 

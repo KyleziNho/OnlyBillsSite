@@ -5,7 +5,7 @@ description: Cash was 8% of UK payments in 2025, down from 45% in 2015. What tha
 date: 2026-10-20
 category: Research
 art: payout
-related: can-you-ask-restaurant-to-split-bill, ask-friend-to-pay-you-back, someone-wont-pay-their-share, bill-splitting-etiquette
+related: ask-friend-to-pay-you-back, split-bill-monzo-revolut-starling, can-you-ask-restaurant-to-split-bill, someone-wont-pay-their-share
 ---
 
 Cash made up just 8% of UK payments in 2025, according to UK Finance's latest UK Payment Markets report. Ten years earlier it was 45%. That shift changed how groups split a restaurant bill: the pile of notes in the middle of the table has been replaced by one person paying on their card and everyone else paying them back by bank transfer or payment link.
@@ -77,7 +77,7 @@ When the debt is settled at the table, nobody has to chase anyone. When it isn't
 - 46% | feel too awkward or embarrassed to ask for it back | Starling Bank and Opinium, 2023
 :::
 
-A 2021 comparethemarket survey of 2,000 diners found 43% feel awkward working out how to pay when eating out, and the average respondent had waited 6 minutes 45 seconds to settle a bill. It also found 65% had used, or watched someone use, a calculator or phone app to work out their share. Diners were split almost evenly on method: 34% thought you should split the bill straight down the middle, 36% that it should be split by who had what.
+A 2021 comparethemarket.com survey of 2,000 diners found 43% feel awkward working out how to pay when eating out, and the average respondent had waited 6 minutes 45 seconds to settle a bill. Diners were split almost evenly on method: 34% thought you should split the bill straight down the middle, 36% that it should be split by who had what.
 
 (Both are surveys run by brands with an interest in the topic: a bank promoting its payment links, and a comparison site. Treat the numbers as rough guides.)
 
@@ -91,7 +91,7 @@ The cash method had one big advantage: the debt was settled before anyone left. 
 
 **Make it work with any bank.** Not everyone banks with Monzo. A payment link that takes a card, or your sort code and account number, works for everyone.
 
-**Make the shares add up.** If four people each round up to the nearest pound, the payer gets a little extra. If they each round down, the payer is a few quid short. The amounts should add up to the bill exactly.
+**Make the shares add up.** If four people each round up to the nearest pound, the payer gets a little extra. If they each round down, the payer is a few quid short. The amounts should add up to the bill exactly. The free [split the bill calculator](/tools/split-bill-calculator/) does this by item, service charge included.
 
 That's the gap OnlyBills was built for. The person who paid scans the receipt, friends tick what they had on their own phone (no app needed, it opens on the web or as an App Clip), and each person sees their exact share with service charge spread fairly. Then they pay the host from a link: Monzo (card, Apple Pay or bank transfer, no Monzo account needed), Starling or Revolut (card or Apple Pay, no account needed), PayPal (a PayPal account may be needed) or bank transfer from any banking app. Owed keeps track of anyone who hasn't paid yet.
 
@@ -112,7 +112,7 @@ There's more wording, from gentle to firm, in [how to ask a friend to pay you ba
 UK Finance doesn't expect it to. It forecasts cash will fall to around 4% of payments by 2035, about 2 billion payments, but "not disappear".
 
 ### How do people split a bill without cash?
-Usually one person pays by card and everyone else pays them back by bank transfer or a payment link from Monzo, Revolut or Starling. Some restaurants will split the card payment at the table, and apps can work out each person's share from the receipt.
+Usually one person pays by card and everyone else pays them back by bank transfer or a payment link from Monzo, Revolut or Starling (step by step in [how to split a bill with Monzo, Revolut and Starling](/blog/split-bill-monzo-revolut-starling/)). Some restaurants will split the card payment at the table, and apps can work out each person's share from the receipt.
 
 ### Can you ask a restaurant to split the bill?
 Yes, many will take separate card payments, though it's slower for big groups and not every restaurant will do it. See [can you ask a restaurant to split the bill?](/blog/can-you-ask-restaurant-to-split-bill/).
@@ -123,4 +123,4 @@ Yes, many will take separate card payments, though it's slower for big groups an
 - [UK Finance press release: digital payments continue to grow as mobile wallets become more popular (19 August 2026)](https://www.ukfinance.org.uk/news-and-insight/press-release/digital-payments-continue-grow-mobile-wallets-become-more-popular)
 - [UK Finance: UK Payment Markets 2026 report page](https://www.ukfinance.org.uk/policy-and-guidance/reports/uk-payment-markets-2026)
 - [Starling Bank: one third of UK adults owed money by friends and family (July 2023, Opinium survey of 2,000 UK adults)](https://www.starlingbank.com/news/one-third-of-uk-adults-owed-money-by-friends-and-family/)
-- [Comparethemarket survey of 2,000 diners (April 2021), reported by the Yorkshire Post](https://www.yorkshirepost.co.uk/read-this/nation-divided-over-how-to-settle-a-bill-after-a-meal-out-with-friends-and-family-3219600)
+- [comparethemarket.com survey of 2,000 diners, reported by Farming Life (29 April 2021)](https://www.farminglife.com/read-this/nation-divided-over-how-to-settle-a-bill-after-a-meal-out-with-friends-and-family-3219600)

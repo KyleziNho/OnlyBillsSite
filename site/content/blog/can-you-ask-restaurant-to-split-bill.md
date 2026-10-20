@@ -10,7 +10,7 @@ related: split-bill-large-group, bill-splitting-etiquette, nobody-carries-cash, 
 
 Yes. In the UK it's completely normal to ask a restaurant to split the bill, and most will do it, either equally between cards or by what each person had. The polite way is to ask early, keep it simple ("split four ways, please"), and avoid it for big groups at busy times, where one card and settling up afterwards is much kinder to the staff.
 
-Restaurants are used to it. In a 2016 OpenTable survey, 30% of UK restaurant owners said they deliberately make it easy for guests to split the bill (OpenTable, 2016). The issue isn't whether you can ask. It's how much work the way you ask creates.
+Restaurants are used to it, and most card machines can divide a total between cards. The issue isn't whether you can ask. It's how much work the way you ask creates.
 
 ## How do restaurants split the bill?
 
@@ -35,14 +35,11 @@ Splitting a bill for two or four people is routine and most servers won't think 
 - **Lots of cards, each for a few pounds.** Each payment is a separate transaction.
 - **Cash and card mixed with no clear total.**
 
-There's also tipping. In the same OpenTable survey, 42% of restaurant owners said splitting the bill reduced the amount guests tipped (OpenTable, 2016). When a bill is split into lots of small payments, people often round down or skip the tip, and nobody owns the total.
+There's also tipping. In a 2016 OpenTable survey, 42% of restaurant owners said splitting the bill reduced the amount guests tipped (OpenTable, 2016). When a bill is split into lots of small payments, people often round down or skip the tip, and nobody owns the total.
 
-:::stats
-- 30% | of UK restaurant owners say they make it easy to split the bill | OpenTable, 2016
-- 42% | of restaurant owners say splitting reduces tips | OpenTable, 2016
-:::
+:::stat 42% | of UK restaurant owners say splitting the bill reduces tips | OpenTable UK survey, 2016
 
-These figures are from 2016, but anyone who's worked a Saturday shift will recognise them.
+That figure is from 2016, but anyone who's worked a Saturday shift will recognise them.
 
 ## How to make it easy for the staff
 
@@ -60,11 +57,11 @@ Mention it when you order, or when you ask for the bill: "We'll be splitting thi
 
 ### Do your own maths first if amounts differ
 
-If everyone owes a different amount, work it out at the table before the server arrives, then give them the numbers: "£32.50 on this card, £41 on this one, the rest on this one." That's much faster than asking them to rebuild the bill item by item.
+If everyone owes a different amount, work it out at the table before the server arrives, then give them the numbers: "£32.50 on this card, £41 on this one, the rest on this one." That's much faster than asking them to rebuild the bill item by item. The free [split the bill calculator](/tools/split-bill-calculator/) gives you each person's number, service charge included.
 
 ### Include the service charge
 
-If a service charge is on the bill, make sure it's in each card payment, not forgotten when the total is chopped up. If there's no service charge and you want to tip, add it to each payment or leave it together. Since 1 October 2024, the Employment (Allocation of Tips) Act 2023 means tips and service charges must be passed on to workers in full, so they reach the staff whichever way you pay.
+If a service charge is on the bill, make sure it's in each card payment, not forgotten when the total is chopped up. If there's no service charge and you want to tip, add it to each payment or leave it together. Since 1 October 2024, the Employment (Allocation of Tips) Act 2023 means card tips and service charges must be passed on to workers in full, so they reach the staff whether they're on one card or six. If you're not sure how much to leave, see [how much to tip in the UK](/blog/how-much-to-tip-uk/).
 
 ### Be patient and say thank you
 
@@ -74,7 +71,7 @@ It's extra work. A thank you goes a long way.
 
 For bigger groups, one card is usually the better option, for everyone.
 
-- **10 or more people:** one card, then settle up. Many restaurants limit the number of cards they'll split between for large tables, so ask at booking.
+- **10 or more people:** one card, then settle up. Many restaurants limit the number of cards they'll split between for large tables, so ask at booking. Our guide to [splitting a bill for a large group](/blog/split-bill-large-group/) covers deposits, set menus and the night itself.
 - **Busy service:** if the place is packed, don't ask for an item by item split.
 - **Lots of shared dishes and bottles:** these are hard for a server to divide, and easy to get wrong.
 - **People leaving at different times:** settling up afterwards means nobody has to wait.
@@ -95,7 +92,7 @@ Option C is the kindest to the staff and the fairest to the table. It just needs
 
 ## Settle up without holding up the table
 
-With OnlyBills, the person who paid scans the receipt and shares a live table with a QR code. Everyone ticks what they had on their own phone, with no app download needed. Shared bottles split between the people who had them, the service charge is spread in proportion, and each person pays back from the same screen.
+With OnlyBills, the person who paid scans the receipt and shares a live table with a QR code. Everyone ticks what they had on their own phone, with no app download needed. Shared bottles split between the people who had them, the service charge is spread in proportion, and each person pays the host back with a link. The [live table tutorial](/how-to/share-a-live-table/) walks through it.
 
 :::shot guest-02-claimed | Each person ticks what they had. The server takes one payment.
 
@@ -117,6 +114,6 @@ It's not common in the UK. If a restaurant has a policy on splitting for large g
 
 ## Sources
 
-- [OpenTable UK: "Going Dutch" could cost diners almost £39,000 over a lifetime (May 2016, archived copy)](https://web.archive.org/web/20260114232737/https://press.opentable.co.uk/going-dutch-could-cost-diners-almost-39000-over-a-lifetime/)
+- [OpenTable UK: "Going Dutch" could cost diners almost £39,000 over a lifetime (24 May 2016, archived copy)](https://web.archive.org/web/20260114232737/https://press.opentable.co.uk/going-dutch-could-cost-diners-almost-39000-over-a-lifetime/)
 - [Employment (Allocation of Tips) Act 2023, legislation.gov.uk](https://www.legislation.gov.uk/ukpga/2023/13/contents)
 - [GOV.UK: Code of practice on fair and transparent distribution of tips](https://www.gov.uk/government/publications/distributing-tips-fairly-statutory-code-of-practice)

@@ -40,7 +40,7 @@ HMRC's VAT guidance draws the same line. A service charge is only treated as opt
 
 **A compulsory service charge:** usually not, because it was part of the price you agreed to when you ordered. But if the service fell well short, the Consumer Rights Act 2015 requires services to be performed "with reasonable care and skill" (section 49). Where they aren't, you may be entitled to a price reduction (section 56). Raise it calmly with the manager at the time.
 
-**Hidden charges:** if a compulsory charge wasn't made clear before you ordered, you have good grounds to challenge it. Since 6 April 2025, the Digital Markets, Competition and Consumers Act 2024 has banned "drip pricing", and the CMA's price transparency guidance (CMA209, November 2025) lists "mandatory cover or service charges at a restaurant" among the charges that must be included in the headline price. So a compulsory service charge should be built into the prices on the menu, not added at the end.
+**Hidden charges:** if a compulsory charge wasn't made clear before you ordered, you have good grounds to challenge it. Since 6 April 2025, the Digital Markets, Competition and Consumers Act 2024 has banned "drip pricing", and the CMA's price transparency guidance (CMA209, November 2025) says any charge you can't avoid must be included in the headline price. Menus count as an invitation to buy, so a compulsory service charge should be built into the prices on the menu, not added at the end. An optional (discretionary) charge is different, because you can say no to it.
 
 ## How to ask for the service charge to be removed
 
@@ -81,9 +81,9 @@ If you'd rather tip a different amount, or the service was poor, it's fine to as
 
 ## Splitting a service charge in a group
 
-If you're keeping the service charge and splitting the bill, share it in proportion to what each person ordered, not equally. Someone who had £15 of food shouldn't pay the same 12.5% service as someone who had £45. Our guide to [splitting service charge fairly](/blog/split-service-charge-fairly/) has the worked maths, and there's a free calculator:
+If you're keeping the service charge and splitting the bill, share it in proportion to what each person ordered, not equally. Someone who had £15 of food shouldn't pay the same 12.5% service as someone who had £45. Our guide to [splitting service charge fairly](/blog/split-service-charge-fairly/) has the worked maths. If you're asking the restaurant to split it between cards instead, make sure the service charge is in each payment (more in [can you ask a restaurant to split the bill?](/blog/can-you-ask-restaurant-to-split-bill/)). The free calculator does the proportions for you:
 
-:::tool tip
+:::tool split
 
 ## FAQ
 

@@ -14,7 +14,7 @@ Here's what each of those is, how they work, and what you're sharing when you us
 
 ## Why "download this app" doesn't work at a table
 
-Ask six people to download an app, make an account and confirm an email at 10.45pm, and two will do it. The rest will say "just tell me what I owe". The split falls back on one person doing it all, which is the thing the app was meant to avoid.
+Ask six people to download an app, make an account and confirm an email at 10.45pm, and you'll be lucky if half of them bother. The rest will say "just tell me what I owe". The split falls back on one person doing it all, which is the thing the app was meant to avoid.
 
 It's also a lot to ask for a one-off. The person who paid uses the app. Everyone else just wants to see a number and pay it.
 
@@ -44,7 +44,7 @@ Still the universal option. Your friend pays from any UK banking app, by Faster 
 
 Instead of an app, the split lives on a web page. The person who paid shares a link or QR code, and everyone opens it in their phone's browser. They pick their name, tick their items, and see their share. Nothing gets installed. It works on any phone with a browser, iPhone or Android.
 
-Several apps now do this. Splitwise launched Itemize in the UK in October 2026, where friends scan a QR code and claim their items without the app or an account. OnlyBills works the same way: the host scans the receipt and shares a live table, and friends join from a link or QR code.
+Several apps now do this. Splitwise launched Itemize in the US and UK in October 2026, where friends scan a QR code and claim their items without the app or an account. OnlyBills works the same way: the host scans the receipt and shares a live table, and friends join from a link or QR code. There's a side by side in [OnlyBills vs Splitwise](/blog/onlybills-vs-splitwise/), and the guest's view is walked through in [claim your items without the app](/how-to/claim-your-items-without-the-app/).
 
 :::shot guest-01-join | Joining a table from a link: pick your name. No app, no account.
 
@@ -76,7 +76,7 @@ If you get a payment link out of the blue claiming you owe money, don't pay it. 
 
 ## What do you share when you join a split?
 
-This depends on the app, so check its privacy policy. For OnlyBills, which we make, the privacy policy says a live table stores the receipt's items, the display names people type in and who claimed what, for the life of the shared session, so everyone at the table can see it update. Guests don't create an account. The host can end the table, which removes it. Payment happens with the host's bank or PayPal, not inside OnlyBills.
+This depends on the app, so check its privacy policy. For OnlyBills, which we make, the privacy policy says a live table stores the receipt's items, the display names people type in and who claimed what, for the life of the shared session, so everyone at the table can see it update. A receipt image shared to the table may be stored too. Guests don't create an account. The host can end the table, which removes it. Payment happens with the host's bank or PayPal, not inside OnlyBills.
 
 ## Paying your share with OnlyBills
 
@@ -96,6 +96,8 @@ The host can also assign items for anyone who'd rather not tap anything, and jus
 ## A message to send with your link
 
 > Here's the bill, tap what you had and it'll tell you what you owe: [link]. You can pay by card or bank transfer, no app needed.
+
+If someone still hasn't paid a few days later, [how to ask a friend to pay you back](/blog/ask-friend-to-pay-you-back/) has gentler and firmer follow ups.
 
 ## FAQ
 

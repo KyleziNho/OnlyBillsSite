@@ -14,8 +14,8 @@ The good news is that a lot of what makes a night out expensive is in your contr
 
 :::stats
 - 50% | of Brits have turned down an invitation because of the cost | Confused.com, 2026
-- 63% | of Londoners have had to decline social invitations because of the cost | Confused.com, 2026
-- 33% | only go to social events for special occasions because of the cost | Confused.com, 2026
+- 63% | of Londoners are declining social invitations because of the cost | Confused.com, 2026
+- 33% | only attend social events for special occasions like birthdays, because of the cost | Confused.com, 2026
 :::
 
 ## How much does going out cost in the UK?
@@ -34,7 +34,7 @@ Confused.com's survey (OnePoll, 2,000 UK adults, April 2026) asked people what t
 | Cinema | £34 |
 | Daytime drinks (coffee and the like) | £26 |
 
-These are self-reported averages, so treat them as a rough guide. Confused.com estimated the overall cost of going out has risen about 12% on average in two years.
+These are self-reported averages, so treat them as a rough guide (the London figure above comes from a smaller group within the sample, so it's indicative too). Confused.com estimated the overall cost of going out has risen about 12% on average in two years.
 
 ## How it's changing what people do
 
@@ -71,7 +71,7 @@ If you're organising, picking the venue gives you the most control over cost. Ch
 
 ## 4. Pay for what you had
 
-This one gets overlooked. On an equal split, the people who order the least pay for everyone else's extras. In OpenTable's 2016 UK survey, people who felt they lost out on an equal split estimated it at about £8.73 a meal. That's real money if you're already on a tight social budget.
+This one gets overlooked. On an equal split, the people who order the least pay for everyone else's extras. In a 2016 OpenTable survey, people who felt they lost out on an equal split estimated it at about £8.73 a meal ([here's what that adds up to over a year](/blog/splitting-the-bill-equally-cost/)). That's real money if you're already on a tight social budget.
 
 Agreeing to pay for what you each order means:
 
@@ -103,13 +103,13 @@ Confused.com's own suggestion is to set a monthly budget for socialising and kee
 
 If one person pays at the till and waits weeks to get paid back, they end up quietly lending money to the group. Settle up the same night, while everyone remembers what they had. A message with each person's exact amount and a payment link makes it easy:
 
-> "Paid! You're £19.50, Tom's £32, Jess £29, Ali £29. Pay me back when you get a sec."
+> "Paid! Priya £19.50, Tom £32, Jess £29, Ali £29. Pay me back when you get a sec."
 
 For more on chasing it politely, see [how to ask a friend to pay you back](/blog/ask-friend-to-pay-you-back/).
 
 :::cta Pay for what you had, and settle up the same night
 
-OnlyBills makes fairer splitting the easy option. Scan the receipt and share a live table: friends tick what they had on their own phone (no app download needed) and see their share add up. Shared dishes split between whoever shared them. Everyone pays you back with a link, and Owed keeps track of who still owes you. Your first split is free, then £0.99 a month or £5.99 a year.
+OnlyBills makes fairer splitting the easy option. Scan the receipt and share a live table: friends tick what they had on their own phone (no app download needed) and see their share add up. Shared dishes split between whoever shared them. Everyone pays you back with a link, and Owed keeps track of who still owes you. Your first split is free, then £0.99 a month or £5.99 a year (with a free trial).
 
 ## If you're the friend who can't afford it
 
@@ -143,5 +143,5 @@ No. It's a reasonable request, especially if you mention it before ordering. Wit
 
 ## Sources
 
-- [Confused.com: Going out costs rise by twelve percent on average in two years (2026)](https://www.confused.com/press/releases/2026/going-out-costs-rise-by-twelve-percent-on-average-in-two-years)
-- [OpenTable UK: Going Dutch could cost diners almost £39,000 over a lifetime (2016)](https://www.opentable.co.uk/blog/going-dutch/)
+- [Confused.com: Going out costs rise by twelve percent on average in two years (23 April 2026)](https://www.confused.com/press/releases/2026/going-out-costs-rise-by-twelve-percent-on-average-in-two-years)
+- [OpenTable UK: "Going Dutch" could cost diners almost £39,000 over a lifetime (24 May 2016, archived copy)](https://web.archive.org/web/20260114232737/https://press.opentable.co.uk/going-dutch-could-cost-diners-almost-39000-over-a-lifetime/)
