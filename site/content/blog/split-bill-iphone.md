@@ -39,7 +39,7 @@ Fine when everyone had roughly the same.
 3. Tap ÷, type 4, tap =.
 4. You get 25.595. Round to £25.60 each.
 
-**The catch:** rounding means the shares don't always add up. Four lots of £25.60 is £102.40, 2p over. Not a big deal, but it's why someone always ends up a few pence out.
+**The catch:** rounding means the shares don't always add up. Four lots of £25.60 is £102.40, 2p over. Not a big deal, but it's why someone always ends up a few pence out. If you just want the number, the free [split the bill calculator](/tools/split-bill-calculator/) does equal and itemised splits in your browser.
 
 ## Method 2: Math Notes (split by what each person had)
 
@@ -67,7 +67,7 @@ Math Notes fills in the answers:
 | Max | £14.00 | £1.50 bread | £15.50 | 17.4375 | £17.44 |
 | **Total** | | | **£91.00** | **102.375** | **£102.39** |
 
-Notice the total: £102.39, against a bill of £102.38. Each share rounded up by a fraction of a penny, and together they overshoot by 1p. Someone (usually the person who paid) knocks a penny off their own share. It works, but you need to check the total every time, and a single mistyped price throws the whole thing out.
+Notice the total: £102.39, against a bill of £102.38. Each share rounded up by a fraction of a penny, and together they overshoot by 1p. Someone (usually the person who paid) knocks a penny off their own share. [How to split service charge and tips fairly](/blog/split-service-charge-fairly/) explains where that stray penny comes from. It works, but you need to check the total every time, and a single mistyped price throws the whole thing out.
 
 :::note
 Name variables with letters only (Math Notes needs Latin characters), and declare a value before you use it, or you'll get an error.
@@ -92,11 +92,11 @@ If you split bills often, a dedicated app saves the maths and the penny argument
 - **Tab:** an older app that scans the receipt and lets people tap what they had, but each person needs Tab to join.
 - **OnlyBills:** made for restaurant bills. More on it below.
 
-We compare them all in [the best apps for splitting a restaurant bill](/blog/splitwise-alternatives/).
+We compare them all, with UK prices, in [Splitwise alternatives: the best bill splitting apps](/blog/splitwise-alternatives/).
 
 ### Splitting the same bill in OnlyBills
 
-The host scans the receipt and OnlyBills reads every line. You check the total matches, then share a live table: friends scan a QR code or open a link and tick what they had on their own phone. They don't need to download anything; it opens on the web or as an App Clip.
+The host [scans the receipt](/how-to/scan-a-receipt/) and OnlyBills reads every line. You check the total matches, then share a live table: friends scan a QR code or open a link and tick what they had on their own phone. They don't need to download anything; it opens on the web or as an App Clip.
 
 The garlic bread splits between the four who shared it and the wine between the three who drank it. Service is spread in proportion. The four shares come to exactly £102.38: no penny over, no one doing sums. The rounding is handled so the shares always add up to the bill.
 
@@ -112,9 +112,9 @@ So in the UK, people pay each other back by:
 - **Bank transfer:** send your sort code and account number and they pay from their banking app.
 - **PayPal:** if everyone uses it.
 
-On iPhone, the easiest thing is to drop the link straight into your group chat in Messages or WhatsApp with each person's amount.
+On iPhone, the easiest thing is to drop the link straight into your group chat in Messages or WhatsApp with each person's amount. Here Jo paid, so Jo is the one who takes the penny off her own share.
 
-> Dinner's sorted. Jo £25.88, Kit £28.69, Lou £30.38, Max £17.44 (Max, no wine for you). Pay me here: [link]
+> Dinner's sorted. Kit £28.69, Lou £30.38, Max £17.44 (Max, no wine for you). Pay me here: [link]
 
 ## Which method should you use?
 

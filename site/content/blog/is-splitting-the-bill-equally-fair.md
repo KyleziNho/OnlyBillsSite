@@ -16,11 +16,9 @@ A simple rule of thumb: **if anyone would pay more than about £5 over what they
 
 ## Why so many people split equally anyway
 
-Splitting equally is popular because it's easy, not because people think it's fair. In OpenTable's 2016 UK survey, 58% said they agree to split equally because it makes paying easier, and 34% said they do it so others don't think they're tight.
+Splitting equally is popular because it's easy, not because people think it's fair. In a 2016 OpenTable survey of UK diners, 58% said they agree to split equally because it makes paying easier, and 34% said they do it so others don't think they're tight. If you want the money side of that in numbers, we've worked out [what an equal split costs you over a year](/blog/splitting-the-bill-equally-cost/).
 
-A 2021 comparethemarket.com survey of 2,000 diners found the country almost exactly divided: 34% think you should split straight down the middle, while 36% think each person should pay for what they had. The same survey found 42% had paid more than they wanted to avoid an awkward moment.
-
-So if you've ever quietly paid £8 more than your share to avoid a scene, you're in good company.
+A 2021 comparethemarket.com survey of 2,000 diners found the country almost exactly divided: 34% think you should split straight down the middle, while 36% think each person should pay for what they had. The same survey found 42% had paid more than they wanted to avoid an awkward moment, so if you've ever quietly done that, you're in good company.
 
 ## The £5 rule
 
@@ -122,7 +120,7 @@ That last one is worth saying out loud more often. People who ordered less rarel
 
 :::cta Make paying by item as easy as splitting
 
-The only real reason to split equally is that itemising is a pain. OnlyBills takes that away. Scan the receipt and share a live table: friends tick what they had on their own phone, without downloading anything. Shared dishes split between whoever shared them, and service charge is spread fairly. Your first split is free.
+The main reason people split equally when they shouldn't is that itemising is a pain. OnlyBills takes that away. Scan the receipt and share a live table: friends tick what they had on their own phone, without downloading anything. Shared dishes split between whoever shared them, and service charge is spread fairly. Your first split is free, then it's £0.99 a month or £5.99 a year (with a free trial).
 
 ## A fair split, step by step
 
@@ -157,5 +155,5 @@ Let everyone pay for what they had, or split the shared food equally and let peo
 
 ## Sources
 
-- [OpenTable UK: Going Dutch could cost diners almost £39,000 over a lifetime (2016)](https://www.opentable.co.uk/blog/going-dutch/)
-- [Yorkshire Post: Nation divided over how to settle a bill after a meal out (comparethemarket.com survey, 2021)](https://www.yorkshirepost.co.uk/read-this/nation-divided-over-how-to-settle-a-bill-after-a-meal-out-with-friends-and-family-3219600)
+- [OpenTable UK: "Going Dutch" could cost diners almost £39,000 over a lifetime (24 May 2016, archived copy)](https://web.archive.org/web/20260114232737/https://press.opentable.co.uk/going-dutch-could-cost-diners-almost-39000-over-a-lifetime/)
+- [comparethemarket.com survey of 2,000 diners, reported by Farming Life (29 April 2021)](https://www.farminglife.com/read-this/nation-divided-over-how-to-settle-a-bill-after-a-meal-out-with-friends-and-family-3219600)

@@ -5,7 +5,7 @@ description: Who pays at a UK birthday dinner, whether the birthday person shoul
 date: 2026-10-09
 category: Occasions
 art: allclear
-related: bill-splitting-etiquette, split-bill-large-group, split-bill-when-some-dont-drink, is-splitting-the-bill-equally-fair
+related: bill-splitting-etiquette, split-bill-large-group, split-service-charge-fairly, split-bill-when-some-dont-drink
 ---
 
 At a typical UK birthday dinner organised by friends, each guest pays for themselves and the group quietly splits the birthday person's share between them. The birthday person doesn't pay, unless they've organised a big meal and said up front that everyone's paying their own way. If they're hosting and invited you as their guest, they pay.
@@ -24,6 +24,8 @@ It depends on who organised it and how it was framed.
 | Partner or family planned it | A treat or surprise | The person who planned it |
 | Big group, 10 or more | Usually "come along" | Everyone pays their own; covering them is optional |
 
+For a big birthday booking, the tips in [how to split a bill for a large group](/blog/split-bill-large-group/) (set menus, deposits, one card) apply too.
+
 A very common setup is the first one: friends treat the birthday person to their meal and maybe a drink. It's a gift, so it should be agreed by the people paying for it.
 
 ### What if the birthday person booked it themselves?
@@ -37,7 +39,7 @@ The fairest way is simple:
 1. **Everyone pays for what they had.**
 2. **The birthday person's food and drink is added up separately.**
 3. **That amount is split between everyone else.**
-4. **Service charge is spread in proportion,** including on the birthday person's share.
+4. **Service charge is spread in proportion,** including on the birthday person's share. Our guide to [splitting service charge fairly](/blog/split-service-charge-fairly/) shows the maths.
 
 This is fairer than splitting the whole bill equally between everyone except the birthday person, because the person who had a starter and a lemonade doesn't end up paying for someone else's cocktails.
 
@@ -56,7 +58,7 @@ Priya's friends take her out for her birthday. Six guests, one bill of £246.25,
 | Ella | £30.20 | £6.37 | £36.57 |
 | **Total** | **£246.25** | **£38.25** | **£246.25** |
 
-Priya's meal (£38.25) splits six ways as £6.375, so three people pay £6.38 and three pay £6.37. The shares still add up to the bill exactly.
+Priya's meal (£38.25) splits six ways as £6.375, so three people pay £6.38 and three pay £6.37. The shares still add up to the bill exactly. You can run your own numbers in the [split the bill calculator](/tools/split-bill-calculator/).
 
 Compare that with splitting the £246.25 equally between the six guests: £41.04 each. Ben, who had the least, would pay about £9.91 more than he does above. Aisha would pay about £11.49 less. Over one dinner that's not a disaster, but it's the kind of thing people notice.
 
@@ -108,7 +110,7 @@ The bigger the group, the smaller the cost each. That's why covering the birthda
 
 ## Paying on the night
 
-The easiest way is for one person to pay the whole bill, then everyone pays them back. With OnlyBills, the person who pays scans the receipt and shares a live table. Everyone ticks what they had on their phone, and the guests can each tick the birthday person's dishes too. Anything ticked by several people is split between them, so each guest's share includes their part of the birthday meal. Service charge is spread in proportion, and the shares add up to the bill to the penny.
+The easiest way is for one person to pay the whole bill, then everyone pays them back. With OnlyBills, the person who pays scans the receipt and shares a live table. Everyone ticks what they had on their phone, and the guests can each tick the birthday person's dishes too. Anything ticked by several people is split between them, so each guest's share includes their part of the birthday meal (the tutorial on [shared items, service and tips](/how-to/shared-items-service-and-tips/) shows how). Service charge is spread in proportion, and the shares add up to the bill to the penny.
 
 :::cta Cover the birthday person without the maths
 

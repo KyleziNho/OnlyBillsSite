@@ -23,6 +23,7 @@ Ipsos asked 1,000 British adults aged 18 to 75 in February 2023 to imagine a man
 | The man | 22% | 28% | 16% |
 | Each pays for what they ordered | 15% | 11% | 18% |
 | The woman | 1% | | |
+| Don't know | 4% | 5% | 3% |
 
 *Source: Ipsos UK Valentine's Day polling, 8 to 9 February 2023. Base: 1,000 online British adults aged 18 to 75.*
 
@@ -44,7 +45,7 @@ This works whatever your genders, and it avoids the guessing game. Nobody has to
 
 ### What if one of you earns a lot more?
 
-It's fine for the person with more money to treat, as long as it's offered, not assumed. If you're on a tight budget, pick the venue so you know you can cover your half: a pub, a coffee, a walk and a drink.
+It's fine for the person with more money to treat, as long as it's offered, not assumed. If you're on a tight budget, pick the venue so you know you can cover your half: a pub, a coffee, a walk and a drink. There are more ideas in [the cost of going out in the UK, and how to spend less](/blog/cost-of-going-out-uk/).
 
 ### What if one of you ordered a lot more?
 
@@ -83,7 +84,7 @@ If you split the first date, carry on splitting until one of you suggests otherw
 
 ## How to split the bill on a date without it being awkward
 
-Most UK restaurants are happy to split a bill for two between two cards. Simply ask: "Could we split it, please?" The server can usually put half on each card, or each person's items on their own card.
+Most UK restaurants are happy to split a bill for two between two cards (more on [asking a restaurant to split the bill](/blog/can-you-ask-restaurant-to-split-bill/)). Simply ask: "Could we split it, please?" The server can usually put half on each card, or each person's items on their own card.
 
 If one of you pays and the other sends their half, do it right away, at the table or on the way home, with the exact amount. Don't leave a payment hanging over a first date. A short message works:
 
@@ -94,11 +95,11 @@ Paying the other person back the same night is polite, and it keeps money out of
 ## Tips for a first date that keeps money simple
 
 - **Pick somewhere with prices you know.** No surprises when the bill arrives.
-- **Check for a service charge.** Many UK restaurants add 12.5%. It's optional, but if you're splitting, split it too. See [is service charge mandatory](/blog/is-service-charge-mandatory-uk/).
+- **Check for a service charge.** Many UK restaurants add 12.5%. It's optional, but if you're splitting, split it too. See [is service charge mandatory](/blog/is-service-charge-mandatory-uk/), and if there's none, [how much to tip in the UK](/blog/how-much-to-tip-uk/).
 - **Agree the plan early if it's a long evening.** Drinks, then food, then more drinks can add up. "Shall we take it in turns?" works well.
 - **Coffee or a drink first.** A lower-cost first date takes pressure off whoever ends up paying.
 
-The Aqua survey found the most popular ideal first date spend was £20 to £30 (Aqua, 2023). You don't need to spend a lot to make a good impression.
+In the Aqua survey, women's most popular ideal first date spend was £20 to £30, while men's was £50 to £60 (Aqua, 2023). You don't need to spend a lot to make a good impression.
 
 ## FAQ
 

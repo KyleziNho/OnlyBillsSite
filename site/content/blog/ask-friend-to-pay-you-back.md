@@ -5,7 +5,7 @@ description: Ask the same day, give the exact amount and send a way to pay. Copy
 date: 2026-10-02
 category: Etiquette
 art: payout
-related: someone-wont-pay-their-share, bill-splitting-etiquette, nobody-carries-cash, pay-without-downloading-app
+related: someone-wont-pay-their-share, split-bill-monzo-revolut-starling, nobody-carries-cash, pay-without-downloading-app
 ---
 
 The least awkward way to ask a friend to pay you back is to do it the same day, with the exact amount and a way to pay in the same message. "Hey, dinner came to £34.60 each, here's my link" feels normal. Waiting three weeks and then hinting is what makes it weird.
@@ -64,6 +64,8 @@ Swap in the names, amounts and link. These work on text, WhatsApp or iMessage.
 
 ### When people had different amounts
 
+If you need to work the numbers out first, the [split the bill calculator](/tools/split-bill-calculator/) does it by item, service charge included.
+
 > Worked out last night's bill by what everyone had. Sam £28.40, Priya £41.10, Jack £33.75. Pay here whenever: [link]
 
 ### When you covered someone's share of tickets or travel
@@ -92,7 +94,7 @@ The biggest reason people pay late is friction. They read your message on the bu
 
 Options that work in the UK:
 
-- **A bank payment link.** Monzo, Starling and Revolut all let you send a link, and the person paying doesn't usually need an account with that bank.
+- **A bank payment link.** Monzo, Starling and Revolut all let you send a link, and the person paying doesn't usually need an account with that bank. There's a step by step guide to [splitting a bill with Monzo, Revolut and Starling](/blog/split-bill-monzo-revolut-starling/).
 - **Your sort code and account number.** Works from any banking app. Put your name exactly as the bank has it so the name check matches.
 - **PayPal.** Fine if your friends use it, though they may need an account.
 
@@ -100,19 +102,17 @@ In Starling's survey, two in five (40%) people said they'd prefer to be paid wha
 
 :::shot guest-03-pay-sheet | In OnlyBills, friends see exactly what they owe and pick how to pay.
 
-With OnlyBills, your friends tick what they had on their own phone and then pay you from the same screen. Monzo links take card, Apple Pay or bank transfer, and they don't need a Monzo account. You don't send a separate "you owe me" message at all, because the amount and the link are already in front of them.
+With OnlyBills, your friends tick what they had on their own phone and then pay you with a link on the same screen. A Monzo link takes card, Apple Pay or bank transfer, with no Monzo account needed. Starling and Revolut links take card or Apple Pay, with no account needed. There's also PayPal (a PayPal account may be needed) and bank transfer from any banking app. You don't send a separate "you owe me" message at all, because the amount and the link are already in front of them. The tutorial on [getting paid back](/how-to/get-paid-back/) shows how to set your links up.
 
 ## What if they don't reply?
 
 Give it a few days, then send one reminder. Keep it shorter and lighter than the first message, not longer.
 
-### First reminder (3 to 5 days later)
+### A reminder (3 to 5 days later)
 
 > Hey, just bumping this in case it got lost: £34.60 for Friday. Link: [link] 🙏
 
-### Second reminder (a week or so later)
-
-> Hi, sorry to chase. Still need £34.60 from Friday's dinner when you can. Would it help if I sent my bank details instead?
+If the link might be the problem, offer another way: "Would it help if I sent my bank details instead?"
 
 ### If you'd rather talk in person
 
@@ -120,14 +120,14 @@ Give it a few days, then send one reminder. Keep it shorter and lighter than the
 
 Asking a question ("did you get my message?") gives them an easy way out of the awkwardness: they can say "oh god, sorry, doing it now". Most people do.
 
-If it's turned into a pattern with one friend, there's a separate guide on [what to do when someone won't pay their share](/blog/someone-wont-pay-their-share/), including when it's worth letting go.
+If one reminder hasn't worked, or it's turned into a pattern with one friend, the next steps are in [what to do when someone won't pay their share](/blog/someone-wont-pay-their-share/): a more direct second message, asking what's going on, and when it's worth letting go.
 
 ## How to stop it happening next time
 
 - **Agree how you'll pay before the bill comes.** "Shall I get it and you all send me your bit?" sets the expectation.
 - **Ask on the night.** Send the amounts before people get home.
 - **Use one link for everyone.** One message in the group chat is easier than six separate ones.
-- **Keep track.** A note on your phone of who's paid stops you chasing someone who already did, which is far more awkward than chasing someone who hasn't.
+- **Keep track.** A note on your phone of who's paid stops you chasing someone who already did, which is far more awkward than chasing someone who hasn't. In OnlyBills, [Owed](/how-to/track-who-owes-you/) keeps that list for you across bills.
 
 :::cta Get paid back without the chasing
 
@@ -137,10 +137,10 @@ If it's turned into a pattern with one friend, there's a separate guide on [what
 Send a short message the same day with what it was for, the exact amount and a way to pay, such as "Dinner came to £34.60 each, here's my link." Friendly, specific and no apology.
 
 ### How long should you wait before asking for money back?
-Don't wait. The same day or the next morning is normal and expected. If they haven't paid after 3 to 5 days, send one short reminder.
+Don't wait. The same day or the next morning is normal and expected. If they haven't paid after 3 to 5 days, send one short reminder. If that doesn't work, see our guide to [when someone won't pay their share](/blog/someone-wont-pay-their-share/).
 
 ### Is it rude to ask for small amounts back?
-No. If you agreed to split it, asking for £8 is just as reasonable as asking for £80. In Starling's 2023 survey, people said on average they'd need to be owed about £59 before asking for it back, but there's no reason to sit on smaller amounts. If it's genuinely tiny and you'd rather treat them, that's your call.
+No. If you agreed to split it, asking for £8 is just as reasonable as asking for £80. In Starling's 2023 survey, the minimum people said they'd need to be owed before asking for it back was £59, but there's no reason to sit on smaller amounts. If it's genuinely tiny and you'd rather treat them, that's your call.
 
 ### What do you say if a friend keeps forgetting to pay you back?
 Ask a direct but warm question: "Did you get my message about Friday? Still need the £34.60 when you can." If it keeps happening, sort payment on the night next time, before anyone leaves.

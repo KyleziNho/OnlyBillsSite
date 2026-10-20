@@ -5,7 +5,7 @@ description: Who pays the delivery fee, the service fee and the tip on a group t
 date: 2026-10-13
 category: Money
 art: receipts
-related: split-bill-when-some-dont-drink, ask-friend-to-pay-you-back, splitting-the-bill-equally-cost, split-bill-large-group
+related: split-service-charge-fairly, split-bill-when-some-dont-drink, ask-friend-to-pay-you-back, splitting-the-bill-equally-cost
 ---
 
 The fair way to split a group takeaway is: everyone pays for their own food, the delivery fee and any rider tip are split equally, and any fee that grows with the size of the order (like a percentage service fee) is split in proportion to what each person ordered. One person usually pays the app, then everyone pays them back.
@@ -37,28 +37,28 @@ Deliveroo's FAQ explains each of these: the delivery fee "is based on your locat
 
 ## A worked example: curry for four
 
-Four friends order on one account. The order comes to £66.31.
+Four friends order on one account. The order comes to £66.32.
 
-- Ana: £14.50
-- Ben: £11.90
+- Ana: £14.60
+- Ben: £11.80
 - Cara: £18.00
 - Dan: £14.00
 - Food total: £58.40
-- Delivery fee: £2.99
+- Delivery fee: £3.00
 - Service fee: £2.92 (in this example, 5% of the food)
 - Rider tip: £2.00
 
 | Person | Food | Delivery (equal) | Service fee (in proportion) | Tip (equal) | Pays |
 |---|---|---|---|---|---|
-| Ana | £14.50 | 75p | 73p | 50p | £16.47 |
-| Ben | £11.90 | 75p | 60p | 50p | £13.74 |
+| Ana | £14.60 | 75p | 73p | 50p | £16.58 |
+| Ben | £11.80 | 75p | 59p | 50p | £13.64 |
 | Cara | £18.00 | 75p | 90p | 50p | £20.15 |
 | Dan | £14.00 | 75p | 70p | 50p | £15.95 |
-| **Total** | **£58.40** | **£2.99** | **£2.92** | **£2.00** | **£66.31** |
+| **Total** | **£58.40** | **£3.00** | **£2.92** | **£2.00** | **£66.32** |
 
-(The fee columns are rounded to the nearest penny for display; the "Pays" column is worked out exactly and rounded once, so the four shares add up to the £66.31 the app charged.)
+Every column adds up, and the four shares come to exactly the £66.32 the app charged. With messier numbers, work each share out exactly and round once at the end, so the pennies still add up. Our guide to [splitting service charge and tips fairly](/blog/split-service-charge-fairly/) shows how.
 
-An equal split would be £16.58 each. Ben would overpay by £2.84 and Cara would pay £3.57 less than her share. Once, that's a shrug. Every Friday for a year, it's about £150 for Ben, and the kind of thing that quietly annoys the person who always orders the cheapest thing. We've looked at how equal splits add up in [how much splitting the bill equally costs you](/blog/splitting-the-bill-equally-cost/).
+An equal split would be £16.58 each. Ben would overpay by £2.94 and Cara would pay £3.57 less than her share. Once, that's a shrug. Every Friday for a year, it's about £150 for Ben, and the kind of thing that quietly annoys the person who always orders the cheapest thing. We've looked at how equal splits add up in [how much splitting the bill equally costs you](/blog/splitting-the-bill-equally-cost/).
 
 ## Shared dishes
 
@@ -86,7 +86,7 @@ Uber's help page doesn't spell out how delivery and service fees are divided in 
 
 The person who paid should send the numbers while the food is still warm. Something like:
 
-> Food's here! Ana £16.47, Ben £13.74, Cara £20.15, Dan £15.95 (your food plus a share of delivery, service and the tip). Pay me here: [link]
+> Food's here! Ana £16.58, Ben £13.64, Cara £20.15, Dan £15.95 (your food plus a share of delivery, service and the tip). Pay me here: [link]
 
 A payment link from your bank (Monzo, Revolut or Starling) lets friends pay by card from any bank, or they can send a bank transfer. There's more on each bank's option in [how to split a bill with Monzo, Revolut and Starling](/blog/split-bill-monzo-revolut-starling/), and wording for the follow up in [how to ask a friend to pay you back](/blog/ask-friend-to-pay-you-back/).
 

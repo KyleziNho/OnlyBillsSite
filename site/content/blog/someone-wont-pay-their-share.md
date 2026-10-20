@@ -5,10 +5,10 @@ description: A friend who always "forgets" to pay? Calm steps from a nudge to a 
 date: 2026-10-07
 category: Etiquette
 art: pass
-related: ask-friend-to-pay-you-back, bill-splitting-etiquette, nobody-carries-cash, split-bill-large-group
+related: ask-friend-to-pay-you-back, nobody-carries-cash, split-bill-when-some-dont-drink, bill-splitting-etiquette
 ---
 
-If someone hasn't paid their share, start by assuming they forgot, send one clear reminder with the amount and a way to pay, and only then get more direct. Most people pay at the first or second nudge. For the friend who always "forgets", the real fix is changing how you pay on the night, so you're never the one holding their dinner on your card.
+If you've asked once and someone still hasn't paid their share, assume they forgot, send one clear reminder with the amount and a way to pay, and only then get more direct. Most people pay at the first or second nudge. For the friend who always "forgets", the real fix is changing how you pay on the night, so you're never the one holding their dinner on your card.
 
 It's a common problem. In a 2023 Opinium survey of 2,000 UK adults for Starling Bank, about a third (32%) said they'd had to ask someone two or more times to be paid back, and it took more than two months on average to get the money (Starling Bank, 2023).
 
@@ -38,7 +38,7 @@ Most "won't pay" situations are really "haven't paid yet". The fix is a short me
 
 > Hey, just a nudge on Friday's dinner, your bit was £32.40. Link's here: [link] 🙏
 
-Put the amount first and include a way to pay. If they have to ask "how much was it again?", you've given them a reason to put it off. Our guide on [how to ask a friend to pay you back](/blog/ask-friend-to-pay-you-back/) has more templates.
+Put the amount first and include a way to pay. If they have to ask "how much was it again?", you've given them a reason to put it off. If you haven't asked at all yet, start with our guide on [how to ask a friend to pay you back](/blog/ask-friend-to-pay-you-back/), which has templates for the first message.
 
 ## Step 2: a second, slightly more direct reminder
 
@@ -57,7 +57,7 @@ If there's still nothing, stop chasing the money and ask about the person. There
 This often brings out the real issue. They might be skint until payday, think the amount was wrong, or be mortified that they forgot twice. Each of those has an easy answer:
 
 - **Skint:** "Pay me after payday" or "send £10 a week" is fine.
-- **Disputes the amount:** send a photo of the receipt and offer to work it out by what everyone had. If they had a lime soda while everyone else drank, they may have a point.
+- **Disputes the amount:** send a photo of the receipt and offer to work it out by what everyone had. If they had a lime soda while everyone else drank, they may have a point (see [splitting the bill when some people don't drink](/blog/split-bill-when-some-dont-drink/)).
 - **Embarrassed:** make it easy. "No worries at all, just whenever you can."
 
 ## Step 4: say it face to face
@@ -82,12 +82,12 @@ If you do let it go, actually let it go. Don't bring it up months later. And don
 
 For a repeat "forgetter", reminders aren't the answer. Changing how the bill gets paid is.
 
-- **Don't be the one who pays.** Let someone else put it on their card, or ask the restaurant to split by card for smaller groups.
+- **Don't be the one who pays.** Let someone else put it on their card, or [ask the restaurant to split the bill](/blog/can-you-ask-restaurant-to-split-bill/) by card for smaller groups.
 - **Sort it before anyone leaves.** "Shall we all send our bits now?" at the table works because everyone's still there and it's the norm.
 - **Use one link for the group.** Everyone gets the same message at the same time, so nobody's singled out.
 - **Ask for deposits for big plans.** For trips, tickets or stag and hen dos, collect money before you book, not after.
 
-With OnlyBills, each person ticks what they had on their own phone at the table and pays you back from the same screen. Because you can see who's claimed and paid, you know exactly who to nudge instead of asking the whole group "who still owes me?". **Owed** keeps track of who still owes you across bills, so a regular forgetter is easy to spot without keeping a list in your head.
+With OnlyBills, each person ticks what they had on their own phone at the table and pays you back with a link from the same screen. Because you can see who's claimed and paid, you know exactly who to nudge instead of asking the whole group "who still owes me?". [Owed](/how-to/track-who-owes-you/) keeps track of who still owes you across bills, so a regular forgetter is easy to spot without keeping a list in your head.
 
 :::cta Know who's paid before you leave the table
 
@@ -101,9 +101,9 @@ Nobody wants to be the person who walked out on the bill, so most people pay qui
 
 ## Worked example: when they think they owe less
 
-Five friends, a bill of £187.50 including 12.5% service. Split equally, it's £37.50 each. Jo had a main and a soft drink, a £20 subtotal, and says £37.50 isn't fair.
+Five friends, a bill of £180.00: £160.00 of food and drink plus £20.00 (12.5%) service. Split equally, it's £36.00 each. Jo had a main and a soft drink, a £20.00 subtotal, and says £36.00 isn't fair.
 
-She's right. With the 12.5% service added, her order comes to £22.50. Splitting by what everyone had, the other four cover the remaining £165.00 between them based on what they ordered. Jo pays £22.50, sends it straight away, and the friendship is fine. Sometimes "won't pay" means "won't pay that".
+She's right. With the 12.5% service added, her order comes to £22.50. Splitting by what everyone had, the other four cover the remaining £157.50 between them based on what they ordered. Jo pays £22.50, sends it straight away, and the friendship is fine. Sometimes "won't pay" means "won't pay that".
 
 :::tool split
 

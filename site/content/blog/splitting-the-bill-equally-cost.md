@@ -8,7 +8,7 @@ art: receipts
 related: why-groups-order-more-when-splitting, is-splitting-the-bill-equally-fair, split-bill-when-some-dont-drink, bill-splitting-etiquette
 ---
 
-If you usually order less than your friends, splitting the bill equally quietly costs you money every time. People in the UK who feel they lose out estimate it at about £8.73 a meal (OpenTable UK survey, 2016), which is easily £100 to £400 a year if you eat out regularly.
+If you usually order less than your friends, splitting the bill equally quietly costs you money every time. People in the UK who feel they lose out estimate it at about £8.73 a meal (a 2016 OpenTable survey), which is easily £100 to £400 a year if you eat out regularly. This page is about the money. If you want to know whether an equal split is fair in the first place, see [is splitting the bill equally fair?](/blog/is-splitting-the-bill-equally-fair/)
 
 It doesn't feel like much on the night. That's the point. Nobody wants to argue over £8, so nobody does, and the same people end up topping up the same people for years.
 
@@ -22,13 +22,13 @@ It doesn't feel like much on the night. That's the point. Nobody wants to argue 
 
 In May 2016 OpenTable surveyed UK diners about splitting the bill. The headline findings:
 
-- 2 in 3 diners said they'll split the bill when eating out, despite worrying about losing out.
-- 38% said they feel they lose money when splitting, an estimated £8.73 per meal.
+- 2 in 3 diners will split the bill when eating out, despite worrying about losing out.
+- 38% feel they lose money when splitting, an estimated £8.73 per meal.
 - 58% said they agree to split equally simply because it makes paying easier.
 - 34% said they split so others don't think they're tight.
 - 54% said they avoid splitting when others drink a lot.
 
-OpenTable then scaled the £8.73 up to a potential £38,782 over a lifetime. Treat that number with care. It's people's own estimate multiplied out, OpenTable didn't publish the sample size, and the survey is now ten years old. For a sense of scale, £38,782 divided by £8.73 is about 4,440 meals. That's roughly six group meals a month for 60 years, which is a lot of dinners.
+OpenTable then projected the £8.73 out to a potential £38,782 over a lifetime. Treat that number with care. It's people's own estimate multiplied out, OpenTable didn't publish the sample size, and the survey is now ten years old. For a sense of scale, £38,782 divided by £8.73 is about 4,440 meals. That's roughly six group meals a month for 60 years, which is a lot of dinners.
 
 So the lifetime figure is a headline. The per-meal figure is the useful part, because you can check it against your own habits.
 
@@ -104,7 +104,7 @@ Equal splitting isn't always wrong. It works well when:
 - It's a set menu or a fixed price per head.
 - Your group takes turns and it genuinely evens out.
 
-A good rule of thumb: if anyone would pay more than about £5 over what they had, split by item instead. There's more on that in [is splitting the bill equally fair?](/blog/is-splitting-the-bill-equally-fair/)
+A good rule of thumb: if anyone would pay more than about £5 over what they had, split by item instead. Our fairness guide, linked at the top of this page, has worked examples of where that line falls.
 
 ## How to stop overpaying without being awkward
 
@@ -118,11 +118,11 @@ You don't need to audit the receipt in front of everyone. A few things that work
 
 **Be the one who sorts it.** Whoever pays at the till can work out each share and send everyone a total. People rarely object to a fair number they didn't have to calculate.
 
-> "I've paid. You're each £24.75, £29.25 and £39.37. Pay me back whenever."
+> "I've paid. Aisha £24.75, Ben £29.25, Chloe £39.37, with the service included. Pay me back whenever."
 
 :::cta Pay for what you had, without the maths
 
-OnlyBills does that last part for you. Scan the receipt, and either share a live table where friends tick what they had on their own phone (no app download needed), or assign items yourself. Shared things like a bottle of wine split between the people who had them, and the service charge is spread fairly in proportion. Everyone pays you back with a link. Your first split is free, then it's £0.99 a month or £5.99 a year.
+OnlyBills does that last part for you. Scan the receipt, and either share a live table where friends tick what they had on their own phone (no app download needed), or assign items yourself. Shared things like a bottle of wine split between the people who had them, and the service charge is spread fairly in proportion. Everyone pays you back with a link. Your first split is free, then it's £0.99 a month or £5.99 a year (with a free trial).
 
 :::shot guest-05-live | Each person sees their own share add up as they tick items.
 
@@ -130,7 +130,7 @@ OnlyBills does that last part for you. Scan the receipt, and either share a live
 
 ### How much do you lose by splitting the bill equally?
 
-It depends on how differently you order. In OpenTable's 2016 UK survey, people who felt they lost out estimated about £8.73 per meal. At two group meals a month, that's about £210 a year.
+It depends on how differently you order. In a 2016 OpenTable survey, people who felt they lost out estimated about £8.73 per meal. At two group meals a month, that's about £210 a year.
 
 ### Is splitting the bill equally ever cheaper?
 
@@ -146,6 +146,6 @@ Bring it up before anyone orders, keep it about you rather than them ("I'm only 
 
 ## Sources
 
-- [OpenTable UK: Going Dutch could cost diners almost £39,000 over a lifetime (2016)](https://www.opentable.co.uk/blog/going-dutch/)
-- [Gneezy, Haruvy and Yafe, The Inefficiency of Splitting the Bill, Economic Journal (2004), full text](https://rady.ucsd.edu/_files/faculty-research/uri-gneezy/splitting-bill.pdf)
+- [OpenTable UK: "Going Dutch" could cost diners almost £39,000 over a lifetime (24 May 2016, archived copy)](https://web.archive.org/web/20260114232737/https://press.opentable.co.uk/going-dutch-could-cost-diners-almost-39000-over-a-lifetime/)
+- [Gneezy, Haruvy and Yafe, The Inefficiency of Splitting the Bill, The Economic Journal (2004)](https://rady.ucsd.edu/_files/faculty-research/uri-gneezy/splitting-bill.pdf)
 - [The Inefficiency of Splitting the Bill, RePEc listing (2004)](https://ideas.repec.org/a/ecj/econjl/v114y2004i495p265-280.html)

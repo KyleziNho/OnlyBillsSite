@@ -1,7 +1,7 @@
 ---
-title: The best apps for splitting a restaurant bill in 2026
-seoTitle: Best Splitwise alternatives for splitting a bill (2026)
-description: Splitwise, Tricount, Settle Up, Splid, Tab, your bank's split button and OnlyBills compared: features, UK prices and who each one suits best.
+title: Splitwise alternatives: the best bill splitting apps in 2026
+seoTitle: Splitwise alternatives: best bill splitting apps UK (2026)
+description: Tricount, Settle Up, Splid, Tab, your bank's split button and OnlyBills compared with Splitwise: features, UK prices and who each bill splitting app suits.
 date: 2026-10-02
 updated: 2026-10-20
 category: Comparisons
@@ -9,11 +9,11 @@ art: receipts
 related: onlybills-vs-splitwise, split-bill-monzo-revolut-starling, split-bill-on-holiday, split-bill-iphone
 ---
 
-The best bill splitting app depends on what you're splitting. For one restaurant bill where everyone had different things, you want an app that reads the receipt line by line and lets each person claim their own items. For a fortnight of shared costs on a trip, or a house of flatmates, you want an app that keeps a running balance of who owes whom.
+The best alternative to Splitwise depends on what you're splitting. For one restaurant bill where everyone had different things, you want an app that reads the receipt line by line and lets each person claim their own items. For a fortnight of shared costs on a trip, or a house of flatmates, you want an app that keeps a running balance of who owes whom.
 
 Most "best app" lists mix those two jobs up. This one doesn't. Below is what each app does today, what it costs in the UK, and who it suits. We checked every feature and price on the app's own website, its UK App Store listing or launch coverage in October 2026. This market moves quickly (Splitwise added free receipt splitting in the UK in mid October 2026), so we'll keep this page updated.
 
-:::stat 65% | of diners have used, or watched someone use, a calculator or phone app to work out their share of a bill | comparethemarket survey of 2,000 diners, 2021
+:::stat 43% | of diners feel awkward about how to pay when they eat out | comparethemarket.com survey of 2,000 diners, 2021
 
 ## Quick comparison
 
@@ -25,7 +25,7 @@ Most "best app" lists mix those two jobs up. This one doesn't. Below is what eac
 | Splid | Holidays, offline use, lots of currencies | No | No sign-up needed for groups | Free; Splid Plus £3.99 |
 | Tab | One bill, everyone already has the app | Yes | No, each person needs Tab | Free |
 | Monzo, Revolut, Starling | Splitting one card payment you already made | No | Friends at other banks can pay by link (Revolut's split button is Revolut-only) | Free |
-| OnlyBills | One UK restaurant bill, split by what each person had | Yes (AI receipt reading) | Yes: a link or QR code opens on the web or as an App Clip | First split free, then £0.99 a month or £5.99 a year |
+| OnlyBills | One UK restaurant bill, split by what each person had | Yes (AI receipt reading) | Yes: a link or QR code opens on the web or as an App Clip | First split free, then £0.99 a month or £5.99 a year, with a free trial |
 
 ## Which app should you use?
 
@@ -36,13 +36,13 @@ Most "best app" lists mix those two jobs up. This one doesn't. Below is what eac
 
 ## Splitwise
 
-Splitwise is the best known name, and for good reason. It describes itself as a way to "keep track of your shared expenses and balances with housemates, trips, groups, friends, and family". You add expenses as they happen, split them equally, by exact amounts, by percentages or by shares, and Splitwise keeps a running total. Debt simplification works out the fewest payments needed to settle a group. It runs on iPhone, Android and the web, and supports more than 100 currencies.
+Splitwise is the app everyone else gets compared with, so here's the short version. You add expenses as they happen, split them equally, by exact amounts, percentages or shares, and it keeps a running balance per group, with debt simplification to cut the number of payments. It runs on iPhone, Android and the web.
 
-**New in October 2026: Itemize.** According to The Paypers, Splitwise launched Itemize in the US and UK on 16 October 2026. One person photographs the receipt, everyone else joins by scanning a QR code without downloading the app or creating an account, and each person claims their own items and any shared ones. It's free for all Splitwise users. Friends can then pay through Splitwise, settle in cash, or add the amount to an existing Splitwise balance. In the UK, Splitwise has offered Pay by Bank (through Tink) since April 2024, so you can pay straight from your bank account inside the app.
+**New in October 2026: Itemize.** According to The Paypers, Splitwise launched Itemize in the US and UK in mid October 2026. One person photographs the receipt, everyone else scans a QR code and claims their own items without the app or an account, and it's free.
 
-**What it costs:** the core app is free, but the free version caps how many expenses you can add each day (Splitwise doesn't publish the number). Splitwise Pro removes the cap and adds currency conversion, charts, search and no ads. The UK App Store lists Pro in-app purchases from £2.79 to £47.99, depending on the plan.
+**What it costs:** free, with a daily cap on how many expenses you can add. Splitwise Pro removes the cap and adds extras like currency conversion; the UK App Store lists Pro in-app purchases from £2.79 to £47.99.
 
-**Best for:** almost everything involving the same group over time, and now one-off receipts too. If your group already uses Splitwise, Itemize is the obvious first thing to try.
+**Best for:** the same group over time, and now one-off receipts too. For a feature by feature look at how it handles a restaurant bill, see [OnlyBills vs Splitwise](/blog/onlybills-vs-splitwise/).
 
 ## Tricount
 
@@ -90,14 +90,14 @@ OnlyBills is a UK app built for one job: splitting a restaurant, pub or group bi
 
 With a live table, friends scan a QR code or open a link and tick what they had on their own phone, with nothing to install (it opens on the web, or as an App Clip on iPhone). Splitwise Itemize now does something similar, so here's where OnlyBills is different:
 
-- **It's made for UK bills.** Everything is in pounds, and it handles a 12.5% service charge, discounts and extras by spreading them in proportion, rather than US-style tax and tip.
+- **It's made for UK bills.** It handles a 12.5% service charge, discounts and extras by spreading them in proportion (the method is in [how to split service charge and tips fairly](/blog/split-service-charge-fairly/)).
 - **Each friend gets their exact amount as a payment link** for the host's bank: Monzo (card, Apple Pay or bank transfer, no Monzo account needed), Starling or Revolut (card or Apple Pay, no account needed), PayPal (a PayPal account may be needed) or bank details (from any banking app). Nobody needs to be in the same app or bank as the host.
 - **The host can assign items for anyone who won't tap anything**, so the table still gets split when half your friends ignore the link.
 - **Shares are exact to the penny** and always add up to the bill.
 
 :::shot guest-01-join | Friends join from a link or QR code and pick their name. No app download.
 
-**What it costs:** your first split is free, then £0.99 a month or £5.99 a year, with a free trial. iPhone and iPad only for the host.
+**What it costs:** your first split is free, then £0.99 a month or £5.99 a year, with a free trial. The host needs an iPhone or iPad; friends join from their browser.
 
 **Not for:** rent, household bills or tracking a whole trip's costs. Use Splitwise, Tricount or Splid for those.
 
@@ -114,11 +114,11 @@ Four friends, a £126 bill: £112 of food and drink plus a 12.5% service charge 
 | Chloe | £14.00 | £31.50 | £15.75 |
 | Dev | £28.00 | £31.50 | £31.50 |
 
-Splitting equally, Chloe pays £15.75 more than her food and service cost, and Amy pays £13.50 less. Any app above can do an equal split. The itemised ones (Splitwise Itemize, OnlyBills, Tab) get Chloe the fair number without someone working it out by hand. For more on when an equal split is fine, see [is splitting the bill equally fair?](/blog/is-splitting-the-bill-equally-fair/).
+Splitting equally, Chloe pays £15.75 more than her food and service cost, and Amy pays £13.50 less. Any app above can do an equal split. The itemised ones (Splitwise Itemize, OnlyBills, Tab) get Chloe the fair number without someone working it out by hand. If you'd rather do it yourself, the free [split the bill calculator](/tools/split-bill-calculator/) does the same sum. For more on when an equal split is fine, see [is splitting the bill equally fair?](/blog/is-splitting-the-bill-equally-fair/).
 
 ## Can you use more than one?
 
-Yes, and plenty of people do. A common setup on a trip: a balance app like Splitwise or Tricount for the villa, car hire and supermarket runs, and an itemised split for each big group dinner. We compare the two approaches in detail in [OnlyBills vs Splitwise](/blog/onlybills-vs-splitwise/).
+Yes, and plenty of people do. A common setup on a trip: a balance app like Splitwise or Tricount for the villa, car hire and supermarket runs, and an itemised split for each big group dinner. For trips specifically, see [how to split costs on a group holiday](/blog/split-bill-on-holiday/).
 
 ## FAQ
 
@@ -139,7 +139,7 @@ For costs across a whole trip, a balance app like Splid, Tricount or Splitwise i
 - [Splitwise: home page and features](https://www.splitwise.com/)
 - [Splitwise Pro features](https://www.splitwise.com/pro)
 - [Splitwise on the UK App Store (in-app purchase prices)](https://apps.apple.com/gb/app/splitwise/id458023433)
-- [The Paypers: Splitwise launches Itemize receipt splitting in the US and UK (16 October 2026)](https://thepaypers.com/payments/news/splitwise-launches-itemize-receipt-splitting-feature-in-the-us-and-uk)
+- [The Paypers: Splitwise launches Itemize receipt splitting in the US and UK (October 2026)](https://thepaypers.com/payments/news/splitwise-launches-itemize-receipt-splitting-feature-in-the-us-and-uk)
 - [Tink: Splitwise partners with Tink for Pay by Bank (April 2024)](https://tink.com/press/splitwise-tink-partner/)
 - [Tricount: home page](https://www.tricount.com/)
 - [Tricount on the UK App Store](https://apps.apple.com/gb/app/id349866256)
@@ -151,5 +151,5 @@ For costs across a whole trip, a balance app like Splid, Tricount or Splitwise i
 - [Tab: The simple bill splitter on the App Store](https://apps.apple.com/gb/app/id595068606)
 - [Monzo Split](https://monzo.com/features/monzo-split)
 - [Starling: Split the bill](https://www.starlingbank.com/features/split-the-bill/)
-- [Comparethemarket survey of 2,000 diners (2021), reported by the Yorkshire Post](https://www.yorkshirepost.co.uk/read-this/nation-divided-over-how-to-settle-a-bill-after-a-meal-out-with-friends-and-family-3219600)
+- [comparethemarket.com survey of 2,000 diners, reported by Farming Life (29 April 2021)](https://www.farminglife.com/read-this/nation-divided-over-how-to-settle-a-bill-after-a-meal-out-with-friends-and-family-3219600)
 - [OnlyBills on the App Store](https://apps.apple.com/app/onlybills/id6754412082)

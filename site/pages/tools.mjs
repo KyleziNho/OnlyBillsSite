@@ -268,7 +268,7 @@ Settling up works for a trip where costs are shared evenly. A restaurant bill is
   },
 ];
 
-export function toolPages({ posts, write, layout, assetsV, postCard, warn }) {
+export function toolPages({ posts, write, layout, assetsV, postCard, warn, ogFor }) {
   const bySlug = new Map(posts.map((p) => [p.slug, p]));
   for (const t of TOOLS) {
     const p = `/tools/${t.slug}/`;
@@ -295,7 +295,7 @@ ${faqBlock(t.faq)}
 </div></div>
 ${rel.length ? `<section class="section-tight"><div class="wrap"><div class="section-head left"><h2 class="h3">Read next</h2></div><div class="cards">${rel.map((r) => postCard(r)).join('')}</div></div></section>` : ''}
 <script type="module" src="/assets/js/tools.js?v=${assetsV}"></script>`;
-    write(p, layout({ path: p, title: t.title, description: t.description, body, current: '/tools/', assetsV,
+    write(p, layout({ path: p, title: t.title, description: t.description, body, current: '/tools/', assetsV, ogImage: ogFor('tool-' + t.slug),
       schema: [crumbsLd(trail), appLd(t.name, p, t.description), faqLd(t.faq)] }), { priority: 0.9 });
   }
   const trail = [['Home', '/'], ['Free tools', '/tools/']];

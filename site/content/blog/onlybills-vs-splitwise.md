@@ -1,12 +1,12 @@
 ---
 title: OnlyBills vs Splitwise: which should you use?
-seoTitle: OnlyBills vs Splitwise: honest comparison (2026)
+seoTitle: OnlyBills vs Splitwise: receipt splitting compared (2026)
 description: Splitwise is built for running balances and now splits receipts too. OnlyBills is built for UK restaurant bills. Here's when to use which, and how to use both.
 date: 2026-10-05
 updated: 2026-10-20
 category: Comparisons
 art: claim
-related: splitwise-alternatives, split-bill-on-holiday, is-splitting-the-bill-equally-fair, split-service-charge-fairly
+related: splitwise-alternatives, split-bill-on-holiday, split-service-charge-fairly, split-bill-monzo-revolut-starling
 ---
 
 Use Splitwise when costs build up over time between the same people: housemates, a couple, a two week trip. For a single restaurant bill, both apps now let one person scan the receipt and everyone else claim their own items from a QR code, so the choice comes down to how you want to get paid back and how your group already works.
@@ -15,7 +15,7 @@ We make OnlyBills, so read this with that in mind. We've tried to be fair: every
 
 ## What changed in October 2026
 
-On 16 October 2026, Splitwise launched **Itemize** in the US and UK, according to The Paypers. One person photographs the receipt. Everyone else scans a QR code and claims what they had, without downloading the app or making an account. It's free for all Splitwise users. That closes most of the gap that used to exist between the two apps for restaurant bills, and it's a good feature. If your group already lives in Splitwise, start there.
+On 16 October 2026, Splitwise launched **Itemize** in the US and UK, according to The Paypers. One person photographs the receipt. Everyone else scans a QR code and claims what they had, without downloading the app or making an account. It's free for all Splitwise users. (If you're comparing more than these two, our roundup of [Splitwise alternatives](/blog/splitwise-alternatives/) covers Tricount, Settle Up, Splid, Tab and the bank split buttons.) That closes most of the gap that used to exist between the two apps for restaurant bills, and it's a good feature. If your group already lives in Splitwise, start there.
 
 ## The short answer
 
@@ -28,9 +28,8 @@ On 16 October 2026, Splitwise launched **Itemize** in the US and UK, according t
 | Extras | Tax and tip in proportion | UK service charge, discounts and extras spread in proportion |
 | How friends pay you | Splitwise Pay (Pay by Bank in the UK), cash, or add to a Splitwise balance | Each friend gets their exact amount as a Monzo, Starling, Revolut or PayPal link, or your bank details |
 | Debt simplification across a group | Yes | No (it splits each bill; Owed shows who still owes you) |
-| Currencies | 100+ | Pounds only |
 | Platforms | iPhone, Android, web | Host on iPhone and iPad; friends on any phone's browser |
-| Price | Free (Itemize is free; daily expense cap on the free plan; Pro is a paid subscription) | First split free, then £0.99 a month or £5.99 a year |
+| Price | Free (Itemize is free; daily expense cap on the free plan; Pro is a paid subscription) | First split free, then £0.99 a month or £5.99 a year, with a free trial |
 
 ## What Splitwise does well
 
@@ -48,11 +47,11 @@ OnlyBills only does one thing: split a bill like the one in front of you at a re
 
 Where it differs from Splitwise Itemize:
 
-**Getting paid back.** Each friend sees their exact amount and pays you with a link for the bank you already use. With Monzo that's card, Apple Pay or bank transfer, with no Monzo account needed. With Starling or Revolut it's card or Apple Pay, no account needed. There's PayPal (a PayPal account may be needed) and plain bank transfer from any banking app. Nobody has to join anything to pay. OnlyBills doesn't hold the money; it hands off to your bank or PayPal.
+**Getting paid back.** Each friend sees their exact amount and pays you with a link for the bank you already use. With Monzo that's card, Apple Pay or bank transfer, with no Monzo account needed. With Starling or Revolut it's card or Apple Pay, no account needed. There's PayPal (a PayPal account may be needed) and plain bank transfer from any banking app. Nobody has to join your bank or download anything to pay; only the PayPal option may ask for an account. OnlyBills doesn't hold the money: it hands off to your bank or PayPal. The steps are in [how to get paid back](/how-to/get-paid-back/).
 
-**UK bills.** It's built around how UK receipts look: a discretionary 12.5% service charge, a discount, a cover charge. They're spread across everyone in proportion to what they had, and the shares are exact to the penny and always add up to the bill.
+**UK bills.** It's built around how UK receipts look: a discretionary 12.5% service charge, a discount, a cover charge. They're spread across everyone in proportion to what they had, and the shares are exact to the penny and always add up to the bill. (Why proportional is fairer is explained in [how to split service charge and tips fairly](/blog/split-service-charge-fairly/).)
 
-**The friend who won't tap anything.** The host can assign items for people as well as letting them claim their own, so the bill still gets split when someone ignores the link.
+**The friend who won't tap anything.** The host can [assign items for people](/how-to/assign-items-yourself/) as well as letting them claim their own, so the bill still gets split when someone ignores the link.
 
 **Owed.** It keeps track of who still owes you across bills, with their faces, so you can chase without digging through your banking app.
 
@@ -69,7 +68,7 @@ The bill is £161.10: £143.20 of food and drink plus 12.5% service (£17.90). T
 | Esme | £34.50 | none | £34.50 | £38.81 |
 | **Total** | | | **£143.20** | **£161.10** |
 
-An equal split would be £32.22 each. Dev, who didn't drink, would pay £7.47 more than his share.
+An equal split would be £32.22 each. Dev, who didn't drink, would pay £7.47 more than his share. That's the classic problem covered in [splitting the bill when some people don't drink](/blog/split-bill-when-some-dont-drink/).
 
 Both apps get to these numbers in roughly the same way: scan, share a QR code, everyone claims. The difference is the last step. In Splitwise, the amounts land in Splitwise, where friends pay through the app or add them to a balance. In OnlyBills, Dev gets "£24.75" and your Monzo or bank link, and pays from whatever bank he uses.
 
@@ -79,7 +78,7 @@ Both apps get to these numbers in roughly the same way: scan, share a QR code, e
 - You're tracking a whole trip: the villa, car hire, fuel, supermarket runs.
 - Your group already uses Splitwise, and you'd rather keep every debt in one place.
 - Some of your group want an app of their own on Android.
-- You need multiple currencies.
+- You're spending in several currencies and want Splitwise Pro's conversion.
 
 ## When OnlyBills is the better choice
 
@@ -111,14 +110,14 @@ Yes. Itemize, launched in the US and UK in October 2026, lets one person photogr
 ### Do friends need an account for OnlyBills?
 No. Friends join a live table from a link or QR code in their browser, or an App Clip on iPhone, type their name and tick their items. Only the host needs the app.
 
-### Does OnlyBills work in other currencies?
-No, it works in pounds. For trips abroad with spending in several currencies, a balance app like Splitwise or Splid handles conversion.
+### How much does OnlyBills cost?
+Your first split is free. After that it's £0.99 a month or £5.99 a year, with a free trial. Only the host pays; friends who join a live table don't need the app or an account.
 
 ## Sources
 
 - [Splitwise: home page and features](https://www.splitwise.com/)
 - [Splitwise Pro features](https://www.splitwise.com/pro)
 - [Splitwise on the UK App Store (in-app purchase prices)](https://apps.apple.com/gb/app/splitwise/id458023433)
-- [The Paypers: Splitwise launches Itemize receipt splitting in the US and UK (16 October 2026)](https://thepaypers.com/payments/news/splitwise-launches-itemize-receipt-splitting-feature-in-the-us-and-uk)
+- [The Paypers: Splitwise launches Itemize receipt splitting in the US and UK (October 2026)](https://thepaypers.com/payments/news/splitwise-launches-itemize-receipt-splitting-feature-in-the-us-and-uk)
 - [Tink: Splitwise partners with Tink for Pay by Bank (April 2024)](https://tink.com/press/splitwise-tink-partner/)
 - [OnlyBills on the App Store](https://apps.apple.com/app/onlybills/id6754412082)

@@ -41,6 +41,7 @@ const assetsV = crypto.createHash('sha1')
   .update(fs.readFileSync(path.join(ROOT, 'assets/js/money.js')))
   .update(fs.readFileSync(path.join(ROOT, 'assets/css/tokens.css')))
   .digest('hex').slice(0, 8);
+const ogFor = (key) => (fs.existsSync(path.join(HERE, 'static/og', key + '.jpg')) ? abs(`/assets/og/${key}.jpg`) : undefined);
 const SHOTS = new Set(fs.readdirSync(path.join(HERE, 'static/shots')).map((f) => f.replace(/-(light|dark)\.webp$/, '')));
 
 const pages = []; // { path, lastmod, priority }
@@ -215,7 +216,7 @@ function articlePage(p) {
     dateModified: p.updated || p.date,
     inLanguage: 'en-GB',
     mainEntityOfPage: abs(p.path),
-    image: abs('/assets/img/og-card.jpg'),
+    image: ogFor(p.slug) || abs('/assets/img/og-card.jpg'),
     author: { '@type': 'Person', name: SITE.author, url: abs('/about/'), sameAs: [SITE.linkedin] },
     publisher: { '@id': SITE.url + '/#org' },
     wordCount: p.words,
@@ -254,7 +255,7 @@ function articlePage(p) {
     <div class="cards">${related.map((r) => postCard(r)).join('')}</div>
   </div>
 </section>`;
-  write(p.path, layout({ path: p.path, title: p.seoTitle || p.title, description: p.description, body, schema: ld, ogType: 'article', current: section[1], assetsV,
+  write(p.path, layout({ path: p.path, title: p.seoTitle || p.title, description: p.description, body, schema: ld, ogType: 'article', ogImage: ogFor(p.slug), current: section[1], assetsV,
     extraHead: `<meta property="article:published_time" content="${p.date}">${p.updated ? `<meta property="article:modified_time" content="${p.updated}">` : ''}` }),
   { lastmod: p.updated || p.date, priority: isTut ? 0.7 : 0.6 });
 }
@@ -298,7 +299,7 @@ function articlePage(p) {
 }
 
 // ── Home, tools, about, 404 ─────────────────────────────
-const ctx = { posts, tuts, postCard, assetsV, write, layout, warn, errors };
+const ctx = { ogFor, posts, tuts, postCard, assetsV, write, layout, warn, errors };
 homePage(ctx);
 toolPages(ctx);
 aboutPage(ctx);

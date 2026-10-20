@@ -109,7 +109,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots" cont
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:image" content="${img}">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="800">
+<meta property="og:image:height" content="${ogImage ? 630 : 800}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">

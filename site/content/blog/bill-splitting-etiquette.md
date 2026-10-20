@@ -18,13 +18,11 @@ It goes wrong a lot. In a 2021 survey of 2,000 diners for comparethemarket.com, 
 - 13% | have fallen out with someone over the bill | comparethemarket, 2021
 :::
 
-Here are the rules most people follow without saying them out loud, and the reasons behind them.
-
 ## 1. Agree how you're splitting before you order
 
 The fairest moment to decide is at the start, not when a £240 bill lands. "Shall we just split it?" is fine at the start, because everyone can order with that in mind. Said at the end, it can feel like an ambush to the person who had a salad and tap water.
 
-**Why:** people order differently depending on how they're paying. A well-known 2004 restaurant study found diners spent about 51 shekels each when the bill was split equally, against about 37 when each paid their own, roughly a third more (Gneezy, Haruvy and Yafe, 2004). It was a small study of groups of six students in Israel, but the effect makes sense to anyone who's watched a table order a third bottle.
+**Why:** people order differently depending on how they're paying. A well-known 2004 restaurant study found diners spent about 51 shekels each when the bill was split equally, against about 37 when each paid their own, about 36% more (Gneezy, Haruvy and Yafe, 2004). It was a small study of groups of six students in Israel, but the effect makes sense to anyone who's watched a table order a third bottle.
 
 ## 2. Splitting equally is fine when orders are similar
 
@@ -36,13 +34,13 @@ If everyone had a main, a drink and shared a few starters, splitting equally is 
 
 If some people drank and some didn't, take the drinks off before splitting. A bottle of wine shared by three people is split by those three, not by the whole table.
 
-**Why:** alcohol is often the biggest difference between people's orders. In OpenTable's 2016 UK survey, the top reason people gave for not wanting to split equally was when others had ordered several alcoholic drinks (54%) (OpenTable, 2016). There's a full guide on [splitting the bill when some people don't drink](/blog/split-bill-when-some-dont-drink/).
+**Why:** alcohol is often the biggest difference between people's orders. In a 2016 OpenTable survey, 54% of UK diners said they avoid splitting when others drink a lot (OpenTable, 2016). There's a full guide on [splitting the bill when some people don't drink](/blog/split-bill-when-some-dont-drink/).
 
 ## 4. Never make someone justify paying for what they had
 
 "Do you mind if I just pay for mine?" should get the answer "of course". Nobody should have to explain their budget at a dinner table.
 
-**Why:** people often go along with equal splits to avoid looking tight. In the same OpenTable survey, a third (34%) said they split equally because they didn't want others to think they were tight with money (OpenTable, 2016). Making it easy to opt out is kind.
+**Why:** people often go along with equal splits to avoid looking tight. In the same OpenTable survey, 34% said they split so others don't think they're tight (OpenTable, 2016). Making it easy to opt out is kind.
 
 ## 5. Shared plates are split by who shared them
 
@@ -82,7 +80,7 @@ If you arrive after the starters or leave before dessert, pay your part and mayb
 
 ## 11. If it's someone's birthday, decide in advance whether you're covering them
 
-Many groups split the birthday person's share between everyone else. That's lovely, but it's a cost, so agree it in the group chat before the night. Full details in [who pays at a birthday dinner](/blog/birthday-dinner-who-pays/).
+Many groups split the birthday person's share between everyone else. That's lovely, but it's a cost, so agree it in the group chat before the night. There's a worked example in [who pays at a birthday dinner](/blog/birthday-dinner-who-pays/).
 
 **Why:** springing it on people at the end means some feel they had no say in spending an extra £6 or £7.
 
@@ -104,7 +102,7 @@ Four friends, a £136.13 bill including 12.5% service. Two drank, two didn't.
 | Dev | £9.50 | £4.00 | £13.50 | £1.69 | £15.19 |
 | **Total** | | | **£121.00** | **£15.13** | **£136.13** |
 
-Split equally, it would be £34.03 each. Dev would pay nearly £19 more than he had. Splitting by what you had takes longer with a calculator, which is where an app helps.
+Split equally, it would be £34.03 each (with one person paying £34.04 to cover the extra penny). Dev would pay nearly £19 more than he had. Splitting by what you had takes longer with a calculator, which is where an app helps.
 
 :::cta Split by what everyone had, to the penny
 
@@ -124,7 +122,7 @@ Ideally the tip or service charge is split in proportion to what each person spe
 
 ## Sources
 
-- [comparethemarket.com study of 2,000 diners, reported by Farming Life (April 2021)](https://www.farminglife.com/read-this/nation-divided-over-how-to-settle-a-bill-after-a-meal-out-with-friends-and-family-3219600)
-- [OpenTable UK: "Going Dutch" could cost diners almost £39,000 over a lifetime (May 2016, archived copy)](https://web.archive.org/web/20260114232737/https://press.opentable.co.uk/going-dutch-could-cost-diners-almost-39000-over-a-lifetime/)
-- [Gneezy, Haruvy and Yafe, The Inefficiency of Splitting the Bill, Economic Journal (2004)](https://rady.ucsd.edu/_files/faculty-research/uri-gneezy/splitting-bill.pdf)
+- [comparethemarket.com survey of 2,000 diners, reported by Farming Life (29 April 2021)](https://www.farminglife.com/read-this/nation-divided-over-how-to-settle-a-bill-after-a-meal-out-with-friends-and-family-3219600)
+- [OpenTable UK: "Going Dutch" could cost diners almost £39,000 over a lifetime (24 May 2016, archived copy)](https://web.archive.org/web/20260114232737/https://press.opentable.co.uk/going-dutch-could-cost-diners-almost-39000-over-a-lifetime/)
+- [Gneezy, Haruvy and Yafe, The Inefficiency of Splitting the Bill, The Economic Journal (2004)](https://rady.ucsd.edu/_files/faculty-research/uri-gneezy/splitting-bill.pdf)
 - [Employment (Allocation of Tips) Act 2023, legislation.gov.uk](https://www.legislation.gov.uk/ukpga/2023/13/contents)

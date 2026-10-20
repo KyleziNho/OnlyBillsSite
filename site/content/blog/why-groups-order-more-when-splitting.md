@@ -26,7 +26,7 @@ If you were paying for yourself, the dessert costs you £6. On an equal split, i
 
 Seen that way, the dessert is a bargain. The trouble is that everyone at the table has the same bargain on everything they order. If all six people add a £6 dessert, each person pays £6 more, which is exactly what it would have cost them on their own. Nobody saved anything, and the bill went up by £36.
 
-Tim Harford put it neatly in his Undercover Economist column ("Free-riding à la carte", 2013): on a table of six splitting equally, a £12 starter costs the person who ordered it just £2.
+Tim Harford wrote about this in his Undercover Economist column ("Free-riding à la carte", 2013), using the restaurant experiment below as his example.
 
 That's the dilemma. Each person's sensible choice, added up, gives a result most of them didn't want.
 
@@ -36,7 +36,7 @@ Uri Gneezy, Ernan Haruvy and Hadas Yafe wanted to see whether this happens with 
 
 **The setup**
 
-- Students were recruited from the Technion campus in Haifa, Israel, and invited to lunch at a popular restaurant nearby.
+- Students were recruited from the Technion campus in Haifa, Israel, and invited to lunch at a popular restaurant nearby. 60 took part in the three main rules below, and 12 more in the fourth.
 - Each group was six people (three men, three women) who didn't know each other.
 - Everyone was paid 80 shekels (about $20 at the time) just for turning up.
 - They wrote down their orders privately, in silence, so nobody could influence anyone else.
@@ -59,7 +59,7 @@ Each group was told one of these before ordering:
 | You pay a sixth of your own meal | 57.4 shekels |
 | Free | 82.3 shekels |
 
-Moving from "pay for yourself" to "split equally" pushed spending up from about 37 to about 51 shekels, roughly 36% more. When the meal was free, people spent more than twice as much.
+Moving from "pay for yourself" to "split equally" pushed spending up from about 37 to about 51 shekels, about 36% more. When the meal was free, people spent more than twice as much.
 
 ## The clever bit: the fourth rule
 
@@ -67,9 +67,9 @@ The fourth rule is what makes the study convincing.
 
 Under an equal split, ordering an extra 6 shekels of food costs you 1 shekel and costs your friends 5. Under the "pay a sixth" rule, ordering an extra 6 shekels still costs you just 1 shekel, but costs your friends nothing (the researchers pay).
 
-If people were holding back to be kind to their tablemates, they should have ordered noticeably more under the fourth rule, because nobody else gets hurt. They didn't. Spending under the two rules was statistically about the same.
+If people were holding back to be kind to their tablemates, they should have ordered noticeably more under the fourth rule, because nobody else gets hurt. They spent a little more (57.4 shekels against 50.9), but the difference wasn't statistically significant. The authors point out that the fourth group was small, so this part is suggestive rather than proof.
 
-In other words, diners weren't really thinking about the others at the table. They were reacting to what an extra dish cost them. Make the extra dish cheap for the person ordering, and they order more.
+In other words, diners didn't seem to be thinking much about the others at the table. They were reacting to what an extra dish cost them. Make the extra dish cheap for the person ordering, and they order more.
 
 ## Most people didn't want to split
 
@@ -81,7 +81,7 @@ So most people preferred to pay individually. But once they were told the bill w
 
 It's a good study with real limits, so it's worth being honest about them:
 
-- **It was small.** 24 diners for each of the first two rules and 12 for the free meal.
+- **It was small.** 24 diners for each of the first two rules, 12 for the free meal and 12 for the fourth rule.
 - **They were strangers.** Friends who eat together often may hold back more, because they'll see each other again. The authors say as much.
 - **It was students in Israel in the early 2000s.** Prices, menus and social norms differ.
 
@@ -91,7 +91,7 @@ So don't quote "36%" as a law of nature. The direction is what matters, and it l
 
 You don't need to ban splitting. You just need to stop the rules from nudging everyone to order more than they want.
 
-**Agree how you'll pay before anyone orders.** The effect happens at the moment of ordering. Deciding afterwards is too late.
+**Agree how you'll pay before anyone orders.** The effect happens at the moment of ordering. Deciding afterwards is too late. (It's rule one in our [bill splitting etiquette](/blog/bill-splitting-etiquette/) for this reason.)
 
 > "Shall we each pay for what we have tonight? Makes it easier."
 
@@ -105,13 +105,13 @@ You don't need to ban splitting. You just need to stop the rules from nudging ev
 
 :::cta Everyone pays for what they had
 
-OnlyBills is built for exactly this. The host scans the receipt and shares a live table. Friends join with a QR code or link (no app needed), tick what they had, and see their share add up. Shared dishes split between the people who had them, and the service charge is spread fairly. Your first split is free.
+OnlyBills is built for exactly this. The host scans the receipt and shares a live table. Friends join with a QR code or link (no app needed), tick what they had, and see their share add up. Shared dishes split between the people who had them, and the service charge is spread fairly. Your first split is free, then it's £0.99 a month or £5.99 a year (with a free trial).
 
 ## A quick test you can run yourself
 
 Next time you're out with a regular group, try one dinner where you agree up front to pay for what you each order. Compare the total with what your group normally spends. It isn't a proper experiment, but plenty of people find the bill comes in lower, and nobody feels like they got less.
 
-If you want to see what equal splitting has been costing you personally, the overpay calculator does the sums.
+If you want to see what equal splitting has been costing you personally, the overpay calculator does the sums, and we've added up [what an equal split costs over a year](/blog/splitting-the-bill-equally-cost/).
 
 :::tool overpay
 
@@ -135,6 +135,6 @@ Probably less, because friends notice and care about each other. But the incenti
 
 ## Sources
 
-- [Gneezy, Haruvy and Yafe, The Inefficiency of Splitting the Bill, Economic Journal (2004), full text](https://rady.ucsd.edu/_files/faculty-research/uri-gneezy/splitting-bill.pdf)
+- [Gneezy, Haruvy and Yafe, The Inefficiency of Splitting the Bill, The Economic Journal (2004)](https://rady.ucsd.edu/_files/faculty-research/uri-gneezy/splitting-bill.pdf)
 - [The Inefficiency of Splitting the Bill, RePEc listing (2004)](https://ideas.repec.org/a/ecj/econjl/v114y2004i495p265-280.html)
 - [Tim Harford, Free-riding à la carte, The Undercover Economist (2013)](https://timharford.com/2013/09/free-riding-a-la-carte/)

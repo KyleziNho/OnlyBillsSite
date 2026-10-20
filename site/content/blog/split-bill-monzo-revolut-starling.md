@@ -5,7 +5,7 @@ description: Step by step: the split bill features in Monzo, Revolut and Starlin
 date: 2026-10-08
 category: Guides
 art: payout
-related: ask-friend-to-pay-you-back, splitwise-alternatives, someone-wont-pay-their-share, split-bill-iphone
+related: pay-without-downloading-app, ask-friend-to-pay-you-back, splitwise-alternatives, split-bill-iphone
 ---
 
 All three banks let you split a card payment after you've made it: open the transaction in the app, tap split, pick your friends and send requests. The big difference is who can pay you. Revolut's split bill only works with other Revolut customers, while Monzo and Starling can send a payment link to friends at any bank.
@@ -70,11 +70,11 @@ If your friend banks with Starling, the link opens their app. If not, it opens a
 
 Bank split buttons are free and already on your phone, so they're great when the split is simple. They struggle in three situations.
 
-**They split a total, not the receipt.** None of them reads the bill line by line. If one person had a £9 salad and another had steak and three cocktails, you're working out the amounts yourself before you type them in.
+**They split a total, not the receipt.** None of them reads the bill line by line. If one person had a £9 salad and another had steak and three cocktails, you're working out the amounts yourself before you type them in (the free [split the bill calculator](/tools/split-bill-calculator/) helps with that part).
 
 **Some only work within the bank.** Revolut's Split bill needs everyone on Revolut. Even with Monzo and Starling, friends at other banks get a link rather than the full experience.
 
-**Service charge is on you.** If the bill includes 12.5% service, you need to add it to each person's share in proportion, or someone ends up paying for everyone else's tip.
+**Service charge is on you.** If the bill includes 12.5% service, you need to add it to each person's share in proportion, or someone ends up paying for everyone else's tip. [How to split service charge and tips fairly](/blog/split-service-charge-fairly/) shows the method.
 
 ### A worked example
 
@@ -90,7 +90,7 @@ In Monzo, you'd split the payment and edit the amounts to £20.25 and £36.00. I
 
 ## How payment links work for friends at other banks
 
-You don't need everyone on the same bank to get paid back. You have three options, and none of them needs your friend to open a new account.
+You don't need everyone on the same bank to get paid back. You have three options. The first two don't need your friend to open anything new, and the third only works smoothly if they already use PayPal.
 
 - **Your bank's payment link:** Monzo's request link, a Revolut.me link or a Starling Settle Up link. Your friend taps it and pays on a web page, usually by card. Check each bank's limits (above) for bigger amounts.
 - **A plain bank transfer:** send your name, sort code and account number. Your friend pays from any UK banking app by Faster Payments. No limits from a link, but they have to type your details in.
@@ -98,7 +98,7 @@ You don't need everyone on the same bank to get paid back. You have three option
 
 :::shot guest-03-pay-sheet | In OnlyBills, friends see their exact share and pick how to pay you.
 
-OnlyBills puts these together. After friends tick what they had, they see their exact share and a pay sheet. If you've added your Monzo link, they can pay by card, Apple Pay or bank transfer, with no Monzo account needed. With Starling or Revolut it's card or Apple Pay, no account needed. PayPal (a PayPal account may be needed) and bank transfer (from any banking app) are there too. OnlyBills doesn't handle the money: it hands off to your bank or PayPal.
+OnlyBills puts these together. After friends tick what they had, they see their exact share and a pay sheet. If you've added your Monzo link, they can pay by card, Apple Pay or bank transfer, with no Monzo account needed. With Starling or Revolut it's card or Apple Pay, no account needed. PayPal (a PayPal account may be needed) and bank transfer (from any banking app) are there too. OnlyBills doesn't handle the money: it hands off to your bank or PayPal. Setting up your links takes a minute; see [how to get paid back](/how-to/get-paid-back/).
 
 :::cta Get paid back for what everyone actually had
 
