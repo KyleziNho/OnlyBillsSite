@@ -37,6 +37,8 @@ fs.copyFileSync(path.join(ROOT, 'split-app/src/lib/faces.js'), path.join(ROOT, '
 const assetsV = crypto.createHash('sha1')
   .update(fs.readFileSync(path.join(ROOT, 'assets/css/site.css')))
   .update(fs.readFileSync(path.join(ROOT, 'assets/js/site.js')))
+  .update(fs.readFileSync(path.join(ROOT, 'assets/js/tools.js')))
+  .update(fs.readFileSync(path.join(ROOT, 'assets/js/money.js')))
   .update(fs.readFileSync(path.join(ROOT, 'assets/css/tokens.css')))
   .digest('hex').slice(0, 8);
 const SHOTS = new Set(fs.readdirSync(path.join(HERE, 'static/shots')).map((f) => f.replace(/-(light|dark)\.webp$/, '')));
@@ -65,6 +67,8 @@ const TOOLS = {
   split: ['/tools/split-bill-calculator/', 'Split the bill calculator', 'Add who had what. Service and shared dishes split to the penny.', icons.calc],
   overpay: ['/tools/overpay-calculator/', 'Does splitting equally cost you?', 'Five quick taps for your estimated yearly overpay.', icons.pound],
   tip: ['/tools/tip-calculator/', 'Tip and service charge calculator', 'Work out 10, 12.5 or 15% and each person’s share.', icons.heart],
+  service: ['/tools/service-charge-calculator/', 'Service charge calculator', 'Add 12.5% to a bill, or find the service inside a total.', icons.calc],
+  settle: ['/tools/settle-up-calculator/', 'Who owes who calculator', 'Who paid what, and the fewest payments to settle up.', icons.pound],
 };
 const toolCard = (key) => {
   const t = TOOLS[key];
@@ -219,7 +223,8 @@ function articlePage(p) {
   }];
   if (p.faqs.length) ld.push({ '@type': 'FAQPage', mainEntity: p.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: stripTags(f.html) } })) });
 
-  const toc = !isTut && p.toc.length >= 4 ? `<nav class="card toc" aria-label="On this page"><b>On this page</b><ol>${p.toc.map(([id, t]) => `<li><a href="#${id}">${esc(t)}</a></li>`).join('')}${p.faqs.length ? '<li><a href="#faq">Questions people ask</a></li>' : ''}</ol></nav>` : '';
+  const tocLabel = (t) => t.replace(/^\d+\.\s*/, '');
+  const toc = !isTut && p.toc.length >= 4 ? `<details class="card toc"><summary><b>On this page</b><span class="quiet small">${p.toc.length + (p.faqs.length ? 1 : 0)} sections</span></summary><ul>${p.toc.map(([id, t]) => `<li><a href="#${id}">${esc(tocLabel(t))}</a></li>`).join('')}${p.faqs.length ? '<li><a href="#faq">Questions people ask</a></li>' : ''}</ul></details>` : '';
 
   const body = `
 <article>

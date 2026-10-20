@@ -1,7 +1,7 @@
 ---
 title: The cost of going out in the UK, and how to spend less
-seoTitle: The cost of going out in the UK in 2026 (and how to spend less)
-description: Half of Brits have turned down an invitation because of the cost, 63% in London. Here's what going out costs now and practical ways to keep socialising for less.
+seoTitle: Cost of going out in the UK in 2026, and how to spend less
+description: Half of Brits have turned down an invitation because of the cost, 63% in London. What going out costs now, and practical ways to socialise for less.
 date: 2026-10-20
 category: Money
 art: payout

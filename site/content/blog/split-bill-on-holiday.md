@@ -1,6 +1,6 @@
 ---
 title: How to split costs on a group holiday
-seoTitle: How to split costs on a group holiday (kitty, apps, card fees)
+seoTitle: Split costs on a group holiday: kitty, apps and card fees
 description: Kitty, pay as you go, or one person pays and you settle at the end? How to split meals and costs on a group holiday, with examples and the card fees to avoid.
 date: 2026-10-15
 category: Guides

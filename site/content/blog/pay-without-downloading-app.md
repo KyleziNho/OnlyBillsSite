@@ -38,7 +38,7 @@ The big privacy plus: Starling points out that with a link there's no need to sh
 
 ### Bank transfer
 
-Still the universal option. Your friend pays from any UK banking app, and Faster Payments usually arrive within moments. The trade off is that you're handing out your sort code and account number. That's normal between friends, but you might not want it in a 15 person group chat.
+Still the universal option. Your friend pays from any UK banking app, by Faster Payments. The trade off is that you're handing out your sort code and account number. That's normal between friends, but you might not want it in a 15 person group chat.
 
 ## What is a web link split?
 

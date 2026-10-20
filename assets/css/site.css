@@ -577,3 +577,10 @@ p { margin: 0; text-wrap: pretty; }
 .hero-phones { max-width: 100%; }
 @media (max-width: 639px) { .home-posts .post-card:nth-child(n+4) { display: none; } }
 [hidden] { display: none !important; }
+.toc summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.toc summary::-webkit-details-marker { display: none; }
+.toc summary::after { content: ""; width: 8px; height: 8px; border-right: 2px solid var(--text-2); border-bottom: 2px solid var(--text-2); transform: rotate(45deg) translateY(-3px); transition: transform 280ms var(--ease-out); margin-left: auto; }
+.toc[open] summary::after { transform: rotate(225deg); }
+.toc summary b { font-size: 15px; color: var(--text); }
+.toc ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; font-size: 16px; }
+.prose .toc li + li { margin-top: 0; }

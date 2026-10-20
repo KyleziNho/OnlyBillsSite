@@ -159,7 +159,9 @@ function footer() {
       <div><h4>Free tools</h4><ul>
         <li><a href="/tools/split-bill-calculator/">Split the bill calculator</a></li>
         <li><a href="/tools/overpay-calculator/">Splitting equally calculator</a></li>
-        <li><a href="/tools/tip-calculator/">Tip and service calculator</a></li>
+        <li><a href="/tools/tip-calculator/">Tip calculator</a></li>
+        <li><a href="/tools/service-charge-calculator/">Service charge calculator</a></li>
+        <li><a href="/tools/settle-up-calculator/">Who owes who calculator</a></li>
       </ul></div>
       <div><h4>Read</h4><ul>
         <li><a href="/blog/">All articles</a></li>

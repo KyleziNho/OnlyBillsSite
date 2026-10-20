@@ -178,6 +178,94 @@ If one person had a £12 pasta and another had £45 of steak and wine, giving th
     ],
     related: ['how-much-to-tip-uk', 'is-service-charge-mandatory-uk', 'split-service-charge-fairly'],
   },
+  {
+    slug: 'service-charge-calculator',
+    art: 'receipts',
+    name: 'Service charge calculator',
+    title: 'Service charge calculator: add 12.5% or find it in a total',
+    h1: 'Service charge calculator',
+    lede: 'Add 10, 12.5 or 15% to a bill, or work backwards from what you paid to see how much was service.',
+    description: 'Free UK service charge calculator. Add 10%, 12.5% or 15% service to a bill, or work out how much service charge is hiding in a total you have already paid.',
+    card: 'Add service, or find it inside a total.',
+    app: `<div class="tool two" data-tool="service">
+  <div class="card card-pad" style="display:grid;gap:18px">
+    <div class="seg" role="group" aria-label="What do you want to do" data-svmode><button type="button" data-v="add" aria-pressed="true">Add service</button><button type="button" data-v="find" aria-pressed="false">Find it in a total</button></div>
+    <div class="field"><label for="s-amount" data-svlabel>Bill before service</label><input class="input money-in" id="s-amount" inputmode="decimal" placeholder="£0.00" value="75.00"></div>
+    <div class="field"><span class="label">Service charge</span><div class="seg" role="group" aria-label="Service charge percentage" data-svpct><button type="button" data-v="10" aria-pressed="false">10%</button><button type="button" data-v="12.5" aria-pressed="true">12.5%</button><button type="button" data-v="15" aria-pressed="false">15%</button></div></div>
+  </div>
+  <div class="result-col"><div class="card result" data-result aria-live="polite"></div></div>
+</div>`,
+    body: `
+## How to work out service charge
+
+**Adding it:** multiply the bill by the percentage. 12.5% of £75 is £75 × 0.125 = £9.38 (rounded to the penny), so the total is £84.38.
+
+**Finding it in a total:** divide the total by 1 plus the percentage. If you paid £84.38 including 12.5% service, the bill before service was £84.38 ÷ 1.125 = £75.00, so £9.38 of what you paid was service.
+
+| Total paid | Service at 10% | Service at 12.5% | Service at 15% |
+|---|---|---|---|
+| £50 | £4.55 | £5.56 | £6.52 |
+| £100 | £9.09 | £11.11 | £13.04 |
+| £150 | £13.64 | £16.67 | £19.57 |
+| £200 | £18.18 | £22.22 | £26.09 |
+
+## Is service charge optional?
+
+A discretionary or optional service charge is exactly that: you can ask for it to be taken off. Read [is service charge mandatory in the UK?](/blog/is-service-charge-mandatory-uk/) for when a charge can be compulsory and what to say if you want it removed.
+
+## Splitting service charge in a group
+
+The fairest way is in proportion to what each person had: everyone adds the same percentage to their own share. The [split the bill calculator](/tools/split-bill-calculator/) does it item by item, and [this guide](/blog/split-service-charge-fairly/) explains why it beats splitting the service equally.
+`,
+    faq: [
+      ['How much is 12.5% service charge on £100?', '£12.50, making the bill £112.50. If £100 is the total you paid including 12.5% service, the service part was £11.11.'],
+      ['How do I take service charge off a total?', 'Divide the total by 1.125 for 12.5% service (or 1.1 for 10%, 1.15 for 15%). That gives you the bill before service. The difference is the service charge.'],
+      ['Is service charge the same as a tip?', 'In practice, yes. A discretionary service charge is a tip added to the bill for you. Since October 2024, employers in Great Britain must pass it all to staff. You don\'t need to tip on top.'],
+      ['Is service charge added before or after a discount?', 'Usually after: the percentage is worked out on the bill once any discount has come off. Check the receipt if you\'re not sure.'],
+    ],
+    related: ['is-service-charge-mandatory-uk', 'split-service-charge-fairly', 'how-much-to-tip-uk'],
+  },
+  {
+    slug: 'settle-up-calculator',
+    art: 'payout',
+    name: 'Who owes who calculator',
+    title: 'Who owes who calculator: settle up group costs fairly',
+    h1: 'Who owes who calculator',
+    lede: 'Several people paid for different things? Enter what each person paid and get the fewest payments to settle up.',
+    description: 'Free settle-up calculator for trips, holidays and group nights out. Enter who paid what and get the fewest bank transfers to even it out, exact to the penny.',
+    card: 'Who paid what, and the fewest payments to settle.',
+    app: `<div class="tool two" data-tool="settle">
+  <div class="field"><span class="label" id="paid-l">Who paid what</span><div class="group" data-payers aria-labelledby="paid-l"></div><p class="foot" style="padding:0 4px">Put £0 for anyone who didn’t pay for anything. Costs are shared equally between everyone listed.</p></div>
+  <div class="result-col"><div class="card result" data-result aria-live="polite"></div></div>
+</div>`,
+    body: `
+## How settling up works
+
+1. **Add up everything that was spent.** Four friends spent £240 between them on a weekend away.
+2. **Work out each person's fair share.** £240 ÷ 4 = £60 each.
+3. **Compare what each person paid with their share.** Sam paid £120, so he's owed £60. Maya paid £75, so she's owed £15. Priya paid £45, so she owes £15. Jon paid nothing, so he owes £60.
+4. **Settle with as few payments as possible.** Jon pays Sam £60 and Priya pays Maya £15. Two transfers and everyone is square.
+
+| Person | Paid | Fair share | Balance |
+|---|---|---|---|
+| Sam | £120 | £60 | owed £60 |
+| Maya | £75 | £60 | owed £15 |
+| Priya | £45 | £60 | owes £15 |
+| Jon | £0 | £60 | owes £60 |
+
+When the total doesn't divide exactly, a penny or two goes to some people so the shares still add up to the total.
+
+## Restaurant bills are different
+
+Settling up works for a trip where costs are shared evenly. A restaurant bill is usually fairer split by what each person ordered, with any service charge in proportion. For that, use the [split the bill calculator](/tools/split-bill-calculator/), or let friends tick their own items on their phone with OnlyBills. There's more on group trips in [splitting costs on holiday](/blog/split-bill-on-holiday/).
+`,
+    faq: [
+      ['How do you work out who owes who?', 'Add up the total spent, divide by the number of people for each person\'s share, then compare what each person paid with their share. People who paid more than their share are owed money; people who paid less owe it.'],
+      ['What\'s the fewest number of payments to settle up?', 'Usually one fewer than the number of people at most. The calculator pairs the person who owes the most with the person owed the most, again and again, which keeps the number of transfers low.'],
+      ['Can someone pay a smaller share?', 'This calculator shares costs equally. For a bill where people had different things, split it by item instead with the [split the bill calculator](/tools/split-bill-calculator/).'],
+    ],
+    related: ['split-bill-on-holiday', 'split-costs-stag-hen-do', 'ask-friend-to-pay-you-back'],
+  },
 ];
 
 export function toolPages({ posts, write, layout, assetsV, postCard, warn }) {

@@ -1,7 +1,7 @@
 ---
 title: Why groups order more when they split the bill
-seoTitle: The diner's dilemma: why splitting the bill makes you order more
-description: In a real restaurant experiment, diners spent about 36% more when the bill was split equally. Here's the diner's dilemma in plain English, and what to do about it.
+seoTitle: Diner's dilemma: why splitting the bill makes you order more
+description: In a real restaurant experiment, diners spent about 36% more when the bill was split equally. The diner's dilemma in plain English, and what to do.
 date: 2026-10-04
 category: Research
 art: claim

@@ -1,7 +1,7 @@
 ---
 title: How much should you tip in the UK?
 seoTitle: How much to tip in the UK in 2026 (restaurants, pubs, taxis)
-description: In UK restaurants 10% to 12.5% is normal if there's no service charge, and nothing extra if there is. Here's what's normal in pubs, cafés, taxis, delivery and salons.
+description: In UK restaurants, 10% to 12.5% is normal if there's no service charge, and nothing extra if there is. Here's what's normal in pubs, cafés, taxis and more.
 date: 2026-10-12
 category: Etiquette
 art: paid
@@ -78,15 +78,15 @@ Plenty of people don't tip at the salon. Which? (2025) found 28% tipped their ha
 
 ## Does the tip actually go to the staff?
 
-Since 1 October 2024, the Employment (Allocation of Tips) Act 2023 has required employers in Great Britain to pass all tips, gratuities and service charges they control to their workers, without deductions, and to share them out fairly. That includes tips paid by card and discretionary service charges.
+Since 1 October 2024, the Employment (Allocation of Tips) Act 2023 has required employers in Great Britain to pass all tips, gratuities and service charges they control to their workers, without deductions, and to share them out fairly. That includes tips paid by card and discretionary service charges. It doesn't make a service charge compulsory for you, though: our guide to [whether service charge is mandatory](/blog/is-service-charge-mandatory-uk/) covers your rights and how to ask for it to come off.
 
-Cash you hand directly to a person, which the business has no say over, is generally theirs to keep, though some places pool cash tips by agreement. If you want to know how a restaurant shares its tips, you can ask. Businesses that regularly take tips must have a written tipping policy their staff can see.
+Cash you hand directly to a person, which the business has no say over, is generally theirs to keep, though some places pool cash tips by agreement. If you want to know how a restaurant shares its tips, you can ask.
 
 Which? (2025) found 31% of people who'd tipped in a restaurant weren't confident about who would receive it, so if it matters to you, asking is fair.
 
 ## Tipping in a group
 
-When a group tips, split the tip in proportion to what each person spent, not equally. If you had a £15 main and your friend had a £45 three course dinner, a 10% tip is £1.50 for you and £4.50 for them. The same goes for a service charge. Our guide to [splitting service charge and tips fairly](/blog/split-service-charge-fairly/) has a worked example.
+When a group tips, split the tip in proportion to what each person spent, not equally. If you had a £15 main and your friend had a £45 three course dinner, a 10% tip is £1.50 for you and £4.50 for them. The same goes for a service charge. Our guide to [splitting service charge and tips fairly](/blog/split-service-charge-fairly/) has a worked example, and the [split the bill calculator](/tools/split-bill-calculator/) does the proportions for you.
 
 To work out a tip or service charge on any bill:
 

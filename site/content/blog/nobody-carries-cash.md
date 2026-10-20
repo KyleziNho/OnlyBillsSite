@@ -47,7 +47,7 @@ That last number is the one that matters for splitting the bill.
 
 :::stat 6.2bn | Faster Payments and other remote banking payments in 2025, up 10%, partly from people splitting bills and paying friends back | UK Finance, 2026
 
-UK Finance's press release says the growth "has been fuelled by people using Faster Payments to split bills and send money to friends and family, replacing transactions that were once made in cash". The money that used to go in a pile on the table now goes from banking app to banking app.
+UK Finance's press release credits part of the long-term growth to "people using Faster Payments to split bills and send money to friends and family", replacing payments that used to be made in cash. The money that used to go in a pile on the table now goes from banking app to banking app.
 
 ## How splitting the bill used to work
 

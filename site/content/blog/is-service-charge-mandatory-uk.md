@@ -1,7 +1,7 @@
 ---
 title: Is service charge mandatory in the UK?
 seoTitle: Is service charge mandatory in the UK? Your rights in 2026
-description: A discretionary service charge is optional and you can ask for it to be removed. Here's when a charge is compulsory, what the 2024 tips law changed, and what to say.
+description: A discretionary service charge is optional and you can ask for it to be removed. When a charge is compulsory, what the 2024 tips law changed, and what to say.
 date: 2026-10-14
 category: Etiquette
 art: receipts

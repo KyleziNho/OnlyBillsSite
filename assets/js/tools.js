@@ -219,5 +219,91 @@ function tipTool(root) {
   compute();
 }
 
-const tools = { split: splitTool, overpay: overpayTool, tip: tipTool };
+// ── Service charge: add it, or find it inside a total ───
+function serviceTool(root) {
+  const result = $('[data-result]', root);
+  const input = $('#s-amount', root);
+  const label = $('[data-svlabel]', root);
+  let mode = segment($('[data-svmode]', root), (v) => {
+    mode = v;
+    label.textContent = mode === 'add' ? 'Bill before service' : 'Total you paid, including service';
+    input.value = mode === 'add' ? '75.00' : '84.38';
+    compute();
+  });
+  let pct = segment($('[data-svpct]', root), (v) => { pct = v; compute(); });
+  function compute() {
+    const amount = toMinor(input.value);
+    const p = Number(pct) || 0;
+    let before; let service; let total;
+    if (mode === 'add') {
+      before = amount; service = Math.round((amount * p) / 100); total = before + service;
+    } else {
+      total = amount; before = Math.round(amount / (1 + p / 100)); service = total - before;
+    }
+    result.innerHTML = `<span class="quiet">${mode === 'add' ? 'Service charge' : 'Of which service'}</span>
+      <div class="hero-money">${fmt(service)}</div>
+      <div class="group"><div class="row"><span class="row-body">Bill before service</span><span class="money">${fmt(before)}</span></div><div class="row"><span class="row-body">Service at ${p}%</span><span class="money">${fmt(service)}</span></div><div class="row"><span class="row-body"><b>Total</b></span><span class="money"><b>${fmt(total)}</b></span></div></div>
+      <p class="foot">Splitting it with friends? <a href="/tools/split-bill-calculator/">Share the service by what each person had</a>.</p>`;
+  }
+  input.addEventListener('input', compute);
+  compute();
+}
+
+// ── Who owes who: fewest transfers to settle shared costs ─
+function settleTool(root) {
+  const KEY = 'ob-settle-v1';
+  const st = load(KEY) || { people: [['Sam', '120'], ['Maya', '75'], ['Priya', '45'], ['Jon', '0']] };
+  const list = $('[data-payers]', root);
+  const result = $('[data-result]', root);
+  function draw() {
+    const faces = facesOf(st.people.map((p) => p[0]));
+    list.innerHTML = st.people.map(([n, paid], i) => `<div class="person-row">${faceImg(faces[i], 36)}<input class="input" aria-label="Person ${i + 1} name" data-sn="${i}" value="${escH(n)}" placeholder="Name"><input class="input money-in" style="max-width:110px" aria-label="${escH(n || 'Person')} paid" inputmode="decimal" data-sp="${i}" value="${escH(paid)}" placeholder="£0.00"><button class="iconbtn" type="button" data-sdel="${i}" aria-label="Remove ${escH(n || 'person')}" ${st.people.length <= 2 ? 'disabled' : ''}>×</button></div>`).join('')
+      + '<button class="addbtn" type="button" data-sadd>Add person</button>';
+  }
+  function compute() {
+    const names = st.people.map(([n], i) => n.trim() || 'Person ' + (i + 1));
+    const paid = st.people.map(([, v]) => toMinor(v));
+    const total = paid.reduce((a, b) => a + b, 0);
+    const n = names.length;
+    const shares = largestRemainderInt(total, Array(n).fill(1));
+    const bal = paid.map((p, i) => p - shares[i]); // + is owed, - owes
+    const owe = bal.map((b, i) => [i, -b]).filter(([, b]) => b > 0);
+    const owed = bal.map((b, i) => [i, b]).filter(([, b]) => b > 0);
+    const moves = [];
+    while (owe.length && owed.length) {
+      owe.sort((a, b) => b[1] - a[1]); owed.sort((a, b) => b[1] - a[1]);
+      const amt = Math.min(owe[0][1], owed[0][1]);
+      moves.push([owe[0][0], owed[0][0], amt]);
+      owe[0][1] -= amt; owed[0][1] -= amt;
+      if (!owe[0][1]) owe.shift();
+      if (!owed[0][1]) owed.shift();
+    }
+    const faces = facesOf(names);
+    const each = Math.max(...shares);
+    result.innerHTML = `<span class="quiet">Total spent ${fmt(total)} · ${fmt(each)} each</span>
+      ${moves.length ? `<div class="group">${moves.map(([a, b, amt]) => `<div class="row" style="--sep-inset:68px"><span class="faces" style="--size:30px">${faceImg(faces[a], 30)}${faceImg(faces[b], 30)}</span><span class="row-body"><span class="row-title">${escH(names[a])} pays ${escH(names[b])}</span></span><span class="money" style="font-weight:600">${fmt(amt)}</span></div>`).join('')}</div>
+      <span class="ok">✓ ${moves.length} payment${moves.length === 1 ? '' : 's'} and everyone’s square</span>
+      <button class="btn btn-secondary" type="button" data-copy>Copy for the group chat</button>` : '<p class="lede">Everyone’s already square.</p>'}`;
+    const c = $('[data-copy]', result);
+    if (c) c.addEventListener('click', (e) => copy(`Settling up (${fmt(total)} total, ${fmt(each)} each):\n${moves.map(([a, b, amt]) => `${names[a]} pays ${names[b]} ${fmt(amt)}`).join('\n')}\nWorked out at onlybills.app/tools/settle-up-calculator`, e.currentTarget));
+  }
+  root.addEventListener('input', (e) => {
+    const t = e.target;
+    if (t.dataset.sn != null) st.people[+t.dataset.sn][0] = t.value;
+    else if (t.dataset.sp != null) st.people[+t.dataset.sp][1] = t.value;
+    else return;
+    save(KEY, st); compute();
+  });
+  root.addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.sadd != null) { st.people.push(['', '0']); draw(); $$('[data-sn]', root).at(-1)?.focus(); }
+    else if (b.dataset.sdel != null) { st.people.splice(+b.dataset.sdel, 1); draw(); }
+    else return;
+    save(KEY, st); compute();
+  });
+  draw(); compute();
+}
+
+const tools = { split: splitTool, overpay: overpayTool, tip: tipTool, service: serviceTool, settle: settleTool };
 $$('[data-tool]').forEach((el) => tools[el.dataset.tool]?.(el));

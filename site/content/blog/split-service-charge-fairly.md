@@ -1,7 +1,7 @@
 ---
 title: How to split service charge and tips fairly
 seoTitle: How to split service charge, tips and discounts in a group
-description: Share service charge, tips and discounts in proportion to what each person ordered, not equally. Here's the method, a worked example, and how to fix the missing penny.
+description: Share service charge, tips and discounts in proportion to what each person ordered, not equally. The method, a worked example, and the missing penny fix.
 date: 2026-10-17
 category: Money
 art: allclear
@@ -10,7 +10,7 @@ related: is-service-charge-mandatory-uk, how-much-to-tip-uk, is-splitting-the-bi
 
 The fair way to split a service charge or tip in a group is in proportion to what each person ordered. If the service charge is 12.5%, each person pays 12.5% of their own food and drink. Discounts work the same way in reverse. Splitting extras equally means the person who ordered least pays the most service per pound spent.
 
-The maths is simple. The fiddly bit is the pennies, which is where most hand-worked splits come out wrong.
+The maths is simple. The fiddly bit is the pennies, which is where most hand-worked splits come out wrong. (Whether you have to pay the service charge at all is a separate question: see [is service charge mandatory in the UK?](/blog/is-service-charge-mandatory-uk/) And for how much to tip in the first place, see [how much to tip in the UK](/blog/how-much-to-tip-uk/).)
 
 ## Proportional vs equal: what's the difference?
 
@@ -112,7 +112,7 @@ This works for any mix of service charge, tip and discount, as long as they all 
 
 (Equal: the £10.90 service is £2.725 each and the £10 voucher is £2.50 each, so everyone pays their order plus 22.5p. Rounding those half pennies up gives £88.12, so two people (here Grace and Hari) take a penny off to make £88.10.)
 
-On a table where orders are close, the difference is pennies. It grows with the gap between orders and the size of the extras. For a 15% service charge on a table where one person had £15 and another had £60, an equal split moves £3.38 from one to the other. Over a year of dinners, that adds up.
+On a table where orders are close, the difference is pennies. It grows with the gap between orders and the size of the extras. For a 15% service charge on a table where one person had £15 and another had £60, an equal split moves about £3.38 from one to the other. Over a year of dinners, that adds up.
 
 ## Special cases
 
@@ -124,7 +124,7 @@ On a table where orders are close, the difference is pennies. It grows with the 
 
 **Someone wants to tip more.** Let them. Split the agreed tip in proportion, and anyone who wants to add extra can do so on top.
 
-**Shared dishes.** Split a shared dish between the people who had it first, then apply the service charge in proportion to each person's total including their share of the dish.
+**Shared dishes.** Split a shared dish between the people who had it first, then apply the service charge in proportion to each person's total including their share of the dish. The [shared items, service and tips tutorial](/how-to/shared-items-service-and-tips/) shows how OnlyBills handles this.
 
 :::cta Exact to the penny, every time
 
@@ -134,7 +134,7 @@ OnlyBills does all of this automatically. Scan the receipt, share a live table, 
 
 ## Do it with the calculator
 
-If you just want the numbers for one bill, the free tip and service charge calculator spreads the extra across the table for you:
+If you just want the numbers for one bill, the free tip and service charge calculator works out the extra, and the [split the bill calculator](/tools/split-bill-calculator/) spreads it across the table:
 
 :::tool tip
 

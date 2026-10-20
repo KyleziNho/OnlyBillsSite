@@ -67,7 +67,22 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="feature reveal">
+    <div class="feature flip reveal">
+      <div class="feature-copy">
+        <span class="eyebrow">Scan</span>
+        <h2 class="h2">It reads the receipt for you.</h2>
+        <p class="lede">Point your camera at the bill. Every dish, price and service charge comes through, and you can see straight away that it adds up.</p>
+        <ul class="ticks">
+          <li>Handles long receipts, quantities and discounts</li>
+          <li>Fix any line with a tap before you share</li>
+          <li>No receipt? Type the bill in instead</li>
+        </ul>
+        <a class="text-link" href="/how-to/scan-a-receipt/">Tips for a perfect scan</a>
+      </div>
+      <div class="feature-visual">${shot('host-03-review', 'The check page for a bill at Rajaji: five items, and a pill saying the receipt adds up', 290)}</div>
+    </div>
+
+    <div class="feature reveal" style="margin-top:clamp(72px,10vw,140px)">
       <div class="feature-copy">
         <span class="eyebrow">No app needed</span>
         <h2 class="h2">Your friends just scan and tap.</h2>
@@ -133,14 +148,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         <p class="lede">Every bill you host lands in one place. See who’s paid, nudge who hasn’t, and mark it settled when the money arrives.</p>
         <a class="text-link" href="/how-to/track-who-owes-you/">How Owed works</a>
       </div>
-      <div class="feature-visual">
-        <div class="demo">
-          <div class="card share-card"><span class="share-head"><span><small>You’re owed</small></span></span><div class="hero-money">£62.35</div><div class="share-meta">3 people · 3 bills</div></div>
-          <div class="group">
-            ${owed.map(([n, amt, where], i) => `<div class="row" style="--sep-inset:72px">${face(n, 40, '', owedFaces[i])}<span class="row-body"><span class="row-title">${n}</span><span class="row-sub">${where}</span></span><span class="row-end"><span class="money" style="color:var(--negative-text)">${amt}</span></span></div>`).join('')}
-            <div class="row" style="--sep-inset:72px">${face('Sam', 40, '', sam)}<span class="row-body"><span class="row-title">Sam</span><span class="row-sub">Saffron House, Thu</span></span><span class="row-end"><span class="chip chip-live" style="height:24px">Paid</span></span></div>
-          </div>
-        </div>
+      <div class="feature-visual">${shot('host-07-owed', 'The Owed page: faces of friends who owe you float around the total, £68.13 across 4 friends', 290)}</div>
       </div>
     </div>
   </div>
