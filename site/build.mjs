@@ -11,10 +11,11 @@ import { SITE, esc, abs, fmtDate, art, shot, layout, appCta, crumbs, crumbsLd, i
 import { homePage } from './pages/home.mjs';
 import { toolPages } from './pages/tools.mjs';
 import { aboutPage } from './pages/about.mjs';
+import { vsPage } from './pages/vs.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
-const OUT_DIRS = ['about', 'blog', 'how-to', 'tools', 'assets'];
+const OUT_DIRS = ['about', 'blog', 'how-to', 'tools', 'vs', 'assets'];
 const errors = [];
 const warn = [];
 
@@ -307,6 +308,11 @@ const ctx = { ogFor, posts, tuts, postCard, assetsV, write, layout, warn, errors
 homePage(ctx);
 toolPages(ctx);
 aboutPage(ctx);
+vsPage(ctx);
+// Old URLs that moved: a tiny page that forwards (GitHub Pages has no server redirects).
+for (const [from, to] of [['/blog/onlybills-vs-splitwise/', '/vs/splitwise/']]) {
+  write(from, `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>Moved</title><link rel="canonical" href="${abs(to)}"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=${to}"><script>location.replace('${to}' + location.hash)</script></head><body><a href="${to}">This page has moved</a></body></html>`, { skipSitemap: true });
+}
 write('/404.html', layout({ path: '/404.html', title: 'Page not found', description: 'That page has wandered off.', noindex: true, assetsV, body: `
 <section class="section"><div class="wrap"><div class="section-head">${art('allclear', 160, true)}<h1 class="h1">This page has left the table</h1><p class="lede">It may have moved. Try the home page or one of these.</p><div class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="/">Go home</a><a class="btn btn-secondary" href="/blog/">Read articles</a></div></div></div></section>` }), { skipSitemap: true });
 

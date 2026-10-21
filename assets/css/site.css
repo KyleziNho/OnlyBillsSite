@@ -595,3 +595,62 @@ p { margin: 0; text-wrap: pretty; }
 .prose table.compare td.no span[aria-hidden] { background: var(--fill); color: var(--text-2); }
 .prose table.compare th:nth-child(2) { color: var(--accent-text); }
 .prose table.compare tr:last-child td { font-size: 15px; }
+
+/* ── OnlyBills vs Splitwise ── */
+.vs-hero .hero-copy { gap: 18px; }
+.vs-price { display: grid; gap: 12px; align-content: center; max-width: 480px; width: 100%; justify-self: center; }
+.vs-price-card { padding: 22px 24px; display: grid; gap: 4px; }
+.vs-price-card.us { box-shadow: inset 0 0 0 2px var(--accent), 0 24px 60px color-mix(in srgb, var(--accent) 22%, transparent); }
+.vs-price-card.them { opacity: 0.9; }
+.vs-price-head { display: flex; align-items: center; gap: 10px; font-size: 17px; margin-bottom: 4px; }
+.vs-price-head img { width: 36px; height: 36px; border-radius: 9px; }
+.vs-price-head .chip { margin-left: auto; }
+.vs-logo { width: 36px; height: 36px; border-radius: 9px; background: var(--fill); color: var(--text-2); display: grid; place-items: center; font: 700 18px var(--font-rounded); }
+.vs-big { font-family: var(--font-rounded); font-size: clamp(44px, 6vw, 60px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.them .vs-big { color: var(--text-2); }
+.vs-bar { height: 8px; border-radius: 8px; background: var(--fill); margin-top: 12px; overflow: hidden; }
+.vs-bar i { display: block; height: 100%; border-radius: 8px; background: var(--accent); }
+.them .vs-bar i { background: var(--text-3); }
+.vs-save { text-align: center; font-size: 17px; color: var(--text-2); margin-top: 6px; }
+.vs-save b { color: var(--positive-text); }
+
+.vs-switch { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 760px) { .vs-switch { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.vs-pair { padding: 24px 26px; display: grid; gap: 14px; }
+.vs-pain { color: var(--text-2); font-size: 16px; display: flex; gap: 10px; }
+.vs-pain::before { content: "✗"; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--fill); display: grid; place-items: center; font-size: 13px; font-weight: 700; }
+.vs-fix { font-size: 19px; font-weight: 600; line-height: 1.35; display: flex; gap: 10px; letter-spacing: -0.01em; }
+.vs-fix::before { content: "✓"; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--positive-soft); color: var(--positive-text); display: grid; place-items: center; font-size: 13px; font-weight: 700; margin-top: 2px; }
+
+.vs-table { padding: 6px 0; overflow: hidden; }
+.vs-row { display: grid; grid-template-columns: minmax(0, 1fr) 72px 76px; align-items: center; gap: 6px; padding: 13px 14px 13px 18px; position: relative; }
+@media (min-width: 640px) { .vs-row { grid-template-columns: minmax(0, 1fr) 150px 150px; padding: 16px 28px; } }
+.vs-row + .vs-row::before { content: ""; position: absolute; top: 0; left: 20px; right: 20px; height: 0.5px; background: var(--separator); }
+.vs-row > span:not(:first-child) { text-align: center; display: grid; justify-items: center; }
+.vs-row > span:first-child { font-size: 16px; line-height: 1.35; }
+@media (min-width: 640px) { .vs-row > span:first-child { font-size: 17px; } }
+.vs-headrow { font-size: 15px; font-weight: 600; color: var(--text-2); }
+.vs-headrow .vs-col-us { color: var(--accent-text); display: flex; align-items: center; justify-content: center; gap: 8px; }
+.vs-headrow img { width: 28px; height: 28px; border-radius: 7px; }
+.vs-col-us { background: color-mix(in srgb, var(--accent) 6%, transparent); margin: -16px 0; padding: 16px 0; align-self: stretch; align-content: center; }
+.vs-mark { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; font-weight: 700; font-size: 16px; }
+.vs-mark.yes { background: var(--positive-soft); color: var(--positive-text); }
+.vs-mark.no { background: var(--fill); color: var(--text-2); }
+.vs-txt { font-size: 14px; line-height: 1.35; color: var(--text-2); }
+.vs-col-us .vs-txt { color: var(--text); }
+.vs-txt b { font-family: var(--font-rounded); color: var(--text); font-size: 16px; }
+
+.vs-extras { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .vs-extras { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 980px) { .vs-extras { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.vs-extra { padding: 22px; display: grid; gap: 8px; align-content: start; }
+.vs-extra h3 { font-size: 17px; letter-spacing: -0.01em; }
+.vs-extra p { font-size: 15px; line-height: 1.45; }
+.vs-lane { margin: 18px auto 0; max-width: 760px; padding: 22px 26px; font-size: 17px; line-height: 1.5; color: var(--text-2); text-align: center; }
+.vs-lane b { color: var(--text); }
+@media (max-width: 639px) {
+  .vs-row > span:first-child { font-size: 15px; }
+  .vs-txt { font-size: 12px; }
+  .vs-txt b { font-size: 14px; }
+  .vs-headrow .vs-col-us { flex-direction: column; gap: 4px; font-size: 13px; }
+}

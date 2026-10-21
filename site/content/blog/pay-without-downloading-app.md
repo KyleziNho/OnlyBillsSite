@@ -44,7 +44,7 @@ Still the universal option. Your friend pays from any UK banking app, by Faster 
 
 Instead of an app, the split lives on a web page. The person who paid shares a link or QR code, and everyone opens it in their phone's browser. They pick their name, tick their items, and see their share. Nothing gets installed. It works on any phone with a browser, iPhone or Android.
 
-Several apps now do this. Splitwise launched Itemize in the US and UK in October 2026, where friends scan a QR code and claim their items without the app or an account. OnlyBills works the same way: the host scans the receipt and shares a live table, and friends join from a link or QR code. There's a side by side in [OnlyBills vs Splitwise](/blog/onlybills-vs-splitwise/), and the guest's view is walked through in [claim your items without the app](/how-to/claim-your-items-without-the-app/).
+Several apps now do this. Splitwise launched Itemize in the US and UK in October 2026, where friends scan a QR code and claim their items without the app or an account. OnlyBills works the same way: the host scans the receipt and shares a live table, and friends join from a link or QR code. There's a side by side in [OnlyBills vs Splitwise](/vs/splitwise/), and the guest's view is walked through in [claim your items without the app](/how-to/claim-your-items-without-the-app/).
 
 :::shot guest-01-join | Joining a table from a link: pick your name. No app, no account.
 

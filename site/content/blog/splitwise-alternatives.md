@@ -6,7 +6,7 @@ date: 2026-10-02
 updated: 2026-10-20
 category: Comparisons
 art: receipts
-related: onlybills-vs-splitwise, split-bill-monzo-revolut-starling, split-bill-on-holiday, split-bill-iphone
+related: split-bill-monzo-revolut-starling, split-bill-on-holiday, split-bill-iphone
 ---
 
 The best alternative to Splitwise depends on what you're splitting. For one restaurant bill where everyone had different things, you want an app that reads the receipt line by line and lets each person claim their own items. For a fortnight of shared costs on a trip, or a house of flatmates, you want an app that keeps a running balance of who owes whom.
@@ -42,7 +42,7 @@ Splitwise is the app everyone else gets compared with, so here's the short versi
 
 **What it costs:** free, with a daily cap on how many expenses you can add. Splitwise Pro removes the cap and adds extras like currency conversion; the UK App Store lists Pro in-app purchases from £2.79 to £47.99.
 
-**Best for:** the same group over time, and now one-off receipts too. For a feature by feature look at how it handles a restaurant bill, see [OnlyBills vs Splitwise](/blog/onlybills-vs-splitwise/).
+**Best for:** the same group over time, and now one-off receipts too. For a feature by feature look at how it handles a restaurant bill, see [OnlyBills vs Splitwise](/vs/splitwise/).
 
 ## Tricount
 

@@ -7,7 +7,7 @@ export const FAQ = [
   ['Does OnlyBills take a cut of the money?', 'No. Payments go straight from your friends to you through your bank or PayPal. OnlyBills never holds your money.'],
   ['What about service charge, tips and discounts?', 'They’re spread across everyone in proportion to what they had, and shared dishes split between the people who shared them. Every share is exact to the penny and they add up to the bill.'],
   ['Can friends with Android phones join?', 'Yes. The live table opens in any modern phone browser, so friends on Android can claim their items and pay. The OnlyBills app itself is for iPhone and iPad.'],
-  ['How is OnlyBills different from Splitwise?', 'Both can split a receipt by item. OnlyBills adds Monzo, Starling and Revolut pay links with each friend\u2019s exact share, an App Clip on iPhone and automatic receipt translation. And a whole year costs £5.99, about the same as one month of Splitwise Pro.'],
+  ['How is OnlyBills different from Splitwise?', 'Both can split a receipt by item. OnlyBills adds Monzo, Starling and Revolut pay links with each friend\u2019s exact share, an App Clip on iPhone and automatic receipt translation. It needs no sign-up at all, and a whole year costs £5.99 against £39.99 for Splitwise Pro.'],
   ['What if the receipt is read wrong?', 'You check every receipt before you share it. OnlyBills shows whether the items add up to the total, and you can edit any line, price or quantity.'],
 ];
 
@@ -179,7 +179,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <div class="card price"><span class="quiet">Monthly</span><span class="num">£0.99</span><span class="quiet">a month</span></div>
       <div class="card price best"><span class="chip chip-accent">Best value</span><span class="quiet">Yearly</span><span class="num">£5.99</span><span class="quiet">a year, about 50p a month</span></div>
     </div>
-    <a class="card tool-link reveal" href="/blog/onlybills-vs-splitwise/" style="max-width:760px;margin:14px auto 0"><span class="tool-icon">£</span><span><b>A whole year of OnlyBills costs about the same as one month of Splitwise Pro</b><span>£5.99 a year, against £4.99 a month. See how they compare.</span></span><span class="chev" aria-hidden="true">›</span></a>
+    <a class="card tool-link reveal" href="/vs/splitwise/" style="max-width:760px;margin:14px auto 0"><span class="tool-icon">£</span><span><b>Nearly 7x cheaper than Splitwise Pro</b><span>£5.99 a year, against £39.99. A whole year costs less than two months of Pro.</span></span><span class="chev" aria-hidden="true">›</span></a>
     <p class="foot" style="text-align:center;margin-top:16px">Includes a free trial. Renews automatically until you cancel, which you can do any time in Settings. Friends who join your table never pay anything.</p>
   </div>
 </section>

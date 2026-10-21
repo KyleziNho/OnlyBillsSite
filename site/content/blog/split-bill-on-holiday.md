@@ -5,7 +5,7 @@ description: Kitty, pay as you go, or one person pays and you settle at the end?
 date: 2026-10-15
 category: Guides
 art: pass
-related: split-costs-stag-hen-do, splitwise-alternatives, onlybills-vs-splitwise, split-bill-large-group
+related: split-costs-stag-hen-do, splitwise-alternatives, split-bill-large-group
 ---
 
 The simplest fair way to split a group holiday is to log every shared cost in one expense app as you go, then settle up once at the end with the fewest possible payments. Use a kitty for small daily spending if your group likes cash or a shared card, and pay for your own extras separately. Whoever has a card with no foreign transaction fees should pay for the big things.
@@ -82,7 +82,7 @@ We compare these in more depth in [the best apps for splitting a bill](/blog/spl
 
 An equal split works for groceries and the villa. It's less fair at the restaurant on the last night, when one person had the lobster and a bottle of wine and another had a salad and water. For those meals, split by what each person had (the [split the bill calculator](/tools/split-bill-calculator/) does this by item), then add each person's total to your trip app.
 
-If your trip is in the UK (a cottage in Cornwall, a weekend in Edinburgh, a stag or hen do in Newcastle), OnlyBills can handle each restaurant bill: scan the receipt, friends tick what they had on their own phones, and service charge is spread fairly. It's built for UK restaurant and pub bills, so for meals abroad, log them in your trip app. If you're weighing up the two kinds of app, see [OnlyBills vs Splitwise](/blog/onlybills-vs-splitwise/). More on stag and hen weekends in [how to split costs on a stag or hen do](/blog/split-costs-stag-hen-do/).
+If your trip is in the UK (a cottage in Cornwall, a weekend in Edinburgh, a stag or hen do in Newcastle), OnlyBills can handle each restaurant bill: scan the receipt, friends tick what they had on their own phones, and service charge is spread fairly. It's built for UK restaurant and pub bills, so for meals abroad, log them in your trip app. If you're weighing up the two kinds of app, see [OnlyBills vs Splitwise](/vs/splitwise/). More on stag and hen weekends in [how to split costs on a stag or hen do](/blog/split-costs-stag-hen-do/).
 
 ## Foreign card fees: decide who pays for what
 

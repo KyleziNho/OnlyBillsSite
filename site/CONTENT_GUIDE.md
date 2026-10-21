@@ -172,8 +172,10 @@ UK advertising rules (CAP code) need claims backed up. So:
   turned off in Settings).
 - Taglines the founder likes: "Take the maths out of special moments." and "Dinners should end with
   great conversations, not 15 minutes working out the bill."
-- Versus Splitwise Pro (£4.99 a month): a whole year of OnlyBills (£5.99) costs about the same as one
-  month of Pro; month to month OnlyBills is 5x cheaper. Tone can be bold and salesy, but every claim
+- Versus Splitwise Pro (UK App Store, Oct 2026: £3.99 a month, £39.99 a year): OnlyBills is nearly 7x
+  cheaper a year (£5.99 vs £39.99, save £34), and a whole year costs less than two months of Pro.
+  Nobody signs up for OnlyBills, host included; Splitwise needs an account. The full comparison
+  lives at /vs/splitwise/. Tone can be bold and salesy, but every claim
   about Splitwise not doing something must be true.
 - Price: your first split is free. Then £0.99 a month or £5.99 a year (with a free trial).
   Never obscure price, trial or renewal.

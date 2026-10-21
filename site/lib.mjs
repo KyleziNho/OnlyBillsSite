@@ -168,6 +168,7 @@ function footer() {
         <li><a href="/blog/">All articles</a></li>
         <li><a href="/blog/how-much-to-tip-uk/">Tipping in the UK</a></li>
         <li><a href="/blog/bill-splitting-etiquette/">Bill splitting etiquette</a></li>
+        <li><a href="/vs/splitwise/">OnlyBills vs Splitwise</a></li>
         <li><a href="/blog/splitwise-alternatives/">Splitwise alternatives</a></li>
       </ul></div>
       <div><h4>OnlyBills</h4><ul>
