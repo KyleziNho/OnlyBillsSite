@@ -140,16 +140,11 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <div class="feature-copy">
         <span class="eyebrow">Get paid</span>
         <h2 class="h2">Paid back before the coats are on.</h2>
-        <p class="lede">Friends tap one button to pay their exact share. The money goes straight to you, not through us.</p>
-        <div class="group methods" style="width:100%;max-width:440px">
-          <div class="row"><img class="method-logo" src="/assets/img/logo-monzo.jpg" width="40" height="40" alt="" loading="lazy"><span class="row-body"><span class="row-title">Monzo</span><span class="row-sub">Card, Apple Pay or bank transfer. No Monzo account needed</span></span></div>
-          <div class="row"><img class="method-logo" src="/assets/img/logo-starling.png" width="40" height="40" alt="" loading="lazy"><span class="row-body"><span class="row-title">Starling</span><span class="row-sub">Card or Apple Pay. No Starling account needed</span></span></div>
-          <div class="row"><img class="method-logo" src="/assets/img/logo-revolut.png" width="40" height="40" alt="" loading="lazy"><span class="row-body"><span class="row-title">Revolut</span><span class="row-sub">Card or Apple Pay. No Revolut account needed</span></span></div>
-          <div class="row"><img class="method-logo" src="/assets/img/logo-paypal.png" width="40" height="40" alt="" loading="lazy"><span class="row-body"><span class="row-title">PayPal</span><span class="row-sub">PayPal account may be needed</span></span></div>
-          <div class="row"><span class="method-logo bank">${icons.bank}</span><span class="row-body"><span class="row-title">Bank transfer</span><span class="row-sub">From any banking app</span></span></div>
-        </div>
+        <p class="lede">One tap and they\u2019ve paid their exact share, straight to you.</p>
+        <ul class="ticks"><li>Their amount is filled in for them</li><li>Card or Apple Pay, no bank app needed</li><li>Never through us, always straight to you</li></ul>
+        <div class="bank-row" role="list" aria-label="Ways friends can pay you"><span class="bank" role="listitem"><img src="/assets/img/logo-monzo.jpg" width="44" height="44" alt="" loading="lazy"><span>Monzo</span></span><span class="bank" role="listitem"><img src="/assets/img/logo-starling.png" width="44" height="44" alt="" loading="lazy"><span>Starling</span></span><span class="bank" role="listitem"><img src="/assets/img/logo-revolut.png" width="44" height="44" alt="" loading="lazy"><span>Revolut</span></span><span class="bank" role="listitem"><img src="/assets/img/logo-paypal.png" width="44" height="44" alt="" loading="lazy"><span>PayPal</span></span><span class="bank" role="listitem"><span class="bank-icon">${icons.bank}</span><span>Bank</span></span></div>
       </div>
-      <div class="feature-visual">${shot('guest-03-pay-sheet', 'The pay sheet: pay Kyle £22.22 with Monzo or by bank transfer', 290)}</div>
+      <div class="feature-visual">${shot('guest-03-pay-sheet', 'The pay sheet: pay Kyle £22.22 with Monzo or by bank transfer', 290)}<div class="paid-pop" aria-hidden="true">${face('Alex', 30, '', alex)}<span>Alex paid you <b class="money">£22.22</b></span></div></div>
     </div>
 
     <div class="feature flip reveal">

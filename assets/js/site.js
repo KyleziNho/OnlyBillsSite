@@ -91,15 +91,19 @@
     let i = 0;
     const show = (k, play = true) => {
       i = k;
-      steps.forEach((b, j) => { b.classList.toggle('on', j === k); b.setAttribute('aria-pressed', String(j === k)); b.style.setProperty('--p', '0%'); });
+      steps.forEach((b, j) => { b.classList.toggle('on', j === k); b.setAttribute('aria-pressed', String(j === k)); b.style.setProperty('--p', '0'); });
       if (replay) replay.hidden = true;
       loadVideo(v, steps[k].dataset.step);
       if (play) tryPlay(v);
     };
     v.poster = `/assets/video/${steps[0].dataset.step}-${scheme()}-poster.jpg`;
     if (capture) return;
-    v.addEventListener('timeupdate', () => { if (v.duration) steps[i].style.setProperty('--p', `${(v.currentTime / v.duration) * 100}%`); });
-    v.addEventListener('ended', () => { if (i < steps.length - 1) show(i + 1); else if (replay) replay.hidden = false; });
+    // Progress bar: read the playhead every frame (timeupdate only fires about 4 times a second).
+    let raf = 0;
+    const tick = () => { if (v.duration) steps[i].style.setProperty('--p', String(v.currentTime / v.duration)); if (!v.paused && !v.ended) raf = requestAnimationFrame(tick); };
+    v.addEventListener('play', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); });
+    v.addEventListener('pause', () => cancelAnimationFrame(raf));
+    v.addEventListener('ended', () => { steps[i].style.setProperty('--p', '1'); if (i < steps.length - 1) show(i + 1); else if (replay) replay.hidden = false; });
     steps.forEach((b, k) => b.addEventListener('click', () => show(k)));
     if (replay) replay.addEventListener('click', () => show(0));
     if (reduce) { if (replay) replay.hidden = false; return; }
