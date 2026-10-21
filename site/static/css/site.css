@@ -845,3 +845,11 @@ p { margin: 0; text-wrap: pretty; }
 .js .reveal .paid-pop { opacity: 0; transform: translate(-50%, 14px) scale(0.92); }
 .js .reveal.in .paid-pop { opacity: 1; transform: translate(-50%, 0); transition: opacity 400ms 900ms, transform 600ms 900ms var(--spring); }
 @media (prefers-reduced-motion: reduce) { .js .reveal .paid-pop { opacity: 1; transform: translateX(-50%); } }
+
+/* Feature rows: text and visual sit together as one centred pair, not at opposite edges */
+@media (min-width: 900px) {
+  .feature { grid-template-columns: minmax(0, 470px) minmax(300px, 380px); justify-content: center; gap: clamp(56px, 7vw, 110px); }
+  .feature.flip { grid-template-columns: minmax(300px, 380px) minmax(0, 470px); }
+  .feature-visual { justify-items: center; }
+}
+.feature + .feature { margin-top: clamp(96px, 12vw, 180px); }
