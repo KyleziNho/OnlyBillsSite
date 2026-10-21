@@ -11,6 +11,8 @@ related: claim-your-items-without-the-app, get-paid-back, shared-items-service-a
 
 A live table lets everyone claim their own items. After you've checked the receipt, choose **Everyone taps their own**. OnlyBills shows a QR code and a link. Friends scan it with their phone camera, add their name and tap what they had, with no app to download. You see every claim on your phone as it happens.
 
+:::video live-claims | Friends join and claim their dishes, and the bill counts down to all claimed.
+
 ## 1. Go live
 
 On the check page, tap **Continue**, then pick **Everyone taps their own** on the "How are you splitting?" sheet.

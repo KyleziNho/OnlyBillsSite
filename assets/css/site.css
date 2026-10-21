@@ -217,7 +217,7 @@ p { margin: 0; text-wrap: pretty; }
   box-shadow: 0 40px 80px -20px rgba(20, 40, 80, 0.28), 0 0 0 0.5px rgba(0, 0, 0, 0.12);
   flex: none;
 }
-.phone picture, .phone img { width: 100%; height: 100%; border-radius: calc(var(--w, 300px) * 0.135); overflow: hidden; object-fit: cover; background: var(--bg); }
+.phone > picture, .phone > picture > img { width: 100%; height: 100%; border-radius: calc(var(--w, 300px) * 0.135); overflow: hidden; object-fit: cover; background: var(--bg); }
 .figure { margin: 36px 0; display: grid; justify-items: center; gap: 14px; }
 .figure figcaption { font-size: 15px; color: var(--text-2); text-align: center; max-width: 44ch; }
 
@@ -707,3 +707,149 @@ p { margin: 0; text-wrap: pretty; }
 .plan-price b { font-size: 22px; font-weight: 700; }
 .plan-price small { font-size: 14px; color: var(--text-2); }
 .pricing-ticks { gap: 12px; }
+
+/* ── Hero: "paid you" notifications slide in, newest on top (plays once) ── */
+.notifs { position: absolute; z-index: 4; top: 26px; left: -28px; width: min(320px, 86%); display: flex; flex-direction: column-reverse; }
+.notif {
+  display: flex; gap: 12px; align-items: center; border-radius: 22px; font-size: 14px; line-height: 1.3; overflow: hidden;
+  background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow), inset 0 0.5px 0 var(--glass-specular);
+  animation: notif-in 700ms cubic-bezier(0.2, 0.9, 0.25, 1.05) var(--d) both;
+}
+@keyframes notif-in {
+  from { max-height: 0; padding: 0 14px; margin-top: 0; opacity: 0; transform: translateY(-16px) scale(0.92); }
+  to { max-height: 90px; padding: 12px 14px; margin-top: 8px; opacity: 1; transform: none; }
+}
+.notif-av { position: relative; flex: none; display: block; }
+.notif-av .face { --size: 38px; }
+.notif-badge { position: absolute; right: -4px; bottom: -4px; width: 17px; height: 17px; border-radius: 5px; box-shadow: 0 0 0 2px var(--surface); }
+.notif-body { display: grid; gap: 1px; min-width: 0; flex: 1; }
+.notif-top { display: flex; justify-content: space-between; gap: 8px; }
+.notif-top small { color: var(--text-2); font-size: 12px; }
+.notif .money { color: var(--positive-text); font-weight: 700; }
+.all-paid {
+  position: absolute; z-index: 4; bottom: 46px; right: -10px; display: flex; align-items: center; gap: 10px;
+  padding: 10px 18px 10px 10px; border-radius: var(--r-pill); font-weight: 600; font-size: 15px; white-space: nowrap;
+  background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow), inset 0 0.5px 0 var(--glass-specular);
+  animation: pill-in 650ms var(--spring) var(--d) both;
+}
+.all-paid-tick { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--positive-fill); color: #fff; font-size: 15px; font-weight: 700; }
+@media (max-width: 520px) {
+  .notifs { left: 0; top: 10px; width: 82%; }
+  .notif { font-size: 13px; gap: 10px; }
+  .notif-av .face { --size: 32px; }
+  .all-paid { bottom: 18px; right: 0; font-size: 13px; }
+}
+
+/* ── Animated live table (HTML, not a video) ── */
+.live-demo { --w: 290px; }
+.ld-screen {
+  position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: calc(var(--w) * 0.135);
+  background: radial-gradient(260px 160px at 50% 0, var(--wash), transparent 70%), var(--bg);
+  display: flex; flex-direction: column; gap: 8px; padding: 0 10px 12px; font-size: 12px; line-height: 1.3; text-align: left;
+}
+.ld-screen::before { content: ""; position: absolute; top: 9px; left: 50%; width: 31%; height: 22px; transform: translateX(-50%); border-radius: 12px; background: #000; z-index: 3; }
+.ld-status { height: 40px; display: flex; align-items: center; padding: 0 18px; font-size: 13px; flex: none; }
+.ld-head { display: grid; gap: 3px; padding: 4px 6px 2px; }
+.ld-head .chip { height: 20px; font-size: 11px; justify-self: start; padding: 0 8px; }
+.ld-head b { font-size: 22px; letter-spacing: -0.02em; }
+.ld-head small { color: var(--text-2); font-size: 11px; }
+.ld-share { background: var(--surface); border-radius: 18px; padding: 12px 14px; display: grid; gap: 2px; box-shadow: inset 0 0 0 0.5px var(--hairline); }
+.ld-me { display: flex; align-items: center; gap: 8px; }
+.ld-me small { display: block; color: var(--text-2); font-size: 10px; }
+.ld-me b { font-size: 13px; }
+.ld-amt { font-family: var(--font-rounded); font-size: 38px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; display: inline-block; transform-origin: left center; }
+.ld-amt.bump { animation: bump 380ms var(--spring); }
+@keyframes bump { 40% { transform: scale(1.06); color: var(--accent-text); } }
+.ld-share small[data-meta] { color: var(--text-2); font-size: 10.5px; }
+.ld-list { background: var(--surface); border-radius: 18px; box-shadow: inset 0 0 0 0.5px var(--hairline); overflow: hidden; }
+.ld-row { display: flex; align-items: center; gap: 9px; padding: 11px 11px; position: relative; }
+.ld-row + .ld-row::before { content: ""; position: absolute; top: 0; left: 36px; right: 0; height: 0.5px; background: var(--separator); }
+.ld-row .tick { width: 18px; height: 18px; transition: background-color 250ms, box-shadow 250ms; }
+.ld-row.on[data-share] .tick { box-shadow: none; background: var(--accent-soft); color: var(--accent-text); }
+.ld-row.on[data-share] .tick::after { content: ""; width: 7px; height: 4px; border: 2px solid currentColor; border-top: 0; border-right: 0; transform: translateY(-1px) rotate(-45deg); }
+.ld-row .row-body { gap: 1px; }
+.ld-row .row-title { font-size: 13.5px; line-height: 17px; }
+.ld-row .row-sub { font-size: 11px; gap: 4px; opacity: 0; transform: translateY(3px); transition: opacity 300ms, transform 400ms var(--spring); }
+.ld-row.on .row-sub { opacity: 1; transform: none; }
+.ld-row .money { font-size: 13.5px; }
+.ld-row .you { font-size: 10px; opacity: 0; transition: opacity 300ms; }
+.ld-row.on .you { opacity: 1; }
+.ld-row .qty { font-size: 10px; padding: 1px 6px; }
+.ld-cta { margin-top: auto; height: 40px; border-radius: var(--r-pill); background: var(--accent-fill); color: #fff; font-weight: 600; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+.ld-cta span { font-family: var(--font-rounded); }
+.ld-toast {
+  position: absolute; z-index: 4; top: 40px; left: 50%; display: flex; align-items: center; gap: 6px; padding: 5px 12px 5px 5px;
+  border-radius: var(--r-pill); font-size: 11.5px; font-weight: 600; white-space: nowrap;
+  background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); box-shadow: var(--glass-shadow);
+  opacity: 0; transform: translate(-50%, -12px) scale(0.9); transition: opacity 300ms, transform 450ms var(--spring); pointer-events: none;
+}
+.ld-toast.show { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.ld-replay { position: absolute; left: 50%; bottom: -46px; transform: translateX(-50%); border: 0; background: none; color: var(--accent-text); font: 600 15px var(--font); cursor: pointer; padding: 8px 12px; }
+@media (max-width: 380px) { .live-demo { --w: 260px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .notif { animation: none; padding: 12px 14px; margin-top: 8px; }
+  .all-paid { animation: none; }
+  .ld-row .row-sub, .ld-toast, .ld-row .you { transition: none; }
+}
+
+/* ── Real app recordings ── */
+.vid { position: relative; }
+.vid video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: calc(var(--w, 300px) * 0.135); background: var(--bg); }
+.vid-replay {
+  position: absolute; right: 9%; bottom: 7%; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+  display: grid; place-items: center; color: var(--text);
+  background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); box-shadow: var(--glass-shadow);
+}
+.vid-replay:active { transform: scale(0.94); }
+
+/* How it works: steps beside a phone playing the real app */
+.hiw { display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr); align-items: center; max-width: 1000px; margin: 0 auto; }
+@media (min-width: 900px) { .hiw { grid-template-columns: minmax(0, 1fr) auto; gap: 72px; } }
+@media (max-width: 899px) { .hiw-phone { order: -1; } }
+.hiw-phone { display: grid; justify-items: center; }
+.hiw-phone .phone { --w: 290px; }
+@media (max-width: 380px) { .hiw-phone .phone { --w: 250px; } }
+.hiw-steps { display: grid; gap: 8px; }
+.hiw-step {
+  appearance: none; border: 0; background: transparent; color: var(--text); font: inherit; text-align: left; cursor: pointer;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 16px; align-items: start;
+  padding: 18px 20px; border-radius: var(--r-lg); transition: background-color 300ms var(--ease-out), box-shadow 300ms;
+}
+.hiw-step:hover:not(.on) { background: color-mix(in srgb, var(--surface) 55%, transparent); }
+.hiw-step.on { background: var(--surface); box-shadow: var(--card-shadow), inset 0 0 0 0.5px var(--hairline); }
+.hiw-step .step-n { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--text-2); font-size: 15px; margin-top: 1px; transition: background-color 300ms, color 300ms; }
+.hiw-step.on .step-n { background: var(--accent-fill); color: #fff; }
+.hiw-text { display: grid; gap: 4px; }
+.hiw-text b { font-size: 19px; letter-spacing: -0.015em; line-height: 1.3; }
+.hiw-text span { color: var(--text-2); font-size: 15px; line-height: 1.45; }
+.hiw-step:not(.on) .hiw-text span { display: none; }
+.hiw-bar { grid-column: 2; height: 3px; border-radius: 3px; background: var(--fill); margin-top: 8px; overflow: hidden; display: none; }
+.hiw-step.on .hiw-bar { display: block; }
+.hiw-bar i { display: block; height: 100%; width: 100%; background: var(--accent); border-radius: 3px; transform: scaleX(var(--p, 0)); transform-origin: left center; will-change: transform; }
+
+/* Get paid: logo row instead of a long list, and a "paid" pop on the phone */
+.bank-row { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 6px; }
+.bank { display: grid; justify-items: center; gap: 6px; font-size: 12px; color: var(--text-2); font-weight: 500; }
+.bank img, .bank-icon { width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 0 0 0.5px var(--hairline), 0 4px 12px rgba(0, 0, 0, 0.08); object-fit: cover; }
+.bank-icon { display: grid; place-items: center; background: var(--surface); color: var(--text); }
+.paid-pop {
+  position: absolute; left: 50%; bottom: 13%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px;
+  padding: 7px 16px 7px 7px; border-radius: var(--r-pill); font-size: 15px; font-weight: 600; white-space: nowrap; z-index: 2;
+  background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow), inset 0 0.5px 0 var(--glass-specular);
+}
+.paid-pop .money { color: var(--positive-text); }
+.js .reveal .paid-pop { opacity: 0; transform: translate(-50%, 14px) scale(0.92); }
+.js .reveal.in .paid-pop { opacity: 1; transform: translate(-50%, 0); transition: opacity 400ms 900ms, transform 600ms 900ms var(--spring); }
+@media (prefers-reduced-motion: reduce) { .js .reveal .paid-pop { opacity: 1; transform: translateX(-50%); } }
+
+/* Feature rows: text and visual sit together as one centred pair, not at opposite edges */
+@media (min-width: 900px) {
+  .feature { grid-template-columns: minmax(0, 470px) minmax(300px, 380px); justify-content: center; gap: clamp(56px, 7vw, 110px); }
+  .feature.flip { grid-template-columns: minmax(300px, 380px) minmax(0, 470px); }
+  .feature-visual { justify-items: center; }
+}
+.feature + .feature { margin-top: clamp(96px, 12vw, 180px); }

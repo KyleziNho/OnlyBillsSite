@@ -13,6 +13,8 @@ To assign items yourself, choose **I'll assign it** after checking the receipt. 
 
 This is the one to use when there's no signal (it works offline), or when it's quicker for you to do it than to get everyone to scan a QR code.
 
+:::video assign | Pick a face in the dock, then tap what they had.
+
 ## 1. Choose "I'll assign it"
 
 On the check page, tap **Continue**, then **I'll assign it** ("You pick who had what").

@@ -1,4 +1,4 @@
-import { SITE, esc, art, shot, face, facesFor, storeButton, abs, icons } from '../lib.mjs';
+import { SITE, esc, art, shot, video, face, facesFor, storeButton, abs, icons } from '../lib.mjs';
 import { vsAnchor, vsTable, VS_ROWS } from './vs.mjs';
 
 export const FAQ = [
@@ -17,7 +17,7 @@ const HOME_FAQ = [0, 1, 2, 5, 6];
 
 export function homePage({ posts, postCard, assetsV, write, layout }) {
   const demo = ['Kyle', 'Sam', 'Alex'];
-  const [kyle, sam, alex] = facesFor(demo);
+  const [kyle, sam, alex, priya] = facesFor([...demo, 'Priya']);
   const owed = [['Priya', '£18.40', 'Dishoom, Sat'], ['Jon', '£12.75', 'The Ivy, Fri'], ['Maya', '£31.20', 'Hen do dinner']];
   const owedFaces = facesFor(owed.map((o) => o[0]));
 
@@ -37,8 +37,12 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         ${shot('guest-01-join', '', 0, true)}
         ${shot('guest-05-live', '', 0, true)}
       </div>
-      <div class="float-pill a">${face('Sam', 32, '', sam)}<span>Sam paid <span class="money">£19.01</span></span></div>
-      <div class="float-pill b"><span class="chip chip-live" style="height:24px">Adds up</span><span class="money">£71.25</span></div>
+      <div class="notifs" aria-hidden="true">
+        <div class="notif" style="--d:900ms"><span class="notif-av">${face('Sam', 38, '', sam)}<img class="notif-badge" src="/assets/img/app-icon-64.png" width="16" height="16" alt=""></span><span class="notif-body"><span class="notif-top"><b>Sam</b><small>now</small></span><span>Paid you <span class="money">£19.01</span> for Saffron House</span></span></div>
+        <div class="notif" style="--d:2300ms"><span class="notif-av">${face('Priya', 38, '', priya)}<img class="notif-badge" src="/assets/img/app-icon-64.png" width="16" height="16" alt=""></span><span class="notif-body"><span class="notif-top"><b>Priya</b><small>now</small></span><span>Paid you <span class="money">£16.40</span> for Saffron House</span></span></div>
+        <div class="notif" style="--d:3700ms"><span class="notif-av">${face('Alex', 38, '', alex)}<img class="notif-badge" src="/assets/img/app-icon-64.png" width="16" height="16" alt=""></span><span class="notif-body"><span class="notif-top"><b>Alex</b><small>now</small></span><span>Paid you <span class="money">£22.22</span> for Saffron House</span></span></div>
+      </div>
+      <div class="all-paid" aria-hidden="true" style="--d:5000ms"><span class="all-paid-tick">✓</span>Everyone\u2019s paid you back</div>
     </div>
   </div>
 </section>
@@ -74,10 +78,9 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <h2 class="h2">Three steps. One minute.</h2>
       <p class="lede">Dinners should end with great conversations, not 15 minutes working out the bill.</p>
     </div>
-    <div class="steps">
-      <div class="card step reveal">${art('scan', 150)}<span class="step-n">1</span><h3 class="h3">Scan the receipt</h3><p class="quiet">OnlyBills reads every line and the service charge, and translates it if the menu isn\u2019t in English.</p></div>
-      <div class="card step reveal">${art('pass', 150)}<span class="step-n">2</span><h3 class="h3">Share the table</h3><p class="quiet">Friends scan your QR code and tick what they had. Shared dishes split between whoever shared them.</p></div>
-      <div class="card step reveal">${art('payout', 150)}<span class="step-n">3</span><h3 class="h3">Get paid back</h3><p class="quiet">Everyone sees their exact share and pays you with Monzo, Starling, Revolut, PayPal or a bank transfer.</p></div>
+    <div class="hiw reveal" data-hiw>
+      <div class="hiw-steps"><button class="hiw-step on" type="button" data-step="scan" aria-pressed="true"><span class="step-n">1</span><span class="hiw-text"><b>Scan the receipt</b><span>OnlyBills reads every line and the service charge, and translates it if the menu isn\u2019t in English.</span></span><span class="hiw-bar"><i></i></span></button><button class="hiw-step" type="button" data-step="live-claims" aria-pressed="false"><span class="step-n">2</span><span class="hiw-text"><b>Friends tick what they had</b><span>They scan your QR code and claim their dishes on their own phone. Shared dishes split between whoever shared them.</span></span><span class="hiw-bar"><i></i></span></button><button class="hiw-step" type="button" data-step="live-paid" aria-pressed="false"><span class="step-n">3</span><span class="hiw-text"><b>Get paid back</b><span>Everyone pays their exact share with Monzo, Starling, Revolut, PayPal or a bank transfer, and you watch them tick off.</span></span><span class="hiw-bar"><i></i></span></button></div>
+      <div class="hiw-phone">${video('scan', 'The OnlyBills app: scanning a receipt, friends claiming items, and getting paid', 0, 'data-hiw-video')}</div>
     </div>
     <p style="text-align:center;margin-top:28px"><a class="text-link" href="/how-to/split-a-bill-with-onlybills/">Read the full walkthrough</a></p>
   </div>
@@ -97,7 +100,24 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         </ul>
         <a class="text-link" href="/split/?demo=2&amp;state=claiming">Try a demo table in your browser</a>
       </div>
-      <div class="feature-visual">${shot('guest-02-claimed', 'A friend ticking the dishes they had on the OnlyBills live table', 290)}</div>
+      <div class="feature-visual"><div class="phone live-demo" data-live role="img" aria-label="Animated example: friends tick what they had on the live table and Alex\u2019s share adds up to £22.22">
+          <div class="ld-screen">
+            <div class="ld-status"><b>09:41</b></div>
+            <div class="ld-toast" data-at="2000">${face('Priya', 20, '', priya)}Priya joined the table</div>
+            <div class="ld-toast" data-at="5800">${face('Sam', 20, '', sam)}Sam paid</div>
+            <div class="ld-head"><span class="chip chip-live">Live</span><b>Saffron House</b><small>Hosted by Kyle · 4 at the table</small></div>
+            <div class="ld-share"><span class="ld-me">${face('Alex', 30, '', alex)}<span><small>Your share</small><b>Alex</b></span></span><b class="ld-amt" data-amt>£0.00</b><small data-meta>Tap what you had</small></div>
+            <div class="ld-list">
+              <div class="ld-row" data-at="1400"><span class="tick"></span><span class="row-body"><span class="row-title">House Black Daal</span><span class="row-sub">${face('Kyle', 14, '', kyle)}Kyle</span></span><span class="row-end"><span class="money">£7.90</span></span></div>
+              <div class="ld-row" data-at="2600"><span class="tick"></span><span class="row-body"><span class="row-title">Chicken Ruby</span><span class="row-sub">${face('Sam', 14, '', sam)}Sam</span></span><span class="row-end"><span class="money">£14.50</span></span></div>
+              <div class="ld-row" data-at="800" data-share="£13.20"><span class="tick"></span><span class="row-body"><span class="row-title">Lamb Raan Bun</span><span class="row-sub">${face('Alex', 14, '', alex)}You</span></span><span class="row-end"><span class="money">£13.20</span></span></div>
+              <div class="ld-row" data-at="3400" data-share="£14.80"><span class="tick"></span><span class="row-body"><span class="row-title">Garlic Naan <span class="qty">×2</span></span><span class="row-sub"><span class="faces" style="--size:14px">${face('Kyle', 14, '', kyle)}${face('Sam', 14, '', sam)}${face('Alex', 14, '', alex)}</span>Split 3 ways</span></span><span class="row-end"><span class="money">£4.80</span><span class="you">You £1.60</span></span></div>
+              <div class="ld-row" data-at="4200" data-share="£19.75"><span class="tick"></span><span class="row-body"><span class="row-title">Mango Lassi</span><span class="row-sub">${face('Alex', 14, '', alex)}You</span></span><span class="row-end"><span class="money">£4.95</span></span></div>
+            </div>
+            <div class="ld-cta">Pay Kyle <span data-amt>£0.00</span></div>
+          </div>
+          <button class="ld-replay" type="button" hidden>Play again</button>
+        </div></div>
     </div>
 
     <div class="feature flip reveal">
@@ -112,19 +132,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         </ul>
         <a class="text-link" href="/tools/split-bill-calculator/">Try the free calculator</a>
       </div>
-      <div class="feature-visual">
-        <div class="demo" aria-label="Example: Alex's share of a bill at Saffron House is £22.22">
-          <div class="card share-card">
-            <div class="share-head">${face('Alex', 48, '', alex)}<span><small>Your share</small><b>Alex</b></span></div>
-            <div class="hero-money">£22.22</div>
-            <div class="share-meta">3 items · 1 shared · incl. £2.47 extras</div>
-          </div>
-          <div class="group">
-            <div class="row"><span class="tick"></span><span class="row-body"><span class="row-title">Chicken Ruby</span><span class="row-sub">${face('Sam', 20, '', sam)}Sam</span></span><span class="row-end"><span class="money">£14.50</span></span></div>
-            <div class="row"><span class="tick on"></span><span class="row-body"><span class="row-title">Lamb Raan Bun</span><span class="row-sub">${face('Alex', 20, '', alex)}You</span></span><span class="row-end"><span class="money">£13.20</span></span></div>
-            <div class="row"><span class="tick on"></span><span class="row-body"><span class="row-title">Garlic Naan <span class="qty">×2</span></span><span class="row-sub"><span class="faces" style="--size:20px">${face('Kyle', 20, '', kyle)}${face('Sam', 20, '', sam)}${face('Alex', 20, '', alex)}</span>Split 3 ways</span></span><span class="row-end"><span class="money">£4.80</span><span class="you">You £1.60</span></span></div>
-          </div>
-        </div>
+      <div class="feature-visual">${shot('host-06-summary', 'Who owes what: each person\u2019s exact share of the bill, with their percentage', 290)}</div>
       </div>
     </div>
 
@@ -132,16 +140,11 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <div class="feature-copy">
         <span class="eyebrow">Get paid</span>
         <h2 class="h2">Paid back before the coats are on.</h2>
-        <p class="lede">Friends tap one button to pay their exact share. The money goes straight to you, not through us.</p>
-        <div class="group methods" style="width:100%;max-width:440px">
-          <div class="row"><img class="method-logo" src="/assets/img/logo-monzo.jpg" width="40" height="40" alt="" loading="lazy"><span class="row-body"><span class="row-title">Monzo</span><span class="row-sub">Card, Apple Pay or bank transfer. No Monzo account needed</span></span></div>
-          <div class="row"><img class="method-logo" src="/assets/img/logo-starling.png" width="40" height="40" alt="" loading="lazy"><span class="row-body"><span class="row-title">Starling</span><span class="row-sub">Card or Apple Pay. No Starling account needed</span></span></div>
-          <div class="row"><img class="method-logo" src="/assets/img/logo-revolut.png" width="40" height="40" alt="" loading="lazy"><span class="row-body"><span class="row-title">Revolut</span><span class="row-sub">Card or Apple Pay. No Revolut account needed</span></span></div>
-          <div class="row"><img class="method-logo" src="/assets/img/logo-paypal.png" width="40" height="40" alt="" loading="lazy"><span class="row-body"><span class="row-title">PayPal</span><span class="row-sub">PayPal account may be needed</span></span></div>
-          <div class="row"><span class="method-logo bank">${icons.bank}</span><span class="row-body"><span class="row-title">Bank transfer</span><span class="row-sub">From any banking app</span></span></div>
-        </div>
+        <p class="lede">One tap and they\u2019ve paid their exact share, straight to you.</p>
+        <ul class="ticks"><li>Their amount is filled in for them</li><li>Card or Apple Pay, no bank app needed</li><li>Never through us, always straight to you</li></ul>
+        <div class="bank-row" role="list" aria-label="Ways friends can pay you"><span class="bank" role="listitem"><img src="/assets/img/logo-monzo.jpg" width="44" height="44" alt="" loading="lazy"><span>Monzo</span></span><span class="bank" role="listitem"><img src="/assets/img/logo-starling.png" width="44" height="44" alt="" loading="lazy"><span>Starling</span></span><span class="bank" role="listitem"><img src="/assets/img/logo-revolut.png" width="44" height="44" alt="" loading="lazy"><span>Revolut</span></span><span class="bank" role="listitem"><img src="/assets/img/logo-paypal.png" width="44" height="44" alt="" loading="lazy"><span>PayPal</span></span><span class="bank" role="listitem"><span class="bank-icon">${icons.bank}</span><span>Bank</span></span></div>
       </div>
-      <div class="feature-visual">${shot('guest-03-pay-sheet', 'The pay sheet: pay Kyle £22.22 with Monzo or by bank transfer', 290)}</div>
+      <div class="feature-visual">${shot('guest-03-pay-sheet', 'The pay sheet: pay Kyle £22.22 with Monzo or by bank transfer', 290)}<div class="paid-pop" aria-hidden="true"><span class="all-paid-tick">✓</span><span>You paid Kyle <b class="money">£22.22</b></span></div></div>
     </div>
 
     <div class="feature flip reveal">
@@ -151,7 +154,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         <p class="lede">Every bill you host lands in one place, and you can add an IOU for anything else. See who’s paid, chase who hasn’t, and mark it settled when the money arrives.</p>
         <a class="text-link" href="/how-to/track-who-owes-you/">How Owed works</a>
       </div>
-      <div class="feature-visual">${shot('host-07-owed', 'The Owed page: faces of friends who owe you float around the total, £68.13 across 4 friends', 290)}</div>
+      <div class="feature-visual">${video('owed', 'The Owed page: friends\u2019 faces float around what you\u2019re owed, £68.13 across 4 friends', 290)}</div>
       </div>
     </div>
   </div>

@@ -13,6 +13,8 @@ To scan a receipt, tap **Scan receipt**, fit the whole receipt inside the frame,
 
 Most bad scans come down to light, creases or a cut-off bottom. Here's how to avoid them.
 
+:::video scan | The scanner finds the receipt, you tap to capture, and every line comes through.
+
 ## 1. Set the receipt up
 
 - **Lay it flat.** Put it on the table and smooth out any folds. A curled receipt bends the text and the numbers are what matter most.

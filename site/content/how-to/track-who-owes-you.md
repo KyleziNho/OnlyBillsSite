@@ -11,6 +11,8 @@ related: someone-wont-pay-their-share, ask-friend-to-pay-you-back, get-paid-back
 
 OnlyBills keeps a running list of who still owes you on the **Owed** page. Swipe across from the home screen, or tap **Owed** at the top. Everyone who owes you floats around your total, sized by how much they owe. Drag someone into the middle when they've paid, or tap them for the details.
 
+:::video owed | Swipe to Owed: everyone who still owes you, floating round the total.
+
 ## How do people end up on Owed?
 
 Only when you say so. When you finish a bill (tap **Done** on the summary, or **Finish** on a live table), OnlyBills asks "Has everyone paid you?" about anyone you haven't ticked off yet.

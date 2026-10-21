@@ -13,6 +13,8 @@ To get paid back, add a way for friends to pay you: a Monzo, Starling, Revolut o
 
 The money goes straight from your friends to you. OnlyBills never holds it.
 
+:::video live-paid | When a friend pays, their row ticks off and the paid count goes up.
+
 ## 1. Choose how you get paid
 
 OnlyBills asks during setup, and again the first time you share a table or send a request if you skipped it. You can also find it any time in Settings, under **Getting paid**. Tap your photo at the top left of the home screen to open Settings.
