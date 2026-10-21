@@ -1,4 +1,4 @@
-import { SITE, esc, art, shot, face, facesFor, storeButton, abs, icons } from '../lib.mjs';
+import { SITE, esc, art, shot, video, face, facesFor, storeButton, abs, icons } from '../lib.mjs';
 import { vsAnchor, vsTable, VS_ROWS } from './vs.mjs';
 
 export const FAQ = [
@@ -78,10 +78,9 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <h2 class="h2">Three steps. One minute.</h2>
       <p class="lede">Dinners should end with great conversations, not 15 minutes working out the bill.</p>
     </div>
-    <div class="steps">
-      <div class="card step reveal">${art('scan', 150)}<span class="step-n">1</span><h3 class="h3">Scan the receipt</h3><p class="quiet">OnlyBills reads every line and the service charge, and translates it if the menu isn\u2019t in English.</p></div>
-      <div class="card step reveal">${art('pass', 150)}<span class="step-n">2</span><h3 class="h3">Share the table</h3><p class="quiet">Friends scan your QR code and tick what they had. Shared dishes split between whoever shared them.</p></div>
-      <div class="card step reveal">${art('payout', 150)}<span class="step-n">3</span><h3 class="h3">Get paid back</h3><p class="quiet">Everyone sees their exact share and pays you with Monzo, Starling, Revolut, PayPal or a bank transfer.</p></div>
+    <div class="hiw reveal" data-hiw>
+      <div class="hiw-steps"><button class="hiw-step on" type="button" data-step="scan" aria-pressed="true"><span class="step-n">1</span><span class="hiw-text"><b>Scan the receipt</b><span>OnlyBills reads every line and the service charge, and translates it if the menu isn\u2019t in English.</span></span><span class="hiw-bar"><i></i></span></button><button class="hiw-step" type="button" data-step="live-claims" aria-pressed="false"><span class="step-n">2</span><span class="hiw-text"><b>Friends tick what they had</b><span>They scan your QR code and claim their dishes on their own phone. Shared dishes split between whoever shared them.</span></span><span class="hiw-bar"><i></i></span></button><button class="hiw-step" type="button" data-step="live-paid" aria-pressed="false"><span class="step-n">3</span><span class="hiw-text"><b>Get paid back</b><span>Everyone pays their exact share with Monzo, Starling, Revolut, PayPal or a bank transfer, and you watch them tick off.</span></span><span class="hiw-bar"><i></i></span></button></div>
+      <div class="hiw-phone">${video('scan', 'The OnlyBills app: scanning a receipt, friends claiming items, and getting paid', 0, 'data-hiw-video')}</div>
     </div>
     <p style="text-align:center;margin-top:28px"><a class="text-link" href="/how-to/split-a-bill-with-onlybills/">Read the full walkthrough</a></p>
   </div>
@@ -160,7 +159,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         <p class="lede">Every bill you host lands in one place, and you can add an IOU for anything else. See who’s paid, chase who hasn’t, and mark it settled when the money arrives.</p>
         <a class="text-link" href="/how-to/track-who-owes-you/">How Owed works</a>
       </div>
-      <div class="feature-visual">${shot('host-07-owed', 'The Owed page: faces of friends who owe you float around the total, £68.13 across 4 friends', 290)}</div>
+      <div class="feature-visual">${video('owed', 'The Owed page: friends\u2019 faces float around what you\u2019re owed, £68.13 across 4 friends', 290)}</div>
       </div>
     </div>
   </div>

@@ -13,6 +13,8 @@ Splitting a bill with OnlyBills takes four steps: scan the receipt, check it add
 
 This page is the quick version. Each step links to a longer tutorial if you want the detail.
 
+:::video live-table | Friends scan the QR code and join your table.
+
 ## 1. Scan the receipt
 
 Open OnlyBills and tap **Scan receipt**. Hold your phone over the receipt until the pill at the top says "Receipt found", then tap the shutter button. OnlyBills reads every item, price, service charge and discount.

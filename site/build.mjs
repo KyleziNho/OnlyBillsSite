@@ -7,7 +7,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
-import { SITE, esc, abs, fmtDate, art, shot, layout, appCta, crumbs, crumbsLd, icons, face, ORG } from './lib.mjs';
+import { SITE, esc, abs, fmtDate, art, shot, video, layout, appCta, crumbs, crumbsLd, icons, face, ORG } from './lib.mjs';
 import { homePage } from './pages/home.mjs';
 import { toolPages } from './pages/tools.mjs';
 import { aboutPage } from './pages/about.mjs';
@@ -104,6 +104,12 @@ function renderBody(md, file) {
       if (!SHOTS.has(m[1])) { errors.push(`${file}: unknown screenshot "${m[1]}"`); continue; }
       const cap = m[2] || '';
       out.push('', `<figure class="figure">${shot(m[1], cap.replace(/[*_`]/g, ''), 280)}${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`, '');
+      continue;
+    }
+    if ((m = line.match(/^:::video\s+([\w-]+)\s*(?:\|\s*(.*))?$/))) {
+      if (!fs.existsSync(path.join(HERE, 'static/video', m[1] + '-light.mp4'))) { errors.push(`${file}: unknown video "${m[1]}"`); continue; }
+      const cap = m[2] || '';
+      out.push('', `<figure class="figure">${video(m[1], cap.replace(/[*_`]/g, ''), 280)}${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`, '');
       continue;
     }
     if (/^:::note\s*$/.test(line)) {

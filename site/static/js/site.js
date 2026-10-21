@@ -60,6 +60,53 @@
     } else play();
   });
 
+  // Real app recordings: light or dark file, loaded only when visible, played once.
+  const scheme = () => (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const loadVideo = (v, name) => {
+    const m = scheme();
+    v.poster = `/assets/video/${name}-${m}-poster.jpg`;
+    v.innerHTML = `<source src="/assets/video/${name}-${m}.webm" type="video/webm"><source src="/assets/video/${name}-${m}.mp4" type="video/mp4">`;
+    v.dataset.loaded = name; v.load();
+  };
+  const tryPlay = (v) => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+  const visible = (el, on, off) => {
+    if (!('IntersectionObserver' in window)) { on(); return; }
+    new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? on() : off && off())), { threshold: 0.5 }).observe(el);
+  };
+  $$('video[data-video]:not([data-hiw-video])').forEach((v) => {
+    const name = v.dataset.video;
+    const replay = v.parentElement.querySelector('.vid-replay');
+    v.poster = `/assets/video/${name}-${scheme()}-poster.jpg`;
+    if (capture) return;
+    if (replay) replay.addEventListener('click', () => { if (v.dataset.loaded !== name) loadVideo(v, name); v.currentTime = 0; replay.hidden = true; tryPlay(v); });
+    v.addEventListener('ended', () => { if (replay) replay.hidden = false; });
+    if (reduce) { if (replay) replay.hidden = false; return; }
+    let played = false;
+    visible(v, () => { if (!played) { played = true; loadVideo(v, name); tryPlay(v); } else if (!v.ended) tryPlay(v); }, () => v.pause());
+  });
+  $$('[data-hiw]').forEach((box) => {
+    const steps = $$('.hiw-step', box);
+    const v = box.querySelector('video');
+    const replay = box.querySelector('.vid-replay');
+    let i = 0;
+    const show = (k, play = true) => {
+      i = k;
+      steps.forEach((b, j) => { b.classList.toggle('on', j === k); b.setAttribute('aria-pressed', String(j === k)); b.style.setProperty('--p', '0%'); });
+      if (replay) replay.hidden = true;
+      loadVideo(v, steps[k].dataset.step);
+      if (play) tryPlay(v);
+    };
+    v.poster = `/assets/video/${steps[0].dataset.step}-${scheme()}-poster.jpg`;
+    if (capture) return;
+    v.addEventListener('timeupdate', () => { if (v.duration) steps[i].style.setProperty('--p', `${(v.currentTime / v.duration) * 100}%`); });
+    v.addEventListener('ended', () => { if (i < steps.length - 1) show(i + 1); else if (replay) replay.hidden = false; });
+    steps.forEach((b, k) => b.addEventListener('click', () => show(k)));
+    if (replay) replay.addEventListener('click', () => show(0));
+    if (reduce) { if (replay) replay.hidden = false; return; }
+    let started = false;
+    visible(box, () => { if (!started) { started = true; show(0); } else if (!v.ended) tryPlay(v); }, () => v.pause());
+  });
+
   // Copy link / native share
   $$('[data-share]').forEach((b) => b.addEventListener('click', async () => {
     const url = location.href.split('#')[0];
