@@ -687,3 +687,23 @@ p { margin: 0; text-wrap: pretty; }
 .home-vs .vs-lockup { margin-bottom: 4px; }
 .home-vs .vs-lockup .vs-icon { width: 56px; height: 56px; }
 .home-vs .vs-anchor { margin-top: 28px; }
+
+/* Home pricing: small, friendly numbers inside a rich card */
+.pricing { display: grid; gap: 32px; padding: clamp(28px, 5vw, 56px); grid-template-columns: minmax(0, 1fr); align-items: center; overflow: hidden; position: relative;
+  background: radial-gradient(600px 360px at 0% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%), var(--surface); }
+@media (min-width: 900px) { .pricing { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; } }
+.pricing-intro { display: grid; gap: 14px; justify-items: start; }
+.pricing-intro .art { margin: 0 0 6px -10px; }
+.pricing-intro .lede { max-width: 30ch; }
+.pricing-side { display: grid; gap: 22px; justify-items: start; }
+.plans { width: 100%; background: var(--surface-raised); box-shadow: inset 0 0 0 0.5px var(--hairline); }
+@media (prefers-color-scheme: dark) { .plans { background: var(--surface-raised); } }
+.plan { min-height: 68px; }
+.plan .row-title { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.plan .chip { height: 22px; font-size: 12px; padding: 0 8px; }
+.plan.best { box-shadow: inset 0 0 0 2px var(--accent); border-radius: calc(var(--r-lg) - 5px); margin: 5px; background: var(--surface); }
+.plan.best + .plan::before { display: none; }
+.plan-price { font-family: var(--font-rounded); display: flex; align-items: baseline; gap: 2px; white-space: nowrap; }
+.plan-price b { font-size: 22px; font-weight: 700; }
+.plan-price small { font-size: 14px; color: var(--text-2); }
+.pricing-ticks { gap: 12px; }

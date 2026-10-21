@@ -184,17 +184,28 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
 
 <section class="section" id="pricing">
   <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Pricing</span>
-      <h2 class="h2">Your first split is free.</h2>
-      <p class="lede">After that, less than one round of drinks a year. One person pays, and the whole table benefits.</p>
+    <div class="card pricing reveal">
+      <div class="pricing-intro">
+        ${art('paid', 150)}
+        <span class="eyebrow">Pricing</span>
+        <h2 class="h2">Your first split is free.</h2>
+        <p class="lede">After that, about 50p a month. Less than a single round, for a whole year of fair dinners.</p>
+      </div>
+      <div class="pricing-side">
+        <div class="group plans">
+          <div class="row plan best"><span class="row-body"><span class="row-title">Yearly <span class="chip chip-live">Best value</span></span><span class="row-sub">£5.99 a year</span></span><span class="plan-price"><b>50p</b><small>/month</small></span></div>
+          <div class="row plan"><span class="row-body"><span class="row-title">Monthly</span><span class="row-sub">Billed monthly</span></span><span class="plan-price"><b>99p</b><small>/month</small></span></div>
+        </div>
+        <ul class="ticks pricing-ticks">
+          <li>Split every dinner, drink and night out</li>
+          <li>Friends join free, with no app or sign-up</li>
+          <li>No ads, ever</li>
+          <li>Cancel any time in Settings</li>
+        </ul>
+        ${storeButton('Download on the', 'pricing')}
+      </div>
     </div>
-    <div class="price-grid reveal">
-      <div class="card price"><span class="quiet">Monthly</span><span class="num">£0.99</span><span class="quiet">a month</span></div>
-      <div class="card price best"><span class="chip chip-accent">Best value</span><span class="quiet">Yearly</span><span class="num">£5.99</span><span class="quiet">a year, about 50p a month</span></div>
-    </div>
-    <a class="card tool-link reveal" href="/vs/splitwise/" style="max-width:760px;margin:14px auto 0"><span class="tool-icon">£</span><span><b>Save 85% against Splitwise Pro</b><span>£5.99 a year, not £39.99. And nobody has to sign up.</span></span><span class="chev" aria-hidden="true">›</span></a>
-    <p class="foot" style="text-align:center;margin-top:16px">Includes a free trial. Renews automatically until you cancel, which you can do any time in Settings. Friends who join your table never pay anything.</p>
+    <p class="foot" style="text-align:center;margin-top:16px">Includes a free trial, then renews automatically until you cancel. <a href="/vs/splitwise/">85% less than Splitwise Pro</a>.</p>
   </div>
 </section>
 
