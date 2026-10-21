@@ -144,7 +144,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         <ul class="ticks"><li>Their amount is filled in for them</li><li>Card or Apple Pay, no bank app needed</li><li>Never through us, always straight to you</li></ul>
         <div class="bank-row" role="list" aria-label="Ways friends can pay you"><span class="bank" role="listitem"><img src="/assets/img/logo-monzo.jpg" width="44" height="44" alt="" loading="lazy"><span>Monzo</span></span><span class="bank" role="listitem"><img src="/assets/img/logo-starling.png" width="44" height="44" alt="" loading="lazy"><span>Starling</span></span><span class="bank" role="listitem"><img src="/assets/img/logo-revolut.png" width="44" height="44" alt="" loading="lazy"><span>Revolut</span></span><span class="bank" role="listitem"><img src="/assets/img/logo-paypal.png" width="44" height="44" alt="" loading="lazy"><span>PayPal</span></span><span class="bank" role="listitem"><span class="bank-icon">${icons.bank}</span><span>Bank</span></span></div>
       </div>
-      <div class="feature-visual">${shot('guest-03-pay-sheet', 'The pay sheet: pay Kyle £22.22 with Monzo or by bank transfer', 290)}<div class="paid-pop" aria-hidden="true">${face('Alex', 30, '', alex)}<span>Alex paid you <b class="money">£22.22</b></span></div></div>
+      <div class="feature-visual">${shot('guest-03-pay-sheet', 'The pay sheet: pay Kyle £22.22 with Monzo or by bank transfer', 290)}<div class="paid-pop" aria-hidden="true"><span class="all-paid-tick">✓</span><span>You paid Kyle <b class="money">£22.22</b></span></div></div>
     </div>
 
     <div class="feature flip reveal">
