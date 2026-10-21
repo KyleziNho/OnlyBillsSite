@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en-GB" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How OnlyBills splits shared dishes, service charge and tips</title>
+<meta name="description" content="Shared dishes split between whoever shared them. Service, tips and discounts follow what each person ordered. Here's the exact maths, with a worked £ example.">
+<link rel="canonical" href="https://onlybills.app/how-to/shared-items-service-and-tips/">
+<meta name="robots" content="max-image-preview:large">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="apple-itunes-app" content="app-id=6754412082">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" type="image/png" sizes="64x64" href="/assets/img/favicon.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="OnlyBills articles" href="/blog/feed.xml">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="OnlyBills">
+<meta property="og:locale" content="en_GB">
+<meta property="og:url" content="https://onlybills.app/how-to/shared-items-service-and-tips/">
+<meta property="og:title" content="How OnlyBills splits shared dishes, service charge and tips">
+<meta property="og:description" content="Shared dishes split between whoever shared them. Service, tips and discounts follow what each person ordered. Here's the exact maths, with a worked £ example.">
+<meta property="og:image" content="https://onlybills.app/assets/og/shared-items-service-and-tips.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How OnlyBills splits shared dishes, service charge and tips">
+<meta name="twitter:description" content="Shared dishes split between whoever shared them. Service, tips and discounts follow what each person ordered. Here's the exact maths, with a worked £ example.">
+<meta name="twitter:image" content="https://onlybills.app/assets/og/shared-items-service-and-tips.jpg">
+<link rel="stylesheet" href="/assets/css/tokens.css?v=3adae6d5">
+<link rel="stylesheet" href="/assets/css/site.css?v=3adae6d5">
+<script>document.documentElement.className='js'</script>
+<meta property="article:published_time" content="2026-10-21">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://onlybills.app/#org","name":"OnlyBills","url":"https://onlybills.app/","logo":"https://onlybills.app/assets/img/app-icon.png","founder":{"@type":"Person","name":"Kyle","url":"https://onlybills.app/about/"},"sameAs":["https://apps.apple.com/gb/app/onlybills/id6754412082","https://www.linkedin.com/in/kos33/"]},{"@type":"WebSite","@id":"https://onlybills.app/#site","url":"https://onlybills.app/","name":"OnlyBills","publisher":{"@id":"https://onlybills.app/#org"},"inLanguage":"en-GB"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://onlybills.app/"},{"@type":"ListItem","position":2,"name":"How it works","item":"https://onlybills.app/how-to/"},{"@type":"ListItem","position":3,"name":"How shared items, service and tips are split","item":"https://onlybills.app/how-to/shared-items-service-and-tips/"}]},{"@type":"TechArticle","headline":"How shared items, service and tips are split","description":"Shared dishes split between whoever shared them. Service, tips and discounts follow what each person ordered. Here's the exact maths, with a worked £ example.","datePublished":"2026-10-21","dateModified":"2026-10-21","inLanguage":"en-GB","mainEntityOfPage":"https://onlybills.app/how-to/shared-items-service-and-tips/","image":"https://onlybills.app/assets/og/shared-items-service-and-tips.jpg","author":{"@type":"Person","name":"Kyle","url":"https://onlybills.app/about/","sameAs":["https://www.linkedin.com/in/kos33/"]},"publisher":{"@id":"https://onlybills.app/#org"},"wordCount":810},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why not just split the service charge equally?","acceptedAnswer":{"@type":"Answer","text":"Because then light eaters subsidise big orders. Sharing service in proportion means everyone pays service on what they actually had."}},{"@type":"Question","name":"What if the shares don't add up to the bill?","acceptedAnswer":{"@type":"Answer","text":"They always do. OnlyBills works in whole pennies and hands out any odd penny so that every person's share added together equals the bill total."}},{"@type":"Question","name":"Can I see how my share was worked out?","acceptedAnswer":{"@type":"Answer","text":"Yes. On a live table, tap Show breakdown under your share to see each item and your part of the extras. On the summary, tap a person to see their items."}},{"@type":"Question","name":"What happens to items nobody claimed?","acceptedAnswer":{"@type":"Answer","text":"On a live table, the host can tap Split what's left evenly to share them. Anything still unclaimed when the host finishes counts as the host's, since they paid the restaurant."}}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="bar-inner">
+    <a class="brand" href="/" aria-label="OnlyBills home"><picture><source srcset="/assets/img/app-icon-dark-64.png 1x, /assets/img/app-icon-dark-128.png 2x" media="(prefers-color-scheme: dark)"><img src="/assets/img/app-icon-64.png" srcset="/assets/img/app-icon-64.png 1x, /assets/img/app-icon-128.png 2x" width="32" height="32" alt=""></picture><span>OnlyBills</span></a>
+    <nav class="nav" aria-label="Main"><a href="/how-to/" aria-current="page">How it works</a><a href="/tools/">Free tools</a><a href="/blog/">Articles</a></nav>
+    <a class="get" href="https://apps.apple.com/gb/app/onlybills/id6754412082" data-cta="nav" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.77-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.27-1.6 2.78-.41 6.9 1.15 9.15.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.78.74 2.99.72 1.24-.02 2.02-1.12 2.77-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.39-.92-2.4-3.67zM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.01.61-2.66 1.37-.58.67-1.09 1.76-.95 2.79 1.01.08 2.04-.51 2.67-1.27z"/></svg><span>Get the app</span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main"><a href="/how-to/" aria-current="page">How it works</a><a href="/tools/">Free tools</a><a href="/blog/">Articles</a><a href="/about/">About</a></nav>
+</header>
+<main id="main" tabindex="-1">
+
+<article>
+  <div class="wrap wrap-prose">
+    <header class="article-head">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">›</span><a href="/how-to/">How it works</a><span aria-hidden="true">›</span><span aria-current="page">How shared items, service and tips are split</span></nav>
+      <picture class="art" style="--art:140px"><source srcset="/assets/art/receipts-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/art/receipts.webp" width="140" height="140" alt="" fetchpriority="high" decoding="async"></picture>
+      <span class="eyebrow">Tutorial</span>
+      <h1 class="h1">How shared items, service and tips are split</h1>
+      <p class="lede">Shared dishes split between whoever shared them. Service, tips and discounts follow what each person ordered. Here's the exact maths, with a worked £ example.</p>
+      <div class="byline"><img src="/assets/img/maker-avatar.jpg" width="40" height="40" alt=""><span><b><a href="/about/" style="color:inherit">Kyle</a>, founder of OnlyBills</b>21 October 2026 · 4 min read</span></div>
+    </header>
+    <div class="prose">
+      
+      <p>OnlyBills splits a bill in two stages. First, each item goes to whoever had it, and a shared item is split equally between the people who shared it. Then service charge, tips, discounts and other extras are spread across everyone in proportion to what their items came to. The shares always add up to the bill total exactly, to the penny.</p>
+<h2 id="how-is-a-shared-dish-split">How is a shared dish split?</h2>
+<p>Equally between the people who shared it. If three people tap the garlic naan on a live table, or you assign it to three people yourself, each pays a third. A £6.00 naan becomes £2.00 each.</p>
+<p>When a split doesn&#39;t divide into whole pennies, OnlyBills hands out the odd penny so the parts still add up to the item&#39;s price. A £10.00 bottle of wine shared three ways comes out as £3.34, £3.33 and £3.33.</p>
+<figure class="figure"><div class="phone" style="--w:280px"><picture><source srcset="/assets/shots/host-04b-assign-done-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/shots/host-04b-assign-done-light.webp" width="640" height="1391" alt="The poppadoms are split 4 ways. Everything else has one owner." loading="lazy" decoding="async"></picture></div><figcaption>The poppadoms are split 4 ways. Everything else has one owner.</figcaption></figure>
+
+
+<h2 id="what-about-items-ordered-more-than-once">What about items ordered more than once?</h2>
+<p>A line like &quot;Kingfisher ×2&quot; or &quot;Garlic Naan ×2&quot; is one line with a quantity.</p>
+<ul>
+<li><strong>Assigning yourself:</strong> tapping the line opens &quot;Split this item&quot;. Choose <strong>Who ordered what</strong> to say how many each person had (one beer for Sam, one for Priya), or <strong>Share equally</strong> to split the whole line between the people you pick.</li>
+<li><strong>On a live table:</strong> everyone who taps the line shares it. In the OnlyBills app and the App Clip, the person who tapped it can also say &quot;How many did you have?&quot;.</li>
+</ul>
+<figure class="figure"><div class="phone" style="--w:280px"><picture><source srcset="/assets/shots/guest-02-claimed-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/shots/guest-02-claimed-light.webp" width="640" height="1391" alt="Garlic Naan ×2, £4.80, split 3 ways. This person's part is £1.60." loading="lazy" decoding="async"></picture></div><figcaption>Garlic Naan ×2, £4.80, split 3 ways. This person&#39;s part is £1.60.</figcaption></figure>
+
+
+<h2 id="how-is-service-charge-split">How is service charge split?</h2>
+<p>In proportion to what each person&#39;s items came to, not equally. Someone whose food was £20 pays twice as much service as someone whose food was £10. That&#39;s how the service was earned, so it&#39;s the fair way to share it.</p>
+<p>A percentage service charge (12.5% is common in UK restaurants) is worked out on the items after any bill-wide discount, and recalculated if you edit the items. Lines that are already inside the prices, such as &quot;VAT included&quot;, are shown for information and don&#39;t add anything.</p>
+<h2 id="how-are-tips-split">How are tips split?</h2>
+<p>The same way as service: in proportion to what each person ordered. If a tip is printed on the receipt, OnlyBills reads it as a tip line. To add one yourself, tap <strong>Add charge or tip</strong> on the check page, choose Tip, and enter an amount or a percentage.</p>
+<h2 id="how-are-discounts-split">How are discounts split?</h2>
+<p>It depends what the discount is for:</p>
+<ul>
+<li><strong>A discount on one item</strong> (like &quot;2 for 1&quot; printed under a dish) only comes off that item, so only the people who had it get the saving.</li>
+<li><strong>A discount on the whole bill</strong> (like 10% off) is shared in proportion, just like service.</li>
+</ul>
+<p>If the scan finds a discount but can&#39;t tell what it was for, the check page asks &quot;Which item was this for?&quot; with each item and <strong>Whole bill</strong> to choose from.</p>
+<h2 id="a-worked-example">A worked example</h2>
+<p>Amy, Ben and Cal have dinner. The receipt:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Price</th>
+<th>Who had it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Lamb curry</td>
+<td>£14.00</td>
+<td>Amy</td>
+</tr>
+<tr>
+<td>Chicken curry</td>
+<td>£12.00</td>
+<td>Ben</td>
+</tr>
+<tr>
+<td>Dal</td>
+<td>£8.00</td>
+<td>Cal</td>
+</tr>
+<tr>
+<td>Garlic naan</td>
+<td>£6.00</td>
+<td>All three</td>
+</tr>
+<tr>
+<td>Service charge 12.5%</td>
+<td>£5.00</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>£45.00</strong></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<p><strong>Step 1: items.</strong> The naan is £2.00 each. So Amy&#39;s items come to £16.00, Ben&#39;s to £14.00 and Cal&#39;s to £10.00. That&#39;s £40.00 of food.</p>
+<p><strong>Step 2: extras in proportion.</strong> Amy had 40% of the food (£16 of £40), Ben 35% and Cal 25%. The £5.00 service splits the same way: £2.00, £1.75 and £1.25.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Person</th>
+<th>Items</th>
+<th>Service</th>
+<th>Pays</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Amy</td>
+<td>£16.00</td>
+<td>£2.00</td>
+<td><strong>£18.00</strong></td>
+</tr>
+<tr>
+<td>Ben</td>
+<td>£14.00</td>
+<td>£1.75</td>
+<td><strong>£15.75</strong></td>
+</tr>
+<tr>
+<td>Cal</td>
+<td>£10.00</td>
+<td>£1.25</td>
+<td><strong>£11.25</strong></td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td>£40.00</td>
+<td>£5.00</td>
+<td><strong>£45.00</strong></td>
+</tr>
+</tbody></table></div>
+<p>Split equally, each would pay £15.00. Cal would be £3.75 out of pocket for food Amy ate.</p>
+<h3 id="with-a-10-discount">With a 10% discount</h3>
+<p>Say the restaurant takes 10% off the bill. The food drops from £40.00 to £36.00, and 12.5% service on £36.00 is £4.50, so the total is £40.50. Shared in proportion, Amy pays £16.20, Ben £14.18 and Cal £10.12. Ben and Cal&#39;s exact shares were £14.175 and £10.125, so one of them takes the extra penny and the three shares add up to £40.50 exactly.</p>
+<p><a class="card tool-link" href="/tools/split-bill-calculator/"><span class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8.5 7.5h7M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16h.01M12 16h.01M15.5 16h.01"/></svg></span><span><b>Split the bill calculator</b><span>Add who had what. Service and shared dishes split to the penny.</span></span><span class="chev" aria-hidden="true">›</span></a></p>
+
+      <h2 id="faq">Questions people ask</h2><div class="faq"><details><summary>Why not just split the service charge equally?</summary><div class="answer"><p>Because then light eaters subsidise big orders. Sharing service in proportion means everyone pays service on what they actually had.</p>
+</div></details><details><summary>What if the shares don't add up to the bill?</summary><div class="answer"><p>They always do. OnlyBills works in whole pennies and hands out any odd penny so that every person&#39;s share added together equals the bill total.</p>
+</div></details><details><summary>Can I see how my share was worked out?</summary><div class="answer"><p>Yes. On a live table, tap <strong>Show breakdown</strong> under your share to see each item and your part of the extras. On the summary, tap a person to see their items.</p>
+</div></details><details><summary>What happens to items nobody claimed?</summary><div class="answer"><p>On a live table, the host can tap <strong>Split what&#39;s left evenly</strong> to share them. Anything still unclaimed when the host finishes counts as the host&#39;s, since they paid the restaurant.</p>
+</div></details></div>
+      <a class="card tool-link" href="/how-to/get-paid-back/"><span class="tool-icon"><span class="num" style="font-weight:700">7</span></span><span><span>Next tutorial</span><b>How to get paid back with OnlyBills</b></span><span class="chev" aria-hidden="true">›</span></a>
+      
+<aside class="card app-cta" aria-label="Get OnlyBills">
+  <picture><source srcset="/assets/img/app-icon-dark-128.png" media="(prefers-color-scheme: dark)"><img class="icon" src="/assets/img/app-icon-128.png" width="64" height="64" alt="" loading="lazy"></picture>
+  <div><h3>Try it on your next bill</h3><p>Scan the receipt. Friends tap what they had on their own phone. Your first split is free.</p></div>
+  <div class="btn-row"><a class="btn btn-primary" href="https://apps.apple.com/gb/app/onlybills/id6754412082" data-cta="tutorial-end" rel="noopener">Get OnlyBills</a></div>
+</aside>
+      
+      <div class="share-row"><span>Share</span><button type="button" data-share data-title="How shared items, service and tips are split"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span>Copy link</span></button><a href="https://wa.me/?text=How%20shared%20items%2C%20service%20and%20tips%20are%20split%20https%3A%2F%2Fonlybills.app%2Fhow-to%2Fshared-items-service-and-tips%2F" rel="noopener">WhatsApp</a></div>
+    </div>
+  </div>
+</article>
+<section class="section-tight">
+  <div class="wrap">
+    <div class="section-head left"><h2 class="h3">Keep reading</h2></div>
+    <div class="cards"><a class="card post-card" href="/blog/split-service-charge-fairly/" data-cat="Money">
+  <div class="thumb"><picture class="art" style="--art:120px"><source srcset="/assets/art/allclear-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/art/allclear.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></picture></div>
+  <div class="body"><span class="meta">Money</span><h3>How to split service charge and tips fairly</h3><p>Share service charge, tips and discounts in proportion to what each person ordered, not equally. The method, a worked example, and the missing penny fix.</p></div>
+</a><a class="card post-card" href="/blog/is-service-charge-mandatory-uk/" data-cat="Etiquette">
+  <div class="thumb"><picture class="art" style="--art:120px"><source srcset="/assets/art/receipts-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/art/receipts.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></picture></div>
+  <div class="body"><span class="meta">Etiquette</span><h3>Is service charge mandatory in the UK?</h3><p>A discretionary service charge is optional and you can ask for it to be removed. When a charge is compulsory, what the 2024 tips law changed, and what to say.</p></div>
+</a><a class="card post-card" href="/how-to/assign-items-yourself/" data-cat="">
+  <div class="thumb"><picture class="art" style="--art:120px"><source srcset="/assets/art/receipts-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/art/receipts.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></picture></div>
+  <div class="body"><span class="meta">Tutorial</span><h3>How to assign items yourself</h3><p>No signal, or friends who won't get their phones out? Pick how many people, tap a face, tick their items, share the rest, and OnlyBills works out every share.</p></div>
+</a></div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="OnlyBills home"><picture><source srcset="/assets/img/app-icon-dark-64.png" media="(prefers-color-scheme: dark)"><img src="/assets/img/app-icon-64.png" width="32" height="32" alt=""></picture><span>OnlyBills</span></a>
+        <p class="foot" style="max-width:30ch">Split the bill by what everyone had. Made in the UK for iPhone and iPad.</p>
+        <a class="maker" href="/about/"><img src="/assets/img/maker-avatar.jpg" width="32" height="32" alt="" loading="lazy">Made by Kyle</a>
+      </div>
+      <div><h4>App</h4><ul>
+        <li><a href="/how-to/">How it works</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="https://apps.apple.com/gb/app/onlybills/id6754412082" rel="noopener">App Store</a></li>
+        <li><a href="/split/?demo=2&amp;state=claiming">Try a demo table</a></li>
+      </ul></div>
+      <div><h4>Free tools</h4><ul>
+        <li><a href="/tools/split-bill-calculator/">Split the bill calculator</a></li>
+        <li><a href="/tools/overpay-calculator/">Splitting equally calculator</a></li>
+        <li><a href="/tools/tip-calculator/">Tip calculator</a></li>
+        <li><a href="/tools/service-charge-calculator/">Service charge calculator</a></li>
+        <li><a href="/tools/settle-up-calculator/">Who owes who calculator</a></li>
+      </ul></div>
+      <div><h4>Read</h4><ul>
+        <li><a href="/blog/">All articles</a></li>
+        <li><a href="/blog/how-much-to-tip-uk/">Tipping in the UK</a></li>
+        <li><a href="/blog/bill-splitting-etiquette/">Bill splitting etiquette</a></li>
+        <li><a href="/vs/splitwise/">OnlyBills vs Splitwise</a></li>
+        <li><a href="/blog/splitwise-alternatives/">Splitwise alternatives</a></li>
+      </ul></div>
+      <div><h4>OnlyBills</h4><ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/privacy/">Privacy policy</a></li>
+        <li><a href="mailto:osullivan7791@gmail.com">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="legal"><span>© 2026 OnlyBills</span><span>Apple, iPhone and App Store are trademarks of Apple Inc. Monzo, Starling, Revolut and PayPal are trademarks of their owners.</span></div>
+  </div>
+</footer>
+<script src="/assets/js/site.js?v=3adae6d5" defer></script>
+</body>
+</html>
