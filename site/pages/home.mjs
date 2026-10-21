@@ -132,8 +132,18 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         </ul>
         <a class="text-link" href="/tools/split-bill-calculator/">Try the free calculator</a>
       </div>
-      <div class="feature-visual">${shot('host-06-summary', 'Who owes what: each person\u2019s exact share of the bill, with their percentage', 290)}</div>
-      </div>
+      <div class="feature-visual"><div class="demo" aria-label="Example: Alex's share of a bill at Saffron House is £22.22">
+          <div class="card share-card">
+            <div class="share-head">${face('Alex', 48, '', alex)}<span><small>Your share</small><b>Alex</b></span></div>
+            <div class="hero-money">£22.22</div>
+            <div class="share-meta">3 items · 1 shared · incl. £2.47 extras</div>
+          </div>
+          <div class="group">
+            <div class="row"><span class="tick"></span><span class="row-body"><span class="row-title">Chicken Ruby</span><span class="row-sub">${face('Sam', 20, '', sam)}Sam</span></span><span class="row-end"><span class="money">£14.50</span></span></div>
+            <div class="row"><span class="tick on"></span><span class="row-body"><span class="row-title">Lamb Raan Bun</span><span class="row-sub">${face('Alex', 20, '', alex)}You</span></span><span class="row-end"><span class="money">£13.20</span></span></div>
+            <div class="row"><span class="tick on"></span><span class="row-body"><span class="row-title">Garlic Naan <span class="qty">×2</span></span><span class="row-sub"><span class="faces" style="--size:20px">${face('Kyle', 20, '', kyle)}${face('Sam', 20, '', sam)}${face('Alex', 20, '', alex)}</span>Split 3 ways</span></span><span class="row-end"><span class="money">£4.80</span><span class="you">You £1.60</span></span></div>
+          </div>
+        </div></div>
     </div>
 
     <div class="feature reveal">
@@ -155,7 +165,6 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         <a class="text-link" href="/how-to/track-who-owes-you/">How Owed works</a>
       </div>
       <div class="feature-visual">${video('owed', 'The Owed page: friends\u2019 faces float around what you\u2019re owed, £68.13 across 4 friends', 290)}</div>
-      </div>
     </div>
   </div>
 </section>

@@ -357,6 +357,9 @@ for (const pg of pages) {
   const f = pg.path.endsWith('/') ? path.join(ROOT, pg.path, 'index.html') : path.join(ROOT, pg.path);
   const visible = fs.readFileSync(f, 'utf8').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '');
   if (/[—–]/.test(visible)) errors.push(`${pg.path}: em/en dash in built page`);
+  // Every <div> must close: a stray </div> silently pushes later sections out of their container.
+  const opens = (visible.match(/<div[\s>]/g) || []).length, closes = (visible.match(/<\/div>/g) || []).length;
+  if (opens !== closes) errors.push(`${pg.path}: ${opens} <div> but ${closes} </div>`);
   // Internal links must resolve.
   for (const [, href] of visible.matchAll(/href="(\/[^"#?]*)/g)) {
     if (href.startsWith('/split') || href.startsWith('/assets/') || href === '/privacy/' || href.endsWith('.xml') || href.endsWith('.html')) continue;

@@ -5,7 +5,7 @@ description: Show a QR code or send a link, and friends tick what they had on th
 date: 2026-10-21
 order: 3
 summary: QR code, copy link, send invite, watch claims live and finish.
-art: pass
+art: claim
 related: claim-your-items-without-the-app, get-paid-back, shared-items-service-and-tips
 ---
 
