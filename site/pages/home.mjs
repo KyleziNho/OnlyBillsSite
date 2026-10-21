@@ -12,6 +12,9 @@ export const FAQ = [
   ['What if the receipt is read wrong?', 'You check every receipt before you share it. OnlyBills shows whether the items add up to the total, and you can edit any line, price or quantity.'],
 ];
 
+// Questions shown on the page (structured data must match what is visible).
+const HOME_FAQ = [0, 1, 2, 5, 6];
+
 export function homePage({ posts, postCard, assetsV, write, layout }) {
   const demo = ['Kyle', 'Sam', 'Alex'];
   const [kyle, sam, alex] = facesFor(demo);
@@ -47,7 +50,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <div class="card stat-card"><span class="num">80%</span><p>of diners asked in a restaurant study would rather each pay for their own.</p><cite>Gneezy, Haruvy and Yafe, 2004</cite></div>
       <div class="card stat-card"><span class="num">6m 45s</span><p>is how long the average group spends settling a bill.</p><cite>comparethemarket survey, 2021</cite></div>
     </div>
-    <p class="foot" style="text-align:center;margin-top:14px"><a href="/blog/splitting-the-bill-equally-cost/">Where these numbers come from</a></p>
+    <p class="foot" style="text-align:center;margin-top:14px"><a href="/tools/overpay-calculator/">How much does splitting equally cost you?</a> · <a href="/blog/splitting-the-bill-equally-cost/">Where these numbers come from</a></p>
   </div>
 </section>
 
@@ -59,7 +62,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <p class="lede">Everything you need for tonight\u2019s bill. None of the sign-ups, ads or £39.99 a year.</p>
     </div>
     <div class="reveal">${vsAnchor()}</div>
-    <div class="reveal" style="max-width:900px;margin:40px auto 0">${vsTable([0, 2, 3, 5, 6, 9, 10].map((i) => VS_ROWS[i]))}</div>
+    <div class="reveal" style="max-width:900px;margin:40px auto 0">${vsTable([0, 2, 5, 9].map((i) => VS_ROWS[i]))}</div>
     <p style="text-align:center;margin-top:22px"><a class="text-link" href="/vs/splitwise/">See the full comparison</a></p>
   </div>
 </section>
@@ -72,7 +75,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <p class="lede">Dinners should end with great conversations, not 15 minutes working out the bill.</p>
     </div>
     <div class="steps">
-      <div class="card step reveal">${art('scan', 150)}<span class="step-n">1</span><h3 class="h3">Scan the receipt</h3><p class="quiet">OnlyBills reads every line, price and service charge. You check it adds up.</p></div>
+      <div class="card step reveal">${art('scan', 150)}<span class="step-n">1</span><h3 class="h3">Scan the receipt</h3><p class="quiet">OnlyBills reads every line and the service charge, and translates it if the menu isn\u2019t in English.</p></div>
       <div class="card step reveal">${art('pass', 150)}<span class="step-n">2</span><h3 class="h3">Share the table</h3><p class="quiet">Friends scan your QR code and tick what they had. Shared dishes split between whoever shared them.</p></div>
       <div class="card step reveal">${art('payout', 150)}<span class="step-n">3</span><h3 class="h3">Get paid back</h3><p class="quiet">Everyone sees their exact share and pays you with Monzo, Starling, Revolut, PayPal or a bank transfer.</p></div>
     </div>
@@ -82,22 +85,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="feature flip reveal">
-      <div class="feature-copy">
-        <span class="eyebrow">Scan</span>
-        <h2 class="h2">It reads the receipt for you.</h2>
-        <p class="lede">Point your camera at the bill. Every dish, price and service charge comes through, and you can see straight away that it adds up.</p>
-        <ul class="ticks">
-          <li>Reads quantities, service charge and discounts</li>
-          <li>Translates receipts in other languages into English</li>
-          <li>Fix any line with a tap, or type a bill in by hand</li>
-        </ul>
-        <a class="text-link" href="/how-to/scan-a-receipt/">Tips for a perfect scan</a>
-      </div>
-      <div class="feature-visual">${shot('host-03-review', 'The check page for a bill at Rajaji: five items, and a pill saying the receipt adds up', 290)}</div>
-    </div>
-
-    <div class="feature reveal" style="margin-top:clamp(72px,10vw,140px)">
+    <div class="feature reveal">
       <div class="feature-copy">
         <span class="eyebrow">No app needed</span>
         <h2 class="h2">Your friends just scan and tap.</h2>
@@ -169,24 +157,11 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
   </div>
 </section>
 
-<section class="section-tight">
-  <div class="wrap">
-    <a class="card card-pad reveal" href="/tools/overpay-calculator/" style="display:grid;gap:18px;grid-template-columns:1fr;align-items:center;color:var(--text);text-decoration:none">
-      <div style="display:grid;gap:10px">
-        <span class="eyebrow">Free calculator</span>
-        <h2 class="h2" style="font-size:clamp(28px,3.6vw,40px)">How much does splitting equally cost you?</h2>
-        <p class="lede">Five quick taps for your estimated yearly overpay. Most light eaters are surprised.</p>
-        <span class="text-link">Work out my number</span>
-      </div>
-    </a>
-  </div>
-</section>
-
 <section class="section" id="pricing">
   <div class="wrap">
     <div class="card pricing reveal">
       <div class="pricing-intro">
-        ${art('paid', 150)}
+        ${art('allclear', 150)}
         <span class="eyebrow">Pricing</span>
         <h2 class="h2">Your first split is free.</h2>
         <p class="lede">After that, about 50p a month. Less than a single round, for a whole year of fair dinners.</p>
@@ -212,14 +187,14 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
 <section class="section" style="padding-top:0">
   <div class="wrap">
     <div class="section-head reveal"><h2 class="h2">Questions</h2></div>
-    <div class="faq reveal">${FAQ.map(([q, a]) => `<details><summary>${esc(q)}</summary><div class="answer"><p>${esc(a)}</p></div></details>`).join('')}</div>
+    <div class="faq reveal">${FAQ.filter((_, i) => HOME_FAQ.includes(i)).map(([q, a]) => `<details><summary>${esc(q)}</summary><div class="answer"><p>${esc(a)}</p></div></details>`).join('')}</div>
   </div>
 </section>
 
 ${posts.length ? `<section class="section" style="padding-top:0">
   <div class="wrap">
     <div class="section-head reveal"><span class="eyebrow">From the blog</span><h2 class="h2">Money, manners and maths.</h2></div>
-    <div class="cards home-posts">${posts.slice(0, 6).map((p) => postCard(p)).join('')}</div>
+    <div class="cards home-posts">${posts.slice(0, 3).map((p) => postCard(p)).join('')}</div>
     <p style="text-align:center;margin-top:28px"><a class="text-link" href="/blog/">All articles</a></p>
   </div>
 </section>` : ''}
@@ -253,7 +228,7 @@ ${posts.length ? `<section class="section" style="padding-top:0">
         { '@type': 'Offer', name: 'Yearly', price: '5.99', priceCurrency: 'GBP' },
       ],
     },
-    { '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+    { '@type': 'FAQPage', mainEntity: FAQ.filter((_, i) => HOME_FAQ.includes(i)).map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
   ];
   write('/', layout({
     path: '/',
