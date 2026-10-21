@@ -680,3 +680,10 @@ p { margin: 0; text-wrap: pretty; }
 .vs-try .vs-reassure { justify-content: flex-start; }
 @media (min-width: 760px) { .vs-try { grid-template-columns: minmax(0, 1fr) auto; } }
 .vs-lane { text-align: center; margin: 22px auto 0; max-width: 46ch; font-size: 16px; color: var(--text-2); }
+
+/* Home: the Splitwise section and hero chip */
+.vs-chip { text-decoration: none !important; gap: 8px; padding-left: 6px; }
+.vs-chip img { width: 18px; height: 18px; border-radius: 5px; }
+.home-vs .vs-lockup { margin-bottom: 4px; }
+.home-vs .vs-lockup .vs-icon { width: 56px; height: 56px; }
+.home-vs .vs-anchor { margin-top: 28px; }

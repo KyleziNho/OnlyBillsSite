@@ -1,4 +1,5 @@
 import { SITE, esc, art, shot, face, facesFor, storeButton, abs, icons } from '../lib.mjs';
+import { vsAnchor, vsTable, VS_ROWS } from './vs.mjs';
 
 export const FAQ = [
   ['Do my friends need to download OnlyBills?', 'No. When you share a live table, friends scan the QR code or open the link and claim their items in their browser (or as an App Clip on iPhone). They can pay you from there too. Only the person hosting the bill needs the app.'],
@@ -21,11 +22,11 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="chip chip-accent">Friends join without the app</span>
+      <a class="chip chip-accent vs-chip" href="/vs/splitwise/"><img src="/assets/img/splitwise-icon.png" width="18" height="18" alt="">85% less than Splitwise Pro ›</a>
       <h1 class="display">Everyone pays for what they had.</h1>
       <p class="lede">Scan the receipt. Friends tap their items on their own phone and pay you back, exact to the penny.</p>
       <div class="btn-row">${storeButton('Download on the', 'hero')}<a class="btn btn-secondary" href="/how-to/">See how it works</a></div>
-      <p class="hero-note">${face('Sam', 24, '', sam)}<span>Your first split is free. iPhone and iPad.</span></p>
+      <p class="hero-note">${face('Sam', 24, '', sam)}<span>Your first split is free. No sign-up, not even for you.</span></p>
     </div>
     <div class="hero-stage" aria-hidden="true">
       <div class="hero-glow"><picture><source srcset="/assets/img/hero-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/img/hero-light.webp" width="1400" height="933" alt="" fetchpriority="high"></picture></div>
@@ -47,6 +48,19 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <div class="card stat-card"><span class="num">6m 45s</span><p>is how long the average group spends settling a bill.</p><cite>comparethemarket survey, 2021</cite></div>
     </div>
     <p class="foot" style="text-align:center;margin-top:14px"><a href="/blog/splitting-the-bill-equally-cost/">Where these numbers come from</a></p>
+  </div>
+</section>
+
+<section class="section home-vs" id="splitwise">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="vs-lockup" aria-hidden="true"><picture><source srcset="/assets/img/app-icon-dark-128.png" media="(prefers-color-scheme: dark)"><img class="vs-icon" src="/assets/img/app-icon-128.png" width="56" height="56" alt=""></picture><span>vs</span><img class="vs-icon" src="/assets/img/splitwise-icon.png" width="56" height="56" alt=""></div>
+      <h2 class="h2">Using Splitwise?<br>Same dinner, 85% less.</h2>
+      <p class="lede">Everything you need for tonight\u2019s bill. None of the sign-ups, ads or £39.99 a year.</p>
+    </div>
+    <div class="reveal">${vsAnchor()}</div>
+    <div class="reveal" style="max-width:900px;margin:40px auto 0">${vsTable([0, 2, 3, 5, 6, 9, 10].map((i) => VS_ROWS[i]))}</div>
+    <p style="text-align:center;margin-top:22px"><a class="text-link" href="/vs/splitwise/">See the full comparison</a></p>
   </div>
 </section>
 

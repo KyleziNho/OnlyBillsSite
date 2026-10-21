@@ -42,6 +42,41 @@ export const VS_FAQ = [
   ['Can I use both?', 'Plenty of people do. Splitwise for the flat’s rent and bills, OnlyBills for dinners and nights out, where everyone had something different.'],
 ];
 
+export const vsAnchor = () => `
+    <div class="card vs-anchor" aria-label="Price per year: Splitwise Pro £39.99, OnlyBills £5.99. Save 85%.">
+      <div class="vs-anchor-side them">
+        <div class="vs-anchor-name">${SW_ICON(36)}Splitwise Pro</div>
+        <div class="vs-anchor-price"><s>£39.99</s></div>
+        <span class="quiet">a year</span>
+      </div>
+      <div class="vs-anchor-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="vs-anchor-side us">
+        <div class="vs-anchor-name">${OB_ICON(36)}OnlyBills</div>
+        <div class="vs-anchor-price">£5.99</div>
+        <span class="quiet">a year</span>
+      </div>
+      <div class="vs-save-badge">Save 85%</div>
+    </div>
+`;
+export const vsMinds = () => `
+    <div class="vs-minds">
+      <div class="card vs-mind them reveal">
+        <div class="vs-mind-head">${SW_ICON(32)}<b>With Splitwise</b></div>
+        <ul class="vs-bubbles">${THEIR_THOUGHTS.map((t, i) => `<li style="--i:${i}">${esc(t)}</li>`).join('')}</ul>
+      </div>
+      <div class="card vs-mind us reveal">
+        <div class="vs-mind-head">${OB_ICON(32)}<b>With OnlyBills</b></div>
+        <ul class="vs-bubbles"><li class="one">Who had what?</li></ul>
+        <p class="vs-thats-it">That’s it. Everyone taps their own, and pays you.</p>
+      </div>
+    </div>`;
+export const vsTable = (rows) => `
+    <div class="card vs-table reveal" role="table" aria-label="OnlyBills compared with Splitwise">
+      <div class="vs-row vs-headrow" role="row"><span role="columnheader"><span class="visually-hidden">Feature</span></span><span role="columnheader" class="vs-col-us">${OB_ICON(28)}OnlyBills</span><span role="columnheader" class="vs-col-them">${SW_ICON(28)}Splitwise</span></div>
+      ${rows.map(([f, a, b]) => `<div class="vs-row" role="row"><span role="rowheader">${esc(f)}</span><span role="cell" class="vs-col-us">${a}</span><span role="cell">${b}</span></div>`).join('')}
+    </div>`;
+export { ROWS as VS_ROWS };
+
 export function vsPage({ write, layout, assetsV, ogFor }) {
   const path = '/vs/splitwise/';
   const trail = [['Home', '/'], ['OnlyBills vs Splitwise', path]];
@@ -57,20 +92,7 @@ export function vsPage({ write, layout, assetsV, ogFor }) {
       ${reassure}
     </div>
 
-    <div class="card vs-anchor" aria-label="Price per year: Splitwise Pro £39.99, OnlyBills £5.99. Save 85%.">
-      <div class="vs-anchor-side them">
-        <div class="vs-anchor-name">${SW_ICON(36)}Splitwise Pro</div>
-        <div class="vs-anchor-price"><s>£39.99</s></div>
-        <span class="quiet">a year</span>
-      </div>
-      <div class="vs-anchor-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      <div class="vs-anchor-side us">
-        <div class="vs-anchor-name">${OB_ICON(36)}OnlyBills</div>
-        <div class="vs-anchor-price">£5.99</div>
-        <span class="quiet">a year</span>
-      </div>
-      <div class="vs-save-badge">Save 85%</div>
-    </div>
+    ${vsAnchor()}
     <p class="vs-anchor-note">That’s £34 back every year. Roughly six pints, or the next round.</p>
   </div>
 </section>
@@ -81,27 +103,14 @@ export function vsPage({ write, layout, assetsV, ogFor }) {
       <h2 class="h2">Less to think about.</h2>
       <p class="lede">At the end of a good dinner, the bill should be one thought, not five.</p>
     </div>
-    <div class="vs-minds">
-      <div class="card vs-mind them reveal">
-        <div class="vs-mind-head">${SW_ICON(32)}<b>With Splitwise</b></div>
-        <ul class="vs-bubbles">${THEIR_THOUGHTS.map((t, i) => `<li style="--i:${i}">${esc(t)}</li>`).join('')}</ul>
-      </div>
-      <div class="card vs-mind us reveal">
-        <div class="vs-mind-head">${OB_ICON(32)}<b>With OnlyBills</b></div>
-        <ul class="vs-bubbles"><li class="one">Who had what?</li></ul>
-        <p class="vs-thats-it">That’s it. Everyone taps their own, and pays you.</p>
-      </div>
-    </div>
+    ${vsMinds()}
   </div>
 </section>
 
 <section class="section" id="compare" style="padding-top:0">
   <div class="wrap" style="max-width:calc(900px + 2 * var(--gutter))">
     <div class="section-head reveal"><h2 class="h2">Side by side.</h2></div>
-    <div class="card vs-table reveal" role="table" aria-label="OnlyBills compared with Splitwise">
-      <div class="vs-row vs-headrow" role="row"><span role="columnheader"><span class="visually-hidden">Feature</span></span><span role="columnheader" class="vs-col-us">${OB_ICON(28)}OnlyBills</span><span role="columnheader" class="vs-col-them">${SW_ICON(28)}Splitwise</span></div>
-      ${ROWS.map(([f, a, b]) => `<div class="vs-row" role="row"><span role="rowheader">${esc(f)}</span><span role="cell" class="vs-col-us">${a}</span><span role="cell">${b}</span></div>`).join('')}
-    </div>
+    ${vsTable(ROWS)}
   </div>
 </section>
 
