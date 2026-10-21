@@ -28,8 +28,8 @@
 <meta name="twitter:title" content="OnlyBills: split the bill by what everyone had">
 <meta name="twitter:description" content="Scan the receipt, friends tap what they had on their own phone (no app needed) and pay you back by Monzo, Starling, Revolut or PayPal. First split free.">
 <meta name="twitter:image" content="https://onlybills.app/assets/img/og-card.jpg">
-<link rel="stylesheet" href="/assets/css/tokens.css?v=3adae6d5">
-<link rel="stylesheet" href="/assets/css/site.css?v=3adae6d5">
+<link rel="stylesheet" href="/assets/css/tokens.css?v=d10cf788">
+<link rel="stylesheet" href="/assets/css/site.css?v=d10cf788">
 <script>document.documentElement.className='js'</script>
 <link rel="preload" as="image" href="/assets/img/hero-light.webp" media="(prefers-color-scheme: light)">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://onlybills.app/#org","name":"OnlyBills","url":"https://onlybills.app/","logo":"https://onlybills.app/assets/img/app-icon.png","founder":{"@type":"Person","name":"Kyle","url":"https://onlybills.app/about/"},"sameAs":["https://apps.apple.com/gb/app/onlybills/id6754412082","https://www.linkedin.com/in/kos33/"]},{"@type":"WebSite","@id":"https://onlybills.app/#site","url":"https://onlybills.app/","name":"OnlyBills","publisher":{"@id":"https://onlybills.app/#org"},"inLanguage":"en-GB"},{"@type":"MobileApplication","name":"OnlyBills","operatingSystem":"iOS, iPadOS","applicationCategory":"FinanceApplication","description":"Split restaurant bills by what everyone had. Scan the receipt, friends claim their items on their own phone, and everyone pays you back exact to the penny.","url":"https://onlybills.app/","downloadUrl":"https://apps.apple.com/gb/app/onlybills/id6754412082","image":"https://onlybills.app/assets/img/app-icon.png","inLanguage":"en-GB","author":{"@id":"https://onlybills.app/#org"},"offers":[{"@type":"Offer","name":"First split","price":"0","priceCurrency":"GBP"},{"@type":"Offer","name":"Monthly","price":"0.99","priceCurrency":"GBP"},{"@type":"Offer","name":"Yearly","price":"5.99","priceCurrency":"GBP"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do my friends need to download OnlyBills?","acceptedAnswer":{"@type":"Answer","text":"No. When you share a live table, friends scan the QR code or open the link and claim their items in their browser (or as an App Clip on iPhone). They can pay you from there too. Only the person hosting the bill needs the app."}},{"@type":"Question","name":"How much does OnlyBills cost?","acceptedAnswer":{"@type":"Answer","text":"Your first split is free. After that it’s £0.99 a month or £5.99 a year, with a free trial. You can cancel any time in your iPhone’s Settings."}},{"@type":"Question","name":"How do people pay me back?","acceptedAnswer":{"@type":"Answer","text":"You add how you’d like to be paid: a Monzo, Starling or Revolut payment link, PayPal, or your bank details. Friends tap to pay their exact share. Monzo links take card, Apple Pay or bank transfer with no Monzo account needed; Starling and Revolut take card or Apple Pay; bank transfer works from any banking app."}},{"@type":"Question","name":"Can friends with Android phones join?","acceptedAnswer":{"@type":"Answer","text":"Yes. The live table opens in any modern phone browser, so friends on Android can claim their items and pay. The OnlyBills app itself is for iPhone and iPad."}},{"@type":"Question","name":"How is OnlyBills different from Splitwise?","acceptedAnswer":{"@type":"Answer","text":"Both can split a receipt by item. OnlyBills adds Monzo, Starling and Revolut pay links with each friend’s exact share, an App Clip on iPhone and automatic receipt translation. It needs no sign-up at all, and a whole year costs £5.99 against £39.99 for Splitwise Pro."}}]}]}</script>
@@ -62,8 +62,12 @@
         <div class="phone"><picture><source srcset="/assets/shots/guest-01-join-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/shots/guest-01-join-light.webp" width="640" height="1391" alt="" fetchpriority="high" decoding="async"></picture></div>
         <div class="phone"><picture><source srcset="/assets/shots/guest-05-live-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/shots/guest-05-live-light.webp" width="640" height="1391" alt="" fetchpriority="high" decoding="async"></picture></div>
       </div>
-      <div class="float-pill a"><img class="face" style="--size:32px" src="/assets/faces/green-2.webp" width="32" height="32" alt="" loading="lazy" decoding="async"><span>Sam paid <span class="money">£19.01</span></span></div>
-      <div class="float-pill b"><span class="chip chip-live" style="height:24px">Adds up</span><span class="money">£71.25</span></div>
+      <div class="notifs" aria-hidden="true">
+        <div class="notif" style="--d:900ms"><span class="notif-av"><img class="face" style="--size:38px" src="/assets/faces/green-2.webp" width="38" height="38" alt="" loading="lazy" decoding="async"><img class="notif-badge" src="/assets/img/app-icon-64.png" width="16" height="16" alt=""></span><span class="notif-body"><span class="notif-top"><b>Sam</b><small>now</small></span><span>Paid you <span class="money">£19.01</span> for Saffron House</span></span></div>
+        <div class="notif" style="--d:2300ms"><span class="notif-av"><img class="face" style="--size:38px" src="/assets/faces/green-3.webp" width="38" height="38" alt="" loading="lazy" decoding="async"><img class="notif-badge" src="/assets/img/app-icon-64.png" width="16" height="16" alt=""></span><span class="notif-body"><span class="notif-top"><b>Priya</b><small>now</small></span><span>Paid you <span class="money">£16.40</span> for Saffron House</span></span></div>
+        <div class="notif" style="--d:3700ms"><span class="notif-av"><img class="face" style="--size:38px" src="/assets/faces/orange-1.webp" width="38" height="38" alt="" loading="lazy" decoding="async"><img class="notif-badge" src="/assets/img/app-icon-64.png" width="16" height="16" alt=""></span><span class="notif-body"><span class="notif-top"><b>Alex</b><small>now</small></span><span>Paid you <span class="money">£22.22</span> for Saffron House</span></span></div>
+      </div>
+      <div class="all-paid" aria-hidden="true" style="--d:5000ms"><span class="all-paid-tick">✓</span>Everyone’s paid you back</div>
     </div>
   </div>
 </section>
@@ -141,7 +145,24 @@
         </ul>
         <a class="text-link" href="/split/?demo=2&amp;state=claiming">Try a demo table in your browser</a>
       </div>
-      <div class="feature-visual"><div class="phone" style="--w:290px"><picture><source srcset="/assets/shots/guest-02-claimed-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/shots/guest-02-claimed-light.webp" width="640" height="1391" alt="A friend ticking the dishes they had on the OnlyBills live table" loading="lazy" decoding="async"></picture></div></div>
+      <div class="feature-visual"><div class="phone live-demo" data-live role="img" aria-label="Animated example: friends tick what they had on the live table and Alex’s share adds up to £22.22">
+          <div class="ld-screen">
+            <div class="ld-status"><b>09:41</b></div>
+            <div class="ld-toast" data-at="2000"><img class="face" style="--size:20px" src="/assets/faces/green-3.webp" width="20" height="20" alt="" loading="lazy" decoding="async">Priya joined the table</div>
+            <div class="ld-toast" data-at="5800"><img class="face" style="--size:20px" src="/assets/faces/green-2.webp" width="20" height="20" alt="" loading="lazy" decoding="async">Sam paid</div>
+            <div class="ld-head"><span class="chip chip-live">Live</span><b>Saffron House</b><small>Hosted by Kyle · 4 at the table</small></div>
+            <div class="ld-share"><span class="ld-me"><img class="face" style="--size:30px" src="/assets/faces/orange-1.webp" width="30" height="30" alt="" loading="lazy" decoding="async"><span><small>Your share</small><b>Alex</b></span></span><b class="ld-amt" data-amt>£0.00</b><small data-meta>Tap what you had</small></div>
+            <div class="ld-list">
+              <div class="ld-row" data-at="1400"><span class="tick"></span><span class="row-body"><span class="row-title">House Black Daal</span><span class="row-sub"><img class="face" style="--size:14px" src="/assets/faces/teal-3.webp" width="14" height="14" alt="" loading="lazy" decoding="async">Kyle</span></span><span class="row-end"><span class="money">£7.90</span></span></div>
+              <div class="ld-row" data-at="2600"><span class="tick"></span><span class="row-body"><span class="row-title">Chicken Ruby</span><span class="row-sub"><img class="face" style="--size:14px" src="/assets/faces/green-2.webp" width="14" height="14" alt="" loading="lazy" decoding="async">Sam</span></span><span class="row-end"><span class="money">£14.50</span></span></div>
+              <div class="ld-row" data-at="800" data-share="£13.20"><span class="tick"></span><span class="row-body"><span class="row-title">Lamb Raan Bun</span><span class="row-sub"><img class="face" style="--size:14px" src="/assets/faces/orange-1.webp" width="14" height="14" alt="" loading="lazy" decoding="async">You</span></span><span class="row-end"><span class="money">£13.20</span></span></div>
+              <div class="ld-row" data-at="3400" data-share="£14.80"><span class="tick"></span><span class="row-body"><span class="row-title">Garlic Naan <span class="qty">×2</span></span><span class="row-sub"><span class="faces" style="--size:14px"><img class="face" style="--size:14px" src="/assets/faces/teal-3.webp" width="14" height="14" alt="" loading="lazy" decoding="async"><img class="face" style="--size:14px" src="/assets/faces/green-2.webp" width="14" height="14" alt="" loading="lazy" decoding="async"><img class="face" style="--size:14px" src="/assets/faces/orange-1.webp" width="14" height="14" alt="" loading="lazy" decoding="async"></span>Split 3 ways</span></span><span class="row-end"><span class="money">£4.80</span><span class="you">You £1.60</span></span></div>
+              <div class="ld-row" data-at="4200" data-share="£19.75"><span class="tick"></span><span class="row-body"><span class="row-title">Mango Lassi</span><span class="row-sub"><img class="face" style="--size:14px" src="/assets/faces/orange-1.webp" width="14" height="14" alt="" loading="lazy" decoding="async">You</span></span><span class="row-end"><span class="money">£4.95</span></span></div>
+            </div>
+            <div class="ld-cta">Pay Kyle <span data-amt>£0.00</span></div>
+          </div>
+          <button class="ld-replay" type="button" hidden>Play again</button>
+        </div></div>
     </div>
 
     <div class="feature flip reveal">
@@ -156,19 +177,7 @@
         </ul>
         <a class="text-link" href="/tools/split-bill-calculator/">Try the free calculator</a>
       </div>
-      <div class="feature-visual">
-        <div class="demo" aria-label="Example: Alex's share of a bill at Saffron House is £22.22">
-          <div class="card share-card">
-            <div class="share-head"><img class="face" style="--size:48px" src="/assets/faces/orange-1.webp" width="48" height="48" alt="" loading="lazy" decoding="async"><span><small>Your share</small><b>Alex</b></span></div>
-            <div class="hero-money">£22.22</div>
-            <div class="share-meta">3 items · 1 shared · incl. £2.47 extras</div>
-          </div>
-          <div class="group">
-            <div class="row"><span class="tick"></span><span class="row-body"><span class="row-title">Chicken Ruby</span><span class="row-sub"><img class="face" style="--size:20px" src="/assets/faces/green-2.webp" width="20" height="20" alt="" loading="lazy" decoding="async">Sam</span></span><span class="row-end"><span class="money">£14.50</span></span></div>
-            <div class="row"><span class="tick on"></span><span class="row-body"><span class="row-title">Lamb Raan Bun</span><span class="row-sub"><img class="face" style="--size:20px" src="/assets/faces/orange-1.webp" width="20" height="20" alt="" loading="lazy" decoding="async">You</span></span><span class="row-end"><span class="money">£13.20</span></span></div>
-            <div class="row"><span class="tick on"></span><span class="row-body"><span class="row-title">Garlic Naan <span class="qty">×2</span></span><span class="row-sub"><span class="faces" style="--size:20px"><img class="face" style="--size:20px" src="/assets/faces/teal-3.webp" width="20" height="20" alt="" loading="lazy" decoding="async"><img class="face" style="--size:20px" src="/assets/faces/green-2.webp" width="20" height="20" alt="" loading="lazy" decoding="async"><img class="face" style="--size:20px" src="/assets/faces/orange-1.webp" width="20" height="20" alt="" loading="lazy" decoding="async"></span>Split 3 ways</span></span><span class="row-end"><span class="money">£4.80</span><span class="you">You £1.60</span></span></div>
-          </div>
-        </div>
+      <div class="feature-visual"><div class="phone" style="--w:290px"><picture><source srcset="/assets/shots/host-06-summary-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/shots/host-06-summary-light.webp" width="640" height="1391" alt="Who owes what: each person’s exact share of the bill, with their percentage" loading="lazy" decoding="async"></picture></div></div>
       </div>
     </div>
 
@@ -300,6 +309,6 @@
     <div class="legal"><span>© 2026 OnlyBills</span><span>Apple, iPhone and App Store are trademarks of Apple Inc. Monzo, Starling, Revolut and PayPal are trademarks of their owners.</span></div>
   </div>
 </footer>
-<script src="/assets/js/site.js?v=3adae6d5" defer></script>
+<script src="/assets/js/site.js?v=d10cf788" defer></script>
 </body>
 </html>

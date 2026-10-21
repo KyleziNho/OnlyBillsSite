@@ -17,7 +17,7 @@ const HOME_FAQ = [0, 1, 2, 5, 6];
 
 export function homePage({ posts, postCard, assetsV, write, layout }) {
   const demo = ['Kyle', 'Sam', 'Alex'];
-  const [kyle, sam, alex] = facesFor(demo);
+  const [kyle, sam, alex, priya] = facesFor([...demo, 'Priya']);
   const owed = [['Priya', '£18.40', 'Dishoom, Sat'], ['Jon', '£12.75', 'The Ivy, Fri'], ['Maya', '£31.20', 'Hen do dinner']];
   const owedFaces = facesFor(owed.map((o) => o[0]));
 
@@ -37,8 +37,12 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         ${shot('guest-01-join', '', 0, true)}
         ${shot('guest-05-live', '', 0, true)}
       </div>
-      <div class="float-pill a">${face('Sam', 32, '', sam)}<span>Sam paid <span class="money">£19.01</span></span></div>
-      <div class="float-pill b"><span class="chip chip-live" style="height:24px">Adds up</span><span class="money">£71.25</span></div>
+      <div class="notifs" aria-hidden="true">
+        <div class="notif" style="--d:900ms"><span class="notif-av">${face('Sam', 38, '', sam)}<img class="notif-badge" src="/assets/img/app-icon-64.png" width="16" height="16" alt=""></span><span class="notif-body"><span class="notif-top"><b>Sam</b><small>now</small></span><span>Paid you <span class="money">£19.01</span> for Saffron House</span></span></div>
+        <div class="notif" style="--d:2300ms"><span class="notif-av">${face('Priya', 38, '', priya)}<img class="notif-badge" src="/assets/img/app-icon-64.png" width="16" height="16" alt=""></span><span class="notif-body"><span class="notif-top"><b>Priya</b><small>now</small></span><span>Paid you <span class="money">£16.40</span> for Saffron House</span></span></div>
+        <div class="notif" style="--d:3700ms"><span class="notif-av">${face('Alex', 38, '', alex)}<img class="notif-badge" src="/assets/img/app-icon-64.png" width="16" height="16" alt=""></span><span class="notif-body"><span class="notif-top"><b>Alex</b><small>now</small></span><span>Paid you <span class="money">£22.22</span> for Saffron House</span></span></div>
+      </div>
+      <div class="all-paid" aria-hidden="true" style="--d:5000ms"><span class="all-paid-tick">✓</span>Everyone\u2019s paid you back</div>
     </div>
   </div>
 </section>
@@ -97,7 +101,24 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         </ul>
         <a class="text-link" href="/split/?demo=2&amp;state=claiming">Try a demo table in your browser</a>
       </div>
-      <div class="feature-visual">${shot('guest-02-claimed', 'A friend ticking the dishes they had on the OnlyBills live table', 290)}</div>
+      <div class="feature-visual"><div class="phone live-demo" data-live role="img" aria-label="Animated example: friends tick what they had on the live table and Alex\u2019s share adds up to £22.22">
+          <div class="ld-screen">
+            <div class="ld-status"><b>09:41</b></div>
+            <div class="ld-toast" data-at="2000">${face('Priya', 20, '', priya)}Priya joined the table</div>
+            <div class="ld-toast" data-at="5800">${face('Sam', 20, '', sam)}Sam paid</div>
+            <div class="ld-head"><span class="chip chip-live">Live</span><b>Saffron House</b><small>Hosted by Kyle · 4 at the table</small></div>
+            <div class="ld-share"><span class="ld-me">${face('Alex', 30, '', alex)}<span><small>Your share</small><b>Alex</b></span></span><b class="ld-amt" data-amt>£0.00</b><small data-meta>Tap what you had</small></div>
+            <div class="ld-list">
+              <div class="ld-row" data-at="1400"><span class="tick"></span><span class="row-body"><span class="row-title">House Black Daal</span><span class="row-sub">${face('Kyle', 14, '', kyle)}Kyle</span></span><span class="row-end"><span class="money">£7.90</span></span></div>
+              <div class="ld-row" data-at="2600"><span class="tick"></span><span class="row-body"><span class="row-title">Chicken Ruby</span><span class="row-sub">${face('Sam', 14, '', sam)}Sam</span></span><span class="row-end"><span class="money">£14.50</span></span></div>
+              <div class="ld-row" data-at="800" data-share="£13.20"><span class="tick"></span><span class="row-body"><span class="row-title">Lamb Raan Bun</span><span class="row-sub">${face('Alex', 14, '', alex)}You</span></span><span class="row-end"><span class="money">£13.20</span></span></div>
+              <div class="ld-row" data-at="3400" data-share="£14.80"><span class="tick"></span><span class="row-body"><span class="row-title">Garlic Naan <span class="qty">×2</span></span><span class="row-sub"><span class="faces" style="--size:14px">${face('Kyle', 14, '', kyle)}${face('Sam', 14, '', sam)}${face('Alex', 14, '', alex)}</span>Split 3 ways</span></span><span class="row-end"><span class="money">£4.80</span><span class="you">You £1.60</span></span></div>
+              <div class="ld-row" data-at="4200" data-share="£19.75"><span class="tick"></span><span class="row-body"><span class="row-title">Mango Lassi</span><span class="row-sub">${face('Alex', 14, '', alex)}You</span></span><span class="row-end"><span class="money">£4.95</span></span></div>
+            </div>
+            <div class="ld-cta">Pay Kyle <span data-amt>£0.00</span></div>
+          </div>
+          <button class="ld-replay" type="button" hidden>Play again</button>
+        </div></div>
     </div>
 
     <div class="feature flip reveal">
@@ -112,19 +133,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         </ul>
         <a class="text-link" href="/tools/split-bill-calculator/">Try the free calculator</a>
       </div>
-      <div class="feature-visual">
-        <div class="demo" aria-label="Example: Alex's share of a bill at Saffron House is £22.22">
-          <div class="card share-card">
-            <div class="share-head">${face('Alex', 48, '', alex)}<span><small>Your share</small><b>Alex</b></span></div>
-            <div class="hero-money">£22.22</div>
-            <div class="share-meta">3 items · 1 shared · incl. £2.47 extras</div>
-          </div>
-          <div class="group">
-            <div class="row"><span class="tick"></span><span class="row-body"><span class="row-title">Chicken Ruby</span><span class="row-sub">${face('Sam', 20, '', sam)}Sam</span></span><span class="row-end"><span class="money">£14.50</span></span></div>
-            <div class="row"><span class="tick on"></span><span class="row-body"><span class="row-title">Lamb Raan Bun</span><span class="row-sub">${face('Alex', 20, '', alex)}You</span></span><span class="row-end"><span class="money">£13.20</span></span></div>
-            <div class="row"><span class="tick on"></span><span class="row-body"><span class="row-title">Garlic Naan <span class="qty">×2</span></span><span class="row-sub"><span class="faces" style="--size:20px">${face('Kyle', 20, '', kyle)}${face('Sam', 20, '', sam)}${face('Alex', 20, '', alex)}</span>Split 3 ways</span></span><span class="row-end"><span class="money">£4.80</span><span class="you">You £1.60</span></span></div>
-          </div>
-        </div>
+      <div class="feature-visual">${shot('host-06-summary', 'Who owes what: each person\u2019s exact share of the bill, with their percentage', 290)}</div>
       </div>
     </div>
 
