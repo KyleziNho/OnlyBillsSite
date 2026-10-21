@@ -488,7 +488,8 @@
                     <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Your receipt history and settings stay on your device</span></li>
                     <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Receipt scanning sends the image to a secure AI service (Google Gemini)</span></li>
                     <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Live Split shares only the items and names you choose, over an encrypted connection</span></li>
-                    <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>We measure anonymous in-app usage to improve the app — no advertising ID, no cross-app tracking</span></li>
+                    <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>We measure anonymous in-app usage to improve the app. No advertising ID, no cross-app tracking</span></li>
+                    <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Notes you send us hold only what you write, plus your app version and device</span></li>
                     <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>We never sell your data or use it for advertising</span></li>
                 </ul>
             </section>
@@ -496,8 +497,8 @@
             <!-- Privacy Policy Sections -->
             <section class="policy-section" id="overview" aria-labelledby="h-overview">
                 <h2 id="h-overview">Privacy Policy</h2>
-                <p class="meta">Last Updated: <span id="current-date">27 July 2026</span></p>
-                <p>OnlyBills is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our app, including when receipt scanning, Live Split, and usage analytics use secure third-party cloud services.</p>
+                <p class="meta">Last Updated: <span id="current-date">21 October 2026</span></p>
+                <p>OnlyBills is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our app, including when receipt scanning, Live Split, venue lookups, feedback notes and usage analytics use secure third-party cloud services.</p>
             </section>
 
             <section class="policy-section" id="information-we-collect" aria-labelledby="h-collect">
@@ -512,8 +513,11 @@
                 <p>Some features send data to secure third-party cloud services to work:</p>
                 <ul class="doc-list">
                     <li><span class="bullet" aria-hidden="true">•</span> Receipt scanning uploads the receipt image to Google's Gemini API for analysis</li>
-                    <li><span class="bullet" aria-hidden="true">•</span> Live Split stores the receipt's items, the display names people enter, and who claimed what in Google Firebase so guests can join and split in real time. Receipt images shared during Live Split may be stored in Firebase Storage.</li>
-                    <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics are sent to Google Firebase Analytics — which screens you open, which onboarding steps you complete, whether a scan succeeded, and subscription events such as starting a trial. These are tied to a random app-install identifier, never to your name, email, or contacts, and no advertising identifier (IDFA) is collected. Receipt contents, item names, guest names, and payment handles are never included.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Live Split stores the receipt's items, the display names people enter, who claimed what, and who has marked themselves as paid in Google Firebase so guests can join and split in real time. Receipt images shared during Live Split may be stored in Firebase Storage.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> When you share a live table, the payment links and bank details you have chosen to show (for example your Monzo username, or your account name, sort code and account number) are included so guests can pay you. They are visible to anyone with the table link.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> To show a restaurant's name and photo, the venue name and address read from your receipt are sent to Google Places. Nothing about you or your friends is included.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> If you send us a note from the app or a bill page, we store your message, the screen you sent it from, your app and iOS version and device model, and, only if you give it, the email or number you'd like a reply on.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics are sent to Google Firebase Analytics: which screens you open, which onboarding steps you complete, whether a scan succeeded, and subscription events such as starting a trial. These are tied to a random app-install identifier, never to your name, email, or contacts, and no advertising identifier (IDFA) is collected. Receipt contents, item names, guest names, and payment handles are never included.</li>
                 </ul>
             </section>
 
@@ -523,9 +527,11 @@
                 <ul class="doc-list">
                     <li><span class="bullet" aria-hidden="true">•</span> Receipt images are sent to Google's Gemini API to read the items and prices, then returned to your device</li>
                     <li><span class="bullet" aria-hidden="true">•</span> During Live Split, the receipt items, the names guests enter, and their claims are stored in Google Firebase so everyone at the table can split the bill together in real time</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Payment details on a live table are used only to let guests pay you directly. OnlyBills never handles the money.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Feedback notes are used only to improve OnlyBills and to reply to you</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Contact information is only used on your device to display names and photos when splitting bills</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Your receipt history and settings are stored locally on your device using Apple's secure data storage</li>
-                    <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics tell us which parts of the app people actually reach — for example how many people finish onboarding, or whether receipt scanning is failing — so we can fix what isn't working</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics tell us which parts of the app people actually reach, for example how many people finish onboarding or whether receipt scanning is failing, so we can fix what isn't working</li>
                 </ul>
                 <p>We do not:</p>
                 <ul class="doc-list">
@@ -549,16 +555,18 @@
                 <p>Some data is stored off-device only when a feature needs it:</p>
                 <ul class="doc-list">
                     <li><span class="bullet" aria-hidden="true">•</span> Receipt images are transmitted to Google's Gemini API for scanning and are not retained by us</li>
-                    <li><span class="bullet" aria-hidden="true">•</span> When you start a Live Split, that bill's items, guest names, and claims are stored in Google Firebase for the life of the shared session so guests can join and update it. You can end and remove a live table from the app.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> When you start a Live Split, that bill's items, guest names, and claims are stored in Google Firebase, together with the payment details you chose to share, for the life of the shared session so guests can join and update it. You can end and remove a live table from the app.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics events are stored by Google Firebase Analytics under a random app-install identifier. Deleting the app resets that identifier.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Feedback notes are stored in Google Firebase. Email us and we will delete yours.</li>
                 </ul>
             </section>
 
             <section class="policy-section" id="third-party-services" aria-labelledby="h-third">
                 <h2 id="h-third">Third-Party Services</h2>
-                <p>OnlyBills uses Google cloud services to power three things:</p>
+                <p>OnlyBills uses Google cloud services to power four things:</p>
                 <p><strong>Google Gemini API (receipt scanning):</strong> receipt images are transmitted over an encrypted connection, analysed, and structured item data is returned to your device.</p>
-                <p><strong>Google Firebase (Live Split):</strong> when you share a bill, its items, the display names guests enter, and their claims are stored so everyone can split it in real time. Shared receipt images may be stored in Firebase Storage for the session.</p>
+                <p><strong>Google Firebase (Live Split):</strong> when you share a bill, its items, the display names guests enter, and their claims are stored so everyone can split it in real time. Shared receipt images may be stored in Firebase Storage for the session. Feedback notes you send are stored here too.</p>
+                <p><strong>Google Places (venue details):</strong> the restaurant name and address from your receipt are sent to find the venue's name and photo. No personal information is sent.</p>
                 <p><strong>Google Firebase Analytics (product improvement):</strong> anonymous, aggregated usage events keyed to a random app-install identifier. No advertising identifier is collected and no receipt or contact data is included.</p>
                 <p>All transfers use encrypted (HTTPS/TLS) connections. You can review these services' privacy policies:</p>
                 <ul class="doc-list">
@@ -598,7 +606,7 @@
 
             <section class="policy-section" id="contact" aria-labelledby="h-contact">
                 <h2 id="h-contact">Contact Us</h2>
-                <p>If you have questions about this Privacy Policy or our practices, or you want data from a Live Split session removed, email <a href="mailto:osullivan7791@gmail.com">osullivan7791@gmail.com</a>.</p>
+                <p>If you have questions about this Privacy Policy or our practices, or you want data from a Live Split session or a feedback note removed, email <a href="mailto:osullivan7791@gmail.com">osullivan7791@gmail.com</a>.</p>
             </section>
 
             <section class="policy-section" id="your-rights" aria-labelledby="h-rights">
