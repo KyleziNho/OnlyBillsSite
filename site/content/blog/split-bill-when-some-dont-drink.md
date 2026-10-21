@@ -103,7 +103,7 @@ Sometimes the table just wants to split it and move on. A few options:
 
 :::cta Food split, drinks to whoever had them
 
-This is the kind of split OnlyBills is built for. Scan the receipt, then share a live table: everyone ticks their own drinks and the dishes they shared, on their own phone, without downloading anything. A bottle of wine splits between the people who ticked it. The service charge spreads in proportion. Your first split is free, then £0.99 a month or £5.99 a year (with a free trial).
+This is the kind of split OnlyBills is built for. Scan the receipt, then share a live table: everyone ticks their own drinks and the dishes they shared, on their own phone, without downloading anything. A bottle of wine splits between the people who ticked it. The service charge spreads in proportion. It's free, with no sign-up.
 
 :::shot guest-02-claimed | Each person ticks only the drinks and dishes they had.
 

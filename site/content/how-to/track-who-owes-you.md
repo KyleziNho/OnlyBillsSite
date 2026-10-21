@@ -73,5 +73,5 @@ Yes. Tap their face or their row. You'll see each bill with the venue, date and 
 ### What if I settle someone by mistake?
 Tap **Undo** on the message that appears straight after. You can also add the amount back with **Add an IOU**.
 
-### Can I still use Owed without a subscription?
-Yes. Owed, History and Settings stay open after your free split, even without a subscription. Only starting a new split needs one.
+### Do I need to pay to use Owed?
+No. Owed is free, along with History, Settings and everything else in OnlyBills.

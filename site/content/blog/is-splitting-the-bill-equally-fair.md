@@ -120,7 +120,7 @@ That last one is worth saying out loud more often. People who ordered less rarel
 
 :::cta Make paying by item as easy as splitting
 
-The main reason people split equally when they shouldn't is that itemising is a pain. OnlyBills takes that away. Scan the receipt and share a live table: friends tick what they had on their own phone, without downloading anything. Shared dishes split between whoever shared them, and service charge is spread fairly. Your first split is free, then it's £0.99 a month or £5.99 a year (with a free trial).
+The main reason people split equally when they shouldn't is that itemising is a pain. OnlyBills takes that away. Scan the receipt and share a live table: friends tick what they had on their own phone, without downloading anything. Shared dishes split between whoever shared them, and service charge is spread fairly. It's free, with no sign-up.
 
 ## A fair split, step by step
 

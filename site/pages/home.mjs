@@ -3,12 +3,12 @@ import { vsAnchor, vsTable, VS_ROWS } from './vs.mjs';
 
 export const FAQ = [
   ['Do my friends need to download OnlyBills?', 'No. When you share a live table, friends scan the QR code or open the link and claim their items in their browser (or as an App Clip on iPhone). They can pay you from there too. Only the person hosting the bill needs the app.'],
-  ['How much does OnlyBills cost?', 'Your first split is free. After that it’s £0.99 a month or £5.99 a year, with a free trial. You can cancel any time in your iPhone’s Settings.'],
+  ['How much does OnlyBills cost?', 'It’s free. There’s no sign-up, no ads and no trial to cancel, and friends who join your table never pay anything. Free includes 10 receipt scans a month. Typing a bill in is always unlimited. If you scan a lot, you can add unlimited scans in the app.'],
   ['How do people pay me back?', 'You add how you’d like to be paid: a Monzo, Starling or Revolut payment link, PayPal, or your bank details. Friends tap to pay their exact share. Monzo links take card, Apple Pay or bank transfer with no Monzo account needed; Starling and Revolut take card or Apple Pay; bank transfer works from any banking app.'],
   ['Does OnlyBills take a cut of the money?', 'No. Payments go straight from your friends to you through your bank or PayPal. OnlyBills never holds your money.'],
   ['What about service charge, tips and discounts?', 'They’re spread across everyone in proportion to what they had, and shared dishes split between the people who shared them. Every share is exact to the penny and they add up to the bill.'],
   ['Can friends with Android phones join?', 'Yes. The live table opens in any modern phone browser, so friends on Android can claim their items and pay. The OnlyBills app itself is for iPhone and iPad.'],
-  ['How is OnlyBills different from Splitwise?', 'Both can split a receipt by item. OnlyBills adds Monzo, Starling and Revolut pay links with each friend\u2019s exact share, an App Clip on iPhone and automatic receipt translation. It needs no sign-up at all, and a whole year costs £5.99 against £39.99 for Splitwise Pro.'],
+  ['How is OnlyBills different from Splitwise?', 'Both can split a receipt by item. OnlyBills adds Monzo, Starling and Revolut pay links with each friend\u2019s exact share, an App Clip on iPhone and automatic receipt translation. It needs no sign-up at all, and it’s free, where Splitwise Pro is £39.99 a year.'],
   ['What if the receipt is read wrong?', 'You check every receipt before you share it. OnlyBills shows whether the items add up to the total, and you can edit any line, price or quantity.'],
 ];
 
@@ -25,11 +25,11 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <a class="chip chip-accent vs-chip" href="/vs/splitwise/"><img src="/assets/img/splitwise-icon.png" width="18" height="18" alt="">85% less than Splitwise Pro ›</a>
+      <a class="chip chip-accent vs-chip" href="/vs/splitwise/"><img src="/assets/img/splitwise-icon.png" width="18" height="18" alt="">The free alternative to Splitwise Pro ›</a>
       <h1 class="display">Everyone pays for what they had.</h1>
       <p class="lede">Scan the receipt. Friends tap their items on their own phone and pay you back, exact to the penny.</p>
       <div class="btn-row">${storeButton('Download on the', 'hero')}<a class="btn btn-secondary" href="/how-to/">See how it works</a></div>
-      <p class="hero-note">${face('Sam', 24, '', sam)}<span>Your first split is free. No sign-up, not even for you.</span></p>
+      <p class="hero-note">${face('Sam', 24, '', sam)}<span>Free. No sign-up, not even for you.</span></p>
     </div>
     <div class="hero-stage" aria-hidden="true">
       <div class="hero-glow"><picture><source srcset="/assets/img/hero-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/img/hero-light.webp" width="1400" height="933" alt="" fetchpriority="high"></picture></div>
@@ -62,7 +62,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
   <div class="wrap">
     <div class="section-head reveal">
       <div class="vs-lockup" aria-hidden="true"><picture><source srcset="/assets/img/app-icon-dark-128.png" media="(prefers-color-scheme: dark)"><img class="vs-icon" src="/assets/img/app-icon-128.png" width="56" height="56" alt=""></picture><span>vs</span><img class="vs-icon" src="/assets/img/splitwise-icon.png" width="56" height="56" alt=""></div>
-      <h2 class="h2">Using Splitwise?<br>Same dinner, 85% less.</h2>
+      <h2 class="h2">Using Splitwise?<br>Same dinner, for free.</h2>
       <p class="lede">Everything you need for tonight\u2019s bill. None of the sign-ups, ads or £39.99 a year.</p>
     </div>
     <div class="reveal">${vsAnchor()}</div>
@@ -175,24 +175,23 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <div class="pricing-intro">
         ${art('allclear', 150)}
         <span class="eyebrow">Pricing</span>
-        <h2 class="h2">Your first split is free.</h2>
-        <p class="lede">After that, about 50p a month. Less than a single round, for a whole year of fair dinners.</p>
+        <h2 class="h2">Free. For you and your friends.</h2>
+        <p class="lede">No trial, no card details, nothing to cancel. Just fair dinners.</p>
       </div>
       <div class="pricing-side">
         <div class="group plans">
-          <div class="row plan best"><span class="row-body"><span class="row-title">Yearly <span class="chip chip-live">Best value</span></span><span class="row-sub">£5.99 a year</span></span><span class="plan-price"><b>50p</b><small>/month</small></span></div>
-          <div class="row plan"><span class="row-body"><span class="row-title">Monthly</span><span class="row-sub">Billed monthly</span></span><span class="plan-price"><b>99p</b><small>/month</small></span></div>
+          <div class="row plan best"><span class="row-body"><span class="row-title">OnlyBills</span><span class="row-sub">Host and friends</span></span><span class="plan-price"><b>Free</b></span></div>
         </div>
         <ul class="ticks pricing-ticks">
           <li>Split every dinner, drink and night out</li>
           <li>Friends join free, with no app or sign-up</li>
           <li>No ads, ever</li>
-          <li>Cancel any time in Settings</li>
+          <li>No account to make, not even for you</li>
         </ul>
         ${storeButton('Download on the', 'pricing')}
       </div>
     </div>
-    <p class="foot" style="text-align:center;margin-top:16px">Includes a free trial, then renews automatically until you cancel. <a href="/vs/splitwise/">85% less than Splitwise Pro</a>.</p>
+    <p class="foot" style="text-align:center;margin-top:16px">Free includes 10 receipt scans a month. Typing a bill in is always unlimited. Unlimited scans are available in the app if you need more. <a href="/how-to/first-run-and-pricing/">How pricing works</a>.</p>
   </div>
 </section>
 
@@ -216,7 +215,7 @@ ${posts.length ? `<section class="section" style="padding-top:0">
     <div class="card closer reveal">
       ${art('paid', 170)}
       <h2 class="h2">Take the maths out of special moments.</h2>
-      <p class="lede">Scan, share, get paid. Your first split is on us.</p>
+      <p class="lede">Scan, share, get paid. Free, with no sign-up.</p>
       ${storeButton('Download on the', 'closer')}
     </div>
   </div>
@@ -234,18 +233,14 @@ ${posts.length ? `<section class="section" style="padding-top:0">
       image: abs('/assets/img/app-icon.png'),
       inLanguage: 'en-GB',
       author: { '@id': SITE.url + '/#org' },
-      offers: [
-        { '@type': 'Offer', name: 'First split', price: '0', priceCurrency: 'GBP' },
-        { '@type': 'Offer', name: 'Monthly', price: '0.99', priceCurrency: 'GBP' },
-        { '@type': 'Offer', name: 'Yearly', price: '5.99', priceCurrency: 'GBP' },
-      ],
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
     },
     { '@type': 'FAQPage', mainEntity: FAQ.filter((_, i) => HOME_FAQ.includes(i)).map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
   ];
   write('/', layout({
     path: '/',
     title: 'OnlyBills: split the bill by what everyone had',
-    description: 'Scan the receipt, friends tap what they had on their own phone (no app needed) and pay you back by Monzo, Starling, Revolut or PayPal. First split free.',
+    description: 'Scan the receipt, friends tap what they had on their own phone (no app needed) and pay you back by Monzo, Starling, Revolut or PayPal. Free, no sign-up.',
     body, schema, current: '/', assetsV,
     extraHead: '<link rel="preload" as="image" href="/assets/img/hero-light.webp" media="(prefers-color-scheme: light)">',
   }), { priority: 1.0 });

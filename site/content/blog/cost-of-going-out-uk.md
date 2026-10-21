@@ -109,7 +109,7 @@ For more on chasing it politely, see [how to ask a friend to pay you back](/blog
 
 :::cta Pay for what you had, and settle up the same night
 
-OnlyBills makes fairer splitting the easy option. Scan the receipt and share a live table: friends tick what they had on their own phone (no app download needed) and see their share add up. Shared dishes split between whoever shared them. Everyone pays you back with a link, and Owed keeps track of who still owes you. Your first split is free, then £0.99 a month or £5.99 a year (with a free trial).
+OnlyBills makes fairer splitting the easy option. Scan the receipt and share a live table: friends tick what they had on their own phone (no app download needed) and see their share add up. Shared dishes split between whoever shared them. Everyone pays you back with a link, and Owed keeps track of who still owes you. It's free, with no sign-up.
 
 ## If you're the friend who can't afford it
 

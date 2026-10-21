@@ -105,7 +105,7 @@ With friends, the same method works. Two extra points:
 
 :::cta Fourteen people, one receipt, every share exact
 
-OnlyBills reads the receipt from a photo. Share a live table and each person ticks their menu, their drinks or the package on their own phone, no download needed. Shared bottles split between whoever ticked them, and service is spread in proportion, exact to the penny. Friends pay you back by Monzo, Starling, Revolut or PayPal link, or bank transfer. Your first split is free, then £0.99 a month or £5.99 a year (with a free trial).
+OnlyBills reads the receipt from a photo. Share a live table and each person ticks their menu, their drinks or the package on their own phone, no download needed. Shared bottles split between whoever ticked them, and service is spread in proportion, exact to the penny. Friends pay you back by Monzo, Starling, Revolut or PayPal link, or bank transfer. It's free, with no sign-up.
 
 ## FAQ
 

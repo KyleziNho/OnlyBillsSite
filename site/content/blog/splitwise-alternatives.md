@@ -25,7 +25,7 @@ Most "best app" lists mix those two jobs up. This one doesn't. Below is what eac
 | Splid | Holidays, offline use, lots of currencies | No | No sign-up needed for groups | Free; Splid Plus £3.99 |
 | Tab | One bill, everyone already has the app | Yes | No, each person needs Tab | Free |
 | Monzo, Revolut, Starling | Splitting one card payment you already made | No | Friends at other banks can pay by link (Revolut's split button is Revolut-only) | Free |
-| OnlyBills | One UK restaurant bill, split by what each person had | Yes (AI receipt reading) | Yes: a link or QR code opens on the web or as an App Clip | First split free, then £0.99 a month or £5.99 a year, with a free trial |
+| OnlyBills | One UK restaurant bill, split by what each person had | Yes (AI receipt reading) | Yes: a link or QR code opens on the web or as an App Clip | Free (10 receipt scans a month, typing a bill in unlimited); optional unlimited scans |
 
 ## Which app should you use?
 
@@ -97,7 +97,7 @@ With a live table, friends scan a QR code or open a link and tick what they had 
 
 :::shot guest-01-join | Friends join from a link or QR code and pick their name. No app download.
 
-**What it costs:** your first split is free, then £0.99 a month or £5.99 a year, with a free trial. The host needs an iPhone or iPad; friends join from their browser.
+**What it costs:** free, with no sign-up. Free includes 10 receipt scans a month. Typing a bill in is always unlimited, and there's an optional subscription in the app for unlimited scans. The host needs an iPhone or iPad; friends join from their browser.
 
 **Not for:** rent, household bills or tracking a whole trip's costs. Use Splitwise, Tricount or Splid for those.
 

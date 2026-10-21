@@ -60,10 +60,10 @@ Tick people off as they pay. When you tap **Done** (or **Finish** on a live tabl
 No. If you share a live table, friends open it in their browser or as an App Clip on iPhone. If you assign items yourself, they don't need to do anything until your payment request arrives.
 
 ### What does OnlyBills cost?
-Your first split is free. After that it's £0.99 a month or £5.99 a year, with a free trial. The paywall shows the trial length and price before you start, and you can cancel any time in your iPhone's Settings.
+It's free, with no sign-up. Free includes 10 receipt scans a month. Typing a bill in is always unlimited. If you scan a lot, you can add unlimited scans in the app. [What free includes](/how-to/first-run-and-pricing/) has the details.
 
 ### Can I practise before a real bill?
-Yes. During setup you can try a practice scan on a pretend receipt, and you can replay it any time from Settings under Walkthrough. Nothing is saved, and it doesn't use your free split.
+Yes. During setup you can try a practice scan on a pretend receipt, and you can replay it any time from Settings under Walkthrough. Nothing is saved, and it doesn't count towards your receipt scans.
 
 ### Can I change the bill after I've split it?
 Yes. On the summary, tap **Edit** or **Edit items & charges** to change items, prices and charges. The shares update to match.

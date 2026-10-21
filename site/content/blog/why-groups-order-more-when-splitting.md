@@ -105,7 +105,7 @@ You don't need to ban splitting. You just need to stop the rules from nudging ev
 
 :::cta Everyone pays for what they had
 
-OnlyBills is built for exactly this. The host scans the receipt and shares a live table. Friends join with a QR code or link (no app needed), tick what they had, and see their share add up. Shared dishes split between the people who had them, and the service charge is spread fairly. Your first split is free, then it's £0.99 a month or £5.99 a year (with a free trial).
+OnlyBills is built for exactly this. The host scans the receipt and shares a live table. Friends join with a QR code or link (no app needed), tick what they had, and see their share add up. Shared dishes split between the people who had them, and the service charge is spread fairly. It's free, with no sign-up.
 
 ## A quick test you can run yourself
 

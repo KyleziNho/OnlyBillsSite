@@ -136,7 +136,7 @@ For the practical side (asking for the bill, one card or several, getting paid b
 
 :::cta Itemised, without the maths
 
-OnlyBills reads the receipt from a photo. Share a live table and each friend ticks what they had on their own phone, with no download needed, or assign the items yourself. Shared dishes split between whoever ticked them, the service charge spreads in proportion, and the shares add up to the bill to the penny. Your first split is free, then £0.99 a month or £5.99 a year (with a free trial).
+OnlyBills reads the receipt from a photo. Share a live table and each friend ticks what they had on their own phone, with no download needed, or assign the items yourself. Shared dishes split between whoever ticked them, the service charge spreads in proportion, and the shares add up to the bill to the penny. It's free, with no sign-up.
 
 ## FAQ
 

@@ -128,7 +128,7 @@ On a table where orders are close, the difference is pennies. It grows with the 
 
 :::cta Exact to the penny, every time
 
-OnlyBills does all of this automatically. Scan the receipt, share a live table, and each person ticks what they had. Service charge, tips and discounts are spread across everyone in proportion, and the shares always add up exactly to the bill. Friends pay you back with a link through Monzo, Starling, Revolut, PayPal or a bank transfer, and they don't need your bank's app. Your first split is free.
+OnlyBills does all of this automatically. Scan the receipt, share a live table, and each person ticks what they had. Service charge, tips and discounts are spread across everyone in proportion, and the shares always add up exactly to the bill. Friends pay you back with a link through Monzo, Starling, Revolut, PayPal or a bank transfer, and they don't need your bank's app. It's free, with no sign-up.
 
 :::shot guest-05-live | Each share includes its fair part of the service charge.
 
