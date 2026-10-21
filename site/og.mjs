@@ -34,7 +34,7 @@ for (const [slug, title, art] of [
   ['service-charge-calculator', 'Service charge calculator', 'receipts'],
   ['settle-up-calculator', 'Who owes who calculator', 'payout'],
 ]) jobs.push({ slug: 'tool-' + slug, title, kicker: 'Free tool', art });
-jobs.push({ slug: 'vs-splitwise', title: 'Splitwise is for flatmates. OnlyBills is for tonight.', kicker: 'OnlyBills vs Splitwise', art: 'paid' });
+jobs.push({ slug: 'vs-splitwise', title: 'Same dinner. 85% less than Splitwise Pro.', kicker: 'OnlyBills vs Splitwise', art: 'paid' });
 
 const todo = jobs.filter((j) => (!only || j.slug === only) && (force || only || !fs.existsSync(path.join(OUT, j.slug + '.jpg'))));
 if (!todo.length) { console.log('All share images exist. Use --force to redo them.'); process.exit(0); }

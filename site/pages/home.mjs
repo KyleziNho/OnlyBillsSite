@@ -179,7 +179,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <div class="card price"><span class="quiet">Monthly</span><span class="num">£0.99</span><span class="quiet">a month</span></div>
       <div class="card price best"><span class="chip chip-accent">Best value</span><span class="quiet">Yearly</span><span class="num">£5.99</span><span class="quiet">a year, about 50p a month</span></div>
     </div>
-    <a class="card tool-link reveal" href="/vs/splitwise/" style="max-width:760px;margin:14px auto 0"><span class="tool-icon">£</span><span><b>Nearly 7x cheaper than Splitwise Pro</b><span>£5.99 a year, against £39.99. A whole year costs less than two months of Pro.</span></span><span class="chev" aria-hidden="true">›</span></a>
+    <a class="card tool-link reveal" href="/vs/splitwise/" style="max-width:760px;margin:14px auto 0"><span class="tool-icon">£</span><span><b>Save 85% against Splitwise Pro</b><span>£5.99 a year, not £39.99. And nobody has to sign up.</span></span><span class="chev" aria-hidden="true">›</span></a>
     <p class="foot" style="text-align:center;margin-top:16px">Includes a free trial. Renews automatically until you cancel, which you can do any time in Settings. Friends who join your table never pay anything.</p>
   </div>
 </section>
