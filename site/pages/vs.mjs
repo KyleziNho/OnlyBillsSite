@@ -12,14 +12,17 @@ const NO = '<span class="vs-mark no"><span aria-hidden="true">✗</span><span cl
 const txt = (t) => `<span class="vs-txt">${t}</span>`;
 
 const ROWS = [
-  ['No sign-up, for anyone', YES, NO],
-  ['Pay links for Monzo, Starling, Revolut', YES, NO],
-  ['Friends pay by card or Apple Pay', YES, NO],
-  ['Receipts translated automatically', YES, NO],
+  ['No sign-up for anyone, host included', YES, NO],
+  ['Friends claim their items from a QR code, no app needed', YES, YES],
+  ['Pay links for Monzo, Starling and Revolut, exact amount filled in', YES, NO],
+  ['Friends can pay you by card or Apple Pay', YES, NO],
+  ['PayPal for UK friends', YES, txt('US only')],
+  ['Automatically translates receipts into English', YES, NO],
+  ['Built for UK service charge', YES, txt('Tax and tip')],
+  ['Running balances and IOUs across bills', YES, YES],
+  ['Shares exact to the penny', YES, YES],
   ['No ads', YES, txt('Pro only')],
-  ['Friends join by QR, no app', YES, YES],
-  ['Running balances and IOUs', YES, YES],
-  ['A year costs', txt('<b>£5.99</b>'), txt('<b>£39.99</b>')],
+  ['Price', txt('<b>£5.99 a year</b><br>or £0.99 a month'), txt('Pro: <b>£39.99 a year</b><br>or £3.99 a month')],
 ];
 
 // What's on your mind at the table. Each Splitwise line is a real step or limit.
@@ -93,10 +96,10 @@ export function vsPage({ write, layout, assetsV, ogFor }) {
 </section>
 
 <section class="section" id="compare" style="padding-top:0">
-  <div class="wrap" style="max-width:calc(760px + 2 * var(--gutter))">
+  <div class="wrap" style="max-width:calc(900px + 2 * var(--gutter))">
     <div class="section-head reveal"><h2 class="h2">Side by side.</h2></div>
     <div class="card vs-table reveal" role="table" aria-label="OnlyBills compared with Splitwise">
-      <div class="vs-row vs-headrow" role="row"><span role="columnheader"><span class="visually-hidden">Feature</span></span><span role="columnheader" class="vs-col-us">${OB_ICON(40)}<span>OnlyBills</span></span><span role="columnheader">${SW_ICON(40)}<span>Splitwise</span></span></div>
+      <div class="vs-row vs-headrow" role="row"><span role="columnheader"><span class="visually-hidden">Feature</span></span><span role="columnheader" class="vs-col-us">${OB_ICON(28)}OnlyBills</span><span role="columnheader" class="vs-col-them">${SW_ICON(28)}Splitwise</span></div>
       ${ROWS.map(([f, a, b]) => `<div class="vs-row" role="row"><span role="rowheader">${esc(f)}</span><span role="cell" class="vs-col-us">${a}</span><span role="cell">${b}</span></div>`).join('')}
     </div>
   </div>
