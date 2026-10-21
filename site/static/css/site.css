@@ -584,3 +584,14 @@ p { margin: 0; text-wrap: pretty; }
 .toc summary b { font-size: 15px; color: var(--text); }
 .toc ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; font-size: 16px; }
 .prose .toc li + li { margin-top: 0; }
+
+/* Comparison tables: feature rows with ticks */
+.prose table.compare th:not(:first-child), .prose table.compare td:not(:first-child) { text-align: center; width: 24%; }
+.prose table.compare td.mark span[aria-hidden] {
+  display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+  font-size: 15px; font-weight: 700; line-height: 1;
+}
+.prose table.compare td.yes span[aria-hidden] { background: var(--positive-soft); color: var(--positive-text); }
+.prose table.compare td.no span[aria-hidden] { background: var(--fill); color: var(--text-2); }
+.prose table.compare th:nth-child(2) { color: var(--accent-text); }
+.prose table.compare tr:last-child td { font-size: 15px; }

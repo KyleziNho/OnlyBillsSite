@@ -165,10 +165,19 @@ UK advertising rules (CAP code) need claims backed up. So:
   account needed"), Starling and Revolut ("Card or Apple Pay. No Starling/Revolut account
   needed"), PayPal ("PayPal account may be needed") or bank transfer ("From any banking app").
   Never imply friends need the host's bank app.
-- **Owed** tracks who still owes you across bills, with their faces.
+- **Owed** tracks who still owes you across bills, with their faces: a running balance with each
+  friend. You can add IOUs for anything else (the taxi, tickets). A reminder after a week to chase
+  anyone who hasn't paid.
+- Receipts in other languages are **automatically translated into English** (on by default, can be
+  turned off in Settings).
+- Taglines the founder likes: "Take the maths out of special moments." and "Dinners should end with
+  great conversations, not 15 minutes working out the bill."
+- Versus Splitwise Pro (£4.99 a month): a whole year of OnlyBills (£5.99) costs about the same as one
+  month of Pro; month to month OnlyBills is 5x cheaper. Tone can be bold and salesy, but every claim
+  about Splitwise not doing something must be true.
 - Price: your first split is free. Then £0.99 a month or £5.99 a year (with a free trial).
   Never obscure price, trial or renewal.
 - App Store: https://apps.apple.com/app/onlybills/id6754412082
-- Don't claim: Android, multiple currencies, splitting rent/utilities/ongoing household bills,
+- Don't claim: Android, multiple currencies, splitting rent/utilities as a household bills app,
   automatic bank integration, payment processing by OnlyBills itself (it hands off to the bank or
   PayPal), or anything you can't see in the list above.

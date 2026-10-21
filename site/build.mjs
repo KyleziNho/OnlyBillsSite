@@ -141,6 +141,10 @@ function renderArticle(body, file) {
   });
   html = html.replace(/<h3>(.*?)<\/h3>/g, (_, inner) => `<h3 id="${slugify(inner)}">${inner}</h3>`);
   html = html.replace(/<table>/g, '<div class="table-wrap"><table>').replace(/<\/table>/g, '</table></div>');
+  // Comparison tables: ✓ / ✗ cells become styled marks with words for screen readers.
+  html = html.replace(/<td([^>]*)>\s*✓\s*<\/td>/g, '<td$1 class="mark yes"><span aria-hidden="true">✓</span><span class="visually-hidden">Yes</span></td>')
+    .replace(/<td([^>]*)>\s*✗\s*<\/td>/g, '<td$1 class="mark no"><span aria-hidden="true">✗</span><span class="visually-hidden">No</span></td>')
+    .replace(/<div class="table-wrap"><table>(?=[\s\S]*?class="mark)/g, '<div class="table-wrap"><table class="compare">');
   html = html.replace(/<a href="(https?:\/\/(?!onlybills\.app)[^"]+)"/g, '<a href="$1" rel="noopener"');
 
   const faqs = [];

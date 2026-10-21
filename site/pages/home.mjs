@@ -7,6 +7,7 @@ export const FAQ = [
   ['Does OnlyBills take a cut of the money?', 'No. Payments go straight from your friends to you through your bank or PayPal. OnlyBills never holds your money.'],
   ['What about service charge, tips and discounts?', 'They’re spread across everyone in proportion to what they had, and shared dishes split between the people who shared them. Every share is exact to the penny and they add up to the bill.'],
   ['Can friends with Android phones join?', 'Yes. The live table opens in any modern phone browser, so friends on Android can claim their items and pay. The OnlyBills app itself is for iPhone and iPad.'],
+  ['How is OnlyBills different from Splitwise?', 'Both can split a receipt by item. OnlyBills adds Monzo, Starling and Revolut pay links with each friend\u2019s exact share, an App Clip on iPhone and automatic receipt translation. And a whole year costs £5.99, about the same as one month of Splitwise Pro.'],
   ['What if the receipt is read wrong?', 'You check every receipt before you share it. OnlyBills shows whether the items add up to the total, and you can edit any line, price or quantity.'],
 ];
 
@@ -54,7 +55,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
     <div class="section-head reveal">
       <span class="eyebrow">How it works</span>
       <h2 class="h2">Three steps. One minute.</h2>
-      <p class="lede">No more passing the receipt round or doing sums on a napkin.</p>
+      <p class="lede">Dinners should end with great conversations, not 15 minutes working out the bill.</p>
     </div>
     <div class="steps">
       <div class="card step reveal">${art('scan', 150)}<span class="step-n">1</span><h3 class="h3">Scan the receipt</h3><p class="quiet">OnlyBills reads every line, price and service charge. You check it adds up.</p></div>
@@ -74,8 +75,8 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
         <p class="lede">Point your camera at the bill. Every dish, price and service charge comes through, and you can see straight away that it adds up.</p>
         <ul class="ticks">
           <li>Reads quantities, service charge and discounts</li>
-          <li>Fix any line with a tap before you share</li>
-          <li>No receipt? Type the bill in instead</li>
+          <li>Translates receipts in other languages into English</li>
+          <li>Fix any line with a tap, or type a bill in by hand</li>
         </ul>
         <a class="text-link" href="/how-to/scan-a-receipt/">Tips for a perfect scan</a>
       </div>
@@ -145,7 +146,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <div class="feature-copy">
         <span class="eyebrow">Owed</span>
         <h2 class="h2">Know who still owes you.</h2>
-        <p class="lede">Every bill you host lands in one place. See who’s paid, nudge who hasn’t, and mark it settled when the money arrives.</p>
+        <p class="lede">Every bill you host lands in one place, and you can add an IOU for anything else. See who’s paid, chase who hasn’t, and mark it settled when the money arrives.</p>
         <a class="text-link" href="/how-to/track-who-owes-you/">How Owed works</a>
       </div>
       <div class="feature-visual">${shot('host-07-owed', 'The Owed page: faces of friends who owe you float around the total, £68.13 across 4 friends', 290)}</div>
@@ -178,6 +179,7 @@ export function homePage({ posts, postCard, assetsV, write, layout }) {
       <div class="card price"><span class="quiet">Monthly</span><span class="num">£0.99</span><span class="quiet">a month</span></div>
       <div class="card price best"><span class="chip chip-accent">Best value</span><span class="quiet">Yearly</span><span class="num">£5.99</span><span class="quiet">a year, about 50p a month</span></div>
     </div>
+    <a class="card tool-link reveal" href="/blog/onlybills-vs-splitwise/" style="max-width:760px;margin:14px auto 0"><span class="tool-icon">£</span><span><b>A whole year of OnlyBills costs about the same as one month of Splitwise Pro</b><span>£5.99 a year, against £4.99 a month. See how they compare.</span></span><span class="chev" aria-hidden="true">›</span></a>
     <p class="foot" style="text-align:center;margin-top:16px">Includes a free trial. Renews automatically until you cancel, which you can do any time in Settings. Friends who join your table never pay anything.</p>
   </div>
 </section>
@@ -201,7 +203,7 @@ ${posts.length ? `<section class="section" style="padding-top:0">
   <div class="wrap">
     <div class="card closer reveal">
       ${art('paid', 170)}
-      <h2 class="h2">Next dinner, split it properly.</h2>
+      <h2 class="h2">Take the maths out of special moments.</h2>
       <p class="lede">Scan, share, get paid. Your first split is on us.</p>
       ${storeButton('Download on the', 'closer')}
     </div>
