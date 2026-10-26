@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "rewrites": [
+    { "source": "/split", "destination": "/api/split" },
+    { "source": "/split/", "destination": "/api/split" }
+  ],
+  "functions": {
+    "api/split.js": { "includeFiles": "split/shell.html" }
+  },
+  "headers": [
+    {
+      "source": "/.well-known/apple-app-site-association",
+      "headers": [{ "key": "Content-Type", "value": "application/json" }]
+    }
+  ]
+}
