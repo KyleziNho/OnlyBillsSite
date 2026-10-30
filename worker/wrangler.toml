@@ -1,0 +1,14 @@
+# onlybills.app link previews (see README.md). Deploy: npx wrangler@4.20.0 deploy
+name = "onlybills-link-previews"
+main = "src/index.js"
+compatibility_date = "2025-06-01"
+
+# Only bill links go through the worker; the rest of onlybills.app is plain GitHub Pages.
+routes = [
+  { pattern = "onlybills.app/split*", zone_name = "onlybills.app" },
+]
+
+[vars]
+FIREBASE_PROJECT_ID = "onlybills-b8dac"
+# The site's public Firebase web key (already shipped in split-app/src/firebase.js).
+FIREBASE_API_KEY = "AIzaSyByDh_nxkV1kWGdIHFldDAoIU7iGqU3FQc"
