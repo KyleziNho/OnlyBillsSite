@@ -487,6 +487,7 @@
                 <ul>
                     <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Your receipt history and settings stay on your device</span></li>
                     <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Receipt scanning sends the image to a secure AI service (Google Gemini)</span></li>
+                    <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Your scan count for the fair-use limit is kept on your device. There is no account</span></li>
                     <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Live Split shares only the items and names you choose, over an encrypted connection</span></li>
                     <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>We measure anonymous in-app usage to improve the app. No advertising ID, no cross-app tracking</span></li>
                     <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span>Notes you send us hold only what you write, plus your app version and device</span></li>
@@ -497,8 +498,8 @@
             <!-- Privacy Policy Sections -->
             <section class="policy-section" id="overview" aria-labelledby="h-overview">
                 <h2 id="h-overview">Privacy Policy</h2>
-                <p class="meta">Last Updated: <span id="current-date">21 October 2026</span></p>
-                <p>OnlyBills is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our app, including when receipt scanning, Live Split, venue lookups, feedback notes and usage analytics use secure third-party cloud services.</p>
+                <p class="meta">Last Updated: <span id="current-date">30 October 2026</span></p>
+                <p>OnlyBills is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our app, including when receipt scanning, Live Split, venue lookups, bill link previews, feedback notes and usage analytics use secure third-party cloud services.</p>
             </section>
 
             <section class="policy-section" id="information-we-collect" aria-labelledby="h-collect">
@@ -516,8 +517,11 @@
                     <li><span class="bullet" aria-hidden="true">•</span> Live Split stores the receipt's items, the display names people enter, who claimed what, and who has marked themselves as paid in Google Firebase so guests can join and split in real time. Receipt images shared during Live Split may be stored in Firebase Storage.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> When you share a live table, the payment links and bank details you have chosen to show (for example your Monzo username, or your account name, sort code and account number) are included so guests can pay you. They are visible to anyone with the table link.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> To show a restaurant's name and photo, the venue name and address read from your receipt are sent to Google Places. Nothing about you or your friends is included.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> When someone opens a bill link, or an app like Messages or WhatsApp shows a preview of it, the request goes through Cloudflare, which serves our website. For a bill link, Cloudflare reads that table's venue name and photo so the preview can show them. Anyone with the link can already see these on the bill page.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> If you send us a note from the app or a bill page, we store your message, the screen you sent it from, your app and iOS version and device model, and, only if you give it, the email or number you'd like a reply on.</li>
-                    <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics are sent to Google Firebase Analytics: which screens you open, which onboarding steps you complete, whether a scan succeeded, and subscription events such as starting a trial. These are tied to a random app-install identifier, never to your name, email, or contacts, and no advertising identifier (IDFA) is collected. Receipt contents, item names, guest names, and payment handles are never included.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Receipt scanning has a fair-use limit. To apply it, the app keeps a count of your recent scans on your device. The count is not sent to us and is not linked to an account.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> If you become an OnlyBills Supporter, Apple handles the purchase. The app checks with Apple whether your subscription is active. We never see your name, Apple ID or payment details.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics are sent to Google Firebase Analytics: which screens you open, which onboarding steps you complete, whether a scan succeeded, and subscription events such as becoming a Supporter. These are tied to a random app-install identifier, never to your name, email, or contacts, and no advertising identifier (IDFA) is collected. Receipt contents, item names, guest names, and payment handles are never included.</li>
                 </ul>
             </section>
 
@@ -551,6 +555,7 @@
                     <li><span class="bullet" aria-hidden="true">•</span> Contact selections</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Split calculations</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Payment handles and user preferences</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Your receipt scan count for the fair-use limit</li>
                 </ul>
                 <p>Some data is stored off-device only when a feature needs it:</p>
                 <ul class="doc-list">
@@ -558,20 +563,25 @@
                     <li><span class="bullet" aria-hidden="true">•</span> When you start a Live Split, that bill's items, guest names, and claims are stored in Google Firebase, together with the payment details you chose to share, for the life of the shared session so guests can join and update it. You can end and remove a live table from the app.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics events are stored by Google Firebase Analytics under a random app-install identifier. Deleting the app resets that identifier.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Feedback notes are stored in Google Firebase. Email us and we will delete yours.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Cloudflare keeps a bill link's venue name and photo for up to 5 minutes so previews load quickly. It does not store the bill's items, names or payment details.</li>
                 </ul>
             </section>
 
             <section class="policy-section" id="third-party-services" aria-labelledby="h-third">
                 <h2 id="h-third">Third-Party Services</h2>
-                <p>OnlyBills uses Google cloud services to power four things:</p>
+                <p>OnlyBills uses Google cloud services to power four things, Cloudflare to serve our website, and Apple for subscriptions:</p>
                 <p><strong>Google Gemini API (receipt scanning):</strong> receipt images are transmitted over an encrypted connection, analysed, and structured item data is returned to your device.</p>
                 <p><strong>Google Firebase (Live Split):</strong> when you share a bill, its items, the display names guests enter, and their claims are stored so everyone can split it in real time. Shared receipt images may be stored in Firebase Storage for the session. Feedback notes you send are stored here too.</p>
                 <p><strong>Google Places (venue details):</strong> the restaurant name and address from your receipt are sent to find the venue's name and photo. No personal information is sent.</p>
                 <p><strong>Google Firebase Analytics (product improvement):</strong> anonymous, aggregated usage events keyed to a random app-install identifier. No advertising identifier is collected and no receipt or contact data is included.</p>
+                <p><strong>Cloudflare (website and bill link previews):</strong> requests to onlybills.app, including bill links, pass through Cloudflare. It processes them, including your IP address and browser details, only to deliver the site. For a bill link it reads the venue name and photo to build the link preview.</p>
+                <p><strong>Apple (OnlyBills Supporter):</strong> the optional subscription is bought, renewed and cancelled through the App Store. Apple processes the payment; we never receive your payment details.</p>
                 <p>All transfers use encrypted (HTTPS/TLS) connections. You can review these services' privacy policies:</p>
                 <ul class="doc-list">
                     <li><span class="bullet" aria-hidden="true">•</span> Google Gemini: <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener noreferrer">https://ai.google.dev/gemini-api/terms</a></li>
                     <li><span class="bullet" aria-hidden="true">•</span> Google Firebase / Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Cloudflare: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">https://www.cloudflare.com/privacypolicy/</a></li>
+                    <li><span class="bullet" aria-hidden="true">•</span> Apple: <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">https://www.apple.com/legal/privacy/</a></li>
                 </ul>
             </section>
 
