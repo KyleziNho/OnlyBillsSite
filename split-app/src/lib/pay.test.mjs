@@ -16,6 +16,16 @@ test('Starling Settle Up link: profile only, guest enters the amount', () => {
   assert.equal(o.prefilled, false);
   assert.equal(o.note, 'Enter £11.00 when it opens');
   assert.equal(o.capability, 'Card or Apple Pay. No Starling account needed');
+  assert.equal(o.payWith, 'Card or Apple Pay');
+});
+
+test('what you pay with never names the host\'s bank', () => {
+  const o = buildPayOptions(ALL, opts);
+  for (const x of o.filter((x) => ['monzo', 'starling', 'revolut'].includes(x.key))) {
+    assert.doesNotMatch(x.payWith, /Monzo|Starling|Revolut/);
+  }
+  assert.equal(o[0].payWith, 'Card, Apple Pay or bank transfer');
+  assert.equal(o[3].payWith, 'PayPal');
 });
 
 test('links keep their formats; best payer experience first', () => {

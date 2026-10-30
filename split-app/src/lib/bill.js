@@ -252,6 +252,19 @@ export const normalizeStatic = (data) => ({
 // What a guest can pay WITH, per rail (researched Oct 2026). Guests kept assuming they
 // needed the host's app, so every option says what actually works. PayPal is honest:
 // guest card checkout isn't guaranteed. Mirrors PaymentMethodType.guestCapability (iOS).
+/**
+ * What the guest pays WITH, the headline for each way to pay. Never the host's bank name:
+ * guests read "Monzo" as "I need Monzo" and stopped (founder feedback, Oct 2026).
+ */
+export const PAY_WITH = {
+  monzo: 'Card, Apple Pay or bank transfer',
+  starling: 'Card or Apple Pay',
+  revolut: 'Card or Apple Pay',
+  paypal: 'PayPal',
+  venmo: 'Venmo',
+  bank: 'Bank transfer',
+};
+
 export const CAPABILITY = {
   monzo: 'Card, Apple Pay or bank transfer. No Monzo account needed',
   starling: 'Card or Apple Pay. No Starling account needed',
@@ -280,27 +293,27 @@ export const buildPayOptions = (payment, { amount, currency, reference }) => {
   if (p.monzoUsername) opts.push({
     key: 'monzo', label: 'Monzo', logo: 'logo-monzo.jpg',
     href: `https://monzo.me/${handle(p.monzoUsername)}/${amt}?d=${ref}`,
-    note: filled, prefilled: true, capability: CAPABILITY.monzo,
+    note: filled, prefilled: true, capability: CAPABILITY.monzo, payWith: PAY_WITH.monzo,
   });
   if (p.starlingUsername) opts.push({
     key: 'starling', label: 'Starling', logo: 'logo-starling.png',
     href: `https://settleup.starlingbank.com/${handle(p.starlingUsername)}`,
-    note: enter, prefilled: false, capability: CAPABILITY.starling,
+    note: enter, prefilled: false, capability: CAPABILITY.starling, payWith: PAY_WITH.starling,
   });
   if (p.revolutUsername) opts.push({
     key: 'revolut', label: 'Revolut', logo: 'logo-revolut.png',
     href: `https://revolut.me/${handle(p.revolutUsername)}`,
-    note: enter, prefilled: false, capability: CAPABILITY.revolut,
+    note: enter, prefilled: false, capability: CAPABILITY.revolut, payWith: PAY_WITH.revolut,
   });
   if (p.paypalUsername) opts.push({
     key: 'paypal', label: 'PayPal', logo: 'logo-paypal.png',
     href: `https://paypal.me/${handle(p.paypalUsername)}/${amt}${cur}`,
-    note: filled, prefilled: true, capability: CAPABILITY.paypal,
+    note: filled, prefilled: true, capability: CAPABILITY.paypal, payWith: PAY_WITH.paypal,
   });
   if (p.venmoHandle) opts.push({
     key: 'venmo', label: 'Venmo', mark: 'V', tint: '#008cff',
     href: `https://venmo.com/${handle(p.venmoHandle)}?txn=pay&amount=${amt}&note=${ref}`,
-    note: filled, prefilled: true, capability: CAPABILITY.venmo,
+    note: filled, prefilled: true, capability: CAPABILITY.venmo, payWith: PAY_WITH.venmo,
   });
   return opts;
 };

@@ -320,6 +320,20 @@
   line-height: var(--lh-footnote);
   color: var(--text-2);
 }
+.pay-with {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 0 4px;
+  font-size: var(--fs-footnote);
+  line-height: var(--lh-footnote);
+  color: var(--text-2);
+}
+.pay-with strong { color: var(--text); font-weight: 600; }
+.pay-with-icon { display: inline-grid; place-items: center; color: var(--accent-text); flex: none; }
+.pay-with-icon .pay-logo { border-radius: 4px; }
+.pay-card { display: grid; place-items: center; color: var(--accent-text); background: var(--accent-soft); }
 .via-chip {
   display: inline-flex;
   align-items: center;

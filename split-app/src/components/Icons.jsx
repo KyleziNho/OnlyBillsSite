@@ -7,6 +7,7 @@ const Svg = ({ children, size = 20, className = '', strokeWidth = 2, ...rest }) 
   </svg>
 );
 
+export const CardIcon = (p) => <Svg {...p}><rect x="3.5" y="6" width="17" height="12" rx="2.6" /><path d="M3.5 10h17M7 14.5h3" /></Svg>;
 export const CheckIcon = (p) => <Svg {...p}><path d="M5 12.5l4.2 4.2L19 7" /></Svg>;
 export const ChevronRight = (p) => <Svg {...p}><path d="M9.5 5.5L16 12l-6.5 6.5" /></Svg>;
 export const ChevronDown = (p) => <Svg {...p}><path d="M6 9.5l6 6 6-6" /></Svg>;

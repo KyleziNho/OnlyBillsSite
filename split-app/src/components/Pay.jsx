@@ -1,18 +1,26 @@
-// Paying the host. One big primary button for the host's default method — "Pay Kyle
-// £11.00" — with a small "via Monzo" chip and one line on what the guest can actually pay
-// with (people kept assuming they needed the host's app). Then "Other ways to pay": the
-// remaining links, and bank details ALWAYS (copy per line), plus an optional payment QR.
+// Paying the host. One big primary button for the host's default method ("Pay Kyle
+// £11.00") and one line on what the guest pays WITH ("Card or Apple Pay · £11.00 filled in
+// for you"). Never the host's bank name: guests read "via Monzo" as "I need Monzo" and
+// stopped (Oct 2026). Then "Other ways to pay": the remaining links, titled the same way,
+// and bank details ALWAYS (copy per line), plus an optional payment QR.
 // Docs without `payment.defaultMethod` (older apps) lead with the first link, as before.
 import { useState } from 'react';
-import { bankRows, payPlan, payeeOf, CAPABILITY } from '../lib/bill.js';
+import { bankRows, payPlan, payeeOf, CAPABILITY, PAY_WITH } from '../lib/bill.js';
 import { formatMoney, haptic } from '../lib/format.js';
 import { Row, Section } from './Section.jsx';
-import { ArrowUpRight, BankIcon, CheckIcon, CopyIcon, QrIcon } from './Icons.jsx';
+import { ArrowUpRight, BankIcon, CardIcon, CheckIcon, CopyIcon, QrIcon } from './Icons.jsx';
 import { HeroArt } from './HeroArt.jsx';
 
 const Logo = ({ opt, size = 36 }) => (opt.logo
   ? <img className="pay-logo" src={opt.logo} alt="" width={size} height={size} style={{ width: size, height: size }} />
   : <span className="pay-logo pay-mark" style={{ background: opt.tint, width: size, height: size }}>{opt.mark}</span>);
+
+/** Card-friendly links show a card, not the host's bank logo. */
+const usesCard = (opt) => opt.key === 'monzo' || opt.key === 'starling' || opt.key === 'revolut';
+
+const MethodIcon = ({ opt }) => (usesCard(opt)
+  ? <span className="pay-logo pay-card" aria-hidden="true"><CardIcon size={20} /></span>
+  : <Logo opt={opt} />);
 
 export function PayOption({ opt, index, onOpen }) {
   return (
@@ -20,23 +28,25 @@ export function PayOption({ opt, index, onOpen }) {
       href={opt.href} target="_blank" rel="noopener noreferrer" index={index}
       className="pay-option" inset="leading"
       onClick={() => { haptic(6); onOpen?.(opt); }}
-      leading={<Logo opt={opt} />}
-      title={opt.label}
-      subtitle={<>{opt.capability}<span className="pay-option-note">{opt.note}</span></>}
+      leading={<MethodIcon opt={opt} />}
+      title={opt.payWith}
+      subtitle={opt.key === 'paypal' || opt.key === 'venmo' ? `${opt.capability}. ${opt.note}` : opt.note}
       trailing={<span className="pay-go" aria-hidden="true"><ArrowUpRight size={15} strokeWidth={2.4} /></span>}
-      aria-label={`${opt.label}: ${opt.capability}. ${opt.note}. Opens ${opt.label}.`}
+      aria-label={`${opt.payWith}. ${opt.note}. Opens a payment page.`}
     />
   );
 }
 
-/** "via [logo] Monzo" — the rail, kept small and secondary to the person + amount. */
-function ViaChip({ opt }) {
+/** "[card] Card or Apple Pay · £11.00 filled in for you": what you pay with, never whose bank. */
+function PayWithLine({ opt }) {
+  const card = !opt || usesCard(opt);
+  const text = opt ? opt.payWith : `${PAY_WITH.bank} from any banking app`;
+  const note = opt ? (opt.key === 'paypal' || opt.key === 'venmo' ? opt.capability : opt.note) : null;
   return (
-    <span className="via-chip">
-      <span className="via-word">via</span>
-      {opt ? <Logo opt={opt} size={18} /> : <span className="via-bank" aria-hidden="true"><BankIcon size={13} /></span>}
-      <span className="via-name">{opt ? opt.label : 'Bank transfer'}</span>
-    </span>
+    <p className="pay-with">
+      <span className="pay-with-icon" aria-hidden="true">{card ? (opt ? <CardIcon size={15} /> : <BankIcon size={14} />) : <Logo opt={opt} size={16} />}</span>
+      <span><strong>{text}</strong>{note ? <> · {note}</> : null}</span>
+    </p>
   );
 }
 
@@ -100,15 +110,11 @@ function PrimaryPay({ plan, payment, amount, currency, payee, onCopied }) {
     return (
       <div className="pay-primary" data-method={opt.key}>
         <a className="btn btn-accent pay-primary-btn" href={opt.href} target="_blank" rel="noopener noreferrer"
-          onClick={() => haptic(8)} aria-label={`${label} via ${opt.label}. ${opt.capability}. Opens ${opt.label}.`}>
+          onClick={() => haptic(8)} aria-label={`${label}. ${opt.payWith}. ${opt.note}. Opens a payment page.`}>
           <span className="btn-label">{label}</span>
           <ArrowUpRight size={17} strokeWidth={2.4} />
         </a>
-        <div className="pay-primary-meta">
-          <ViaChip opt={opt} />
-          <span className="pay-capability">{opt.capability}</span>
-        </div>
-        <p className="pay-primary-note">{opt.note}</p>
+        <PayWithLine opt={opt} />
       </div>
     );
   }
@@ -117,10 +123,7 @@ function PrimaryPay({ plan, payment, amount, currency, payee, onCopied }) {
     <div className="pay-primary is-bank" data-method="bank">
       <div className="pay-primary-head">
         <span className="pay-primary-title">{label}</span>
-        <div className="pay-primary-meta">
-          <ViaChip />
-          <span className="pay-capability">{CAPABILITY.bank}</span>
-        </div>
+        <PayWithLine opt={null} />
       </div>
       <Section className="bank" footer="Tap a line to copy it.">
         <BankRowsList rows={bankRows(payment)} onCopied={onCopied} />
