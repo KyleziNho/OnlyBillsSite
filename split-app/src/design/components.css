@@ -319,12 +319,13 @@
 .row-money { font-size: var(--fs-body); font-weight: 600; }
 .row-money.quiet { font-weight: 500; color: var(--text-2); }
 .row-money.strong { font-weight: 700; }
-.money-glyphs { display: inline-flex; align-items: flex-start; height: 1.2em; line-height: 1.2em; vertical-align: -0.18em; -webkit-user-select: none; user-select: none; }
+.money-glyphs { display: inline-flex; align-items: flex-start; height: 1.2em; line-height: 1.2em; -webkit-user-select: none; user-select: none; }
 .money-sym { display: inline-block; height: 1.2em; }
 .digit {
   display: inline-block;
   height: 1.2em;
-  overflow: hidden;
+  /* clip-path, not overflow: hidden, so the digit keeps its text baseline and lines up with words */
+  clip-path: inset(0);
   -webkit-mask-image: linear-gradient(180deg, transparent, #000 13%, #000 87%, transparent);
   mask-image: linear-gradient(180deg, transparent, #000 13%, #000 87%, transparent);
 }
