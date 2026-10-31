@@ -4,6 +4,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   HOST_ID, liveTotals, normalizeLive, percentChargeRefresh, pickGuestColor, tablePhase, hasAnyPayMethod,
+  UNIT_EPS, claimValue, claimedUnits, formatUnits, isMultiUnit, unitsLeft, unitsOf, withClaim,
 } from '../lib/bill.js';
 import { cleanVenueName, formatMoney, haptic, plural, roundMoney } from '../lib/format.js';
 import { exponent, parseAmount } from '../lib/money.js';
@@ -200,13 +201,18 @@ export default function LiveBill({ docId, initialData, demo = null }) {
     if (!canEdit) return;
     const mine = item.claimedBy.includes(me.id);
     haptic(8);
-    const next = {
-      ...bill,
-      items: bill.items.map((i) => (i.id !== item.id ? i : {
-        ...i, claimedBy: mine ? i.claimedBy.filter((g) => g !== me.id) : [...i.claimedBy, me.id].sort(),
-      })),
-    };
+    // First tap claims one unit (`true`, as every app version reads it); tapping again unclaims entirely.
+    const next = { ...bill, items: bill.items.map((i) => (i.id !== item.id ? i : withClaim(i, me.id, mine ? 0 : 1))) };
     write({ [`items.${item.id}.claimedBy.${me.id}`]: mine ? DELETE : true }, { optimistic: next });
+  };
+
+  /** The units stepper on a multi-quantity row: set my claim to `units` (≤ 0 deletes it). */
+  const setUnits = (item, units) => {
+    if (!me) { nudgeJoin(); return; }
+    if (!canEdit) return;
+    haptic(5);
+    const next = { ...bill, items: bill.items.map((i) => (i.id !== item.id ? i : withClaim(i, me.id, units))) };
+    write({ [`items.${item.id}.claimedBy.${me.id}`]: units > UNIT_EPS ? claimValue(units) : DELETE }, { optimistic: next });
   };
 
   const nudgeJoin = () => {
@@ -226,7 +232,7 @@ export default function LiveBill({ docId, initialData, demo = null }) {
     if (item === 'new') {
       const id = newId('itm_');
       const order = Math.max(-1, ...bill.items.map((i) => i.order)) + 1;
-      const fresh = { id, order, name: values.name, price: values.price, discount: 0, qty: values.qty, claimedBy: [] };
+      const fresh = { id, order, name: values.name, price: values.price, discount: 0, qty: values.qty, claimedBy: [], claims: {} };
       const items = [...bill.items, fresh];
       // Percentage charges follow the items; keep their stored amount current for older apps.
       write({ [`items.${id}`]: { order, name: values.name, price: values.price, qty: values.qty, claimedBy: {} },
@@ -340,7 +346,7 @@ export default function LiveBill({ docId, initialData, demo = null }) {
 
         <BillSection bill={bill} totals={totals} me={me} canEdit={canEdit && !!me} phase={phase}
           editMode={editMode} setEditMode={setEditMode}
-          onClaim={toggleClaim} onEdit={(item) => setSheet({ edit: item })} />
+          onClaim={toggleClaim} onUnits={setUnits} onEdit={(item) => setSheet({ edit: item })} />
 
         <ExtrasSection bill={bill} totals={totals} />
 
@@ -547,17 +553,26 @@ function useLongPress(onLong, ms = 480) {
   };
 }
 
-function ItemRow({ item, index, bill, me, myShare, canClaim, canEdit, editMode, onClaim, onEdit }) {
+function ItemRow({ item, index, bill, me, myShare, canClaim, canEdit, editMode, onClaim, onUnits, onEdit }) {
   const guestById = useMemo(() => Object.fromEntries(bill.guests.map((g) => [g.id, g])), [bill.guests]);
   const claimers = item.claimedBy.map((id) => guestById[id]).filter(Boolean);
   const mine = !!me && item.claimedBy.includes(me.id);
-  const shared = claimers.length > 1;
   const { wasLong, ...press } = useLongPress(() => canEdit && onEdit(item));
   const interactive = editMode ? canEdit : canClaim;
 
+  // Multi-quantity rows (×2 naan) count units: each claim holds some of the qty.
+  const multi = isMultiUnit(item);
+  const qty = Math.round(item.qty);
+  const claimed = claimedUnits(item);
+  const left = unitsLeft(item);
+  const myUnits = mine ? unitsOf(item, me.id) : 0;
+  const stepper = multi && mine && !editMode && canClaim && canEdit;
+
   const who = claimers.length === 0 ? null
-    : claimers.length === 1 ? (claimers[0].id === me?.id ? 'You' : claimers[0].name)
-      : `split ${claimers.length} ways`;
+    : multi && claimed <= item.qty + UNIT_EPS
+      ? `${formatUnits(claimed)} of ${qty} claimed${left > 0 ? ` · ${formatUnits(left)} left` : ''}`
+      : claimers.length === 1 ? (claimers[0].id === me?.id ? 'You' : claimers[0].name)
+        : `split ${claimers.length} ways`;
 
   const body = (
     <>
@@ -574,11 +589,22 @@ function ItemRow({ item, index, bill, me, myShare, canClaim, canEdit, editMode, 
             : <><AvatarStack people={claimers} size={20} label={claimers.map((c) => c.name).join(', ')} /><span>{who}</span></>}
         </span>
       </span>
-      {item.qty > 1.5 && <span className="chip" aria-label={`quantity ${Math.round(item.qty)}`}>{Math.round(item.qty)}</span>}
+      {stepper ? (
+        <span className="stepper unit-stepper" role="group" aria-label={`Your ${item.name}`}>
+          <button type="button" onClick={() => onUnits(item, myUnits - 1)}
+            aria-label={myUnits - 1 > UNIT_EPS ? 'One fewer' : 'Remove your claim'}>
+            <MinusIcon size={15} strokeWidth={2.6} />
+          </button>
+          <span className="stepper-val" aria-live="polite">{formatUnits(myUnits)} of {qty}</span>
+          <button type="button" onClick={() => onUnits(item, myUnits + 1)} disabled={left < 1 - UNIT_EPS} aria-label="One more">
+            <PlusIcon size={15} strokeWidth={2.6} />
+          </button>
+        </span>
+      ) : item.qty > 1.5 && <span className="chip" aria-label={`quantity ${Math.round(item.qty)}`}>{Math.round(item.qty)}</span>}
       <span className="row-trailing item-price">
         <Money value={item.price} currency={bill.currency} roll={false} className="row-money" />
         {item.discount > 0 && <span className="my-share"><s>{formatMoney(item.price + item.discount, bill.currency)}</s></span>}
-        {mine && shared && <span className="my-share">You · {formatMoney(myShare, bill.currency)}</span>}
+        {mine && Math.abs(myShare - item.price) > 0.005 && <span className="my-share">You · {formatMoney(myShare, bill.currency)}</span>}
       </span>
       {editMode && canEdit && <PencilIcon size={16} className="edit-glyph" />}
     </>
@@ -586,6 +612,18 @@ function ItemRow({ item, index, bill, me, myShare, canClaim, canEdit, editMode, 
 
   if (!interactive) {
     return <div className={`row item-row ${mine ? 'is-mine' : ''}`} style={{ '--i': index }}>{body}</div>;
+  }
+  if (stepper) {
+    // The stepper can't sit inside the row's button, so the row is a plain box with a
+    // full-size tap target behind its content and the stepper raised above it.
+    return (
+      <div className="row item-row has-stepper is-mine" style={{ '--i': index }}>
+        <button type="button" className="row-hit" aria-pressed="true" aria-label={item.name}
+          {...(canEdit ? press : {})}
+          onClick={() => { if (!wasLong()) onClaim(item); }} />
+        {body}
+      </div>
+    );
   }
   return (
     <button type="button" className={`row item-row is-tappable ${mine ? 'is-mine' : ''} ${editMode ? 'is-editing' : ''}`}
@@ -602,7 +640,7 @@ function ItemRow({ item, index, bill, me, myShare, canClaim, canEdit, editMode, 
   );
 }
 
-function BillSection({ bill, totals, me, canEdit, phase, editMode, setEditMode, onClaim, onEdit }) {
+function BillSection({ bill, totals, me, canEdit, phase, editMode, setEditMode, onClaim, onUnits, onEdit }) {
   const grabs = totals.unclaimed.length;
   const canClaim = phase === 'open';
   const trailing = editMode
@@ -619,7 +657,7 @@ function BillSection({ bill, totals, me, canEdit, phase, editMode, setEditMode, 
       {bill.items.map((item, i) => (
         <ItemRow key={item.id} item={item} index={i} bill={bill} me={me}
           myShare={me ? totals.itemShareFor(item, me.id) : 0}
-          canClaim={canClaim} canEdit={canEdit} editMode={editMode} onClaim={onClaim} onEdit={onEdit} />
+          canClaim={canClaim} canEdit={canEdit} editMode={editMode} onClaim={onClaim} onUnits={onUnits} onEdit={onEdit} />
       ))}
       {editMode && canEdit && (
         <Row onClick={() => onEdit('new')} className="add-row" inset="leading"
@@ -708,7 +746,9 @@ function PaySheetBody({ bill, totals, me, myItems, myTotal, mode, paidAmt, topUp
       <Section title="Your items" className="breakdown">
         {myItems.map((it) => (
           <Row key={it.id} title={it.name}
-            subtitle={it.claimedBy.length > 1 ? `Split ${it.claimedBy.length} ways · ${formatMoney(it.price, bill.currency)}` : null}
+            subtitle={isMultiUnit(it) && claimedUnits(it) <= it.qty + UNIT_EPS
+              ? `${formatUnits(unitsOf(it, me.id))} of ${Math.round(it.qty)} · ${formatMoney(it.price, bill.currency)}`
+              : it.claimedBy.length > 1 ? `Split ${it.claimedBy.length} ways · ${formatMoney(it.price, bill.currency)}` : null}
             trailing={<>
               {it.qty > 1.5 && <span className="chip">{Math.round(it.qty)}</span>}
               <Money value={totals.itemShareFor(it, me.id)} currency={bill.currency} roll={false} className="row-money" />
