@@ -1,4 +1,4 @@
-import { SITE, esc, art, shot, video, face, facesFor, storeButton, abs, icons } from '../lib.mjs';
+import { SITE, esc, art, shot, video, face, facesFor, storeButton, abs, icons, appLd } from '../lib.mjs';
 import { vsAnchor, vsTable, VS_ROWS } from './vs.mjs';
 
 export const FAQ = [
@@ -222,19 +222,7 @@ ${posts.length ? `<section class="section" style="padding-top:0">
 </section>`;
 
   const schema = [
-    {
-      '@type': 'MobileApplication',
-      name: 'OnlyBills',
-      operatingSystem: 'iOS, iPadOS',
-      applicationCategory: 'FinanceApplication',
-      description: 'Split restaurant bills by what everyone had. Scan the receipt, friends claim their items on their own phone, and everyone pays you back exact to the penny.',
-      url: abs('/'),
-      downloadUrl: SITE.appStore,
-      image: abs('/assets/img/app-icon.png'),
-      inLanguage: 'en-GB',
-      author: { '@id': SITE.url + '/#org' },
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
-    },
+    appLd(), // structure lives in lib.mjs (one free offer, shared with /vs/)
     { '@type': 'FAQPage', mainEntity: FAQ.filter((_, i) => HOME_FAQ.includes(i)).map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
   ];
   write('/', layout({

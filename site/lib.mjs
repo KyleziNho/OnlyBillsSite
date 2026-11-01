@@ -7,6 +7,7 @@ export const SITE = {
   appStore: 'https://apps.apple.com/gb/app/onlybills/id6754412082',
   appId: '6754412082',
   author: 'Kyle',
+  authorName: 'Kyle O\'Sullivan', // full name for structured data; the visible byline stays "Kyle"
   authorBio: 'Kyle is a computer science student at the University of Bath who built OnlyBills on his own, after one too many dinners spent doing sums on a napkin.',
   linkedin: 'https://www.linkedin.com/in/kos33/',
   github: 'https://github.com/KyleziNho',
@@ -71,25 +72,75 @@ const NAV = [
 
 const jsonLd = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
 
+/** Kyle, as one schema.org entity every page and article points at. */
+export const PERSON_ID = SITE.url + '/about/#kyle';
+export const PERSON = {
+  '@type': 'Person',
+  '@id': PERSON_ID,
+  name: SITE.authorName,
+  alternateName: SITE.author,
+  url: SITE.url + '/about/',
+  image: SITE.url + '/assets/img/maker-avatar.jpg',
+  jobTitle: 'Founder',
+  worksFor: { '@id': SITE.url + '/#org' },
+  sameAs: [SITE.linkedin, SITE.github],
+};
+/** Inline author for Article nodes (Google reads name + url even without resolving @id). */
+export const AUTHOR = { '@type': 'Person', '@id': PERSON_ID, name: SITE.authorName, url: SITE.url + '/about/' };
+
 export const ORG = {
   '@type': 'Organization',
   '@id': SITE.url + '/#org',
   name: 'OnlyBills',
   url: SITE.url + '/',
-  logo: SITE.url + '/assets/img/app-icon.png',
-  founder: { '@type': 'Person', name: 'Kyle', url: SITE.url + '/about/' },
+  logo: { '@type': 'ImageObject', url: SITE.url + '/assets/img/app-icon.png', width: 512, height: 512 },
+  email: SITE.email,
+  founder: { '@id': PERSON_ID },
   sameAs: [SITE.appStore, SITE.linkedin],
 };
+const WEBSITE = { '@type': 'WebSite', '@id': SITE.url + '/#site', url: SITE.url + '/', name: 'OnlyBills', publisher: { '@id': SITE.url + '/#org' }, inLanguage: 'en-GB' };
+
+/**
+ * The iPhone app as a schema.org MobileApplication, used on the home page and /vs/ pages.
+ * One free offer: the app is free to download and use. No ratings or reviews here: only add
+ * aggregateRating if it mirrors real App Store ratings shown on the page.
+ */
+export const APP_ID = SITE.url + '/#app';
+export const appLd = (extra = {}) => ({
+  '@type': 'MobileApplication',
+  '@id': APP_ID,
+  name: 'OnlyBills',
+  operatingSystem: 'iOS, iPadOS',
+  applicationCategory: 'FinanceApplication',
+  description: 'Split restaurant bills by what everyone had. Scan the receipt, friends claim their items on their own phone, and everyone pays you back exact to the penny.',
+  url: SITE.url + '/',
+  downloadUrl: SITE.appStore,
+  installUrl: SITE.appStore,
+  sameAs: SITE.appStore,
+  image: SITE.url + '/assets/img/app-icon.png',
+  screenshot: SITE.url + '/assets/shots/guest-01-join-light.webp',
+  inLanguage: 'en-GB',
+  countriesSupported: 'GB',
+  author: { '@id': SITE.url + '/#org' },
+  publisher: { '@id': SITE.url + '/#org' },
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP', url: SITE.appStore, availability: 'https://schema.org/InStock' },
+  ...extra,
+});
 
 /**
  * The page shell. `path` is the canonical path ("/blog/x/"). `schema` is an array of
  * JSON-LD nodes for this page; Organization + WebSite are always included.
  */
-export function layout({ path, title, description, body, schema = [], ogImage, ogType = 'website', current, assetsV, extraHead = '', noindex = false }) {
+export function layout({ path, title, description, body, schema = [], ogImage, ogImageAlt, ogType = 'website', current, assetsV, extraHead = '', noindex = false }) {
   // Brand suffix only when the title still fits in a search result (~60 characters).
   const fullTitle = title.includes('OnlyBills') || title.length > 48 ? title : `${title} · OnlyBills`;
   const img = ogImage || abs('/assets/img/og-card.jpg');
-  const graph = { '@context': 'https://schema.org', '@graph': [ORG, { '@type': 'WebSite', '@id': SITE.url + '/#site', url: SITE.url + '/', name: 'OnlyBills', publisher: { '@id': SITE.url + '/#org' }, inLanguage: 'en-GB' }, ...schema] };
+  const imgAlt = ogImageAlt || (ogImage ? title : 'OnlyBills: split the bill by what everyone had');
+  const graph = { '@context': 'https://schema.org', '@graph': [ORG, WEBSITE, PERSON, ...schema] };
+  // Noindex pages (404, redirects) get no canonical: a 404 served at any URL must not claim one.
+  const canonical = noindex ? '' : `<link rel="canonical" href="${abs(path)}">
+<link rel="alternate" hreflang="en-GB" href="${abs(path)}">
+<link rel="alternate" hreflang="x-default" href="${abs(path)}">`;
   const nav = NAV.map(([href, label]) => `<a href="${href}"${current === href ? ' aria-current="page"' : ''}>${label}</a>`).join('');
   return `<!doctype html>
 <html lang="en-GB" class="no-js">
@@ -98,8 +149,8 @@ export function layout({ path, title, description, body, schema = [], ogImage, o
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(fullTitle)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${abs(path)}">
-${noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots" content="max-image-preview:large">'}
+${canonical}
+${noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">'}
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -111,16 +162,18 @@ ${noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots" cont
 <meta property="og:type" content="${ogType}">
 <meta property="og:site_name" content="OnlyBills">
 <meta property="og:locale" content="en_GB">
-<meta property="og:url" content="${abs(path)}">
-<meta property="og:title" content="${esc(title)}">
+${noindex ? '' : `<meta property="og:url" content="${abs(path)}">
+`}<meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:image" content="${img}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="${ogImage ? 630 : 800}">
+<meta property="og:image:alt" content="${esc(imgAlt)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
 <meta name="twitter:image" content="${img}">
+<meta name="twitter:image:alt" content="${esc(imgAlt)}">
 <link rel="stylesheet" href="/assets/css/tokens.css?v=${assetsV}">
 <link rel="stylesheet" href="/assets/css/site.css?v=${assetsV}">
 <script>document.documentElement.className='js'</script>
@@ -172,7 +225,8 @@ function footer() {
       </ul></div>
       <div><h4>Read</h4><ul>
         <li><a href="/blog/">All articles</a></li>
-        <li><a href="/blog/how-much-to-tip-uk/">Tipping in the UK</a></li>
+        <li><a href="/blog/topic/split-the-bill/">How to split the bill</a></li>
+        <li><a href="/blog/topic/tipping/">Tipping and service charge</a></li>
         <li><a href="/blog/bill-splitting-etiquette/">Bill splitting etiquette</a></li>
         <li><a href="/vs/splitwise/">OnlyBills vs Splitwise</a></li>
         <li><a href="/blog/splitwise-alternatives/">Splitwise alternatives</a></li>

@@ -4,7 +4,7 @@
 // plan too (daily expense cap), and OnlyBills free has a fair-use scan limit (30 in 30 days); both are
 // said plainly in the table and FAQ. Every ✗ against Splitwise must stay true. Checked
 // Oct 2026: splitwise.com/pro, kb.splitwise.com, UK App Store (Pro £3.99/month, £39.99/year).
-import { SITE, esc, art, shot, abs, crumbs, crumbsLd, storeButton } from '../lib.mjs';
+import { SITE, esc, art, shot, abs, crumbs, crumbsLd, storeButton, appLd } from '../lib.mjs';
 
 const OB_ICON = (s) => `<picture><source srcset="/assets/img/app-icon-dark-128.png" media="(prefers-color-scheme: dark)"><img class="vs-icon" src="/assets/img/app-icon-128.png" width="${s}" height="${s}" alt="OnlyBills"></picture>`;
 const SW_ICON = (s) => `<img class="vs-icon" src="/assets/img/splitwise-icon.png" width="${s}" height="${s}" alt="Splitwise">`;
@@ -164,6 +164,7 @@ export function vsPage({ write, layout, assetsV, ogFor }) {
     ogImage: ogFor('vs-splitwise'),
     body,
     schema: [crumbsLd(trail), { '@type': 'WebPage', name: 'OnlyBills vs Splitwise', url: abs(path), inLanguage: 'en-GB', dateModified: '2026-11-01' },
+      appLd(),
       { '@type': 'FAQPage', mainEntity: VS_FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }],
   }), { priority: 0.9, lastmod: '2026-10-21' });
 }

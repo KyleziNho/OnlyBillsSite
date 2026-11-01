@@ -1,4 +1,4 @@
-import { SITE, art, crumbs, crumbsLd, abs, storeButton } from '../lib.mjs';
+import { SITE, art, crumbs, crumbsLd, abs, storeButton, PERSON_ID } from '../lib.mjs';
 
 export function aboutPage({ write, layout, assetsV }) {
   const trail = [['Home', '/'], ['About', '/about/']];
@@ -31,6 +31,6 @@ export function aboutPage({ write, layout, assetsV }) {
     path: '/about/', title: 'About OnlyBills and Kyle, who made it', assetsV,
     description: 'OnlyBills is made in the UK by Kyle, a computer science student at the University of Bath, so groups can split the bill fairly without anyone needing an app.',
     body,
-    schema: [crumbsLd(trail), { '@type': 'AboutPage', url: abs('/about/'), mainEntity: { '@type': 'Person', name: 'Kyle', jobTitle: 'Founder', worksFor: { '@id': SITE.url + '/#org' }, sameAs: [SITE.linkedin, SITE.github] } }],
+    schema: [crumbsLd(trail), { '@type': 'AboutPage', url: abs('/about/'), mainEntity: { '@id': PERSON_ID } }],
   }), { priority: 0.4 });
 }
