@@ -185,7 +185,7 @@ function overpayTool(root) {
     } else {
       result.innerHTML = `<span class="eyebrow">Your estimated overpay</span>
         <div class="big-out">${fmt(yearly).replace('.00', '')}<span style="font-size:0.35em;color:var(--text-2);font-weight:600;margin-left:0.3em">a year</span></div>
-        <p class="lede">That’s about ${fmt(perMeal)} on each meal that’s split equally. OnlyBills costs £5.99 a year, and your first split is free.</p>
+        <p class="lede">That’s about ${fmt(perMeal)} on each meal that’s split equally. OnlyBills is free, and splits the bill by what everyone had.</p>
         <div class="btn-row"><a class="btn btn-primary" href="https://apps.apple.com/gb/app/onlybills/id6754412082" data-cta="overpay-result" rel="noopener">Get OnlyBills</a><button class="btn btn-secondary" type="button" data-copy>Share my number</button></div>
         <p class="foot">An estimate from your answers and our assumptions (much less = 30% under the table average, a bit less = 15%, not drinking adds 15 points). It isn’t a research figure.</p>`;
       $('[data-copy]', result).addEventListener('click', (e) => copy(`Splitting the bill equally costs me about ${fmt(yearly).replace('.00', '')} a year. Work out yours: https://onlybills.app/tools/overpay-calculator/`, e.currentTarget));

@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /split/
-Disallow: /split.html
 
 Sitemap: https://onlybills.app/sitemap.xml
