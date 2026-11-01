@@ -100,7 +100,7 @@ If it's still sitting there a few days later, [how to ask a friend to pay you ba
 
 :::cta Split the curry by what everyone had
 
-OnlyBills reads the receipt from a photo. Share a live table and friends tick their own dishes and drinks on their phone, no download needed, while sides split between whoever had them and the service charge spreads fairly. Friends pay you back by Monzo, Starling, Revolut or PayPal link, or bank transfer. Your first split is free, then £0.99 a month or £5.99 a year (with a free trial).
+OnlyBills reads the receipt from a photo. Share a live table and friends tick their own dishes and drinks on their phone, no download needed, while sides split between whoever had them and the service charge spreads fairly. Friends pay you back by Monzo, Starling, Revolut or PayPal link, or bank transfer. It's free, with no sign-up.
 
 ## FAQ
 

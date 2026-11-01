@@ -88,7 +88,7 @@ It happens more than people admit. In a 2023 Starling Bank survey of 2,000 UK ad
 
 :::cta Split the leaving lunch, cover the leaver, done
 
-OnlyBills reads the receipt from a photo. Colleagues tick what they had on their own phone (no download needed), or you assign the items yourself, and the service charge is spread fairly. Then everyone pays you back by Monzo, Starling, Revolut or PayPal link, or bank transfer. Your first split is free, then £0.99 a month or £5.99 a year (with a free trial).
+OnlyBills reads the receipt from a photo. Colleagues tick what they had on their own phone (no download needed), or you assign the items yourself, and the service charge is spread fairly. Then everyone pays you back by Monzo, Starling, Revolut or PayPal link, or bank transfer. It's free, with no sign-up.
 
 ## FAQ
 

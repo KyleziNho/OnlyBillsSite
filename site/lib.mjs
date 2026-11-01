@@ -56,7 +56,7 @@ export const icons = {
 export const storeButton = (label = 'Download on the', where = 'hero') =>
   `<a class="store" href="${SITE.appStore}" data-cta="${esc(where)}" rel="noopener">${icons.apple}<span><small>${esc(label)}</small><b>App Store</b></span></a>`;
 
-export const appCta = (heading = 'Split it fairly in a minute', sub = 'Scan the receipt. Friends tap what they had on their own phone. Your first split is free.', where = 'article') => `
+export const appCta = (heading = 'Split it fairly in a minute', sub = 'Scan the receipt. Friends tap what they had on their own phone. Free, with no sign-up.', where = 'article') => `
 <aside class="card app-cta" aria-label="Get OnlyBills">
   <picture><source srcset="/assets/img/app-icon-dark-128.png" media="(prefers-color-scheme: dark)"><img class="icon" src="/assets/img/app-icon-128.png" width="64" height="64" alt="" loading="lazy"></picture>
   <div><h3>${esc(heading)}</h3><p>${esc(sub)}</p></div>

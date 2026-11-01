@@ -1,8 +1,9 @@
 // OnlyBills vs Splitwise at /vs/splitwise/. Built on decision psychology: show the high
-// price first (anchor), say the saving as one number (85%), make the effort visible
-// (what you have to think about in each app), remove risk (free first split, no account).
-// Every ✗ against Splitwise must stay true. Checked Oct 2026: splitwise.com/pro,
-// kb.splitwise.com, UK App Store (Pro £3.99/month, £39.99/year).
+// price first (anchor: Splitwise Pro against free), make the effort visible (what you have
+// to think about in each app), remove risk (free, no account). Be fair: Splitwise has a free
+// plan too (daily expense cap), and OnlyBills free has a fair-use scan limit (30 in 30 days); both are
+// said plainly in the table and FAQ. Every ✗ against Splitwise must stay true. Checked
+// Oct 2026: splitwise.com/pro, kb.splitwise.com, UK App Store (Pro £3.99/month, £39.99/year).
 import { SITE, esc, art, shot, abs, crumbs, crumbsLd, storeButton } from '../lib.mjs';
 
 const OB_ICON = (s) => `<picture><source srcset="/assets/img/app-icon-dark-128.png" media="(prefers-color-scheme: dark)"><img class="vs-icon" src="/assets/img/app-icon-128.png" width="${s}" height="${s}" alt="OnlyBills"></picture>`;
@@ -22,7 +23,7 @@ const ROWS = [
   ['Running balances and IOUs across bills', YES, YES],
   ['Shares exact to the penny', YES, YES],
   ['No ads', YES, txt('Pro only')],
-  ['Price', txt('<b>£5.99 a year</b><br>or £0.99 a month'), txt('Pro: <b>£39.99 a year</b><br>or £3.99 a month')],
+  ['Price', txt('<b>Free</b><br>30 scans in 30 days, typing unlimited'), txt('Free with a daily cap<br>Pro: <b>£39.99 a year</b>')],
 ];
 
 // What's on your mind at the table. Each Splitwise line is a real step or limit.
@@ -35,15 +36,15 @@ const THEIR_THOUGHTS = [
 ];
 
 export const VS_FAQ = [
-  ['Doesn’t Splitwise do this now?', 'Splitwise added receipt splitting in October 2026. But you still need a Splitwise account, UK friends settle through Pay by Bank or cash, there’s no receipt translation, and Pro costs £39.99 a year. OnlyBills needs no account, gets you paid straight to your bank tonight and costs £5.99 a year.'],
-  ['How much cheaper is OnlyBills?', '85% cheaper over a year. OnlyBills is £5.99 a year (or £0.99 a month). Splitwise Pro is £39.99 a year (or £3.99 a month) on the UK App Store. Your first split is free.'],
+  ['Doesn’t Splitwise do this now?', 'Splitwise added receipt splitting in October 2026. But you still need a Splitwise account, UK friends settle through Pay by Bank or cash, there’s no receipt translation, and Pro costs £39.99 a year. OnlyBills needs no account, gets you paid straight to your bank tonight and is free.'],
+  ['How much does each one cost?', 'OnlyBills is free, with no sign-up. Free includes 30 receipt scans in any 30 days. Typing a bill in is always unlimited. OnlyBills Pro, optional, raises the scan limit. Splitwise is free with a daily cap on new expenses, and Splitwise Pro is £39.99 a year (or £3.99 a month) on the UK App Store.'],
   ['Do my friends need an account or the app?', 'No. They scan your QR code, type their name and tick what they had, in their browser or as an App Clip on iPhone. You don’t make an account either.'],
   ['How do friends pay me?', 'With a Monzo, Starling, Revolut or PayPal link that already has their exact share in it, or by bank transfer. Monzo links take card, Apple Pay or bank transfer, no Monzo account needed. The money goes straight to you.'],
   ['Can I use both?', 'Plenty of people do. Splitwise for the flat’s rent and bills, OnlyBills for dinners and nights out, where everyone had something different.'],
 ];
 
 export const vsAnchor = () => `
-    <div class="card vs-anchor" aria-label="Price per year: Splitwise Pro £39.99, OnlyBills £5.99. Save 85%.">
+    <div class="card vs-anchor" aria-label="Price per year: Splitwise Pro £39.99, OnlyBills free.">
       <div class="vs-anchor-side them">
         <div class="vs-anchor-name">${SW_ICON(36)}Splitwise Pro</div>
         <div class="vs-anchor-price"><s>£39.99</s></div>
@@ -52,10 +53,10 @@ export const vsAnchor = () => `
       <div class="vs-anchor-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <div class="vs-anchor-side us">
         <div class="vs-anchor-name">${OB_ICON(36)}OnlyBills</div>
-        <div class="vs-anchor-price">£5.99</div>
-        <span class="quiet">a year</span>
+        <div class="vs-anchor-price">Free</div>
+        <span class="quiet">no sign-up</span>
       </div>
-      <div class="vs-save-badge">Save 85%</div>
+      <div class="vs-save-badge">Keep your £39.99</div>
     </div>
 `;
 export const vsMinds = () => `
@@ -80,20 +81,20 @@ export { ROWS as VS_ROWS };
 export function vsPage({ write, layout, assetsV, ogFor }) {
   const path = '/vs/splitwise/';
   const trail = [['Home', '/'], ['OnlyBills vs Splitwise', path]];
-  const reassure = '<ul class="vs-reassure"><li>First split free</li><li>No account</li><li>Nothing to cancel</li></ul>';
+  const reassure = '<ul class="vs-reassure"><li>No ads</li><li>No account</li><li>Nothing to cancel</li></ul>';
   const body = `
 <section class="vs-top">
   <div class="wrap">
     <div class="vs-hero">
       <div class="vs-lockup" aria-hidden="true">${OB_ICON(72)}<span>vs</span>${SW_ICON(72)}</div>
-      <h1 class="display vs-h1">Same dinner.<br>85% less.</h1>
+      <h1 class="display vs-h1">Same dinner.<br>Free.</h1>
       <p class="lede">Everything you need to split the bill. None of the sign-ups, ads or £39.99 a year.</p>
       <div class="btn-row" style="justify-content:center">${storeButton('Download on the', 'vs-hero')}</div>
       ${reassure}
     </div>
 
     ${vsAnchor()}
-    <p class="vs-anchor-note">That’s £34 back every year. Roughly six pints, or the next round.</p>
+    <p class="vs-anchor-note">Splitwise has a free plan too, with a daily cap on new expenses. OnlyBills has no cap on bills you type in.</p>
   </div>
 </section>
 
@@ -158,11 +159,11 @@ export function vsPage({ write, layout, assetsV, ogFor }) {
 </section>`;
   write(path, layout({
     path, assetsV, current: '/vs/splitwise/',
-    title: 'OnlyBills vs Splitwise: same dinner, 85% less',
-    description: 'OnlyBills vs Splitwise: no sign-up, Monzo, Starling and Revolut pay links, automatic receipt translation, and 85% cheaper than Splitwise Pro at £5.99 a year.',
+    title: 'OnlyBills vs Splitwise: same dinner, for free',
+    description: 'OnlyBills vs Splitwise: no sign-up, Monzo, Starling and Revolut pay links, automatic receipt translation, and free, where Splitwise Pro is £39.99 a year.',
     ogImage: ogFor('vs-splitwise'),
     body,
-    schema: [crumbsLd(trail), { '@type': 'WebPage', name: 'OnlyBills vs Splitwise', url: abs(path), inLanguage: 'en-GB', dateModified: '2026-10-21' },
+    schema: [crumbsLd(trail), { '@type': 'WebPage', name: 'OnlyBills vs Splitwise', url: abs(path), inLanguage: 'en-GB', dateModified: '2026-11-01' },
       { '@type': 'FAQPage', mainEntity: VS_FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }],
   }), { priority: 0.9, lastmod: '2026-10-21' });
 }

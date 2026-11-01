@@ -106,7 +106,7 @@ If someone still hasn't paid by the next day, a light nudge is fine. [How to ask
 
 :::cta One card at the table, everyone settled before you leave
 
-With OnlyBills, the person paying scans the receipt and shares a live table. Friends open a link or scan a QR code, tick what they had on their own phone (no download needed), and see their exact share, service included. Then they pay you back with a Monzo, Starling, Revolut or PayPal link, or by bank transfer from any banking app. Your first split is free, then £0.99 a month or £5.99 a year (with a free trial).
+With OnlyBills, the person paying scans the receipt and shares a live table. Friends open a link or scan a QR code, tick what they had on their own phone (no download needed), and see their exact share, service included. Then they pay you back with a Monzo, Starling, Revolut or PayPal link, or by bank transfer from any banking app. It's free, with no sign-up.
 
 ## What if someone has to leave early?
 

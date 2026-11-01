@@ -157,6 +157,8 @@ UK advertising rules (CAP code) need claims backed up. So:
   - **share a live table**: friends scan a QR code or open a link and tick the items they had on
     their own phone. No app download needed (it opens on the web or as an App Clip). Everyone
     sees their share add up live, and who's claimed what.
+    On iPhone, the App Clip lets guests join straight from the QR code without downloading the
+    app; anyone else joins in their phone's browser.
   - or **assign items yourself** to each person.
 - Shared items (a bottle of wine, sides) split between the people who shared them. Service charge,
   tips, discounts and other extras are spread across everyone fairly (in proportion). Always exact
@@ -172,13 +174,27 @@ UK advertising rules (CAP code) need claims backed up. So:
   turned off in Settings).
 - Taglines the founder likes: "Take the maths out of special moments." and "Dinners should end with
   great conversations, not 15 minutes working out the bill."
-- Versus Splitwise Pro (UK App Store, Oct 2026: £3.99 a month, £39.99 a year): OnlyBills is nearly 7x
-  cheaper a year (£5.99 vs £39.99, save £34), and a whole year costs less than two months of Pro.
+- Versus Splitwise Pro (UK App Store, Oct 2026: £3.99 a month, £39.99 a year): OnlyBills is free.
+  Be fair: Splitwise has a free plan too (with a daily cap on new expenses), so compare free with
+  free and Pro with Pro, and never imply Splitwise has no free plan.
   Nobody signs up for OnlyBills, host included; Splitwise needs an account. The full comparison
   lives at /vs/splitwise/. Tone can be bold and salesy, but every claim
   about Splitwise not doing something must be true.
-- Price: your first split is free. Then £0.99 a month or £5.99 a year (with a free trial).
-  Never obscure price, trial or renewal.
+- Price: OnlyBills is free. Lead with "free" (headlines, heroes, CTAs, share images) and don't put
+  prices, "Pro" or the scan allowance in headlines. There's no first-split paywall, no trial, no
+  sign-up and nothing is locked. Everything is free: manual entry, live tables, Owed, History,
+  payment links.
+- Receipt scanning has a fair-use limit: 30 receipt scans in any 30 days (rolling, not a calendar
+  month). Rescanning the same receipt within 48 hours doesn't count, and nor does the practice scan
+  or a photo that couldn't be read. Typing a bill in is always unlimited.
+- The optional subscription is **OnlyBills Pro** (monthly or yearly). It gives higher scan limits
+  (up to 250 receipt scans in 30 days) and helps keep the app free. It gates nothing else.
+- The one honest line: wherever cost is explained (FAQ answers, the pricing explainer at
+  /how-to/first-run-and-pricing/, comparison tables), say plainly: "Free includes 30 receipt scans
+  in any 30 days. Typing a bill in is always unlimited. OnlyBills Pro, optional, raises the scan
+  limit."
+- Never call scanning "unlimited" (free or Pro), and never say "free unlimited scans". Don't quote
+  a price for OnlyBills Pro on the site; the app shows the real price and renewal before you pay.
 - App Store: https://apps.apple.com/app/onlybills/id6754412082
 - Don't claim: Android, multiple currencies, splitting rent/utilities as a household bills app,
   automatic bank integration, payment processing by OnlyBills itself (it hands off to the bank or

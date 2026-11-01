@@ -3,7 +3,7 @@ title: Splitwise alternatives: the best bill splitting apps in 2026
 seoTitle: Splitwise alternatives: best bill splitting apps UK (2026)
 description: Tricount, Settle Up, Splid, Tab, your bank's split button and OnlyBills compared with Splitwise: features, UK prices and who each bill splitting app suits.
 date: 2026-10-02
-updated: 2026-10-20
+updated: 2026-11-01
 category: Comparisons
 art: receipts
 related: split-bill-monzo-revolut-starling, split-bill-on-holiday, split-bill-iphone
@@ -25,7 +25,7 @@ Most "best app" lists mix those two jobs up. This one doesn't. Below is what eac
 | Splid | Holidays, offline use, lots of currencies | No | No sign-up needed for groups | Free; Splid Plus £3.99 |
 | Tab | One bill, everyone already has the app | Yes | No, each person needs Tab | Free |
 | Monzo, Revolut, Starling | Splitting one card payment you already made | No | Friends at other banks can pay by link (Revolut's split button is Revolut-only) | Free |
-| OnlyBills | One UK restaurant bill, split by what each person had | Yes (AI receipt reading) | Yes: a link or QR code opens on the web or as an App Clip | First split free, then £0.99 a month or £5.99 a year, with a free trial |
+| OnlyBills | One UK restaurant bill, split by what each person had | Yes (AI receipt reading) | Yes: a link or QR code opens on the web or as an App Clip | Free (30 receipt scans in any 30 days, typing a bill in unlimited); optional Pro for higher scan limits |
 
 ## Which app should you use?
 
@@ -97,7 +97,7 @@ With a live table, friends scan a QR code or open a link and tick what they had 
 
 :::shot guest-01-join | Friends join from a link or QR code and pick their name. No app download.
 
-**What it costs:** your first split is free, then £0.99 a month or £5.99 a year, with a free trial. The host needs an iPhone or iPad; friends join from their browser.
+**What it costs:** free, with no sign-up. Free includes 30 receipt scans in any 30 days. Typing a bill in is always unlimited. OnlyBills Pro, an optional subscription, raises the scan limit. The host needs an iPhone or iPad; friends join from their browser.
 
 **Not for:** rent, household bills or tracking a whole trip's costs. Use Splitwise, Tricount or Splid for those.
 

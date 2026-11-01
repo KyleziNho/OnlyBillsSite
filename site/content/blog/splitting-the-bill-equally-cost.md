@@ -122,7 +122,7 @@ You don't need to audit the receipt in front of everyone. A few things that work
 
 :::cta Pay for what you had, without the maths
 
-OnlyBills does that last part for you. Scan the receipt, and either share a live table where friends tick what they had on their own phone (no app download needed), or assign items yourself. Shared things like a bottle of wine split between the people who had them, and the service charge is spread fairly in proportion. Everyone pays you back with a link. Your first split is free, then it's £0.99 a month or £5.99 a year (with a free trial).
+OnlyBills does that last part for you. Scan the receipt, and either share a live table where friends tick what they had on their own phone (no app download needed), or assign items yourself. Shared things like a bottle of wine split between the people who had them, and the service charge is spread fairly in proportion. Everyone pays you back with a link. It's free, with no sign-up.
 
 :::shot guest-05-live | Each person sees their own share add up as they tick items.
 
