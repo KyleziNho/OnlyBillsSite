@@ -18,6 +18,16 @@ export function tableId(url) {
   return id && ID_PATTERN.test(id) ? id : null;
 }
 
+/**
+ * The link's own address for og:url: always https://onlybills.app/split/?id=<id>, with every
+ * other parameter dropped (WhatsApp needs og:url for a rich preview, and a per-table URL means
+ * each table gets its own cached preview). The id is percent-encoded; callers escape it again
+ * for the HTML attribute.
+ */
+export function canonicalUrl(id) {
+  return `https://onlybills.app/split/?id=${encodeURIComponent(id)}`;
+}
+
 /** The Firestore REST URL for just the two fields the preview needs. */
 export function firestoreUrl(id, { projectId, apiKey }) {
   const base = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/sharedReceipts/${encodeURIComponent(id)}`;

@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isBillPage, tableId, firestoreUrl, trustedPhoto, cleanVenue, previewFor } from '../src/meta.js';
+import fs from 'node:fs';
+import { isBillPage, tableId, firestoreUrl, trustedPhoto, cleanVenue, previewFor, canonicalUrl } from '../src/meta.js';
 
 const u = (s) => new URL(s, 'https://onlybills.app');
 const doc = (storeName, restaurantPhotoUrl) => ({ fields: {
@@ -67,4 +68,16 @@ test('preview: nothing useful leaves the page alone', () => {
   assert.equal(previewFor(doc('Receipt')), null);
   assert.equal(previewFor({}), null);
   assert.equal(previewFor(null), null);
+});
+
+test('og:url is the table link with only the id kept', () => {
+  const url = u('/split/index.html?id=Ab3_x-9QrT&p=2&utm_source=x');
+  assert.equal(canonicalUrl(tableId(url)), 'https://onlybills.app/split/?id=Ab3_x-9QrT');
+  // Defence in depth: anything odd that ever got past ID_PATTERN is percent-encoded.
+  assert.equal(canonicalUrl('a"b<c>&d'), 'https://onlybills.app/split/?id=a%22b%3Cc%3E%26d');
+});
+
+test('the bill page has no static og:url (the worker adds a per-table one)', () => {
+  const html = fs.readFileSync(new URL('../../split/index.html', import.meta.url), 'utf8');
+  assert.doesNotMatch(html, /property=["']og:url["']/);
 });

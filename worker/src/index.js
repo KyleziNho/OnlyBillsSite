@@ -1,14 +1,14 @@
 // onlybills.app link previews. Sits in front of GitHub Pages on the route onlybills.app/split*.
 //
 // For a bill link (`/split/?id=<table>`) it looks the table up in Firestore and rewrites
-// ONLY the preview tags in <head> (og:title, og:image, twitter:*, <title>) so iMessage shows
+// ONLY the preview tags in <head> (og:title, og:image, og:url, twitter:*, <title>) so iMessage shows
 // "Saffron House · Tap what you had" with the venue photo. The page itself (scripts, body,
 // assets) passes through byte for byte, so splitting on the website works exactly as before.
 //
 // Fails open: anything other than a clean, quick answer (no id, a demo, not HTML, Firestore
 // slow or down, unknown table, any exception) returns GitHub Pages' response untouched.
 
-import { isBillPage, tableId, firestoreUrl, previewFor } from './meta.js';
+import { isBillPage, tableId, firestoreUrl, previewFor, canonicalUrl } from './meta.js';
 
 const LOOKUP_TIMEOUT_MS = 1500;
 const CACHE_SECONDS = 300;
@@ -32,7 +32,7 @@ export default {
     if (!preview) return upstream;
 
     try {
-      return rewrite(upstream, preview);
+      return rewrite(upstream, preview, canonicalUrl(id));
     } catch {
       return upstream;
     }
@@ -79,8 +79,8 @@ function withTimeout(promise, ms) {
   ]);
 }
 
-/** Swap the preview tags; everything else streams through unchanged. */
-function rewrite(upstream, preview) {
+/** Swap the preview tags and add og:url; everything else streams through unchanged. */
+function rewrite(upstream, preview, pageUrl) {
   const set = (value) => ({ element(el) { el.setAttribute('content', value); } });
   const remove = { element(el) { el.remove(); } };
 
@@ -89,7 +89,11 @@ function rewrite(upstream, preview) {
     .on('meta[property="og:title"]', set(preview.title))
     .on('meta[name="twitter:title"]', set(preview.title))
     .on('meta[property="og:description"]', set(preview.description))
-    .on('meta[name="twitter:description"]', set(preview.description));
+    .on('meta[name="twitter:description"]', set(preview.description))
+    // WhatsApp needs og:url for a rich preview. It's per table (never a fixed URL in the page
+    // itself, or every table would share one cached preview), so it's added here.
+    .on('meta[property="og:url"]', remove)
+    .on('head', { element(el) { el.append(`<meta property="og:url" content="${escapeAttr(pageUrl)}" />`, { html: true }); } });
 
   if (preview.image) {
     rewriter = rewriter
