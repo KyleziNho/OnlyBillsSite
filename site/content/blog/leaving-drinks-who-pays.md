@@ -68,8 +68,6 @@ The eight others split Jo's £32 between them: **£4 each**, added to their own 
 
 Splitting the whole £297 evenly between the eight payers would be £37.13 each, which overcharges anyone who had a sandwich and a lime soda. The same approach works for birthdays: see [birthday dinner: who pays?](/blog/birthday-dinner-who-pays/)
 
-:::tool split
-
 ## The leaving collection and gift
 
 The card and gift are separate from the drinks. Keep them separate.

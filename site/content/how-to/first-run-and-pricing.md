@@ -10,7 +10,7 @@ art: paid
 related: split-a-bill-with-onlybills, get-paid-back, scan-a-receipt
 ---
 
-When you first open OnlyBills it says hello with a group chat, shows a short film of how a split works, asks three quick questions about how your group pays, offers a practice scan, then asks your name and how you'd like to get paid. There's nothing to pay and no sign-up. OnlyBills is free, for you and for everyone who joins your table.
+When you first open OnlyBills it says hello with a group chat, shows a short film of how a split works, asks three quick questions about how your group pays, offers a practice scan, then asks your name and how you'd like to get paid. There's nothing to pay and nothing to sign in to. OnlyBills is free, for you and for everyone who joins your table.
 
 ## 1. Watch how it works
 
@@ -34,7 +34,7 @@ That number is an estimate, and the screen says how it's worked out: meals a yea
 
 ## 3. Try a practice scan (optional)
 
-"Try it yourself" lets you scan a pretend receipt on a 3D table and split it with pretend friends. Tap **Try a practice scan**, or **Skip for now**. Nothing is saved, and it doesn't count towards your receipt scans. You can run it again later from Settings, under Walkthrough.
+"Try it yourself" lets you scan a pretend receipt on a 3D table and split it with pretend friends. Tap **Try a practice scan**, or **Skip for now**. Nothing is saved, and it doesn't count towards your receipt scans. You can run it again later from Settings, under Walkthrough, or from **No receipt handy? Try a practice scan** on the home screen before your first bill.
 
 ## 4. Add your name and how you get paid
 
@@ -44,11 +44,11 @@ Then OnlyBills asks how you'd like to be paid back (Monzo, Starling, Revolut, Pa
 
 ## 5. Split your first real bill
 
-Scan a real receipt, or type the bill in, and split it whichever way you like: share a live table or assign the items yourself. There's no offer to sit through at the end.
+Tap **Scan receipt** for a real receipt, or the pencil button next to it (**Manual entry**) to type the bill in. Then split it whichever way you like: **Everyone taps their own** shares a live table with a QR code, and **I'll assign it** lets you pick who had what. There's no offer to sit through at the end.
 
 ## Is OnlyBills free?
 
-Yes. Every feature is free, with no ads and no limits on splitting. Free includes 30 receipt scans in any 30 days. Typing a bill in is always unlimited.
+Yes. Every feature works without signing in or paying, and there are no ads. Free includes 30 receipt scans in any 30 days. Typing a bill in is always unlimited.
 
 Everything else is free too: live QR tables, assigning items, payment links, the Owed page and your History. There's no trial, no first-split paywall and nothing to cancel. Friends who join your table never need the app, an account or to pay anything.
 
@@ -64,17 +64,19 @@ The 30 days roll: each scan stops counting 30 days after you made it. Settings s
 
 ### What happens if I reach the limit?
 
-Before the camera opens, OnlyBills tells you that free scanning has a fair-use limit of 30 receipts in 30 days, and the date your next scan is free again. You can still type a bill in, and anything you've already started carries on as normal. A scan never stops halfway: if the camera opened, you can finish that split.
+Before the camera opens, OnlyBills tells you that free scanning has a fair-use limit of 30 receipts in 30 days, and the date your next scan is free again. You can still type a bill in, and anything you've already started carries on as normal. A scan never stops halfway: if the camera opened, you can finish that split. The same sheet offers OnlyBills Pro's plans if you want higher scan limits, but you don't need them.
 
 ### What is OnlyBills Pro?
 
-An optional subscription (monthly or yearly) in Settings, under Membership. It gives higher scan limits, up to 250 receipt scans in 30 days, and helps keep OnlyBills free for everyone. Nothing else is locked behind it: typing bills in, live tables and Owed stay free for everyone. The app shows the price, and that it renews until you cancel, before you pay. Only the host would ever pay.
+An optional subscription (monthly or yearly). It gives higher scan limits, up to 250 receipt scans in 30 days, and helps keep OnlyBills free for everyone. Nothing else is locked behind it: typing bills in, live tables and Owed stay free for everyone. The app shows the price, and that it renews until you cancel, before you pay. Only the host would ever pay.
 
-If you subscribed before OnlyBills went free, you keep Pro and its higher scan limits.
+To see the plans, tap your profile picture at the top left of the home screen to open Settings, then under **Membership** tap **Get higher scan limits with Pro**. The plans page shows each plan and its price, with **Restore purchases**, the Terms of Use and the Privacy Policy.
+
+If you subscribed before OnlyBills went free, you keep Pro and its higher scan limits. Your Membership section shows **OnlyBills Pro**: tap it, then **See plans** to see your current plan.
 
 ### How do I cancel Pro?
 
-In OnlyBills, open Settings, then Membership, then **Manage subscription**. Or go to your iPhone's Settings, tap your name, then Subscriptions, then OnlyBills. Your higher scan limits carry on to the end of the period you've paid for, then it's back to 30 free scans in 30 days. Everything else stays free.
+In OnlyBills, open Settings and tap **OnlyBills Pro** under Membership, then **Manage subscription**. Or go to your iPhone's Settings, tap your name, then Subscriptions, then OnlyBills. Your higher scan limits carry on to the end of the period you've paid for, then it's back to 30 free scans in 30 days. Everything else stays free.
 
 ## FAQ
 
@@ -85,7 +87,7 @@ No. Nothing in the practice scan is saved and it never counts.
 Yes. Enter the items and prices yourself and split as many bills as you like, every month, free.
 
 ### I've changed phones. Do I need to pay again?
-No. OnlyBills is free on any phone. If you have OnlyBills Pro, tap **Restore purchases** on the plans page to bring back a subscription you already have on the same Apple Account.
+No. OnlyBills is free on any phone. If you have OnlyBills Pro, open Settings, tap **Get higher scan limits with Pro** under Membership, then **Restore purchases** to bring back the subscription you already have on the same Apple Account. It only runs when you tap it.
 
 ### Do my friends have to pay anything?
 No. Friends claim their items and pay you back from a link or QR code. Only the host needs OnlyBills.

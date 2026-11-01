@@ -57,7 +57,7 @@ Mention it when you order, or when you ask for the bill: "We'll be splitting thi
 
 ### Do your own maths first if amounts differ
 
-If everyone owes a different amount, work it out at the table before the server arrives, then give them the numbers: "£32.50 on this card, £41 on this one, the rest on this one." That's much faster than asking them to rebuild the bill item by item. The free [split the bill calculator](/tools/split-bill-calculator/) gives you each person's number, service charge included.
+If everyone owes a different amount, work it out at the table before the server arrives, then give them the numbers: "£32.50 on this card, £41 on this one, the rest on this one." That's much faster than asking them to rebuild the bill item by item. [How to split a bill fairly](/blog/how-to-split-a-bill-fairly/) shows the sums, service charge included.
 
 ### Include the service charge
 

@@ -60,8 +60,6 @@ Two mistakes to watch for:
 - **Forgetting the deposit altogether.** Check the bill shows it. If it doesn't, ask before anyone pays.
 - **The organiser forgetting their own deposit.** They paid it too, so they take it off their share like everyone else.
 
-:::tool split
-
 ## What happens to the deposit when someone drops out?
 
 It depends on two things: what the restaurant does, and what the group agreed. Here are the common cases.

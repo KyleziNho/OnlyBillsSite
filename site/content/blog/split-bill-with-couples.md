@@ -139,7 +139,7 @@ That last one is the kindest of the lot. When the people who ordered more say it
 
 ## Can you do this on your phone?
 
-Yes. The hybrid split takes a few minutes with a calculator, and the free [split the bill calculator](/tools/split-bill-calculator/) can do it by item.
+Yes. The hybrid split takes a few minutes with your phone's calculator. An itemised app like OnlyBills does it by item from a photo of the receipt.
 
 OnlyBills is built for exactly this kind of table. The person who paid scans the receipt and shares a live table, and everyone ticks what they had on their own phone, with no app download needed. The couple's bottle of wine is split between the two of them, the starters between everyone who shared them, and service is spread in proportion. The shares always add up to the bill. Each person, or each couple, pays the host back with a link.
 

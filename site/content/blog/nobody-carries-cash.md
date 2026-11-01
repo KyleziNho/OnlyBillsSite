@@ -92,7 +92,7 @@ The cash method had one big advantage: the debt was settled before anyone left. 
 
 **Make it work with any bank.** Not everyone banks with Monzo. A payment link that takes a card, or your sort code and account number, works for everyone.
 
-**Make the shares add up.** If four people each round up to the nearest pound, the payer gets a little extra. If they each round down, the payer is a few quid short. The amounts should add up to the bill exactly. The free [split the bill calculator](/tools/split-bill-calculator/) does this by item, service charge included.
+**Make the shares add up.** If four people each round up to the nearest pound, the payer gets a little extra. If they each round down, the payer is a few quid short. The amounts should add up to the bill exactly.
 
 That's the gap OnlyBills was built for. The person who paid scans the receipt, friends tick what they had on their own phone (no app needed, it opens on the web or as an [App Clip](/blog/what-is-an-app-clip/)), and each person sees their exact share with service charge spread fairly. Then they pay the host from a link: Monzo (card, Apple Pay or bank transfer, no Monzo account needed), Starling or Revolut (card or Apple Pay, no account needed), PayPal (a PayPal account may be needed) or bank transfer from any banking app. Owed keeps track of anyone who hasn't paid yet.
 

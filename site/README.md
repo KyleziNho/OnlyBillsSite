@@ -19,8 +19,6 @@ cd .. && python3 -m http.server 8765          # preview at http://127.0.0.1:8765
 | `content/blog/*.md` | Articles → `/blog/<slug>/`. Format and voice rules: `CONTENT_GUIDE.md` |
 | `content/how-to/*.md` | Tutorials → `/how-to/<slug>/` (ordered by `order`) |
 | `pages/home.mjs` | Home page (`/`) and its FAQ |
-| `pages/tools.mjs` | Calculator pages (`/tools/…`), their copy and FAQ |
-| `static/js/tools.js` | Calculator logic. Money goes through `money.js` (copied from `split-app/src/lib` at build) |
 | `static/css/site.css` | Site styles on top of `tokens.css` (copied from `split-app/src/design` at build) |
 | `static/shots/` | App screenshots, `<name>-light.webp` + `<name>-dark.webp` (640px wide) |
 | `static/og/` | Generated share images (`og.mjs`) |
@@ -28,7 +26,9 @@ cd .. && python3 -m http.server 8765          # preview at http://127.0.0.1:8765
 | `topics.mjs` | Topic hubs at `/blog/topic/<slug>/`: one per category with 3+ articles, plus keyword clusters (tipping). New articles join automatically |
 
 The build writes only `index.html`, `404.html`, `about/`, `blog/`, `how-to/`, `tools/`, `vs/`, `assets/`,
-`sitemap.xml` and `robots.txt`. It never touches `split/`, `privacy/`, `.well-known/`, `CNAME`
+`sitemap.xml` and `robots.txt`. `tools/` holds only redirect pages: the free calculators were retired
+and each old URL forwards to the closest article (`REDIRECTS` in `build.mjs`, which is also where
+any other moved URL goes). It never touches `split/`, `privacy/`, `.well-known/`, `CNAME`
 or `split.html`.
 
 ## Adding an article

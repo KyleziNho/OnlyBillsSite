@@ -90,10 +90,6 @@ Here's a worked example. Four friends eat at a restaurant with a £1.50 cover ch
 
 Each person pays their own items plus their own £1.50 cover, then the service charge is spread in proportion to what each person had. The shares add up to the £141.75 bill exactly. Our guide to [splitting service charge fairly](/blog/split-service-charge-fairly/) explains why proportional is fairer than equal.
 
-The free calculator handles items, extras and service charge in one go:
-
-:::tool split
-
 **Tricky cases:**
 
 - **Someone joined for one drink.** Ask the staff whether the cover applies to them. If it does, it's theirs to pay, since it's per person.

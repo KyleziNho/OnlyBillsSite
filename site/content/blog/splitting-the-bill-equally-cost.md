@@ -74,8 +74,6 @@ The money only feels small because it's spread out. Here's what a regular gap do
 
 If you're the one who has a main and a soft drink while everyone else has three courses and wine, you're probably somewhere in the bottom two rows.
 
-:::tool overpay
-
 ## Why the gap tends to grow
 
 There's a second cost that's easy to miss. When a table splits equally, people tend to order more.

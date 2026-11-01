@@ -106,8 +106,6 @@ Five friends, a bill of £180.00: £160.00 of food and drink plus £20.00 (12.5%
 
 She's right. With the 12.5% service added, her order comes to £22.50. Splitting by what everyone had, the other four cover the remaining £157.50 between them based on what they ordered. Jo pays £22.50, sends it straight away, and the friendship is fine. Sometimes "won't pay" means "won't pay that".
 
-:::tool split
-
 ## FAQ
 
 ### What do you do when a friend never pays you back?

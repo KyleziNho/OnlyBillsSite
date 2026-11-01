@@ -46,7 +46,7 @@ Here are the three common ways to split it:
 
 All three add up to £109.50.
 
-The middle option is the one most groups land on. The food is split four ways (£66 ÷ 4 = £16.50 each), then each person adds their own drinks. It isn't perfect, but it fixes almost all of Priya's overpayment with very little maths. If you want to check a split like this yourself, the [split the bill calculator](/tools/split-bill-calculator/) handles shared items and own drinks.
+The middle option is the one most groups land on. The food is split four ways (£66 ÷ 4 = £16.50 each), then each person adds their own drinks. It isn't perfect, but it fixes almost all of Priya's overpayment with very little maths.
 
 If there's a service charge, spread it in proportion to each person's total rather than equally, so the person who had less also pays less service. Our guide to [splitting service charge fairly](/blog/split-service-charge-fairly/) shows how.
 

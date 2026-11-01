@@ -90,12 +90,6 @@ A short aside or tip. One or two sentences of Markdown.
 The app call to action card (heading is optional). The page already ends with one, so use at most
 one in the body, at a natural point, and only in articles where the app solves the problem.
 
-```
-:::tool split
-```
-A link card to a free tool: `split` (split the bill calculator), `overpay` (how much does
-splitting equally cost you), `tip` (service charge and tip calculator).
-
 ## FAQ and sources (special sections)
 
 End articles with these two H2 sections when relevant. The build turns them into FAQ structured

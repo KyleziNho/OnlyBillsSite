@@ -114,7 +114,7 @@ Four friends, a £126 bill: £112 of food and drink plus a 12.5% service charge 
 | Chloe | £14.00 | £31.50 | £15.75 |
 | Dev | £28.00 | £31.50 | £31.50 |
 
-Splitting equally, Chloe pays £15.75 more than her food and service cost, and Amy pays £13.50 less. Any app above can do an equal split. The itemised ones (Splitwise Itemize, OnlyBills, Tab) get Chloe the fair number without someone working it out by hand. If you'd rather do it yourself, the free [split the bill calculator](/tools/split-bill-calculator/) does the same sum. For more on when an equal split is fine, see [is splitting the bill equally fair?](/blog/is-splitting-the-bill-equally-fair/).
+Splitting equally, Chloe pays £15.75 more than her food and service cost, and Amy pays £13.50 less. Any app above can do an equal split. The itemised ones (Splitwise Itemize, OnlyBills, Tab) get Chloe the fair number without someone working it out by hand. If you'd rather do it yourself, [how to split a bill fairly](/blog/how-to-split-a-bill-fairly/) walks through the sum. For more on when an equal split is fine, see [is splitting the bill equally fair?](/blog/is-splitting-the-bill-equally-fair/).
 
 ## Can you use more than one?
 

@@ -133,12 +133,6 @@ OnlyBills does all of this automatically. Scan the receipt, share a live table, 
 
 :::shot guest-05-live | Each share includes its fair part of the service charge.
 
-## Do it with the calculator
-
-If you just want the numbers for one bill, the free tip and service charge calculator works out the extra, and the [split the bill calculator](/tools/split-bill-calculator/) spreads it across the table:
-
-:::tool tip
-
 ## FAQ
 
 ### Should service charge be split equally or by what people ordered?

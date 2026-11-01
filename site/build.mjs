@@ -1,7 +1,7 @@
 // Builds the marketing site into the repo root (GitHub Pages serves it as-is).
 // Run: cd site && npm install && node build.mjs
-// Writes ONLY: index.html, 404.html, about/, blog/, how-to/, tools/, vs/, assets/, sitemap.xml,
-// robots.txt. Never touches split/, privacy/, .well-known/, CNAME or split.html.
+// Writes ONLY: index.html, 404.html, about/, blog/, how-to/, tools/ (redirects), vs/, assets/,
+// sitemap.xml, robots.txt. Never touches split/, privacy/, .well-known/, CNAME or split.html.
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -11,7 +11,6 @@ import { marked } from 'marked';
 import { SITE, esc, abs, fmtDate, art, shot, video, imessage, layout, appCta, crumbs, crumbsLd, icons, face, ORG, AUTHOR } from './lib.mjs';
 import { resolveTopics } from './topics.mjs';
 import { homePage } from './pages/home.mjs';
-import { toolPages } from './pages/tools.mjs';
 import { aboutPage } from './pages/about.mjs';
 import { vsPage } from './pages/vs.mjs';
 
@@ -34,14 +33,9 @@ for (const d of OUT_DIRS) fs.rmSync(path.join(ROOT, d), { recursive: true, force
 copyDir(path.join(HERE, 'static'), path.join(ROOT, 'assets'));
 // Shared with the guest page so colours and pennies never drift.
 fs.copyFileSync(path.join(ROOT, 'split-app/src/design/tokens.css'), path.join(ROOT, 'assets/css/tokens.css'));
-fs.mkdirSync(path.join(ROOT, 'assets/js'), { recursive: true });
-fs.copyFileSync(path.join(ROOT, 'split-app/src/lib/money.js'), path.join(ROOT, 'assets/js/money.js'));
-fs.copyFileSync(path.join(ROOT, 'split-app/src/lib/faces.js'), path.join(ROOT, 'assets/js/faces.js'));
 const assetsV = crypto.createHash('sha1')
   .update(fs.readFileSync(path.join(ROOT, 'assets/css/site.css')))
   .update(fs.readFileSync(path.join(ROOT, 'assets/js/site.js')))
-  .update(fs.readFileSync(path.join(ROOT, 'assets/js/tools.js')))
-  .update(fs.readFileSync(path.join(ROOT, 'assets/js/money.js')))
   .update(fs.readFileSync(path.join(ROOT, 'assets/css/tokens.css')))
   .digest('hex').slice(0, 8);
 const ogFor = (key) => (fs.existsSync(path.join(HERE, 'static/og', key + '.jpg')) ? abs(`/assets/og/${key}.jpg`) : undefined);
@@ -67,18 +61,6 @@ function parseFront(src, file) {
   return { data, body: src.slice(m[0].length) };
 }
 
-const TOOLS = {
-  split: ['/tools/split-bill-calculator/', 'Split the bill calculator', 'Add who had what. Service and shared dishes split to the penny.', icons.calc],
-  overpay: ['/tools/overpay-calculator/', 'Does splitting equally cost you?', 'Five quick taps for your estimated yearly overpay.', icons.pound],
-  tip: ['/tools/tip-calculator/', 'Tip and service charge calculator', 'Work out 10, 12.5 or 15% and each person’s share.', icons.heart],
-  service: ['/tools/service-charge-calculator/', 'Service charge calculator', 'Add 12.5% to a bill, or find the service inside a total.', icons.calc],
-  settle: ['/tools/settle-up-calculator/', 'Who owes who calculator', 'Who paid what, and the fewest payments to settle up.', icons.pound],
-};
-const toolCard = (key) => {
-  const t = TOOLS[key];
-  if (!t) { errors.push(`unknown tool "${key}"`); return ''; }
-  return `<a class="card tool-link" href="${t[0]}"><span class="tool-icon">${t[3]}</span><span><b>${esc(t[1])}</b><span>${esc(t[2])}</span></span><span class="chev" aria-hidden="true">›</span></a>`;
-};
 const inline = (s) => marked.parseInline(s.trim());
 const statCard = (parts, cls) => {
   const [num, label, source] = parts.split('|').map((x) => x.trim());
@@ -127,7 +109,6 @@ function renderBody(md, file) {
       continue;
     }
     if ((m = line.match(/^:::cta\s*(.*)$/))) { out.push('', appCta(m[1] || undefined, undefined, 'article-inline'), ''); continue; }
-    if ((m = line.match(/^:::tool\s+(\w+)\s*$/))) { out.push('', toolCard(m[1]), ''); continue; }
     if (/^:::/.test(line)) { errors.push(`${file}: unknown block "${line}"`); continue; }
     out.push(line);
   }
@@ -332,7 +313,6 @@ for (const t of topics) {
       <p class="lede">${esc(t.lede)}</p>
     </div>
     <div class="cards">${t.posts.map((p, i) => postCard(p, i < 3, 2)).join('')}</div>
-    ${(t.tools || []).length ? `<div class="section-head" style="margin-top:56px"><h2 class="h3">Free calculators</h2></div><div class="topic-links">${t.tools.map(toolCard).join('')}</div>` : ''}
     <div class="section-head" style="margin-top:56px"><h2 class="h3">More topics</h2></div>
     <div class="topic-links">${others.map(topicLink).join('')}<a class="card tool-link" href="/blog/"><span class="tool-icon">${icons.link}</span><span><b>All articles</b><span>Everything we have written, newest first.</span></span><span class="chev" aria-hidden="true">›</span></a></div>
   </div>
@@ -362,14 +342,24 @@ for (const t of topics) {
   { priority: 0.8, lastmod: newest(tuts) });
 }
 
-// ── Home, tools, about, 404 ─────────────────────────────
+// ── Home, about, 404 ────────────────────────────────────
 const ctx = { ogFor, posts, tuts, topics, postCard, assetsV, write, layout, warn, errors };
 homePage(ctx);
-toolPages(ctx);
 aboutPage(ctx);
 vsPage(ctx);
 // Old URLs that moved: a tiny page that forwards (GitHub Pages has no server redirects).
-for (const [from, to] of [['/blog/onlybills-vs-splitwise/', '/vs/splitwise/']]) {
+// The free calculators under /tools/ were retired; each forwards to the closest article.
+const REDIRECTS = [
+  ['/blog/onlybills-vs-splitwise/', '/vs/splitwise/'],
+  ['/tools/', '/blog/how-to-split-a-bill-fairly/'],
+  ['/tools/split-bill-calculator/', '/how-to/split-a-bill-with-onlybills/'],
+  ['/tools/overpay-calculator/', '/blog/splitting-the-bill-equally-cost/'],
+  ['/tools/tip-calculator/', '/blog/how-much-to-tip-uk/'],
+  ['/tools/service-charge-calculator/', '/blog/split-service-charge-fairly/'],
+  ['/tools/settle-up-calculator/', '/how-to/track-who-owes-you/'],
+];
+for (const [from, to] of REDIRECTS) {
+  if (!fs.existsSync(path.join(ROOT, to, 'index.html'))) errors.push(`redirect ${from} points at missing page ${to}`);
   write(from, `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>Moved</title><link rel="canonical" href="${abs(to)}"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=${to}"><script>location.replace('${to}' + location.hash)</script></head><body><a href="${to}">This page has moved</a></body></html>`, { skipSitemap: true });
 }
 write('/404.html', layout({ path: '/404.html', title: 'Page not found', description: 'That page has wandered off.', noindex: true, assetsV, body: `
@@ -379,7 +369,7 @@ write('/404.html', layout({ path: '/404.html', title: 'Page not found', descript
 const today = new Date().toISOString().slice(0, 10);
 // lastmod must only move when a page really changes, or search engines learn to ignore it.
 // Articles use `updated`/`date`; index and hub pages their newest article; template pages
-// (home, tools, about) the last commit of their source, or today if it has uncommitted edits.
+// (home, about) the last commit of their source, or today if it has uncommitted edits.
 const gitDate = (...files) => {
   try {
     const rel = files.map((f) => path.relative(ROOT, path.join(HERE, f)));
@@ -387,10 +377,10 @@ const gitDate = (...files) => {
     return execFileSync('git', ['log', '-1', '--format=%cs', '--', ...rel], { cwd: ROOT, encoding: 'utf8' }).trim() || today;
   } catch { return today; }
 };
-const TEMPLATE_DATES = { '/': ['pages/home.mjs'], '/about/': ['pages/about.mjs'], '/tools/': ['pages/tools.mjs'] };
+const TEMPLATE_DATES = { '/': ['pages/home.mjs'], '/about/': ['pages/about.mjs'] };
 for (const u of pages) {
   if (u.lastmod) continue;
-  const src = TEMPLATE_DATES[u.path] || (u.path.startsWith('/tools/') ? ['pages/tools.mjs', 'static/js/tools.js'] : null);
+  const src = TEMPLATE_DATES[u.path];
   u.lastmod = src ? gitDate(...src) : today;
 }
 const extraUrls = [{ path: '/privacy/', priority: 0.3, lastmod: gitDate('../privacy/index.html') }];
@@ -422,7 +412,7 @@ ${posts.slice(0, 30).map((p) => `<item><title>${esc(p.title)}</title><link>${abs
 `);
 
 // ── Report ──────────────────────────────────────────────
-// Every page's built HTML is linted for dashes too (templates, tools).
+// Every page's built HTML is linted for dashes too (templates).
 for (const pg of pages) {
   const f = pg.path.endsWith('/') ? path.join(ROOT, pg.path, 'index.html') : path.join(ROOT, pg.path);
   const visible = fs.readFileSync(f, 'utf8').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '');

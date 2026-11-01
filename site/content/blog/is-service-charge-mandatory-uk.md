@@ -82,9 +82,7 @@ If you'd rather tip a different amount, or the service was poor, it's fine to as
 
 ## Splitting a service charge in a group
 
-If you're keeping the service charge and splitting the bill, share it in proportion to what each person ordered, not equally. Someone who had £15 of food shouldn't pay the same 12.5% service as someone who had £45. Our guide to [splitting service charge fairly](/blog/split-service-charge-fairly/) has the worked maths. If you're asking the restaurant to split it between cards instead, make sure the service charge is in each payment (more in [can you ask a restaurant to split the bill?](/blog/can-you-ask-restaurant-to-split-bill/)). The free calculator does the proportions for you:
-
-:::tool split
+If you're keeping the service charge and splitting the bill, share it in proportion to what each person ordered, not equally. Someone who had £15 of food shouldn't pay the same 12.5% service as someone who had £45. Our guide to [splitting service charge fairly](/blog/split-service-charge-fairly/) has the worked maths. If you're asking the restaurant to split it between cards instead, make sure the service charge is in each payment (more in [can you ask a restaurant to split the bill?](/blog/can-you-ask-restaurant-to-split-bill/)).
 
 ## FAQ
 

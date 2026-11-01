@@ -29,8 +29,6 @@ For comparison, YouGov found the average UK restaurant tip was 6.1% in 2023. A 1
 
 That's £19 on an £80 meal, or nearly 24%. Plenty of people do this by accident.
 
-:::tool tip
-
 ## Watch out for the card machine
 
 The most common way people tip twice is the card terminal. Many machines ask "Add a tip?" with buttons for 10%, 12.5% or 15%, even when service is already on the bill. The prompt is generic. It doesn't know about the service charge.

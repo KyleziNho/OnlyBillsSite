@@ -111,9 +111,7 @@ OnlyBills is built for exactly this. The host scans the receipt and shares a liv
 
 Next time you're out with a regular group, try one dinner where you agree up front to pay for what you each order. Compare the total with what your group normally spends. It isn't a proper experiment, but plenty of people find the bill comes in lower, and nobody feels like they got less.
 
-If you want to see what equal splitting has been costing you personally, the overpay calculator does the sums, and we've added up [what an equal split costs over a year](/blog/splitting-the-bill-equally-cost/).
-
-:::tool overpay
+If you want to see what equal splitting might be costing you, we've added up [what an equal split costs over a year](/blog/splitting-the-bill-equally-cost/).
 
 ## FAQ
 

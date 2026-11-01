@@ -65,7 +65,7 @@ Swap in the names, amounts and link. These work on text, WhatsApp or iMessage.
 
 ### When people had different amounts
 
-If you need to work the numbers out first, the [split the bill calculator](/tools/split-bill-calculator/) does it by item, service charge included.
+If you need to work the numbers out first, [how to split a bill fairly](/blog/how-to-split-a-bill-fairly/) has the method, service charge included.
 
 > Worked out last night's bill by what everyone had. Sam £28.40, Priya £41.10, Jack £33.75. Pay here whenever: [link]
 

@@ -14,7 +14,6 @@ export const CATEGORY_HUBS = {
     description: 'Step-by-step guides to splitting a bill fairly: at a restaurant, on your iPhone, with Monzo, Revolut or Starling, for big groups and on holiday.',
     lede: 'Practical, step-by-step ways to split a bill fairly, whoever is at the table and however they pay.',
     art: 'claim',
-    tools: ['split', 'settle'],
   },
   Etiquette: {
     slug: 'etiquette',
@@ -23,7 +22,6 @@ export const CATEGORY_HUBS = {
     description: 'The unwritten rules of splitting the bill in the UK: who pays, when to tip, asking a restaurant to split it, and chasing friends who owe you.',
     lede: 'The unwritten rules of who pays, how to bring up money with friends and what to do when it goes wrong.',
     art: 'receipts',
-    tools: ['split', 'tip'],
   },
   Money: {
     slug: 'money',
@@ -32,7 +30,6 @@ export const CATEGORY_HUBS = {
     description: 'Where the money really goes when a group splits a bill, with fair ways to handle drinks, service charge, discounts and takeaway orders.',
     lede: 'Where the money really goes when a group splits a bill, and fair ways to handle the awkward parts.',
     art: 'payout',
-    tools: ['overpay', 'split'],
   },
   Occasions: {
     slug: 'occasions',
@@ -41,7 +38,6 @@ export const CATEGORY_HUBS = {
     description: 'Who pays and how to split it fairly at birthday and graduation dinners, Christmas parties, bottomless brunches, leaving drinks, stag dos and first dates.',
     lede: 'Birthdays, work dos, dates and big nights out: who usually pays, and how to split it without any fuss.',
     art: 'paid',
-    tools: ['split', 'settle'],
   },
   Comparisons: {
     slug: 'comparisons',
@@ -50,7 +46,6 @@ export const CATEGORY_HUBS = {
     description: 'Fair, sourced comparisons of bill splitting apps in the UK: Splitwise, Tricount, Settle Up, Splid, bank split buttons and OnlyBills, and who each one suits.',
     lede: 'Which app fits which job, what is free, and who needs an account. Checked against each app\'s own listing.',
     art: 'receipts',
-    tools: ['split', 'settle'],
   },
   Research: {
     slug: 'research',
@@ -59,7 +54,6 @@ export const CATEGORY_HUBS = {
     description: 'What studies and UK surveys say about splitting the bill, why groups order more when they split equally, and how people pay each other now.',
     lede: 'What studies and surveys say about how groups spend, split and pay each other back.',
     art: 'receipts',
-    tools: ['overpay'],
   },
 };
 
@@ -72,7 +66,6 @@ export const CLUSTER_HUBS = [
     description: 'How much to tip in the UK, whether service charge is mandatory, who gets the tip under UK law, and how to split service fairly in a group.',
     lede: 'How much to tip, when service is already included, where your tip goes and how to share it fairly in a group.',
     art: 'paid',
-    tools: ['tip', 'service'],
     match: /\btip(s|ping)?\b|service[- ]charge/i,
   },
 ];
@@ -81,7 +74,7 @@ const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-
 
 /**
  * Resolves the hubs for a list of posts ({ slug, title, seoTitle, category }).
- * Returns [{ slug, path, name, title, description, lede, art, tools, posts, category? }].
+ * Returns [{ slug, path, name, title, description, lede, art, posts, category? }].
  */
 export function resolveTopics(posts) {
   const hubs = [];
@@ -92,7 +85,7 @@ export function resolveTopics(posts) {
     const meta = CATEGORY_HUBS[cat] || {
       slug: slugify(cat), name: cat, title: `${cat}: articles on splitting the bill`,
       description: `OnlyBills articles about ${cat.toLowerCase()}: fair ways to split the bill, tipping in the UK and money with friends.`,
-      lede: `Articles about ${cat.toLowerCase()} and splitting the bill.`, art: 'receipts', tools: ['split'],
+      lede: `Articles about ${cat.toLowerCase()} and splitting the bill.`, art: 'receipts',
     };
     hubs.push({ ...meta, category: cat, path: `/blog/topic/${meta.slug}/`, posts: inCat });
   }

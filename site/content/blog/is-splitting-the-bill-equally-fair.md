@@ -133,10 +133,6 @@ If you're doing it by hand:
 3. Spread the service charge, tip or any discount in proportion to each person's total, not equally (see [how to split service charge fairly](/blog/split-service-charge-fairly/)).
 4. Check that the shares add up to the bill. If you're a penny out, someone takes the odd penny.
 
-Or put the numbers into the free calculator:
-
-:::tool split
-
 ## FAQ
 
 ### Is it rude to not split the bill equally?

@@ -80,9 +80,7 @@ Agreeing to pay for what you each order means:
 - Nobody pays for a bottle of wine they didn't drink.
 - People don't order more because "it's being split anyway" (a real effect; see [why groups order more when splitting](/blog/why-groups-order-more-when-splitting/)).
 
-If the maths is what puts people off, the free calculator below shows how much an equal split costs the lightest orderer.
-
-:::tool overpay
+If the maths is what puts people off, we've worked out [how much an equal split costs the lightest orderer](/blog/splitting-the-bill-equally-cost/) over a year.
 
 ## 5. Split the food, pay for your own drinks
 

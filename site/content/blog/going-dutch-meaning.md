@@ -67,8 +67,6 @@ Some people prefer "split the bill" simply because it's clearer.
 
 For the full set of unwritten rules, see our [bill splitting etiquette guide](/blog/bill-splitting-etiquette/).
 
-:::tool split
-
 ## FAQ
 
 ### What does "go Dutch" mean on a date?
