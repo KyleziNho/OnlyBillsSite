@@ -1,6 +1,6 @@
 ---
 title: How to split costs on student nights out
-seoTitle: Student nights out: how to split pres, rounds, Ubers and dinners
+seoTitle: Splitting student nights out: pres, rounds, Ubers, dinners
 description: Pres, rounds, Ubers home and cheap dinners. Fair ways for students to split the costs of a night out on a tight budget, with £ examples and messages to copy.
 date: 2026-10-19
 updated: 2026-11-01

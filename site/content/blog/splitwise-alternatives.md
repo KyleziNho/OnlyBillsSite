@@ -1,6 +1,6 @@
 ---
 title: Splitwise alternatives: the best bill splitting apps in 2026
-seoTitle: Splitwise alternatives: best bill splitting apps UK (2026)
+seoTitle: Splitwise alternatives: 6 apps compared for the UK (2026)
 description: Tricount, Settle Up, Splid, Tab, your bank's split button and OnlyBills compared with Splitwise: features, UK prices and who each bill splitting app suits.
 date: 2026-10-02
 updated: 2026-11-01

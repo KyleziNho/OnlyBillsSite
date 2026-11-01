@@ -1,6 +1,6 @@
 ---
 title: How to share a live table so friends claim their own items
-seoTitle: Share a live bill: friends scan a QR code and tap what they had
+seoTitle: Share a live bill: friends scan a QR code, tap what they had
 description: Show a QR code or send a link, and friends tick what they had on their own phone. Watch the claims come in, split what's left evenly, then finish the table.
 date: 2026-10-21
 order: 3

@@ -14,10 +14,10 @@ const TOOLS = [
     slug: 'split-bill-calculator',
     art: 'claim',
     name: 'Split the bill calculator',
-    title: 'Split the bill calculator: by item or equally, with service charge',
+    title: 'Split the bill calculator: by item or equally, with service',
     h1: 'Split the bill calculator',
     lede: 'Add who had what. Shared dishes, service charge and tips split fairly, and every share adds up to the bill to the penny.',
-    description: 'Free split the bill calculator. Split by what each person ordered or equally, share starters and wine, add service charge or a tip, and copy the totals to WhatsApp.',
+    description: 'Free split the bill calculator. Split by what each person had or equally, share starters and wine, add service charge or a tip, and copy totals to WhatsApp.',
     card: 'By item or equally. Service, tips and shared dishes included.',
     app: `<div class="tool two" data-tool="split">
   <div style="display:grid;gap:18px">
@@ -82,10 +82,10 @@ If everyone ordered roughly the same, splitting equally is quick and nobody mind
     slug: 'overpay-calculator',
     art: 'receipts',
     name: 'Splitting equally calculator',
-    title: 'How much does splitting the bill equally cost you? Calculator',
+    title: 'How much does splitting the bill equally cost? Calculator',
     h1: 'How much does splitting equally cost you?',
     lede: 'Five quick questions. We\'ll estimate how much you overpay a year when the bill is split evenly.',
-    description: 'Answer five quick questions to estimate how much you overpay each year when restaurant bills are split equally. Free, takes 20 seconds, with the research behind it.',
+    description: 'Answer five quick questions to estimate how much you overpay each year when restaurant bills are split equally. Free, with the research behind it.',
     card: 'Five taps for your estimated yearly overpay.',
     app: `<div class="tool" data-tool="overpay" style="max-width:760px;margin:0 auto">
   <div class="card card-pad" data-quiz>
@@ -138,7 +138,7 @@ In the restaurant study, groups ordered noticeably more when they knew the bill 
     title: 'Tip calculator UK: service charge and split per person',
     h1: 'Tip and service charge calculator',
     lede: 'Work out 10, 12.5 or 15% on any bill and what each person pays. Exact to the penny.',
-    description: 'Free UK tip calculator. Work out 10%, 12.5% or 15% service on a restaurant bill, split it between any number of people, and check whether service is already included.',
+    description: 'Free UK tip calculator. Work out 10%, 12.5% or 15% service on a restaurant bill, split it between any number of people, and check if service is included.',
     card: '10, 12.5 or 15% and the split per person.',
     app: `<div class="tool two" data-tool="tip">
   <div class="card card-pad" style="display:grid;gap:18px">

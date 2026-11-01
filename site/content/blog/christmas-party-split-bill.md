@@ -1,6 +1,6 @@
 ---
 title: How to split the bill at a Christmas party
-seoTitle: Christmas party bill: deposits, set menus and splitting fairly
+seoTitle: Christmas party bill: deposits, set menus and a fair split
 description: Deposits, pre-orders, drinks packages, service charge and dropouts. How to organise and split a Christmas party or festive meal fairly, with a worked £ example.
 date: 2026-10-20
 updated: 2026-11-01

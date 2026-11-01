@@ -1,6 +1,6 @@
 ---
 title: How to get paid back with OnlyBills
-seoTitle: Get paid back by Monzo, Starling, Revolut, PayPal or bank transfer
+seoTitle: Get paid back by Monzo, Starling, Revolut, PayPal or bank
 description: Add your Monzo, Starling, Revolut or PayPal link or bank details once. Then friends pay their exact share from a link, and you tick them off as the money lands.
 date: 2026-10-21
 order: 7
