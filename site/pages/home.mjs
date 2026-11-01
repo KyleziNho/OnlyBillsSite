@@ -113,7 +113,8 @@ export function homePage({ posts, assetsV, write, layout }) {
       <p class="lede">Who had what, who didn’t drink, who’s covering the service. Send one link instead, and everyone pays their own share before the coats are on.</p>
       <p class="awk-stat"><b class="num">38%</b><span>of Brits feel they lose money when the bill is split equally. <a href="/blog/splitting-the-bill-equally-cost/">OpenTable, 2016</a></span></p>
     </div>
-    <div class="chat-card" data-chat aria-label="An example group chat after dinner. Friends argue about splitting the bill until the host shares an OnlyBills link, and then everyone pays.">
+    <div class="chat-card" data-chat role="group" aria-label="Example group chat after dinner">
+      <p class="visually-hidden">Sam, Priya, Jon and Alex argue about how to split the bill. You share an OnlyBills link, “Saffron House, tap what you had”, and Priya, Sam and Alex pay you their exact shares.</p>
       <div class="chat-head" aria-hidden="true"><span class="faces" style="--size:30px">${['Sam', 'Priya', 'Jon', 'Alex'].map((n) => face(n, 30, '', pf[n])).join('')}</span><b>Saturday dinner</b><small>Sam, Priya, Jon, Alex and you</small></div>
       <div class="chat-notifs" aria-hidden="true">${PAID.map(([n, amt]) => `<div class="notif2" data-notif>${face(n, 34, '', pf[n])}<span><b>${n} paid you <span class="money">${amt}</span></b><small>Saffron House</small></span></div>`).join('')}</div>
       <div class="chat-body" aria-hidden="true">${bubbles(AWKWARD, pf)}<div class="msg recv typing" data-typing-row hidden><span class="msg-row"><span class="msg-gap"></span><p class="bub dots"><i></i><i></i><i></i></p></span></div></div>
@@ -203,8 +204,8 @@ export function homePage({ posts, assetsV, write, layout }) {
       <h2 class="h2">What people say after dinner.</h2>
       <p class="lede">Real messages from people who split with OnlyBills.</p>
     </div>
-    <div class="quote-thread" data-chat data-chat-speed="0.75" aria-label="Messages from OnlyBills users">
-      <div class="chat-body">${bubbles(quoteLines, qf)}<div class="msg sent run tail" data-msg data-typing="0"><p class="bub">ok I’m in. next dinner we’re using this</p></div></div>
+    <div class="quote-thread" data-chat data-chat-speed="0.75" role="group" aria-label="Messages from OnlyBills users">
+      <div class="chat-body" aria-hidden="true">${bubbles(quoteLines, qf)}<div class="msg sent run tail" data-msg data-typing="0"><p class="bub">ok I’m in. next dinner we’re using this</p></div></div>
       <ul class="visually-hidden">${QUOTES.map(([who, lines]) => `<li>${esc(who)}: ${esc(lines.join(' '))}</li>`).join('')}</ul>
     </div>
   </div>

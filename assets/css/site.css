@@ -939,8 +939,9 @@ a.eyebrow:hover { text-decoration: underline; }
 }
 .stage-pause span { width: 10px; height: 12px; border-left: 3px solid #fff; border-right: 3px solid #fff; }
 .stage.paused .stage-pause span { width: 0; height: 0; border: 0; border-left: 11px solid #fff; border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 3px; }
+@media (max-width: 959px) { .stage { width: 100%; max-width: 560px; justify-self: center; } }
 @media (max-width: 520px) {
-  .stage { margin: 0 calc(var(--gutter) * -0.5); padding-top: 64px; }
+  .stage { margin: 0 calc(var(--gutter) * -0.5); padding-top: 64px; width: auto; }
 }
 
 /* "Sound familiar?": the post-dinner group chat */

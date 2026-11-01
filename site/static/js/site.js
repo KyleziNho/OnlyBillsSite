@@ -144,7 +144,7 @@
     v.addEventListener('pause', () => { cancelAnimationFrame(raf); tick(); });
     dots.forEach((d, k) => d.addEventListener('click', () => { v.currentTime = seg[k][0] + 0.01; tick(); if (!userPaused) play(); }));
     pause.addEventListener('click', () => { userPaused = !v.paused ? true : false; if (userPaused) { v.pause(); setPaused(true); } else play(); });
-    if (capture) { v.currentTime = 11.6; return; }
+    if (capture) return;
     if (reduce) { setPaused(true); return; }
     visible(stage, () => { if (!userPaused) play(); }, () => v.pause());
   });
