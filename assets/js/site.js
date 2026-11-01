@@ -111,6 +111,95 @@
     visible(box, () => { if (!started) { started = true; show(0); } else if (!v.ended) tryPlay(v); }, () => v.pause());
   });
 
+
+  // Hero film: HTML captions and progress dots follow the video; plays only while on screen.
+  $$('[data-film]').forEach((stage) => {
+    const v = stage.querySelector('video');
+    const caps = $$('.stage-caps li', stage);
+    const dots = $$('.stage-dots button', stage);
+    const pause = stage.querySelector('[data-pause]');
+    const seg = caps.map((li) => [+li.dataset.start, +li.dataset.end]);
+    let cur = 0, raf = 0, userPaused = reduce;
+    const set = (k) => {
+      if (k === cur) return;
+      cur = k;
+      caps.forEach((li, j) => li.classList.toggle('on', j === k));
+      dots.forEach((d, j) => { if (j === k) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+    };
+    const tick = () => {
+      const t = v.currentTime;
+      let k = seg.findIndex(([a, b]) => t >= a && t < b);
+      if (k < 0) k = seg.length - 1;
+      set(k);
+      const [a, b] = seg[k];
+      dots[k].querySelector('i').style.setProperty('--p', String(Math.min(1, (t - a) / (b - a))));
+      if (!v.paused) raf = requestAnimationFrame(tick);
+    };
+    const setPaused = (p) => {
+      stage.classList.toggle('paused', p);
+      pause.setAttribute('aria-label', p ? 'Play the film' : 'Pause the film');
+    };
+    const play = () => { const r = v.play(); if (r && r.catch) r.catch(() => setPaused(true)); };
+    v.addEventListener('play', () => { setPaused(false); cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); });
+    v.addEventListener('pause', () => { cancelAnimationFrame(raf); tick(); });
+    dots.forEach((d, k) => d.addEventListener('click', () => { v.currentTime = seg[k][0] + 0.01; tick(); if (!userPaused) play(); }));
+    pause.addEventListener('click', () => { userPaused = !v.paused ? true : false; if (userPaused) { v.pause(); setPaused(true); } else play(); });
+    if (capture) { v.currentTime = 11.6; return; }
+    if (reduce) { setPaused(true); return; }
+    visible(stage, () => { if (!userPaused) play(); }, () => v.pause());
+  });
+
+  // Chats: messages arrive one by one with typing dots, like the app's welcome screen.
+  // Plays once when it scrolls into view; Reduce Motion and ?capture show the whole thread.
+  $$('[data-chat]').forEach((chat) => {
+    const msgs = $$('[data-msg]', chat);
+    const notifs = $$('[data-notif]', chat);
+    const typing = chat.querySelector('[data-typing-row]');
+    const replay = chat.querySelector('.chat-replay');
+    const speed = +(chat.dataset.chatSpeed || 1);
+    let timers = [];
+    const showAll = () => { msgs.forEach((m) => m.classList.add('show')); notifs.forEach((n, j) => { n.classList.add('show'); n.dataset.depth = String(notifs.length - 1 - j); }); };
+    if (reduce || capture) { showAll(); return; }
+    const run = () => {
+      timers.forEach(clearTimeout); timers = [];
+      msgs.forEach((m) => m.classList.remove('show')); notifs.forEach((n) => { n.classList.remove('show'); delete n.dataset.depth; });
+      if (replay) replay.hidden = true;
+      let t = 300;
+      const at = (ms, fn) => timers.push(setTimeout(fn, ms));
+      msgs.forEach((m) => {
+        const typ = +m.dataset.typing * speed;
+        const sent = m.classList.contains('sent');
+        t += (sent ? 700 : 380) * speed;
+        if (typ && typing) {
+          at(t, () => { typing.hidden = false; typing.classList.remove('show'); void typing.offsetWidth; });
+          t += typ;
+          at(t, () => { typing.hidden = true; });
+        } else t += typ * 0.4;
+        at(t, () => m.classList.add('show'));
+      });
+      notifs.forEach((n, k) => { t += 900; at(t, () => { n.classList.add('show'); notifs.forEach((o, j) => { if (j <= k) o.dataset.depth = String(k - j); }); }); });
+      at(t + 1600, () => { if (replay) replay.hidden = false; });
+    };
+    if (replay) replay.addEventListener('click', run);
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { io.disconnect(); run(); } }, { threshold: 0.4 });
+      io.observe(chat);
+    } else showAll();
+  });
+
+  // Looping decorative films (the closing Orbit): load near the viewport, wide or narrow file.
+  $$('video[data-lazy-loop]').forEach((v) => {
+    const narrow = matchMedia('(max-width: 699px)').matches;
+    const base = narrow ? v.dataset.srcNarrow : v.dataset.srcWide;
+    v.poster = base + '-poster.jpg';
+    if (capture || reduce) return;
+    let loaded = false;
+    visible(v, () => {
+      if (!loaded) { loaded = true; v.innerHTML = `<source src="${base}.webm" type="video/webm"><source src="${base}.mp4" type="video/mp4">`; v.load(); }
+      tryPlay(v);
+    }, () => v.pause());
+  });
+
   // Copy link / native share
   $$('[data-share]').forEach((b) => b.addEventListener('click', async () => {
     const url = location.href.split('#')[0];

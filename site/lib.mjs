@@ -76,9 +76,10 @@ export const appCta = (heading = 'Split it fairly in a minute', sub = 'Scan the 
 </aside>`;
 
 const NAV = [
-  ['/how-to/', 'How it works'],
-  ['/tools/', 'Free tools'],
+  ['/#how', 'How it works'],
+  ['/how-to/', 'Guides'],
   ['/blog/', 'Articles'],
+  ['/about/', 'About'],
 ];
 
 const jsonLd = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
@@ -200,7 +201,7 @@ ${jsonLd(graph)}
     <a class="get" href="${SITE.appStore}" data-cta="nav" rel="noopener">${icons.apple}<span>Get the app</span></a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">${icons.menu}</button>
   </div>
-  <nav class="mobile-nav" id="mobile-nav" aria-label="Main">${nav}<a href="/about/">About</a></nav>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main">${nav}</nav>
 </header>
 <main id="main" tabindex="-1">
 ${body}
@@ -222,17 +223,11 @@ function footer() {
         <a class="maker" href="/about/"><img src="/assets/img/maker-avatar.jpg" width="32" height="32" alt="" loading="lazy">Made by Kyle</a>
       </div>
       <div><h4>App</h4><ul>
-        <li><a href="/how-to/">How it works</a></li>
+        <li><a href="/#how">How it works</a></li>
+        <li><a href="/how-to/">Guides</a></li>
         <li><a href="/#pricing">Pricing</a></li>
         <li><a href="${SITE.appStore}" rel="noopener">App Store</a></li>
         <li><a href="/split/?demo=2&amp;state=claiming">Try a demo table</a></li>
-      </ul></div>
-      <div><h4>Free tools</h4><ul>
-        <li><a href="/tools/split-bill-calculator/">Split the bill calculator</a></li>
-        <li><a href="/tools/overpay-calculator/">Splitting equally calculator</a></li>
-        <li><a href="/tools/tip-calculator/">Tip calculator</a></li>
-        <li><a href="/tools/service-charge-calculator/">Service charge calculator</a></li>
-        <li><a href="/tools/settle-up-calculator/">Who owes who calculator</a></li>
       </ul></div>
       <div><h4>Read</h4><ul>
         <li><a href="/blog/">All articles</a></li>
