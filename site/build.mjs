@@ -8,7 +8,7 @@ import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
-import { SITE, esc, abs, fmtDate, art, shot, video, layout, appCta, crumbs, crumbsLd, icons, face, ORG, AUTHOR } from './lib.mjs';
+import { SITE, esc, abs, fmtDate, art, shot, video, imessage, layout, appCta, crumbs, crumbsLd, icons, face, ORG, AUTHOR } from './lib.mjs';
 import { resolveTopics } from './topics.mjs';
 import { homePage } from './pages/home.mjs';
 import { toolPages } from './pages/tools.mjs';
@@ -112,6 +112,12 @@ function renderBody(md, file) {
       if (!fs.existsSync(path.join(HERE, 'static/video', m[1] + '-light.mp4'))) { errors.push(`${file}: unknown video "${m[1]}"`); continue; }
       const cap = m[2] || '';
       out.push('', `<figure class="figure">${video(m[1], cap.replace(/[*_`]/g, ''), 280)}${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`, '');
+      continue;
+    }
+    if ((m = line.match(/^:::imessage\s+(.+)$/))) {
+      const [title, domain, cap = ''] = m[1].split('|').map((x) => x.trim());
+      if (!title || !domain) { errors.push(`${file}: :::imessage needs "title | domain | caption"`); continue; }
+      out.push('', `<figure class="figure imsg-figure">${imessage(title, domain)}${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`, '');
       continue;
     }
     if (/^:::note\s*$/.test(line)) {

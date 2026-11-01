@@ -67,6 +67,18 @@ More (host side: home, scan, check, assign, QR table, summary, Owed, payout setu
 the list is in `static/shots/`.
 
 ```
+:::imessage Saffron House · Tap what you had | onlybills.app | An illustration of the link in iMessage.
+```
+A stylised sent message with a rich link preview: a right-aligned bubble with an illustration on
+top, a bar with the bold title and the grey domain, a small "Delivered" label, and the caption
+underneath. Parts are `title | domain | caption` (caption optional). Use it to show what a shared
+table link looks like in a chat. The title should match the real preview format
+(`<Venue> · Tap what you had`, see `worker/README.md`). The picture is always the site's own
+receipts art, never a venue photo, so the caption should say it's an illustration and not promise
+a photo. It's read to screen readers as "Example message: a link preview reading Saffron House,
+Tap what you had, onlybills.app". No Apple logos or Messages UI beyond the bubble.
+
+```
 :::note
 A short aside or tip. One or two sentences of Markdown.
 :::

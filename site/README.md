@@ -52,3 +52,11 @@ other than one `<h1>`. When you change an article substantially, set `updated:`.
 
 Convert PNGs with `cwebp -q 82 -resize 640 0 in.png -o static/shots/<name>-light.webp` (and `-dark`).
 Then use `:::shot <name> | caption` in Markdown.
+
+## The iMessage link preview figure
+
+`:::imessage Title | domain | caption` draws a stylised sent message with a link preview (see
+`CONTENT_GUIDE.md`). Markup: `imessage()` in `lib.mjs`; styles: the `.imsg` rules in
+`static/css/site.css` (next to `.figure`, plus two dark-mode lines). It uses the receipts art from
+`static/art/` on a token-coloured wash, so it follows light and dark mode, and it is one
+`role="img"` with an `aria-label`. Never swap in a real venue photo or Google imagery.
