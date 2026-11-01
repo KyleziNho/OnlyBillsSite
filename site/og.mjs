@@ -6,6 +6,7 @@ import path from 'node:path';
 import http from 'node:http';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { resolveTopics } from './topics.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
@@ -19,14 +20,18 @@ const front = (src) => Object.fromEntries((src.match(/^---\n([\s\S]*?)\n---/)?.[
   .map((l) => l.match(/^([A-Za-z]+):\s*(.*)$/)).filter(Boolean).map((m) => [m[1], m[2].trim()]));
 
 const jobs = [];
+const blogPosts = [];
 for (const dir of ['blog', 'how-to']) {
   const d = path.join(HERE, 'content', dir);
   if (!fs.existsSync(d)) continue;
   for (const f of fs.readdirSync(d).filter((x) => x.endsWith('.md'))) {
     const fm = front(fs.readFileSync(path.join(d, f), 'utf8'));
     jobs.push({ slug: f.replace(/\.md$/, ''), title: fm.title, kicker: dir === 'how-to' ? 'Tutorial' : fm.category || 'Article', art: fm.art || 'receipts' });
+    if (dir === 'blog') blogPosts.push({ slug: f.replace(/\.md$/, ''), title: fm.title || '', seoTitle: fm.seoTitle, category: fm.category });
   }
 }
+// Topic hubs (/blog/topic/<slug>/), same list build.mjs makes.
+for (const t of resolveTopics(blogPosts)) jobs.push({ slug: 'topic-' + t.slug, title: t.name, kicker: 'Articles', art: t.art || 'receipts' });
 for (const [slug, title, art] of [
   ['split-bill-calculator', 'Split the bill calculator', 'claim'],
   ['overpay-calculator', 'How much does splitting equally cost you?', 'receipts'],

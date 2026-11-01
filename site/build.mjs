@@ -1,13 +1,15 @@
 // Builds the marketing site into the repo root (GitHub Pages serves it as-is).
 // Run: cd site && npm install && node build.mjs
-// Writes ONLY: index.html, 404.html, about/, blog/, how-to/, tools/, assets/, sitemap.xml,
+// Writes ONLY: index.html, 404.html, about/, blog/, how-to/, tools/, vs/, assets/, sitemap.xml,
 // robots.txt. Never touches split/, privacy/, .well-known/, CNAME or split.html.
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
-import { SITE, esc, abs, fmtDate, art, shot, video, layout, appCta, crumbs, crumbsLd, icons, face, ORG } from './lib.mjs';
+import { SITE, esc, abs, fmtDate, art, shot, video, layout, appCta, crumbs, crumbsLd, icons, face, ORG, AUTHOR } from './lib.mjs';
+import { resolveTopics } from './topics.mjs';
 import { homePage } from './pages/home.mjs';
 import { toolPages } from './pages/tools.mjs';
 import { aboutPage } from './pages/about.mjs';
@@ -196,15 +198,21 @@ const tuts = loadDir('how-to', 'how-to').sort((a, b) => (Number(a.order) || 99) 
 const all = new Map([...posts, ...tuts].map((p) => [p.slug, p]));
 
 // ── Article / tutorial pages ────────────────────────────
-const postCard = (p, eager = false) => `<a class="card post-card" href="${p.path}" data-cat="${esc(p.category || '')}">
+// `h` is the card's heading level: 3 under a section h2, 2 straight under the page h1.
+const postCard = (p, eager = false, h = 3) => `<a class="card post-card" href="${p.path}" data-cat="${esc(p.category || '')}">
   <div class="thumb">${art(p.art || 'receipts', 120, eager)}</div>
-  <div class="body"><span class="meta">${esc(p.category || (p.kind === 'how-to' ? 'Tutorial' : 'Article'))}</span><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p></div>
+  <div class="body"><span class="meta">${esc(p.category || (p.kind === 'how-to' ? 'Tutorial' : 'Article'))}</span><h${h}>${esc(p.title)}</h${h}><p>${esc(p.description)}</p></div>
 </a>`;
+
+// Topic hubs (topics.mjs): category pages plus cross-category clusters such as tipping.
+const topics = resolveTopics(posts);
+const hubOf = (p) => topics.find((t) => t.category && t.category === p.category);
 
 function articlePage(p) {
   const isTut = p.kind === 'how-to';
   const section = isTut ? ['How it works', '/how-to/'] : ['Articles', '/blog/'];
-  const trail = [['Home', '/'], section, [p.title, p.path]];
+  const hub = isTut ? null : hubOf(p);
+  const trail = [['Home', '/'], section, ...(hub ? [[hub.name, hub.path]] : []), [p.title, p.path]];
   const mins = Math.max(2, Math.round(p.words / 230));
   const related = (p.related || '').split(',').map((s) => s.trim()).filter(Boolean)
     .map((s) => { const r = all.get(s); if (!r) warn.push(`${p.file}: related "${s}" not found`); return r; })
@@ -219,18 +227,22 @@ function articlePage(p) {
     return next ? `<a class="card tool-link" href="${next.path}"><span class="tool-icon"><span class="num" style="font-weight:700">${i + 2}</span></span><span><span>Next tutorial</span><b>${esc(next.title)}</b></span><span class="chev" aria-hidden="true">›</span></a>` : '';
   })() : '';
 
+  const ogImg = ogFor(p.slug);
   const ld = [crumbsLd(trail), {
-    '@type': isTut ? 'TechArticle' : 'Article',
+    '@type': isTut ? 'TechArticle' : 'BlogPosting',
+    '@id': abs(p.path) + '#article',
     headline: p.title,
     description: p.description,
     datePublished: p.date,
     dateModified: p.updated || p.date,
     inLanguage: 'en-GB',
-    mainEntityOfPage: abs(p.path),
-    image: ogFor(p.slug) || abs('/assets/img/og-card.jpg'),
-    author: { '@type': 'Person', name: SITE.author, url: abs('/about/'), sameAs: [SITE.linkedin] },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': abs(p.path) },
+    image: ogImg ? { '@type': 'ImageObject', url: ogImg, width: 1200, height: 630 } : { '@type': 'ImageObject', url: abs('/assets/img/og-card.jpg'), width: 1200, height: 800 },
+    author: AUTHOR,
     publisher: { '@id': SITE.url + '/#org' },
+    isPartOf: { '@type': isTut ? 'CollectionPage' : 'Blog', '@id': abs(section[1]) + '#' + (isTut ? 'tutorials' : 'blog'), name: isTut ? 'OnlyBills tutorials' : 'OnlyBills articles', url: abs(section[1]) },
     wordCount: p.words,
+    ...(isTut ? { about: { '@id': SITE.url + '/#app' } } : {}),
     ...(p.category ? { articleSection: p.category } : {}),
   }];
   if (p.faqs.length) ld.push({ '@type': 'FAQPage', mainEntity: p.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: stripTags(f.html) } })) });
@@ -244,7 +256,7 @@ function articlePage(p) {
     <header class="article-head">
       ${crumbs(trail)}
       ${art(p.art || 'receipts', 140, true)}
-      <span class="eyebrow">${esc(isTut ? 'Tutorial' : p.category || 'Article')}</span>
+      ${hub ? `<a class="eyebrow" href="${hub.path}">${esc(p.category)}</a>` : `<span class="eyebrow">${esc(isTut ? 'Tutorial' : p.category || 'Article')}</span>`}
       <h1 class="h1">${esc(p.title)}</h1>
       <p class="lede">${esc(p.description)}</p>
       <div class="byline"><img src="/assets/img/maker-avatar.jpg" width="40" height="40" alt=""><span><b><a href="/about/" style="color:inherit">Kyle</a>, founder of OnlyBills</b>${p.updated ? 'Updated ' + fmtDate(p.updated) : fmtDate(p.date)} · ${mins} min read</span></div>
@@ -267,12 +279,17 @@ function articlePage(p) {
   </div>
 </section>`;
   write(p.path, layout({ path: p.path, title: p.seoTitle || p.title, description: p.description, body, schema: ld, ogType: 'article', ogImage: ogFor(p.slug), current: section[1], assetsV,
-    extraHead: `<meta property="article:published_time" content="${p.date}">${p.updated ? `<meta property="article:modified_time" content="${p.updated}">` : ''}` }),
+    extraHead: `<meta property="article:published_time" content="${p.date}">
+<meta property="article:modified_time" content="${p.updated || p.date}">
+<meta property="article:author" content="${abs('/about/')}">${p.category ? `
+<meta property="article:section" content="${esc(p.category)}">` : ''}` }),
   { lastmod: p.updated || p.date, priority: isTut ? 0.7 : 0.6 });
 }
 [...posts, ...tuts].forEach(articlePage);
 
 // ── Index pages ─────────────────────────────────────────
+const newest = (list) => list.map((p) => p.updated || p.date).filter(Boolean).sort().pop();
+const topicLink = (t) => `<a class="card tool-link" href="${t.path}"><span class="tool-icon">${art(t.art || 'receipts', 40)}</span><span><b>${esc(t.name)}</b><span>${t.posts.length} articles</span></span><span class="chev" aria-hidden="true">›</span></a>`;
 {
   const cats = [...new Set(posts.map((p) => p.category).filter(Boolean))];
   const trail = [['Home', '/'], ['Articles', '/blog/']];
@@ -285,11 +302,39 @@ function articlePage(p) {
       <p class="lede">The maths, manners and research behind splitting the bill. Written for real dinners with real friends.</p>
     </div>
     ${cats.length > 1 ? `<div class="filters" role="group" aria-label="Filter by topic"><button type="button" aria-pressed="true" data-filter="">All</button>${cats.map((c) => `<button type="button" aria-pressed="false" data-filter="${esc(c)}">${esc(c)}</button>`).join('')}</div>` : ''}
-    <div class="cards" data-filterable>${posts.map((p, i) => postCard(p, i < 3)).join('')}</div>
+    <div class="cards" data-filterable>${posts.map((p, i) => postCard(p, i < 3, 2)).join('')}</div>
+    ${topics.length ? `<div class="section-head" style="margin-top:56px"><h2 class="h3">Browse by topic</h2></div>
+    <div class="topic-links">${topics.map(topicLink).join('')}</div>` : ''}
   </div>
 </section>`;
-  write('/blog/', layout({ path: '/blog/', title: 'Articles on splitting the bill, tipping and money with friends', description: 'Fair ways to split a bill, UK tipping and service charge rules, research on why groups overspend, and scripts for asking friends to pay you back.', body, current: '/blog/', assetsV,
-    schema: [crumbsLd(trail), { '@type': 'CollectionPage', name: 'OnlyBills articles', url: abs('/blog/'), hasPart: posts.map((p) => ({ '@type': 'Article', headline: p.title, url: abs(p.path) })) }] }), { priority: 0.8 });
+  write('/blog/', layout({ path: '/blog/', title: 'Articles on splitting the bill and tipping in the UK', description: 'Fair ways to split a bill, UK tipping and service charge rules, research on why groups overspend, and scripts for asking friends to pay you back.', body, current: '/blog/', assetsV,
+    schema: [crumbsLd(trail), { '@type': ['CollectionPage', 'Blog'], '@id': abs('/blog/') + '#blog', name: 'OnlyBills articles', url: abs('/blog/'), inLanguage: 'en-GB', publisher: { '@id': SITE.url + '/#org' },
+      blogPost: posts.map((p) => ({ '@type': 'BlogPosting', '@id': abs(p.path) + '#article', headline: p.title, url: abs(p.path), datePublished: p.date })) }] }),
+  { priority: 0.8, lastmod: newest(posts) });
+}
+// Topic hub pages: /blog/topic/<slug>/
+for (const t of topics) {
+  const trail = [['Home', '/'], ['Articles', '/blog/'], [t.name, t.path]];
+  const others = topics.filter((x) => x !== t);
+  const body = `
+<section class="section-tight">
+  <div class="wrap">
+    <div class="section-head">
+      ${crumbs(trail)}
+      ${art(t.art || 'receipts', 140, true)}
+      <h1 class="h1">${esc(t.name)}</h1>
+      <p class="lede">${esc(t.lede)}</p>
+    </div>
+    <div class="cards">${t.posts.map((p, i) => postCard(p, i < 3, 2)).join('')}</div>
+    ${(t.tools || []).length ? `<div class="section-head" style="margin-top:56px"><h2 class="h3">Free calculators</h2></div><div class="topic-links">${t.tools.map(toolCard).join('')}</div>` : ''}
+    <div class="section-head" style="margin-top:56px"><h2 class="h3">More topics</h2></div>
+    <div class="topic-links">${others.map(topicLink).join('')}<a class="card tool-link" href="/blog/"><span class="tool-icon">${icons.link}</span><span><b>All articles</b><span>Everything we have written, newest first.</span></span><span class="chev" aria-hidden="true">›</span></a></div>
+  </div>
+</section>`;
+  write(t.path, layout({ path: t.path, title: t.title, description: t.description, body, current: '/blog/', assetsV, ogImage: ogFor('topic-' + t.slug),
+    schema: [crumbsLd(trail), { '@type': 'CollectionPage', '@id': abs(t.path), name: t.name, url: abs(t.path), description: t.description, inLanguage: 'en-GB', isPartOf: { '@id': abs('/blog/') + '#blog' },
+      mainEntity: { '@type': 'ItemList', numberOfItems: t.posts.length, itemListElement: t.posts.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(p.path), name: p.title })) } }] }),
+  { priority: 0.7, lastmod: newest(t.posts) });
 }
 {
   const trail = [['Home', '/'], ['How it works', '/how-to/']];
@@ -306,11 +351,13 @@ function articlePage(p) {
   </div>
 </section>`;
   write('/how-to/', layout({ path: '/how-to/', title: 'How to use OnlyBills: tutorials', description: 'Step-by-step OnlyBills tutorials: scan a receipt, share a live table, split shared dishes and service, get paid back by Monzo, Starling, Revolut or PayPal.', body, current: '/how-to/', assetsV,
-    schema: [crumbsLd(trail), { '@type': 'ItemList', itemListElement: tuts.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(t.path), name: t.title })) }] }), { priority: 0.8 });
+    schema: [crumbsLd(trail), { '@type': 'CollectionPage', '@id': abs('/how-to/') + '#tutorials', name: 'OnlyBills tutorials', url: abs('/how-to/'), inLanguage: 'en-GB', about: { '@id': SITE.url + '/#app' },
+      mainEntity: { '@type': 'ItemList', itemListElement: tuts.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(t.path), name: t.title })) } }] }),
+  { priority: 0.8, lastmod: newest(tuts) });
 }
 
 // ── Home, tools, about, 404 ─────────────────────────────
-const ctx = { ogFor, posts, tuts, postCard, assetsV, write, layout, warn, errors };
+const ctx = { ogFor, posts, tuts, topics, postCard, assetsV, write, layout, warn, errors };
 homePage(ctx);
 toolPages(ctx);
 aboutPage(ctx);
@@ -324,17 +371,34 @@ write('/404.html', layout({ path: '/404.html', title: 'Page not found', descript
 
 // ── Feeds, sitemap, robots ──────────────────────────────
 const today = new Date().toISOString().slice(0, 10);
-const extraUrls = [{ path: '/privacy/', priority: 0.3 }];
+// lastmod must only move when a page really changes, or search engines learn to ignore it.
+// Articles use `updated`/`date`; index and hub pages their newest article; template pages
+// (home, tools, about) the last commit of their source, or today if it has uncommitted edits.
+const gitDate = (...files) => {
+  try {
+    const rel = files.map((f) => path.relative(ROOT, path.join(HERE, f)));
+    if (execFileSync('git', ['status', '--porcelain', '--', ...rel], { cwd: ROOT, encoding: 'utf8' }).trim()) return today;
+    return execFileSync('git', ['log', '-1', '--format=%cs', '--', ...rel], { cwd: ROOT, encoding: 'utf8' }).trim() || today;
+  } catch { return today; }
+};
+const TEMPLATE_DATES = { '/': ['pages/home.mjs'], '/about/': ['pages/about.mjs'], '/tools/': ['pages/tools.mjs'] };
+for (const u of pages) {
+  if (u.lastmod) continue;
+  const src = TEMPLATE_DATES[u.path] || (u.path.startsWith('/tools/') ? ['pages/tools.mjs', 'static/js/tools.js'] : null);
+  u.lastmod = src ? gitDate(...src) : today;
+}
+const extraUrls = [{ path: '/privacy/', priority: 0.3, lastmod: gitDate('../privacy/index.html') }];
 const urls = [...pages, ...extraUrls].sort((a, b) => a.path.localeCompare(b.path));
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${abs(u.path)}</loc><lastmod>${u.lastmod || today}</lastmod><priority>${u.priority.toFixed(1)}</priority></url>`).join('\n')}
 </urlset>
 `);
+// /split/ (per-table guest bills) and /split.html carry <meta name="robots" content="noindex">.
+// They are deliberately NOT disallowed here: a robots.txt block would stop Google reading that
+// noindex, and blocked URLs can still be indexed from links ("Indexed, though blocked").
 fs.writeFileSync(path.join(ROOT, 'robots.txt'), `User-agent: *
 Allow: /
-Disallow: /split/
-Disallow: /split.html
 
 Sitemap: ${abs('/sitemap.xml')}
 `);
@@ -364,6 +428,32 @@ for (const pg of pages) {
   for (const [, href] of visible.matchAll(/href="(\/[^"#?]*)/g)) {
     if (href.startsWith('/split') || href.startsWith('/assets/') || href === '/privacy/' || href.endsWith('.xml') || href.endsWith('.html')) continue;
     if (!fs.existsSync(path.join(ROOT, href, 'index.html'))) warn.push(`${pg.path}: broken link ${href}`);
+  }
+}
+// SEO checks across every built page, so new articles and templates get them too.
+{
+  const seen = { title: new Map(), description: new Map() };
+  for (const pg of pages) {
+    const f = pg.path.endsWith('/') ? path.join(ROOT, pg.path, 'index.html') : path.join(ROOT, pg.path);
+    const h = fs.readFileSync(f, 'utf8');
+    const title = (h.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
+    const desc = (h.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '';
+    const plain = (x) => x.replace(/&amp;/g, '&').replace(/&quot;/g, '"');
+    if (plain(title).length > 60) warn.push(`SEO ${pg.path}: title is ${plain(title).length} chars (aim for 60 or fewer): ${plain(title)}`);
+    if (plain(desc).length < 110 || plain(desc).length > 160) warn.push(`SEO ${pg.path}: description is ${plain(desc).length} chars (aim for 110 to 160)`);
+    for (const [k, v] of [['title', title], ['description', desc]]) {
+      if (seen[k].has(v)) warn.push(`SEO ${pg.path}: same ${k} as ${seen[k].get(v)}`); else seen[k].set(v, pg.path);
+    }
+    const h1s = (h.match(/<h1[\s>]/g) || []).length;
+    if (h1s !== 1) errors.push(`${pg.path}: ${h1s} <h1> (want exactly 1)`);
+    if (!/rel="canonical"/.test(h)) errors.push(`${pg.path}: no canonical`);
+    for (const m of h.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+      try { JSON.parse(m[1]); } catch (e) { errors.push(`${pg.path}: bad JSON-LD (${e.message})`); }
+    }
+    for (const img of h.match(/<img\b[^>]*>/g) || []) {
+      if (!/\balt=/.test(img)) errors.push(`${pg.path}: <img> without alt: ${img.slice(0, 80)}`);
+      if (!/\bwidth=/.test(img) || !/\bheight=/.test(img)) warn.push(`${pg.path}: <img> without width/height: ${img.slice(0, 80)}`);
+    }
   }
 }
 const uniq = (xs) => [...new Set(xs)];

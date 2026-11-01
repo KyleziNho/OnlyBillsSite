@@ -24,9 +24,10 @@ cd .. && python3 -m http.server 8765          # preview at http://127.0.0.1:8765
 | `static/css/site.css` | Site styles on top of `tokens.css` (copied from `split-app/src/design` at build) |
 | `static/shots/` | App screenshots, `<name>-light.webp` + `<name>-dark.webp` (640px wide) |
 | `static/og/` | Generated share images (`og.mjs`) |
-| `lib.mjs` | Layout, nav, footer, structured data helpers, faces, art |
+| `lib.mjs` | Layout, nav, footer, head tags, structured data (Organization, Person, MobileApplication), faces, art |
+| `topics.mjs` | Topic hubs at `/blog/topic/<slug>/`: one per category with 3+ articles, plus keyword clusters (tipping). New articles join automatically |
 
-The build writes only `index.html`, `404.html`, `about/`, `blog/`, `how-to/`, `tools/`, `assets/`,
+The build writes only `index.html`, `404.html`, `about/`, `blog/`, `how-to/`, `tools/`, `vs/`, `assets/`,
 `sitemap.xml` and `robots.txt`. It never touches `split/`, `privacy/`, `.well-known/`, `CNAME`
 or `split.html`.
 
@@ -36,6 +37,16 @@ or `split.html`.
 2. `node build.mjs`, fix any errors or warnings (broken links, missing related slugs).
 3. `node --experimental-websocket og.mjs <slug>` for its share image, then build again.
 4. Commit the source and the built output together.
+
+## SEO the build handles for you
+
+Every page gets a canonical URL, Open Graph and Twitter tags, the Apple Smart App Banner,
+JSON-LD (Organization, WebSite and Person on every page; BlogPosting or TechArticle, FAQPage
+and BreadcrumbList on articles), and a sitemap entry whose `lastmod` comes from `updated` or
+`date`. The build warns about titles over 60 characters, descriptions outside 110 to 160,
+duplicate titles or descriptions, and errors on missing alt text, broken JSON-LD or anything
+other than one `<h1>`. When you change an article substantially, set `updated:`.
+`/split/` is noindexed in its own HTML, so robots.txt deliberately doesn't block it.
 
 ## Adding screenshots
 
