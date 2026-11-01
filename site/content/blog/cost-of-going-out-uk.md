@@ -5,7 +5,7 @@ description: Half of Brits have turned down an invitation because of the cost, 6
 date: 2026-10-20
 category: Money
 art: payout
-related: splitting-the-bill-equally-cost, is-splitting-the-bill-equally-fair, split-bill-when-some-dont-drink, birthday-dinner-who-pays
+related: splitting-the-bill-equally-cost, is-splitting-the-bill-equally-fair, student-nights-out-split-costs, birthday-dinner-who-pays
 ---
 
 Going out in the UK has got noticeably more expensive, and it's changing how people socialise. In an April 2026 survey for Confused.com, half of Brits said they'd turned down an invitation because it cost too much, rising to 63% of Londoners. A third said they now only go to social events for special occasions like birthdays.

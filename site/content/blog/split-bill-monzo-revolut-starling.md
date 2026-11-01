@@ -3,6 +3,7 @@ title: How to split a bill with Monzo, Revolut and Starling
 seoTitle: Split a bill with Monzo, Revolut or Starling (2026 guide)
 description: Step by step: the split bill features in Monzo, Revolut and Starling, what they can't do, and how friends at other banks pay you back with a link.
 date: 2026-10-08
+updated: 2026-11-01
 category: Guides
 art: payout
 related: pay-without-downloading-app, ask-friend-to-pay-you-back, splitwise-alternatives, split-bill-iphone
@@ -10,7 +11,7 @@ related: pay-without-downloading-app, ask-friend-to-pay-you-back, splitwise-alte
 
 All three banks let you split a card payment after you've made it: open the transaction in the app, tap split, pick your friends and send requests. The big difference is who can pay you. Revolut's split bill only works with other Revolut customers, while Monzo and Starling can send a payment link to friends at any bank.
 
-Here's exactly how each one works, where each one falls short, and what to do when your friends bank somewhere else. We checked every step against each bank's own help pages in October 2026. Menus do move, so if a button has a slightly different name in your app, that's why.
+Here's exactly how each one works, where each one falls short, and what to do when your friends bank somewhere else. We checked every step against each bank's own help pages in October 2026. Menus do move, so if a button has a slightly different name in your app, that's why. If your bank's split button isn't enough, here are [the best bill splitting apps in the UK](/blog/best-bill-splitting-apps-uk/).
 
 ## At a glance
 

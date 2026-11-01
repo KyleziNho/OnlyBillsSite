@@ -3,6 +3,7 @@ title: Nobody carries cash any more. So who pays?
 seoTitle: Nobody carries cash: how the UK splits the bill now (2026)
 description: Cash was 8% of UK payments in 2025, down from 45% in 2015. What that did to splitting the bill, and what replaced the pile of notes on the table.
 date: 2026-10-20
+updated: 2026-11-01
 category: Research
 art: payout
 related: ask-friend-to-pay-you-back, split-bill-monzo-revolut-starling, can-you-ask-restaurant-to-split-bill, someone-wont-pay-their-share
@@ -32,7 +33,7 @@ UK Finance publishes the main yearly count of how people in the UK pay. Its 2026
 
 Since 2024, cash hasn't even been the second most used way to pay. UK Finance says it fell behind Direct Debits, Faster Payments and credit cards, and is now the fifth most used payment method.
 
-Cash isn't gone, though. 49.3 million people used a cash machine in 2025, and UK Finance expects cash to keep declining "but not disappear", because for some people it matters for budgeting, accessibility or personal preference.
+Cash isn't gone, though. 49.3 million people used a cash machine in 2025, and UK Finance expects cash to keep declining "but not disappear", because for some people it matters for budgeting, accessibility or personal preference. If your group still mixes cash and cards, here's [how to split a bill when some pay cash and some pay card](/blog/split-bill-cash-and-card/).
 
 ## What replaced it?
 
@@ -93,7 +94,7 @@ The cash method had one big advantage: the debt was settled before anyone left. 
 
 **Make the shares add up.** If four people each round up to the nearest pound, the payer gets a little extra. If they each round down, the payer is a few quid short. The amounts should add up to the bill exactly. The free [split the bill calculator](/tools/split-bill-calculator/) does this by item, service charge included.
 
-That's the gap OnlyBills was built for. The person who paid scans the receipt, friends tick what they had on their own phone (no app needed, it opens on the web or as an App Clip), and each person sees their exact share with service charge spread fairly. Then they pay the host from a link: Monzo (card, Apple Pay or bank transfer, no Monzo account needed), Starling or Revolut (card or Apple Pay, no account needed), PayPal (a PayPal account may be needed) or bank transfer from any banking app. Owed keeps track of anyone who hasn't paid yet.
+That's the gap OnlyBills was built for. The person who paid scans the receipt, friends tick what they had on their own phone (no app needed, it opens on the web or as an [App Clip](/blog/what-is-an-app-clip/)), and each person sees their exact share with service charge spread fairly. Then they pay the host from a link: Monzo (card, Apple Pay or bank transfer, no Monzo account needed), Starling or Revolut (card or Apple Pay, no account needed), PayPal (a PayPal account may be needed) or bank transfer from any banking app. Owed keeps track of anyone who hasn't paid yet.
 
 :::cta Settle the bill before anyone leaves the table
 

@@ -5,7 +5,7 @@ description: Going Dutch means each person pays for themselves. Where the phrase
 date: 2026-10-19
 category: Etiquette
 art: receipts
-related: bill-splitting-etiquette, who-pays-first-date, is-splitting-the-bill-equally-fair
+related: bill-splitting-etiquette, who-pays-first-date, is-splitting-the-bill-equally-fair, split-bill-with-couples
 ---
 
 Going Dutch means each person pays their own way, usually for a meal, drinks or a date, instead of one person paying for everyone. Strictly, it means everyone pays for what they had. In everyday British use it often just means splitting the bill, including splitting it evenly.
@@ -54,7 +54,7 @@ Some people prefer "split the bill" simply because it's clearer.
 | Picking up the tab / the bill | One person pays for everyone |
 | My shout / your shout | My (or your) turn to pay, usually for a round of drinks. Common in the UK, Australia and New Zealand |
 | It's on me | I'm paying |
-| Getting a round in | Buying drinks for the whole group |
+| [Getting a round in](/blog/buying-rounds-etiquette-uk/) | Buying drinks for the whole group |
 | Dutch courage | Unrelated: confidence from drinking |
 
 ## A quick guide to going Dutch

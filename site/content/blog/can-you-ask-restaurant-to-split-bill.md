@@ -33,7 +33,7 @@ Splitting a bill for two or four people is routine and most servers won't think 
 - **Being asked at the very end, by a large table, on a busy night.** Ten separate card payments with different amounts can tie up a server for a long time.
 - **Arguments at the card machine.** Standing there while a table debates who had the garlic bread.
 - **Lots of cards, each for a few pounds.** Each payment is a separate transaction.
-- **Cash and card mixed with no clear total.**
+- **[Cash and card mixed](/blog/split-bill-cash-and-card/) with no clear total.**
 
 There's also tipping. In a 2016 OpenTable survey, 42% of restaurant owners said splitting the bill reduced the amount guests tipped (OpenTable, 2016). When a bill is split into lots of small payments, people often round down or skip the tip, and nobody owns the total.
 

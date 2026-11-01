@@ -29,7 +29,7 @@ The **Live split** screen shows a big QR code with the restaurant and total unde
 
 There are three ways in:
 
-- **Show the QR code.** Friends point their phone camera at it. On iPhone it can open as an App Clip; on any phone it opens in the browser.
+- **Show the QR code.** Friends point their phone camera at it. On iPhone it can open as an [App Clip](/blog/what-is-an-app-clip/); on any phone it opens in the browser.
 - **Copy link** puts the link on your clipboard to paste into a group chat.
 - **Send invite** opens the share sheet with a ready-made message: "Tap what you had at Rajaji:" and the link.
 

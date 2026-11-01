@@ -3,9 +3,10 @@ title: Should you tip on top of a service charge?
 seoTitle: Should you tip on top of a service charge? (UK)
 description: No, not in the UK. A service charge is the tip, and by law it has to go to staff. When an extra tip makes sense, and the card machine prompt to watch out for.
 date: 2026-10-19
+updated: 2026-11-01
 category: Etiquette
 art: paid
-related: is-service-charge-mandatory-uk, how-much-to-tip-uk, split-service-charge-fairly
+related: is-service-charge-mandatory-uk, how-much-to-tip-uk, split-service-charge-fairly, cover-charge-uk
 ---
 
 No. In the UK, a service charge is the tip, so you don't need to add anything on top. If the bill already includes 12.5% service, adding another 10% would mean tipping more than 20%, which is far above what's normal here. Only add more if the service was exceptional and you'd like to say thank you to someone in particular.
@@ -34,7 +35,7 @@ That's £19 on an £80 meal, or nearly 24%. Plenty of people do this by accident
 
 The most common way people tip twice is the card terminal. Many machines ask "Add a tip?" with buttons for 10%, 12.5% or 15%, even when service is already on the bill. The prompt is generic. It doesn't know about the service charge.
 
-Before you tap, check the bill for a line like "discretionary service 12.5%". If it's there, press "no tip" or "skip". This isn't rude. The staff are already being tipped through the service charge.
+Before you tap, check the bill for a line like "discretionary service 12.5%". If it's there, press "no tip" or "skip". This isn't rude. The staff are already being tipped through the service charge. Don't confuse it with a cover charge, a flat fee per person that doesn't have to go to staff ([cover charges in the UK](/blog/cover-charge-uk/)).
 
 Also look out for "service not included" printed at the bottom of a bill. That means there's no service charge, and a tip is up to you.
 

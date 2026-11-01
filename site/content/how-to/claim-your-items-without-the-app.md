@@ -11,7 +11,7 @@ related: pay-without-downloading-app, shared-items-service-and-tips, split-a-bil
 
 If a friend has sent you an OnlyBills link or shown you a QR code, you don't need to download anything. Open it, type your name, tap the things you had, and your share adds up as you go. Then tap the pay button to pay whoever paid the bill, straight to them.
 
-It works in your phone's browser, on iPhone or Android. On an iPhone it may open as an App Clip, which is a small piece of the app that runs without installing it.
+It works in your phone's browser, on iPhone or Android. On an iPhone it may open as an [App Clip](/blog/what-is-an-app-clip/), which is a small piece of the app that runs without installing it.
 
 ## 1. Open the table
 

@@ -3,6 +3,7 @@ title: Bill splitting etiquette: 12 unwritten rules for the UK
 seoTitle: Bill splitting etiquette in the UK: 12 unwritten rules
 description: The unwritten rules of splitting a restaurant bill in the UK, from agreeing the method early to drinks, service charge and paying back the same day.
 date: 2026-10-04
+updated: 2026-11-01
 category: Etiquette
 art: receipts
 related: is-splitting-the-bill-equally-fair, split-bill-when-some-dont-drink, split-service-charge-fairly, ask-friend-to-pay-you-back
@@ -20,7 +21,7 @@ It goes wrong a lot. In a 2021 survey of 2,000 diners for comparethemarket.com, 
 
 ## 1. Agree how you're splitting before you order
 
-The fairest moment to decide is at the start, not when a £240 bill lands. "Shall we just split it?" is fine at the start, because everyone can order with that in mind. Said at the end, it can feel like an ambush to the person who had a salad and tap water.
+The fairest moment to decide is at the start, not when a £240 bill lands. "Shall we just split it?" is fine at the start, because everyone can order with that in mind. Said at the end, it can feel like an ambush to the person who had a salad and tap water. With a mix of couples and singles, agree to split per head, not per couple ([splitting the bill with couples](/blog/split-bill-with-couples/)).
 
 **Why:** people order differently depending on how they're paying. A well-known 2004 restaurant study found diners spent about 51 shekels each when the bill was split equally, against about 37 when each paid their own, about 36% more (Gneezy, Haruvy and Yafe, 2004). It was a small study of groups of six students in Israel, but the effect makes sense to anyone who's watched a table order a third bottle.
 

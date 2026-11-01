@@ -3,9 +3,10 @@ title: Pay your share without downloading an app
 seoTitle: Pay your share of a bill without downloading an app
 description: How web links, App Clips and bank payment links let friends join a split and pay you back with no new app or account, and what each one can see about you.
 date: 2026-10-18
+updated: 2026-11-01
 category: Guides
 art: paid
-related: split-bill-monzo-revolut-starling, ask-friend-to-pay-you-back, split-bill-iphone, bill-splitting-etiquette
+related: split-bill-monzo-revolut-starling, what-is-an-app-clip, ask-friend-to-pay-you-back, split-bill-iphone
 ---
 
 Your friends shouldn't need a new app to pay you £23.40 for dinner. In the UK they can pay from a link in their browser (by card, Apple Pay or bank transfer, depending on the link), or by a bank transfer from the banking app they already have. Splitting the bill itself can work the same way: friends open a web page or an iPhone App Clip, tick what they had, and see what they owe.
@@ -62,7 +63,7 @@ You'll have met them without noticing: paying for parking from a QR code on a si
 
 An App Clip feels like a native iPhone screen rather than a web page. Then it gets out of the way. Apple's support page says data associated with an App Clip is deleted from your device after 10 days of non-use (30 days if you signed in with Sign in with Apple), and App Clips are removed automatically after 30 days of non-use.
 
-**To remove one yourself:** open the App Library, scroll to the bottom of the list in search, touch and hold the App Clip, and tap Remove App Clip. You can turn App Clips off entirely in Screen Time's content restrictions.
+**To remove one yourself:** open the App Library, scroll to the bottom of the list in search, touch and hold the App Clip, and tap Remove App Clip. You can turn App Clips off entirely in Screen Time's content restrictions. There's more on how they work, what they can see and how to turn them off in [what is an App Clip on iPhone?](/blog/what-is-an-app-clip/)
 
 ## Is it safe to pay from a link?
 

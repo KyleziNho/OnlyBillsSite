@@ -5,7 +5,7 @@ description: Who pays at leaving drinks: the person leaving, the boss or everyon
 date: 2026-10-20
 category: Occasions
 art: pass
-related: birthday-dinner-who-pays, bill-splitting-etiquette, ask-friend-to-pay-you-back, split-bill-large-group
+related: buying-rounds-etiquette-uk, birthday-dinner-who-pays, bill-splitting-etiquette, ask-friend-to-pay-you-back
 ---
 
 At leaving drinks, the usual answer is that everyone pays for their own drinks, the person leaving doesn't pay for anyone else, and it's a nice gesture (not an obligation) for a manager or the team to buy the leaver's drinks. If the boss puts a card behind the bar, that covers what it covers, and after that it's back to everyone paying their own way.
@@ -24,7 +24,7 @@ The leaver doesn't need to buy a round for everyone either, especially at the en
 
 ## Rounds: when they work and when they don't
 
-Rounds work with three or four people drinking at the same pace. They stop working with a group of twelve, where a round can cost £70 and half the table leaves before it's their turn.
+[Rounds](/blog/buying-rounds-etiquette-uk/) work with three or four people drinking at the same pace. They stop working with a group of twelve, where a round can cost £70 and half the table leaves before it's their turn.
 
 Better options for a big leaving do:
 

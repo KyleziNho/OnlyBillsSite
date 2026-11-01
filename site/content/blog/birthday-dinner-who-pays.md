@@ -3,6 +3,7 @@ title: Birthday dinner: who pays, and should the birthday person?
 seoTitle: Who pays at a birthday dinner? UK etiquette and how to split
 description: Who pays at a UK birthday dinner, whether the birthday person should pay, and how to split it so they're covered, with a worked £ example and messages.
 date: 2026-10-09
+updated: 2026-11-01
 category: Occasions
 art: allclear
 related: bill-splitting-etiquette, split-bill-large-group, split-service-charge-fairly, split-bill-when-some-dont-drink
@@ -71,9 +72,10 @@ If your group would rather keep it quick and orders were similar, splitting equa
 These extras catch people out.
 
 - **A cake from the restaurant:** often a dessert on the bill, so it's part of the birthday person's share and split as above.
-- **A cake you brought:** some restaurants charge a cakeage fee for bringing your own. Check when you book. Split it like the cake.
+- **A cake you brought:** some restaurants charge a [cakeage fee](/blog/corkage-and-cakeage-fees/) for bringing your own. Check when you book. Split it like the cake.
 - **A bottle for the table:** split between the people who drank it, birthday person's glass included in the birthday share.
 - **A present:** keep it separate from the bill. Collect for it before the night so the bill stays simple.
+- **Birthday brunch instead?** Here's [how to split a bottomless brunch](/blog/bottomless-brunch-split-bill/) when not everyone takes the package.
 
 If the group is covering a present and the meal, say both in the invite, so people know the real cost before they say yes.
 
@@ -126,4 +128,4 @@ Not if it was never agreed. In a big group where everyone was told to pay their 
 Everyone pays for what they had, the birthday person's share is added up, and that amount is split between the other guests. Service charge is spread in proportion to what each person spent.
 
 ### Who pays for a birthday dinner if the parents organise it?
-Usually the parents or whoever invited everyone, especially for a family meal. If it's a big group of adult friends and family, it's fine for the organiser to say people are paying their own.
+Usually the parents or whoever invited everyone, especially for a family meal. If it's a big group of adult friends and family, it's fine for the organiser to say people are paying their own. Graduations work much the same way: see [who pays for a graduation dinner](/blog/graduation-dinner-who-pays/).

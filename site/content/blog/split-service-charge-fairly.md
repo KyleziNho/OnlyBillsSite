@@ -3,6 +3,7 @@ title: How to split service charge and tips fairly
 seoTitle: How to split service charge, tips and discounts in a group
 description: Share service charge, tips and discounts in proportion to what each person ordered, not equally. The method, a worked example, and the missing penny fix.
 date: 2026-10-17
+updated: 2026-11-01
 category: Money
 art: allclear
 related: is-service-charge-mandatory-uk, how-much-to-tip-uk, is-splitting-the-bill-equally-fair, split-bill-large-group
@@ -118,7 +119,7 @@ On a table where orders are close, the difference is pennies. It grows with the 
 
 **Discounts that only apply to food.** If a "50% off food" deal doesn't cover drinks, spread the discount only across food, in proportion to each person's food. Someone who mostly drank gets less of the discount.
 
-**Service charge on the discounted or full price?** Restaurants differ. Some calculate service before a voucher, some after. Look at the receipt to see what the percentage was applied to, then split what's actually on it.
+**Service charge on the discounted or full price?** Restaurants differ. Some calculate service before a voucher, some after. Look at the receipt to see what the percentage was applied to, then split what's actually on it. There's a worked example both ways in [how to split a bill with a discount or voucher](/blog/split-bill-with-discount-or-voucher/).
 
 **Tips you add yourselves.** Same rule: in proportion. On a 10% tip, someone who had £20 puts in £2 and someone who had £40 puts in £4.
 

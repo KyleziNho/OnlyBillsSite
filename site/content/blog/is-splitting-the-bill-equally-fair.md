@@ -3,6 +3,7 @@ title: Is splitting the bill equally fair?
 seoTitle: Is splitting the bill equally fair? A simple rule of thumb
 description: Splitting equally is fair when everyone had about the same. When orders differ by more than £5, it isn't. Here's a simple rule, worked examples and what to say.
 date: 2026-10-07
+updated: 2026-11-01
 category: Money
 art: pass
 related: splitting-the-bill-equally-cost, split-bill-when-some-dont-drink, bill-splitting-etiquette, split-bill-large-group
@@ -95,6 +96,7 @@ Equal is often unfair when:
 - **The group is big.** At a table of ten, small differences stack up, and people tend to order more when they know the bill is split (see [why groups order more when splitting](/blog/why-groups-order-more-when-splitting/)).
 - **One person arrived late** and only had a drink.
 - **One person ordered the most expensive thing on the menu,** or a second bottle nobody else wanted.
+- **Couples and singles are mixed,** and the couples are sharing bottles (see [how to split the bill when there are couples](/blog/split-bill-with-couples/)).
 
 ## How to bring it up without sounding tight
 

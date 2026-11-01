@@ -3,6 +3,7 @@ title: What to do when someone won't pay their share of the bill
 seoTitle: Someone won't pay their share of the bill? What to do
 description: A friend who always "forgets" to pay? Calm steps from a nudge to a direct chat, messages to copy, how to stop it next time and when it's worth letting go.
 date: 2026-10-07
+updated: 2026-11-01
 category: Etiquette
 art: pass
 related: ask-friend-to-pay-you-back, nobody-carries-cash, split-bill-when-some-dont-drink, bill-splitting-etiquette
@@ -85,7 +86,7 @@ For a repeat "forgetter", reminders aren't the answer. Changing how the bill get
 - **Don't be the one who pays.** Let someone else put it on their card, or [ask the restaurant to split the bill](/blog/can-you-ask-restaurant-to-split-bill/) by card for smaller groups.
 - **Sort it before anyone leaves.** "Shall we all send our bits now?" at the table works because everyone's still there and it's the norm.
 - **Use one link for the group.** Everyone gets the same message at the same time, so nobody's singled out.
-- **Ask for deposits for big plans.** For trips, tickets or stag and hen dos, collect money before you book, not after.
+- **Ask for deposits for big plans.** For trips, tickets or stag and hen dos, collect money before you book, not after. If it's a no-show fee they've left you with, see [group booking deposits and no-show fees](/blog/group-booking-deposit-split/).
 
 With OnlyBills, each person ticks what they had on their own phone at the table and pays you back with a link from the same screen. Because you can see who's claimed and paid, you know exactly who to nudge instead of asking the whole group "who still owes me?". [Owed](/how-to/track-who-owes-you/) keeps track of who still owes you across bills, so a regular forgetter is easy to spot without keeping a list in your head.
 

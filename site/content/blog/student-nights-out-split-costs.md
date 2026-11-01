@@ -3,6 +3,7 @@ title: How to split costs on student nights out
 seoTitle: Student nights out: how to split pres, rounds, Ubers and dinners
 description: Pres, rounds, Ubers home and cheap dinners. Fair ways for students to split the costs of a night out on a tight budget, with £ examples and messages to copy.
 date: 2026-10-19
+updated: 2026-11-01
 category: Occasions
 art: claim
 related: split-bill-when-some-dont-drink, split-takeaway-order, ask-friend-to-pay-you-back, cost-of-going-out-uk
@@ -31,7 +32,7 @@ A message that works:
 
 ## Rounds: usually a bad idea for students
 
-Rounds feel generous but they're expensive and uneven. In a group of six, a round of pints or doubles can easily be £30 or more, and the person who buys first often pays for drinks that the last person never gets round to buying back.
+Rounds feel generous but they're expensive and uneven (more in [buying rounds etiquette](/blog/buying-rounds-etiquette-uk/)). In a group of six, a round of pints or doubles can easily be £30 or more, and the person who buys first often pays for drinks that the last person never gets round to buying back.
 
 Better options:
 
@@ -97,6 +98,8 @@ Small debts pile up fast when it's £4 here and £6.50 there. Settle up before b
 > Uber was £21: Sam and Lia £2 each, Jake and me £8.50. Sort code 00-00-00, acc 12345678 🙏
 
 If it's still sitting there a few days later, [how to ask a friend to pay you back](/blog/ask-friend-to-pay-you-back/) has gentle nudges.
+
+Graduating soon? Here's [who usually pays for the graduation meal](/blog/graduation-dinner-who-pays/).
 
 :::cta Split the curry by what everyone had
 

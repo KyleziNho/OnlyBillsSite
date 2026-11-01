@@ -3,6 +3,7 @@ title: How to split the bill when some people don't drink
 seoTitle: How to split the bill fairly when some people don't drink
 description: Non-drinkers often pay for everyone's wine on an equal split. Here's a fair way to split food and drinks, a worked £ example, and what to say at the table.
 date: 2026-10-09
+updated: 2026-11-01
 category: Money
 art: claim
 related: is-splitting-the-bill-equally-fair, splitting-the-bill-equally-cost, bill-splitting-etiquette, split-bill-large-group
@@ -10,7 +11,7 @@ related: is-splitting-the-bill-equally-fair, splitting-the-bill-equally-cost, bi
 
 The fairest way to split a bill when some people don't drink is to split the food and let everyone pay for their own drinks. Shared bottles are split only between the people who drank from them. It takes about a minute, and it stops the person on lime and soda from paying for half a bottle of Rioja.
 
-Drinks are usually the biggest gap on a restaurant bill. A bottle of wine can cost more than a main course, so an equal split moves a lot of money from non-drinkers to drinkers.
+Drinks are usually the biggest gap on a restaurant bill. A bottle of wine can cost more than a main course, so an equal split moves a lot of money from non-drinkers to drinkers. It's the same with couples sharing bottles: see [how to split the bill when there are couples](/blog/split-bill-with-couples/).
 
 :::stats
 - 24% | of adults in England didn't drink alcohol in 2024 | Health Survey for England, via Drinkaware
@@ -57,6 +58,7 @@ Some trickier cases:
 - **The table ordered a second bottle.** Split that one only between the people who wanted it.
 - **Someone orders the bottle "for the table".** Ask who's having some before it arrives. "Who's in on the wine?" works fine.
 - **Cocktails versus pints.** Paying for your own drinks handles this automatically. A £14 cocktail and a £6 pint are very different, and nobody has to point it out.
+- **BYO bottle?** Add the corkage to the bottle price and split both between the drinkers ([corkage and cakeage fees](/blog/corkage-and-cakeage-fees/)).
 
 ## Why non-drinkers don't say anything
 
@@ -90,7 +92,7 @@ This is the most useful line of all. When a drinker says it, the non-drinker doe
 
 > "Is there a price without the drinks package? A couple of us aren't drinking."
 
-Many restaurants will do a food only price for set menus if you ask in advance.
+Many restaurants will do a food only price for set menus if you ask in advance. Bottomless brunches have their own rules: see [how to split a bottomless brunch bill](/blog/bottomless-brunch-split-bill/).
 
 ## What if the group insists on splitting equally?
 
@@ -98,7 +100,7 @@ Sometimes the table just wants to split it and move on. A few options:
 
 - **Let it go if the gap is small.** If you'd only be paying £2 or £3 over, it may not be worth the conversation. (We use a [£5 rule of thumb](/blog/is-splitting-the-bill-equally-fair/) for when equal stops being fair.)
 - **Pay your bit and step back.** "I'll put in £20 for mine, you lot sort the rest." Most people won't argue with that.
-- **Take turns.** If you eat with the same group often and someone drinks much more, they could pick up the non-drinker's next coffee or round. Only works if everyone's honest about it.
+- **Take turns.** If you eat with the same group often and someone drinks much more, they could pick up the non-drinker's next coffee or [round](/blog/buying-rounds-etiquette-uk/). Only works if everyone's honest about it.
 - **Go somewhere drinks matter less.** A café, brunch or a curry house often has a smaller gap between drinkers and non-drinkers than a wine bar.
 
 :::cta Food split, drinks to whoever had them

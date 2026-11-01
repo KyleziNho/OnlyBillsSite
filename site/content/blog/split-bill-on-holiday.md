@@ -3,9 +3,10 @@ title: How to split costs on a group holiday
 seoTitle: Split costs on a group holiday: kitty, apps and card fees
 description: Kitty, pay as you go, or one person pays and you settle at the end? How to split meals and costs on a group holiday, with examples and the card fees to avoid.
 date: 2026-10-15
+updated: 2026-11-01
 category: Guides
 art: pass
-related: split-costs-stag-hen-do, splitwise-alternatives, split-bill-large-group
+related: split-costs-stag-hen-do, tricount-alternatives, best-bill-splitting-apps-uk, split-bill-large-group
 ---
 
 The simplest fair way to split a group holiday is to log every shared cost in one expense app as you go, then settle up once at the end with the fewest possible payments. Use a kitty for small daily spending if your group likes cash or a shared card, and pay for your own extras separately. Whoever has a card with no foreign transaction fees should pay for the big things.
@@ -76,7 +77,7 @@ These keep a running balance across the holiday and handle spending in more than
 | Monzo Running Splits | Check Monzo's help pages | Inside the Monzo app; friends who don't bank with Monzo can join as guests by link |
 | Revolut Group Bills | Multiple currencies | Non-Revolut friends can join without signing up |
 
-We compare these in more depth in [the best apps for splitting a bill](/blog/splitwise-alternatives/).
+Which app suits a trip is covered in [the best bill splitting apps in the UK](/blog/best-bill-splitting-apps-uk/). Weighing Tricount up against the others? See [Tricount alternatives](/blog/tricount-alternatives/).
 
 ## Splitting the big group dinners
 

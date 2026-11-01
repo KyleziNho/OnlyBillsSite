@@ -3,12 +3,13 @@ title: How to split a bill for a large group (10 to 30 people)
 seoTitle: How to split a bill for a large group of 10 to 30 people
 description: A calm method for splitting a big group bill: set menus, deposits, drinks, service charge and one card. Worked £ example for 18 people, plus messages to copy.
 date: 2026-10-17
+updated: 2026-11-01
 category: Guides
 art: scan
-related: can-you-ask-restaurant-to-split-bill, split-service-charge-fairly, split-bill-when-some-dont-drink, birthday-dinner-who-pays
+related: christmas-party-split-bill, group-booking-deposit-split, split-service-charge-fairly, split-bill-when-some-dont-drink
 ---
 
-The calm way to split a bill for a big group is to decide the method before you book: a set menu or fixed price for food, drinks paid by what each person had, the service charge spread in proportion, and one person paying the whole bill while everyone pays them back that night. Most of the stress with 10 to 30 people comes from making these decisions at the table, at 11pm, with a £1,000 bill.
+The calm way to split a bill for a big group is to decide the method before you book: a set menu or fixed price for food, drinks paid by what each person had, the service charge spread in proportion, and one person paying the whole bill while everyone pays them back that night. Most of the stress with 10 to 30 people comes from making these decisions at the table, at 11pm, with a £1,000 bill. Family occasions like a [graduation dinner](/blog/graduation-dinner-who-pays/) bring their own question of which family pays.
 
 Settling up takes long enough with a normal-sized group. A 2021 comparethemarket.com survey of 2,000 diners found people had waited an average of 6 minutes 45 seconds to settle a bill, and 29% had had to apologise for how long it was taking (comparethemarket, 2021). With 20 people at one table, it can take a lot longer.
 
@@ -39,7 +40,7 @@ People can only say yes or no fairly if they know what they're agreeing to. Put 
 
 ### Collect deposits before you pay them
 
-If the restaurant wants a deposit, collect it from everyone before you pay it on your card. Only count people as booked once they've paid. It's the simplest way to stop no-shows costing the organiser money.
+If the restaurant wants a deposit, collect it from everyone before you pay it on your card. Only count people as booked once they've paid. It's the simplest way to stop no-shows costing the organiser money. For dropouts and whether no-show fees are legal, see [group booking deposits](/blog/group-booking-deposit-split/).
 
 ## Set menus make big groups much easier
 

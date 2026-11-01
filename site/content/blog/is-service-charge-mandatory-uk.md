@@ -3,6 +3,7 @@ title: Is service charge mandatory in the UK?
 seoTitle: Is service charge mandatory in the UK? Your rights in 2026
 description: A discretionary service charge is optional and you can ask for it to be removed. When a charge is compulsory, what the 2024 tips law changed, and what to say.
 date: 2026-10-14
+updated: 2026-11-01
 category: Etiquette
 art: receipts
 related: how-much-to-tip-uk, split-service-charge-fairly, bill-splitting-etiquette, can-you-ask-restaurant-to-split-bill
@@ -40,7 +41,7 @@ HMRC's VAT guidance draws the same line. A service charge is only treated as opt
 
 **A compulsory service charge:** usually not, because it was part of the price you agreed to when you ordered. But if the service fell well short, the Consumer Rights Act 2015 requires services to be performed "with reasonable care and skill" (section 49). Where they aren't, you may be entitled to a price reduction (section 56). Raise it calmly with the manager at the time.
 
-**Hidden charges:** if a compulsory charge wasn't made clear before you ordered, you have good grounds to challenge it. Since 6 April 2025, the Digital Markets, Competition and Consumers Act 2024 has banned "drip pricing", and the CMA's price transparency guidance (CMA209, November 2025) says any charge you can't avoid must be included in the headline price. Menus count as an invitation to buy, so a compulsory service charge should be built into the prices on the menu, not added at the end. An optional (discretionary) charge is different, because you can say no to it.
+**Hidden charges:** if a compulsory charge wasn't made clear before you ordered, you have good grounds to challenge it. Since 6 April 2025, the Digital Markets, Competition and Consumers Act 2024 has banned "drip pricing", and the CMA's price transparency guidance (CMA209, November 2025) says any charge you can't avoid must be included in the headline price. Menus count as an invitation to buy, so a compulsory service charge should be built into the prices on the menu, not added at the end. The same goes for a [cover charge](/blog/cover-charge-uk/). An optional (discretionary) charge is different, because you can say no to it.
 
 ## How to ask for the service charge to be removed
 

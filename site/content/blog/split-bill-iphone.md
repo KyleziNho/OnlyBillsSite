@@ -3,6 +3,7 @@ title: How to split a bill on iPhone
 seoTitle: How to split a bill on iPhone (Calculator, Notes and apps)
 description: Four ways to split a bill on iPhone in the UK: Calculator, Math Notes, Live Text and apps, plus why Apple Cash won't help you here and how to get paid back.
 date: 2026-10-11
+updated: 2026-11-01
 category: Guides
 art: camera
 related: split-bill-monzo-revolut-starling, splitwise-alternatives, split-service-charge-fairly, pay-without-downloading-app
@@ -92,7 +93,7 @@ If you split bills often, a dedicated app saves the maths and the penny argument
 - **Tab:** an older app that scans the receipt and lets people tap what they had, but each person needs Tab to join.
 - **OnlyBills:** made for restaurant bills. More on it below.
 
-We compare them all, with UK prices, in [Splitwise alternatives: the best bill splitting apps](/blog/splitwise-alternatives/).
+We compare the main options, with UK prices, in [the best bill splitting apps in the UK](/blog/best-bill-splitting-apps-uk/), and Splitwise's rivals in [Splitwise alternatives](/blog/splitwise-alternatives/).
 
 ### Splitting the same bill in OnlyBills
 

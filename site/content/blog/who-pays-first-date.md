@@ -5,7 +5,7 @@ description: Splitting is the top answer in UK polls, but many still think the m
 date: 2026-10-14
 category: Occasions
 art: paid
-related: bill-splitting-etiquette, can-you-ask-restaurant-to-split-bill, cost-of-going-out-uk, how-much-to-tip-uk
+related: bill-splitting-etiquette, going-dutch-meaning, can-you-ask-restaurant-to-split-bill, cost-of-going-out-uk
 ---
 
 In the UK there's no single rule, but splitting the bill is the most popular answer. In a 2023 Ipsos poll of 1,000 British adults, 34% said the bill on a first date should be split equally, 25% said the person who asked should pay, and 22% said the man should pay (Ipsos, 2023). So the polite default is: the person who invited offers to pay, the other offers to split, and you go with whatever feels comfortable to both of you.

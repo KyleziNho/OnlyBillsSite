@@ -3,6 +3,7 @@ title: How to split costs on a stag or hen do
 seoTitle: How to split stag and hen do costs fairly (UK guide)
 description: Deposits, covering the bride or groom, the organiser's float, dinners vs activities and dropouts. A fair way to split stag and hen do costs, with £ examples.
 date: 2026-10-12
+updated: 2026-11-01
 category: Occasions
 art: receipts
 related: split-bill-large-group, split-bill-on-holiday, someone-wont-pay-their-share, ask-friend-to-pay-you-back
@@ -82,7 +83,7 @@ A sensible approach:
 
 - **Set menus are easiest.** Everyone pays the same food price, and drinks are separate.
 - **If it's à la carte,** split by what each person had, with the bride's meal shared between everyone else.
-- **Drinks packages or bottomless brunches** are split equally between those on the package.
+- **Drinks packages or [bottomless brunches](/blog/bottomless-brunch-split-bill/)** are split equally between those on the package.
 - **Rounds at the bar** are best paid as you go, or from a kitty (step 5).
 
 There's a full guide on [splitting a bill for a large group](/blog/split-bill-large-group/), including deposits and set menus.
@@ -128,7 +129,7 @@ For the group dinner or a big bar tab, OnlyBills helps with the part where every
 
 :::cta Split the group dinner by what everyone had
 
-OnlyBills is for the restaurant and bar bills. For the house and activities, a shared note or spreadsheet and deposits up front work well.
+OnlyBills is for the restaurant and bar bills. For the house and activities, a shared note or spreadsheet and deposits up front work well, or a group expense app (see [Tricount alternatives](/blog/tricount-alternatives/)).
 
 ## FAQ
 

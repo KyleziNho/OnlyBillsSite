@@ -6,12 +6,12 @@ date: 2026-10-02
 updated: 2026-11-01
 category: Comparisons
 art: receipts
-related: split-bill-monzo-revolut-starling, split-bill-on-holiday, split-bill-iphone
+related: best-bill-splitting-apps-uk, tricount-alternatives, split-bill-monzo-revolut-starling, split-bill-on-holiday
 ---
 
 The best alternative to Splitwise depends on what you're splitting. For one restaurant bill where everyone had different things, you want an app that reads the receipt line by line and lets each person claim their own items. For a fortnight of shared costs on a trip, or a house of flatmates, you want an app that keeps a running balance of who owes whom.
 
-Most "best app" lists mix those two jobs up. This one doesn't. Below is what each app does today, what it costs in the UK, and who it suits. We checked every feature and price on the app's own website, its UK App Store listing or launch coverage in October 2026. This market moves quickly (Splitwise added free receipt splitting in the UK in mid October 2026), so we'll keep this page updated.
+Most "best app" lists mix those two jobs up. This one doesn't. For a shorter, side by side view by situation, see [the best bill splitting apps in the UK](/blog/best-bill-splitting-apps-uk/). Below is what each app does today, what it costs in the UK, and who it suits. We checked every feature and price on the app's own website, its UK App Store listing or launch coverage in October 2026. This market moves quickly (Splitwise added free receipt splitting in the UK in mid October 2026), so we'll keep this page updated.
 
 :::stat 43% | of diners feel awkward about how to pay when they eat out | comparethemarket.com survey of 2,000 diners, 2021
 
@@ -50,7 +50,7 @@ Tricount has been owned by the Dutch bank bunq since 2022. Its pitch is simple: 
 
 There's no itemised receipt splitting. You add each expense as a total and choose who it applies to.
 
-**Best for:** anyone who wants a free group balance app with no subscription.
+**Best for:** anyone who wants a free group balance app with no subscription. If Tricount isn't quite right for your group, see [Tricount alternatives](/blog/tricount-alternatives/).
 
 ## Settle Up
 

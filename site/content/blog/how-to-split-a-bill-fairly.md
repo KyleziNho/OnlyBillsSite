@@ -3,6 +3,7 @@ title: How to split a bill fairly
 seoTitle: How to split a bill fairly: even, itemised or hybrid
 description: Three fair ways to split a restaurant bill (even, itemised and hybrid), when to use each, and one £159.19 dinner for four worked out all three ways.
 date: 2026-10-21
+updated: 2026-11-01
 category: Guides
 art: receipts
 related: is-splitting-the-bill-equally-fair, split-bill-when-some-dont-drink, split-service-charge-fairly, bill-splitting-etiquette
@@ -27,7 +28,7 @@ It stops being fair when one person had a salad and tap water and another had a 
 
 ### 2. Split by item (itemised)
 
-Everyone pays for exactly what they ordered. Shared things (a bottle of wine, nachos for the table) are divided between the people who had them. Service charge and any discount are spread in proportion to each person's spend, so someone with a £20 order pays less service than someone with a £50 one.
+Everyone pays for exactly what they ordered. Shared things (a bottle of wine, nachos for the table) are divided between the people who had them. Service charge and [any discount](/blog/split-bill-with-discount-or-voucher/) are spread in proportion to each person's spend, so someone with a £20 order pays less service than someone with a £50 one.
 
 This is the fairest method, and it's what most people say they prefer when asked. In a small 2004 restaurant experiment, 19 of the 24 diners asked (about 80%) said they'd rather pay individually than split the bill (Gneezy, Haruvy and Yafe, 2004). The downside is the maths, especially with a long receipt.
 
@@ -113,7 +114,7 @@ Rounding each share to the penny can leave the total a penny or two off. Give th
 ## Shared dishes, bottles and the birthday person
 
 - **Shared dishes:** divide by the people who ate them, not the whole table. Three people sharing £9 of garlic bread pay £3 each, and the fourth pays nothing towards it.
-- **Bottles of wine:** split between the people who drank from it. A £32 bottle between two is £16 each.
+- **Bottles of wine:** split between the people who drank from it. A £32 bottle between two is £16 each. Same for any [corkage](/blog/corkage-and-cakeage-fees/).
 - **Someone you're treating:** work out their share first, then divide it between everyone else. See [birthday dinner: who pays?](/blog/birthday-dinner-who-pays/)
 
 ## Why even splits cost more than you think

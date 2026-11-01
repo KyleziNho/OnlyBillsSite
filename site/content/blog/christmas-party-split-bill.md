@@ -3,9 +3,10 @@ title: How to split the bill at a Christmas party
 seoTitle: Christmas party bill: deposits, set menus and splitting fairly
 description: Deposits, pre-orders, drinks packages, service charge and dropouts. How to organise and split a Christmas party or festive meal fairly, with a worked £ example.
 date: 2026-10-20
+updated: 2026-11-01
 category: Occasions
 art: payout
-related: split-bill-large-group, split-bill-when-some-dont-drink, split-service-charge-fairly, someone-wont-pay-their-share
+related: split-bill-large-group, group-booking-deposit-split, leaving-drinks-who-pays, split-bill-when-some-dont-drink
 ---
 
 The fair way to split a Christmas party bill is to charge everyone the same for the set menu, let people pay for their own drinks (or the drinks package if they chose it), spread the service charge in proportion, and take each person's deposit off their share. Collect deposits before you pay the restaurant, and agree up front what happens if someone drops out.
@@ -82,7 +83,7 @@ Agree this in the invite, then stick to it. A fair default:
 | After pre-orders are sent | Whatever the restaurant charges for their meal |
 | On the night, no word | Same as above. Ask for it kindly, the next day. |
 
-If someone's ill on the day, plenty of groups quietly cover a deposit. That's a kind choice for the group to make together, not a cost the organiser should absorb alone. If someone won't pay what they agreed, [what to do when someone won't pay their share](/blog/someone-wont-pay-their-share/) has calm next steps.
+If someone's ill on the day, plenty of groups quietly cover a deposit. That's a kind choice for the group to make together, not a cost the organiser should absorb alone. If someone won't pay what they agreed, [what to do when someone won't pay their share](/blog/someone-wont-pay-their-share/) has calm next steps. Wondering if the restaurant can keep the deposit? Here's [what UK law says about deposits and no-show fees](/blog/group-booking-deposit-split/).
 
 ## Work Christmas parties
 
@@ -115,7 +116,7 @@ Charge everyone the same for the set menu, have each person pay for their own dr
 
 ### Do you get your Christmas party deposit back if you cancel?
 
-It depends on the restaurant's terms, which are usually non-refundable after a cut-off date. Within a group, agree in the invite whether a dropout gets their deposit back.
+It depends on the restaurant's terms, which are usually non-refundable after a cut-off date. Within a group, agree in the invite whether a dropout gets their deposit back. More in [group booking deposits and no-show fees](/blog/group-booking-deposit-split/).
 
 ### Is a drinks package worth it for a Christmas party?
 

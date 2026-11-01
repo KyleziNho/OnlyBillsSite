@@ -3,6 +3,7 @@ title: How to split the bill at a restaurant
 seoTitle: How to split the bill at a restaurant, step by step
 description: What to do at the table, from agreeing the split before you order to asking for the bill, one card or several, and getting everyone to pay back that night.
 date: 2026-10-21
+updated: 2026-11-01
 category: Guides
 art: scan
 related: can-you-ask-restaurant-to-split-bill, ask-friend-to-pay-you-back, bill-splitting-etiquette, split-bill-large-group
@@ -78,7 +79,7 @@ If something's wrong, say so calmly: "I think we only had two bottles, could you
 
 > "Could we do £42.10 on this card, £38.50 on this one, and the rest on mine?"
 
-Putting "the rest" on the last card means nobody has to make the pennies add up.
+Putting "the rest" on the last card means nobody has to make the pennies add up. If some of you are paying cash, see [splitting a bill with cash and card](/blog/split-bill-cash-and-card/).
 
 **One card:** the most common choice now, because cash has nearly gone. UK Finance figures show cash was just 8% of UK payments in 2025, and it says Faster Payments growth has been driven partly by people splitting bills and sending money to friends. One person pays, and the table settles up by bank transfer.
 

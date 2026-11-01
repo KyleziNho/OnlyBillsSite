@@ -5,7 +5,7 @@ description: Who pays the delivery fee, the service fee and the tip on a group t
 date: 2026-10-13
 category: Money
 art: receipts
-related: split-service-charge-fairly, split-bill-when-some-dont-drink, ask-friend-to-pay-you-back, splitting-the-bill-equally-cost
+related: split-service-charge-fairly, split-bill-when-some-dont-drink, ask-friend-to-pay-you-back, student-nights-out-split-costs
 ---
 
 The fair way to split a group takeaway is: everyone pays for their own food, the delivery fee and any rider tip are split equally, and any fee that grows with the size of the order (like a percentage service fee) is split in proportion to what each person ordered. One person usually pays the app, then everyone pays them back.

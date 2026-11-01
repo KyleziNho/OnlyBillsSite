@@ -3,12 +3,13 @@ title: Who gets the tip? The UK tipping law explained
 seoTitle: Who gets your tip? The UK tipping law explained (2026)
 description: Since October 2024, tips and service charges must go to staff in full. Cash vs card tips, the code of practice now, and how to tip so staff get it.
 date: 2026-10-20
+updated: 2026-11-01
 category: Etiquette
 art: payout
 related: is-service-charge-mandatory-uk, how-much-to-tip-uk, should-you-tip-on-top-of-service-charge, split-service-charge-fairly
 ---
 
-Since 1 October 2024, the staff get it. In England, Scotland and Wales, any tip, gratuity or service charge that a business controls must be passed to its workers in full, shared fairly, and paid by the end of the following month. That covers service charges on the bill and tips added by card. Cash handed straight to a server, which the business never touches, is generally theirs to keep.
+Since 1 October 2024, the staff get it. In England, Scotland and Wales, any tip, gratuity or service charge that a business controls must be passed to its workers in full, shared fairly, and paid by the end of the following month. That covers service charges on the bill and tips added by card. A per person cover charge is different: see [cover charges in the UK](/blog/cover-charge-uk/). Cash handed straight to a server, which the business never touches, is generally theirs to keep.
 
 This guide is about where your money goes. Whether you have to pay a service charge in the first place is a separate question, covered in [is service charge mandatory in the UK?](/blog/is-service-charge-mandatory-uk/)
 
