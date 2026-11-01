@@ -8,7 +8,7 @@ import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
-import { SITE, esc, abs, fmtDate, art, shot, video, imessage, layout, appCta, crumbs, crumbsLd, icons, face, ORG, AUTHOR } from './lib.mjs';
+import { SITE, esc, abs, fmtDate, shot, video, imessage, layout, appCta, ctaLine, crumbs, crumbsLd, icons, ORG, AUTHOR } from './lib.mjs';
 import { resolveTopics } from './topics.mjs';
 import { homePage } from './pages/home.mjs';
 import { aboutPage } from './pages/about.mjs';
@@ -87,13 +87,13 @@ function renderBody(md, file) {
     if ((m = line.match(/^:::shot\s+([\w-]+)\s*(?:\|\s*(.*))?$/))) {
       if (!SHOTS.has(m[1])) { errors.push(`${file}: unknown screenshot "${m[1]}"`); continue; }
       const cap = m[2] || '';
-      out.push('', `<figure class="figure">${shot(m[1], cap.replace(/[*_`]/g, ''), 280)}${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`, '');
+      out.push('', `<figure class="figure shot-fig"><div class="shot-stage">${shot(m[1], cap.replace(/[*_`]/g, ''), 0)}</div>${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`, '');
       continue;
     }
     if ((m = line.match(/^:::video\s+([\w-]+)\s*(?:\|\s*(.*))?$/))) {
       if (!fs.existsSync(path.join(HERE, 'static/video', m[1] + '-light.mp4'))) { errors.push(`${file}: unknown video "${m[1]}"`); continue; }
       const cap = m[2] || '';
-      out.push('', `<figure class="figure">${video(m[1], cap.replace(/[*_`]/g, ''), 280)}${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`, '');
+      out.push('', `<figure class="figure shot-fig"><div class="shot-stage">${video(m[1], cap.replace(/[*_`]/g, ''), 0)}</div>${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`, '');
       continue;
     }
     if ((m = line.match(/^:::imessage\s+(.+)$/))) {
@@ -105,10 +105,10 @@ function renderBody(md, file) {
     if (/^:::note\s*$/.test(line)) {
       const inner = [];
       for (i += 1; i < lines.length && !/^:::\s*$/.test(lines[i]); i += 1) inner.push(lines[i]);
-      out.push('', `<div class="note"><div>${marked.parse(inner.join('\n'))}</div></div>`, '');
+      out.push('', `<div class="note">${marked.parse(inner.join('\n'))}</div>`, '');
       continue;
     }
-    if ((m = line.match(/^:::cta\s*(.*)$/))) { out.push('', appCta(m[1] || undefined, undefined, 'article-inline'), ''); continue; }
+    if ((m = line.match(/^:::cta\s*(.*)$/))) { out.push('', ctaLine(m[1] || undefined), ''); continue; }
     if (/^:::/.test(line)) { errors.push(`${file}: unknown block "${line}"`); continue; }
     out.push(line);
   }
@@ -138,8 +138,8 @@ function renderArticle(body, file) {
   html = html.replace(/<h3>(.*?)<\/h3>/g, (_, inner) => `<h3 id="${slugify(inner)}">${inner}</h3>`);
   html = html.replace(/<table>/g, '<div class="table-wrap"><table>').replace(/<\/table>/g, '</table></div>');
   // Comparison tables: ✓ / ✗ cells become styled marks with words for screen readers.
-  html = html.replace(/<td([^>]*)>\s*✓\s*<\/td>/g, '<td$1 class="mark yes"><span aria-hidden="true">✓</span><span class="visually-hidden">Yes</span></td>')
-    .replace(/<td([^>]*)>\s*✗\s*<\/td>/g, '<td$1 class="mark no"><span aria-hidden="true">✗</span><span class="visually-hidden">No</span></td>')
+  html = html.replace(/<td([^>]*)>\s*✓\s*<\/td>/g, '<td$1 class="mark yes">Yes</td>')
+    .replace(/<td([^>]*)>\s*✗\s*<\/td>/g, '<td$1 class="mark no">No</td>')
     .replace(/<div class="table-wrap"><table>(?=[\s\S]*?class="mark)/g, '<div class="table-wrap"><table class="compare">');
   html = html.replace(/<a href="(https?:\/\/(?!onlybills\.app)[^"]+)"/g, '<a href="$1" rel="noopener"');
 
@@ -185,11 +185,13 @@ const tuts = loadDir('how-to', 'how-to').sort((a, b) => (Number(a.order) || 99) 
 const all = new Map([...posts, ...tuts].map((p) => [p.slug, p]));
 
 // ── Article / tutorial pages ────────────────────────────
-// `h` is the card's heading level: 3 under a section h2, 2 straight under the page h1.
-const postCard = (p, eager = false, h = 3) => `<a class="card post-card" href="${p.path}" data-cat="${esc(p.category || '')}">
-  <div class="thumb">${art(p.art || 'receipts', 120, eager)}</div>
-  <div class="body"><span class="meta">${esc(p.category || (p.kind === 'how-to' ? 'Tutorial' : 'Article'))}</span><h${h}>${esc(p.title)}</h${h}><p>${esc(p.description)}</p></div>
-</a>`;
+// Article lists are text only (the home page's post-list): no thumbnails, so a long list
+// stays calm and scannable. `desc` adds the meta description as a quiet second line.
+const catOf = (p) => p.category || (p.kind === 'how-to' ? 'Tutorial' : 'Article');
+const postLine = (p, { desc = false, cat = true } = {}) => `<a class="post-line${desc ? ' with-desc' : ''}" href="${p.path}">${cat ? `<span class="post-line-cat">${esc(catOf(p))}</span>` : ''}<b>${esc(p.title)}</b>${desc ? `<span class="post-line-desc">${esc(p.description)}</span>` : ''}<span class="chev" aria-hidden="true">›</span></a>`;
+const postList = (list, opts) => `<div class="post-list">${list.map((p) => postLine(p, opts)).join('')}</div>`;
+/** A big type-led card for the newest pieces on /blog/. */
+const postFeature = (p) => `<a class="feature-post" href="${p.path}"><span class="post-line-cat">${esc(catOf(p))} · ${fmtDate(p.date)}</span><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p><span class="text-link">Read</span></a>`;
 
 // Topic hubs (topics.mjs): category pages plus cross-category clusters such as tipping.
 const topics = resolveTopics(posts);
@@ -211,7 +213,7 @@ function articlePage(p) {
   }
   const tutNav = isTut ? (() => {
     const i = tuts.indexOf(p); const next = tuts[i + 1];
-    return next ? `<a class="card tool-link" href="${next.path}"><span class="tool-icon"><span class="num" style="font-weight:700">${i + 2}</span></span><span><span>Next tutorial</span><b>${esc(next.title)}</b></span><span class="chev" aria-hidden="true">›</span></a>` : '';
+    return next ? `<a class="next-tut" href="${next.path}"><span>Next tutorial · ${i + 2} of ${tuts.length}</span><b>${esc(next.title)}</b><span class="chev" aria-hidden="true">›</span></a>` : '';
   })() : '';
 
   const ogImg = ogFor(p.slug);
@@ -242,7 +244,6 @@ function articlePage(p) {
   <div class="wrap wrap-prose">
     <header class="article-head">
       ${crumbs(trail)}
-      ${art(p.art || 'receipts', 140, true)}
       ${hub ? `<a class="eyebrow" href="${hub.path}">${esc(p.category)}</a>` : `<span class="eyebrow">${esc(isTut ? 'Tutorial' : p.category || 'Article')}</span>`}
       <h1 class="h1">${esc(p.title)}</h1>
       <p class="lede">${esc(p.description)}</p>
@@ -253,16 +254,16 @@ function articlePage(p) {
       ${p.html}
       ${p.faqs.length ? `<h2 id="faq">Questions people ask</h2><div class="faq">${p.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="answer">${f.html}</div></details>`).join('')}</div>` : ''}
       ${tutNav}
-      ${appCta(isTut ? 'Try it on your next bill' : undefined, undefined, isTut ? 'tutorial-end' : 'article-end')}
       ${p.sourcesHtml ? `<h2 id="sources">Sources</h2><div class="sources">${p.sourcesHtml}</div>` : ''}
       <div class="share-row"><span>Share</span><button type="button" data-share data-title="${esc(p.title)}">${icons.link}<span>Copy link</span></button><a href="https://wa.me/?text=${encodeURIComponent(p.title + ' ' + abs(p.path))}" rel="noopener">WhatsApp</a></div>
     </div>
   </div>
 </article>
-<section class="section-tight">
-  <div class="wrap">
-    <div class="section-head left"><h2 class="h3">Keep reading</h2></div>
-    <div class="cards">${related.map((r) => postCard(r)).join('')}</div>
+<section class="article-foot">
+  <div class="wrap wrap-prose">
+    ${appCta(isTut ? 'Try it on your next bill' : undefined, undefined, isTut ? 'tutorial-end' : 'article-end')}
+    <h2 class="list-head">Keep reading</h2>
+    ${postList(related)}
   </div>
 </section>`;
   write(p.path, layout({ path: p.path, title: p.seoTitle || p.title, description: p.description, body, schema: ld, ogType: 'article', ogImage: ogFor(p.slug), current: section[1], assetsV,
@@ -275,23 +276,37 @@ function articlePage(p) {
 [...posts, ...tuts].forEach(articlePage);
 
 // ── Index pages ─────────────────────────────────────────
+// Type-led and text-only, like the home page's article list: a big heading, the newest
+// pieces as two large cards, then plain grouped lists with hairlines.
 const newest = (list) => list.map((p) => p.updated || p.date).filter(Boolean).sort().pop();
-const topicLink = (t) => `<a class="card tool-link" href="${t.path}"><span class="tool-icon">${art(t.art || 'receipts', 40)}</span><span><b>${esc(t.name)}</b><span>${t.posts.length} articles</span></span><span class="chev" aria-hidden="true">›</span></a>`;
+const topicLine = (t) => `<a class="post-line with-desc" href="${t.path}"><b>${esc(t.name)}</b><span class="post-line-desc">${t.posts.length} articles</span><span class="chev" aria-hidden="true">›</span></a>`;
 {
-  const cats = [...new Set(posts.map((p) => p.category).filter(Boolean))];
+  const cats = [...new Set(posts.map((p) => p.category).filter(Boolean))]
+    .map((c) => ({ c, id: 'topic-' + slugify(c), list: posts.filter((p) => p.category === c), hub: topics.find((t) => t.category === c) }))
+    .sort((x, y) => y.list.length - x.list.length);
   const trail = [['Home', '/'], ['Articles', '/blog/']];
   const body = `
-<section class="section-tight">
+<section class="index-top">
   <div class="wrap">
-    <div class="section-head">
-      ${art('receipts', 140, true)}
-      <h1 class="h1">Articles</h1>
+    <header class="index-head">
+      <h1 class="display">Articles</h1>
       <p class="lede">The maths, manners and research behind splitting the bill. Written for real dinners with real friends.</p>
-    </div>
-    ${cats.length > 1 ? `<div class="filters" role="group" aria-label="Filter by topic"><button type="button" aria-pressed="true" data-filter="">All</button>${cats.map((c) => `<button type="button" aria-pressed="false" data-filter="${esc(c)}">${esc(c)}</button>`).join('')}</div>` : ''}
-    <div class="cards" data-filterable>${posts.map((p, i) => postCard(p, i < 3, 2)).join('')}</div>
-    ${topics.length ? `<div class="section-head" style="margin-top:56px"><h2 class="h3">Browse by topic</h2></div>
-    <div class="topic-links">${topics.map(topicLink).join('')}</div>` : ''}
+    </header>
+    <h2 class="list-head">Latest</h2>
+    <div class="feature-posts">${posts.slice(0, 2).map(postFeature).join('')}</div>
+    ${cats.length > 1 ? `<nav class="jump" aria-label="Jump to a topic">${cats.map((g) => `<a href="#${g.id}">${esc(g.hub ? g.hub.name : g.c)}<span class="num">${g.list.length}</span></a>`).join('')}</nav>` : ''}
+  </div>
+</section>
+<section class="index-groups">
+  <div class="wrap">
+    ${cats.map((g) => `<section class="cat-group" id="${g.id}" aria-labelledby="${g.id}-h">
+      <div class="cat-head"><h2 class="h3" id="${g.id}-h">${esc(g.hub ? g.hub.name : g.c)}</h2>${g.hub ? `<p>${esc(g.hub.lede)}</p><a class="text-link" href="${g.hub.path}">Topic page</a>` : ''}</div>
+      ${postList(g.list, { desc: true, cat: false })}
+    </section>`).join('\n    ')}
+    ${topics.length ? `<section class="cat-group" aria-labelledby="topics-h">
+      <div class="cat-head"><h2 class="h3" id="topics-h">Browse by topic</h2><p>Every guide on one subject, on one page.</p></div>
+      <div class="post-list">${topics.map(topicLine).join('')}</div>
+    </section>` : ''}
   </div>
 </section>`;
   write('/blog/', layout({ path: '/blog/', title: 'Articles on splitting the bill and tipping in the UK', description: 'Fair ways to split a bill, UK tipping and service charge rules, research on why groups overspend, and scripts for asking friends to pay you back.', body, current: '/blog/', assetsV,
@@ -304,17 +319,17 @@ for (const t of topics) {
   const trail = [['Home', '/'], ['Articles', '/blog/'], [t.name, t.path]];
   const others = topics.filter((x) => x !== t);
   const body = `
-<section class="section-tight">
-  <div class="wrap">
-    <div class="section-head">
-      ${crumbs(trail)}
-      ${art(t.art || 'receipts', 140, true)}
+<section class="index-top">
+  <div class="wrap wrap-mid">
+    ${crumbs(trail)}
+    <header class="index-head">
       <h1 class="h1">${esc(t.name)}</h1>
       <p class="lede">${esc(t.lede)}</p>
-    </div>
-    <div class="cards">${t.posts.map((p, i) => postCard(p, i < 3, 2)).join('')}</div>
-    <div class="section-head" style="margin-top:56px"><h2 class="h3">More topics</h2></div>
-    <div class="topic-links">${others.map(topicLink).join('')}<a class="card tool-link" href="/blog/"><span class="tool-icon">${icons.link}</span><span><b>All articles</b><span>Everything we have written, newest first.</span></span><span class="chev" aria-hidden="true">›</span></a></div>
+    </header>
+    <p class="list-head">${t.posts.length} articles</p>
+    ${postList(t.posts, { desc: true, cat: !t.category })}
+    <h2 class="list-head">More topics</h2>
+    <div class="post-list">${others.map(topicLine).join('')}<a class="post-line with-desc" href="/blog/"><b>All articles</b><span class="post-line-desc">Everything we have written, by topic.</span><span class="chev" aria-hidden="true">›</span></a></div>
   </div>
 </section>`;
   write(t.path, layout({ path: t.path, title: t.title, description: t.description, body, current: '/blog/', assetsV, ogImage: ogFor('topic-' + t.slug),
@@ -324,16 +339,21 @@ for (const t of topics) {
 }
 {
   const trail = [['Home', '/'], ['How it works', '/how-to/']];
+  const [first, ...rest] = tuts;
   const body = `
-<section class="section-tight">
-  <div class="wrap wrap-prose">
-    <div class="section-head">
-      ${art('scan', 140, true)}
-      <h1 class="h1">How OnlyBills works</h1>
-      <p class="lede">Short tutorials with screenshots. Start with the first one and you'll be splitting your next bill properly.</p>
-    </div>
-    <div class="group tut-list">${tuts.map((t, i) => `<a class="row" href="${t.path}" style="--sep-inset:68px"><span class="tut-num">${i + 1}</span><span class="row-body"><span class="row-title">${esc(t.title)}</span><span class="row-sub">${esc(t.summary || t.description)}</span></span><span class="chev" aria-hidden="true">›</span></a>`).join('')}</div>
-    <p class="foot" style="text-align:center;margin-top:20px">Friend sent you a link? You don't need the app: <a href="/how-to/claim-your-items-without-the-app/">here's how claiming works</a>.</p>
+<section class="index-top">
+  <div class="wrap wrap-mid">
+    <header class="index-head">
+      <h1 class="display">How OnlyBills works</h1>
+      <p class="lede">Short tutorials with real screens. Start with the first one and you’ll be splitting your next bill properly.</p>
+    </header>
+    ${first ? `<a class="start-card" href="${first.path}">
+      <span class="start-copy"><span class="post-line-cat">Start here</span><h2 class="h3">${esc(first.title)}</h2><span class="start-sub">${esc(first.summary || first.description)}</span><span class="text-link">Read the tutorial</span></span>
+      <span class="start-shot" aria-hidden="true">${shot('host-01-home', '', 0)}</span>
+    </a>` : ''}
+    <h2 class="list-head">Every tutorial</h2>
+    <div class="group tut-list">${rest.map((t, i) => `<a class="row" href="${t.path}"><span class="tut-num">${i + 2}</span><span class="row-body"><span class="row-title">${esc(t.title)}</span><span class="row-sub">${esc(t.summary || t.description)}</span></span><span class="chev" aria-hidden="true">›</span></a>`).join('')}</div>
+    <p class="index-foot">Friend sent you a link? You don’t need the app: <a href="/how-to/claim-your-items-without-the-app/">here’s how claiming works</a>.</p>
   </div>
 </section>`;
   write('/how-to/', layout({ path: '/how-to/', title: 'How to use OnlyBills: tutorials', description: 'Step-by-step OnlyBills tutorials: scan a receipt, share a live table, split shared dishes and service, get paid back by Monzo, Starling, Revolut or PayPal.', body, current: '/how-to/', assetsV,
@@ -343,7 +363,7 @@ for (const t of topics) {
 }
 
 // ── Home, about, 404 ────────────────────────────────────
-const ctx = { ogFor, posts, tuts, topics, postCard, assetsV, write, layout, warn, errors };
+const ctx = { ogFor, posts, tuts, topics, assetsV, write, layout, warn, errors };
 homePage(ctx);
 aboutPage(ctx);
 vsPage(ctx);
@@ -363,7 +383,21 @@ for (const [from, to] of REDIRECTS) {
   write(from, `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>Moved</title><link rel="canonical" href="${abs(to)}"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=${to}"><script>location.replace('${to}' + location.hash)</script></head><body><a href="${to}">This page has moved</a></body></html>`, { skipSitemap: true });
 }
 write('/404.html', layout({ path: '/404.html', title: 'Page not found', description: 'That page has wandered off.', noindex: true, assetsV, body: `
-<section class="section"><div class="wrap"><div class="section-head">${art('allclear', 160, true)}<h1 class="h1">This page has left the table</h1><p class="lede">It may have moved. Try the home page or one of these.</p><div class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="/">Go home</a><a class="btn btn-secondary" href="/blog/">Read articles</a></div></div></div></section>` }), { skipSitemap: true });
+<section class="index-top">
+  <div class="wrap wrap-mid">
+    <header class="index-head">
+      <span class="eyebrow">Page not found</span>
+      <h1 class="display">This page has left the table.</h1>
+      <p class="lede">It may have moved. One of these should get you back to dinner.</p>
+    </header>
+    <div class="post-list">${[
+      ['/', 'OnlyBills', 'Everyone pays for what they had'],
+      ['/how-to/', 'Tutorials', 'How OnlyBills works'],
+      ['/blog/', 'Articles', 'Splitting the bill, tipping and money with friends'],
+      ['/vs/splitwise/', 'Comparison', 'OnlyBills vs Splitwise'],
+    ].map(([href, cat, title]) => `<a class="post-line" href="${href}"><span class="post-line-cat">${cat}</span><b>${title}</b><span class="chev" aria-hidden="true">›</span></a>`).join('')}</div>
+  </div>
+</section>` }), { skipSitemap: true });
 
 // ── Feeds, sitemap, robots ──────────────────────────────
 const today = new Date().toISOString().slice(0, 10);

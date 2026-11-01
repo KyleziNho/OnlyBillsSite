@@ -34,7 +34,7 @@ Frontmatter (one `key: value` per line, no quotes needed):
 - `description` (required): the meta description, 140 to 160 characters.
 - `date` (required), `updated` (optional): `YYYY-MM-DD`.
 - `category` (blog): one of `Money`, `Etiquette`, `Research`, `Occasions`, `Guides`, `Comparisons`.
-- `art`: hero illustration, one of `scan, claim, paid, receipts, pass, payout, allclear, camera`.
+- `art`: the illustration on the article's share image (`og.mjs`), one of `scan, claim, paid, receipts, pass, payout, allclear, camera`. Pages themselves show no art.
 - `related`: comma-separated slugs of other articles or tutorials (2 to 4).
 - `order` (how-to only): position in the tutorials list.
 - `summary` (how-to only): one short line for the tutorials index.
@@ -87,8 +87,9 @@ A short aside or tip. One or two sentences of Markdown.
 ```
 :::cta Stop doing the maths at the table
 ```
-The app call to action card (heading is optional). The page already ends with one, so use at most
-one in the body, at a natural point, and only in articles where the app solves the problem.
+A quiet one-line link to the app (the heading is optional and becomes the link text). The page
+already ends with the app card, so use at most one in the body, at a natural point, and only in
+articles where the app solves the problem.
 
 ## FAQ and sources (special sections)
 

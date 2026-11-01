@@ -28,37 +28,7 @@
     els.forEach((el) => el.classList.add('in'));
   }
 
-  // Animated live table: plays once when it scrolls into view, with a replay button.
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  $$('[data-live]').forEach((demo) => {
-    const rows = $$('.ld-row', demo).sort((a, b) => a.dataset.at - b.dataset.at);
-    const toasts = $$('.ld-toast', demo);
-    const amts = $$('[data-amt]', demo);
-    const meta = demo.querySelector('[data-meta]');
-    const replay = demo.querySelector('.ld-replay');
-    let timers = [];
-    const setAmt = (v, bump) => amts.forEach((a) => {
-      a.textContent = v;
-      if (bump && a.classList.contains('ld-amt')) { a.classList.remove('bump'); void a.offsetWidth; a.classList.add('bump'); }
-    });
-    const finish = () => { rows.forEach((r) => r.classList.add('on')); setAmt('£22.22'); meta.textContent = '3 items · 1 shared · incl. £2.47 extras'; };
-    const play = () => {
-      timers.forEach(clearTimeout); timers = [];
-      rows.forEach((r) => r.classList.remove('on')); toasts.forEach((t) => t.classList.remove('show'));
-      setAmt('£0.00'); meta.textContent = 'Tap what you had'; if (replay) replay.hidden = true;
-      const at = (ms, fn) => timers.push(setTimeout(fn, ms));
-      rows.forEach((r) => at(+r.dataset.at, () => { r.classList.add('on'); if (r.dataset.share) setAmt(r.dataset.share, true); }));
-      toasts.forEach((t) => { at(+t.dataset.at, () => t.classList.add('show')); at(+t.dataset.at + 2200, () => t.classList.remove('show')); });
-      at(5000, () => { setAmt('£22.22', true); meta.textContent = '3 items · 1 shared · incl. £2.47 extras'; });
-      at(8400, () => { if (replay) replay.hidden = false; });
-    };
-    if (reduce || capture) { finish(); return; }
-    if (replay) replay.addEventListener('click', play);
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { io.disconnect(); play(); } }, { threshold: 0.45 });
-      io.observe(demo);
-    } else play();
-  });
 
   // Real app recordings: light or dark file, loaded only when visible, played once.
   const scheme = () => (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -73,7 +43,7 @@
     if (!('IntersectionObserver' in window)) { on(); return; }
     new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? on() : off && off())), { threshold: 0.5 }).observe(el);
   };
-  $$('video[data-video]:not([data-hiw-video])').forEach((v) => {
+  $$('video[data-video]').forEach((v) => {
     const name = v.dataset.video;
     const replay = v.parentElement.querySelector('.vid-replay');
     v.poster = `/assets/video/${name}-${scheme()}-poster.jpg`;
@@ -84,33 +54,6 @@
     let played = false;
     visible(v, () => { if (!played) { played = true; loadVideo(v, name); tryPlay(v); } else if (!v.ended) tryPlay(v); }, () => v.pause());
   });
-  $$('[data-hiw]').forEach((box) => {
-    const steps = $$('.hiw-step', box);
-    const v = box.querySelector('video');
-    const replay = box.querySelector('.vid-replay');
-    let i = 0;
-    const show = (k, play = true) => {
-      i = k;
-      steps.forEach((b, j) => { b.classList.toggle('on', j === k); b.setAttribute('aria-pressed', String(j === k)); b.style.setProperty('--p', '0'); });
-      if (replay) replay.hidden = true;
-      loadVideo(v, steps[k].dataset.step);
-      if (play) tryPlay(v);
-    };
-    v.poster = `/assets/video/${steps[0].dataset.step}-${scheme()}-poster.jpg`;
-    if (capture) return;
-    // Progress bar: read the playhead every frame (timeupdate only fires about 4 times a second).
-    let raf = 0;
-    const tick = () => { if (v.duration) steps[i].style.setProperty('--p', String(v.currentTime / v.duration)); if (!v.paused && !v.ended) raf = requestAnimationFrame(tick); };
-    v.addEventListener('play', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); });
-    v.addEventListener('pause', () => cancelAnimationFrame(raf));
-    v.addEventListener('ended', () => { steps[i].style.setProperty('--p', '1'); if (i < steps.length - 1) show(i + 1); else if (replay) replay.hidden = false; });
-    steps.forEach((b, k) => b.addEventListener('click', () => show(k)));
-    if (replay) replay.addEventListener('click', () => show(0));
-    if (reduce) { if (replay) replay.hidden = false; return; }
-    let started = false;
-    visible(box, () => { if (!started) { started = true; show(0); } else if (!v.ended) tryPlay(v); }, () => v.pause());
-  });
-
 
   // Hero film: HTML captions and progress dots follow the video; plays only while on screen.
   $$('[data-film]').forEach((stage) => {
@@ -210,15 +153,4 @@
       if (label) { label.textContent = 'Copied'; setTimeout(() => { label.textContent = 'Copy link'; }, 1800); }
     } catch { /* cancelled */ }
   }));
-
-  // Article filters on /blog/
-  const grid = document.querySelector('[data-filterable]');
-  const fb = $$('[data-filter]');
-  if (grid && fb.length) {
-    fb.forEach((b) => b.addEventListener('click', () => {
-      fb.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-      const cat = b.dataset.filter;
-      $$('[data-cat]', grid).forEach((c) => { c.hidden = !!cat && c.dataset.cat !== cat; });
-    }));
-  }
 })();

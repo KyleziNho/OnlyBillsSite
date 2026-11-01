@@ -29,12 +29,6 @@ export const facesFor = (names) => assignFaces(names.map((name) => ({ key: faceK
 export const face = (name, size = 40, alt = '', id = faceOf(name)) =>
   `<img class="face" style="--size:${size}px" src="/assets/faces/${id}.webp" width="${size}" height="${size}" alt="${esc(alt)}" loading="lazy" decoding="async">`;
 
-/** Frosted glass illustration with its smoky dark twin. */
-export const art = (key, size = 160, eager = false) => {
-  const k = String(key || 'receipts').toLowerCase().replace('allclear', 'allclear');
-  return `<picture class="art" style="--art:${size}px"><source srcset="/assets/art/${k}-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/art/${k}.webp" width="${size}" height="${size}" alt="" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></picture>`;
-};
-
 /** A screenshot in a phone frame, light/dark picked by the system. */
 export const shot = (base, alt, width = 300, eager = false) => `<div class="phone"${width ? ` style="--w:${width}px"` : ''}><picture><source srcset="/assets/shots/${base}-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/shots/${base}-light.webp" width="640" height="1391" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></picture></div>`;
 
@@ -58,22 +52,32 @@ export const imessage = (title, domain, art = 'receipts') => {
 export const icons = {
   apple: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.77-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.27-1.6 2.78-.41 6.9 1.15 9.15.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.78.74 2.99.72 1.24-.02 2.02-1.12 2.77-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.39-.92-2.4-3.67zM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.01.61-2.66 1.37-.58.67-1.09 1.76-.95 2.79 1.01.08 2.04-.51 2.67-1.27z"/></svg>',
   menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>',
-  calc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8.5 7.5h7M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16h.01M12 16h.01M15.5 16h.01"/></svg>',
-  pound: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 19H7c1.5-1 2-2.5 2-4.5V9a3.5 3.5 0 0 1 6.6-1.6M6.5 13H13"/></svg>',
-  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
-  bank: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6M5 10v8M19 10v8M9.5 10v8M14.5 10v8M3 20h18"/></svg>',
   link: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>',
 };
 
 export const storeButton = (label = 'Download on the', where = 'hero') =>
   `<a class="store" href="${SITE.appStore}" data-cta="${esc(where)}" rel="noopener">${icons.apple}<span><small>${esc(label)}</small><b>App Store</b></span></a>`;
 
-export const appCta = (heading = 'Split it fairly in a minute', sub = 'Scan the receipt. Friends tap what they had on their own phone. Free, with no sign-up.', where = 'article') => `
-<aside class="card app-cta" aria-label="Get OnlyBills">
-  <picture><source srcset="/assets/img/app-icon-dark-128.png" media="(prefers-color-scheme: dark)"><img class="icon" src="/assets/img/app-icon-128.png" width="64" height="64" alt="" loading="lazy"></picture>
-  <div><h3>${esc(heading)}</h3><p>${esc(sub)}</p></div>
-  <div class="btn-row"><a class="btn btn-primary" href="${SITE.appStore}" data-cta="${esc(where)}" rel="noopener">Get OnlyBills</a></div>
+/**
+ * The end-of-page app card: a small version of the home page's luminous blue closer, with a
+ * real screen rising from the bottom edge and one App Store button. One per page.
+ */
+export const appCta = (heading = 'Split it fairly in a minute', sub = 'Scan the receipt. Friends tap what they had on their own phone. Free, with no sign-up.', where = 'article', screen = ['guest-05-live', 'A live table: your share of £22.22 adds up as you tap what you had']) => `
+<aside class="end-cta" aria-label="Get OnlyBills">
+  <div class="end-cta-copy">
+    <h2 class="end-cta-h">${esc(heading)}</h2>
+    <p>${esc(sub)}</p>
+    ${storeButton('Download on the', where)}
+  </div>
+  <div class="end-cta-shot">${shot(screen[0], screen[1], 0)}</div>
 </aside>`;
+
+/**
+ * The `:::cta` block inside an article: one quiet text row between hairlines, so the body
+ * reads as advice, not an advert. The page's end card is the one real call to action.
+ */
+export const ctaLine = (heading = 'Split the bill by what everyone had', where = 'article-inline') => `
+<aside class="cta-line" aria-label="Get OnlyBills"><a data-cta="${esc(where)}" href="${SITE.appStore}" rel="noopener">${esc(heading)}</a><span>OnlyBills is free on iPhone, and your friends don’t need the app.</span></aside>`;
 
 const NAV = [
   ['/#how', 'How it works'],
