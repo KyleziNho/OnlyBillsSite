@@ -71,7 +71,7 @@ If your friend banks with Starling, the link opens their app. If not, it opens a
 
 Bank split buttons are free and already on your phone, so they're great when the split is simple. They struggle in three situations.
 
-**They split a total, not the receipt.** None of them reads the bill line by line. If one person had a £9 salad and another had steak and three cocktails, you're working out the amounts yourself before you type them in (the free [split the bill calculator](/tools/split-bill-calculator/) helps with that part).
+**They split a total, not the receipt.** None of them reads the bill line by line. If one person had a £9 salad and another had steak and three cocktails, you're working out the amounts yourself before you type them in.
 
 **Some only work within the bank.** Revolut's Split bill needs everyone on Revolut. Even with Monzo and Starling, friends at other banks get a link rather than the full experience.
 

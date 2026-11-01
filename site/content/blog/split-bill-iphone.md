@@ -40,7 +40,7 @@ Fine when everyone had roughly the same.
 3. Tap ÷, type 4, tap =.
 4. You get 25.595. Round to £25.60 each.
 
-**The catch:** rounding means the shares don't always add up. Four lots of £25.60 is £102.40, 2p over. Not a big deal, but it's why someone always ends up a few pence out. If you just want the number, the free [split the bill calculator](/tools/split-bill-calculator/) does equal and itemised splits in your browser.
+**The catch:** rounding means the shares don't always add up. Four lots of £25.60 is £102.40, 2p over. Not a big deal, but it's why someone always ends up a few pence out.
 
 ## Method 2: Math Notes (split by what each person had)
 

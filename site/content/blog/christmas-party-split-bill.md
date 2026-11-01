@@ -66,8 +66,6 @@ Each person's share is their menu plus their drinks, times 1.125 for service, mi
 
 Split it evenly instead and everyone pays £63.29 after deposits, so Sam pays £17.04 more than her own share, mostly for other people's wine. If your group has a few non-drinkers, see [how to split the bill when some people don't drink](/blog/split-bill-when-some-dont-drink/).
 
-:::tool split
-
 ## Should the service charge go on the drinks package?
 
 If the restaurant adds service to the whole bill, it's fair to spread it across everyone in proportion to what they had, which is what the example above does. Splitting the service charge equally would mean the non-drinkers tip on the wine. Our guide to [splitting service charge fairly](/blog/split-service-charge-fairly/) has the details.

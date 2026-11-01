@@ -86,11 +86,7 @@ Which? (2025) found 31% of people who'd tipped in a restaurant weren't confident
 
 ## Tipping in a group
 
-When a group tips, split the tip in proportion to what each person spent, not equally. If you had a £15 main and your friend had a £45 three course dinner, a 10% tip is £1.50 for you and £4.50 for them. The same goes for a service charge. Our guide to [splitting service charge and tips fairly](/blog/split-service-charge-fairly/) has a worked example, and the [split the bill calculator](/tools/split-bill-calculator/) does the proportions for you.
-
-To work out a tip or service charge on any bill:
-
-:::tool tip
+When a group tips, split the tip in proportion to what each person spent, not equally. If you had a £15 main and your friend had a £45 three course dinner, a 10% tip is £1.50 for you and £4.50 for them. The same goes for a service charge. Our guide to [splitting service charge and tips fairly](/blog/split-service-charge-fairly/) has a worked example.
 
 ## FAQ
 

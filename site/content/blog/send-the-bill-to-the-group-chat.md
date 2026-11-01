@@ -46,7 +46,7 @@ Leave out the apology and the long explanation. If someone wants to check your m
 
 ### People had different things
 
-Work out each share first, including their part of the service charge. The [split the bill calculator](/tools/split-bill-calculator/) does that by item.
+Work out each share first, including their part of the service charge. [Splitting service charge fairly](/blog/split-service-charge-fairly/) shows how.
 
 > Here's Saffron House by what everyone had, service included: Sam £38.70, Priya £31.05, Jack £34.20, Maya £25.65. Pay here when you can: [link]
 

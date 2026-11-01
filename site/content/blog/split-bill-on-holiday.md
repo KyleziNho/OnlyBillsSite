@@ -81,7 +81,7 @@ Which app suits a trip is covered in [the best bill splitting apps in the UK](/b
 
 ## Splitting the big group dinners
 
-An equal split works for groceries and the villa. It's less fair at the restaurant on the last night, when one person had the lobster and a bottle of wine and another had a salad and water. For those meals, split by what each person had (the [split the bill calculator](/tools/split-bill-calculator/) does this by item), then add each person's total to your trip app.
+An equal split works for groceries and the villa. It's less fair at the restaurant on the last night, when one person had the lobster and a bottle of wine and another had a salad and water. For those meals, split by what each person had, then add each person's total to your trip app.
 
 If your trip is in the UK (a cottage in Cornwall, a weekend in Edinburgh, a stag or hen do in Newcastle), OnlyBills can handle each restaurant bill: scan the receipt, friends tick what they had on their own phones, and service charge is spread fairly. It's built for UK restaurant and pub bills, so for meals abroad, log them in your trip app. If you're weighing up the two kinds of app, see [OnlyBills vs Splitwise](/vs/splitwise/). More on stag and hen weekends in [how to split costs on a stag or hen do](/blog/split-costs-stag-hen-do/).
 

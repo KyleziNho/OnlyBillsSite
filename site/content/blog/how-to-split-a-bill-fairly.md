@@ -103,8 +103,6 @@ Total: £159.19.
 
 On an even split, Ben pays almost double what he'd pay for his own order. The hybrid fixes most of that with one easy step. The itemised split is exact, and in this case it's the only one where Cara pays for her pricier steak.
 
-:::tool split
-
 ## How to split the service charge fairly
 
 Service charge is a percentage of the bill, so the fair way to share it is as the same percentage of each person's part. Multiply each share by 1.125 for 12.5%, or 1.1 for 10%. Splitting it equally means the person with the smallest order tips the most as a proportion of what they spent.

@@ -99,9 +99,7 @@ On an uneven bill, yes. Four friends, £96 of food and drink plus 12.5% service 
 | Cara | £12.00 | £27.00 | £13.50 |
 | Dan | £20.00 | £27.00 | £22.50 |
 
-Split equally, Cara pays £13.50 more than her share and Asha pays £13.50 less. Every app on this page can do the equal split. Only the itemised ones get Cara the right number without someone working it out on a napkin. Or do the sum yourself with the free calculator:
-
-:::tool split
+Split equally, Cara pays £13.50 more than her share and Asha pays £13.50 less. Every app on this page can do the equal split. Only the itemised ones get Cara the right number without someone working it out on a napkin. Or do the sum yourself with the method in [how to split a bill fairly](/blog/how-to-split-a-bill-fairly/).
 
 ## Do your friends need the app too?
 

@@ -38,9 +38,7 @@ It's often more than people think. Six friends, a bill of £213.00 plus 10% serv
 
 On an equal split, Ellie pays £24.75 more than she ate. Each of the others saves £4.95. That's why the other five rarely notice, and why Ellie does. Do that twice a month and it's close to £50.
 
-To see your own numbers, try the calculator below. If you'd like a rule for when equal is fine, the [£5 rule](/blog/is-splitting-the-bill-equally-fair/) is a good start.
-
-:::tool overpay
+To see what it can add up to over a year, read [what splitting the bill equally costs you](/blog/splitting-the-bill-equally-cost/). If you'd like a rule for when equal is fine, the [£5 rule](/blog/is-splitting-the-bill-equally-fair/) is a good start.
 
 ## When is the best time to say it?
 

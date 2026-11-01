@@ -1,4 +1,4 @@
-// Renders a 1200×630 share image for every article, tutorial and tool into static/og/.
+// Renders a 1200×630 share image for every article, tutorial and topic hub into static/og/.
 // Needs Google Chrome installed. Run after adding content:  node --experimental-websocket og.mjs
 // (Node 22+ doesn't need the flag.) Then run build.mjs, which uses static/og/<slug>.jpg when present.
 import fs from 'node:fs';
@@ -32,13 +32,6 @@ for (const dir of ['blog', 'how-to']) {
 }
 // Topic hubs (/blog/topic/<slug>/), same list build.mjs makes.
 for (const t of resolveTopics(blogPosts)) jobs.push({ slug: 'topic-' + t.slug, title: t.name, kicker: 'Articles', art: t.art || 'receipts' });
-for (const [slug, title, art] of [
-  ['split-bill-calculator', 'Split the bill calculator', 'claim'],
-  ['overpay-calculator', 'How much does splitting equally cost you?', 'receipts'],
-  ['tip-calculator', 'Tip and service charge calculator', 'paid'],
-  ['service-charge-calculator', 'Service charge calculator', 'receipts'],
-  ['settle-up-calculator', 'Who owes who calculator', 'payout'],
-]) jobs.push({ slug: 'tool-' + slug, title, kicker: 'Free tool', art });
 jobs.push({ slug: 'vs-splitwise', title: 'Same dinner, for free. No Splitwise Pro needed.', kicker: 'OnlyBills vs Splitwise', art: 'paid' });
 
 const todo = jobs.filter((j) => (!only || j.slug === only) && (force || only || !fs.existsSync(path.join(OUT, j.slug + '.jpg'))));

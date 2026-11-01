@@ -59,7 +59,7 @@ Priya's friends take her out for her birthday. Six guests, one bill of £246.25,
 | Ella | £30.20 | £6.37 | £36.57 |
 | **Total** | **£246.25** | **£38.25** | **£246.25** |
 
-Priya's meal (£38.25) splits six ways as £6.375, so three people pay £6.38 and three pay £6.37. The shares still add up to the bill exactly. You can run your own numbers in the [split the bill calculator](/tools/split-bill-calculator/).
+Priya's meal (£38.25) splits six ways as £6.375, so three people pay £6.38 and three pay £6.37. The shares still add up to the bill exactly.
 
 Compare that with splitting the £246.25 equally between the six guests: £41.04 each. Ben, who had the least, would pay about £9.91 more than he does above. Aisha would pay about £11.49 less. Over one dinner that's not a disaster, but it's the kind of thing people notice.
 

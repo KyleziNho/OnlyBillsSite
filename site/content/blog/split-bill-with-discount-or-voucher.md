@@ -142,10 +142,6 @@ OnlyBills spreads discounts, service charge and tips across everyone in proporti
 
 :::cta Discounts shared fairly, to the penny
 
-If you just want the numbers for one bill, the free calculator handles items and extras:
-
-:::tool split
-
 ## FAQ
 
 ### Should a voucher be split equally or by what people ordered?

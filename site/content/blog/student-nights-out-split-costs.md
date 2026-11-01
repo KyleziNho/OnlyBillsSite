@@ -77,8 +77,6 @@ Before service: Aisha £15, Ben £26, Chloe £17.50, Dev £27, Ella £19, which 
 
 An even split would be £22.99 each. Aisha, on tap water, would pay £6.49 more than she had. That's a couple of meal deals. More on this in [how to split the bill when some people don't drink](/blog/split-bill-when-some-dont-drink/).
 
-:::tool split
-
 ## Takeaways in halls
 
 Ordering together on one app saves on delivery fees, but someone has to pay. Split the food by who ordered what, and the delivery and service fees evenly or in proportion. Our guide to [splitting a takeaway order](/blog/split-takeaway-order/) has the details.

@@ -77,8 +77,6 @@ Split equally, each would pay £15.00. Cal would be £3.75 out of pocket for foo
 
 Say the restaurant takes 10% off the bill. The food drops from £40.00 to £36.00, and 12.5% service on £36.00 is £4.50, so the total is £40.50. Shared in proportion, Amy pays £16.20, Ben £14.18 and Cal £10.12. Ben and Cal's exact shares were £14.175 and £10.125, so one of them takes the extra penny and the three shares add up to £40.50 exactly.
 
-:::tool split
-
 ## FAQ
 
 ### Why not just split the service charge equally?

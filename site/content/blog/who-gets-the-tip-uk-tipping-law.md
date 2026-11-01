@@ -86,9 +86,7 @@ If you work in hospitality and think your tips aren't being passed on, Acas has 
 
 ## Splitting the tip in a group
 
-When a group shares a bill, the service charge or tip should be split in proportion to what each person had, not equally. Someone with a £15 order shouldn't tip the same as someone with a £45 one. Our [service charge and tips guide](/blog/split-service-charge-fairly/) has the maths, and the calculator does it for you:
-
-:::tool tip
+When a group shares a bill, the service charge or tip should be split in proportion to what each person had, not equally. Someone with a £15 order shouldn't tip the same as someone with a £45 one. Our [service charge and tips guide](/blog/split-service-charge-fairly/) has the maths.
 
 ## FAQ
 

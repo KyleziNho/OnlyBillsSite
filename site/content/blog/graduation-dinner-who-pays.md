@@ -73,9 +73,7 @@ Maya is graduating. At lunch afterwards are her mum, her dad and her gran (one f
 
 **Option 2: 50/50.** Each family pays **£165.94**.
 
-Here each family's share moves by only £2.25, because the families are the same size and ordered similarly, so 50/50 is fine. If Sam's family had brought two more people, option 1 would matter a lot more. You can test your own numbers in the [split the bill calculator](/tools/split-bill-calculator/).
-
-:::tool split
+Here each family's share moves by only £2.25, because the families are the same size and ordered similarly, so 50/50 is fine. If Sam's family had brought two more people, option 1 would matter a lot more.
 
 ## What if the graduate's parents are separated?
 
