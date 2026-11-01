@@ -1068,8 +1068,8 @@ a.eyebrow:hover { text-decoration: underline; }
 @media (min-width: 900px) {
   .bento { grid-template-columns: repeat(3, 1fr); }
   .tile { padding: 34px 32px; }
-  .tile-wide { grid-column: span 2; grid-template-columns: 1fr 1fr; align-items: start; }
-  .tile-wide .tile-shot { margin: 0 -32px -34px 0; height: 100%; min-height: 330px; align-self: stretch; }
+  .tile-wide { grid-column: span 2; grid-template-columns: 1fr 1fr; align-items: start; min-height: 400px; }
+  .tile-wide .tile-shot { position: absolute; top: 34px; right: 0; bottom: 0; width: 50%; height: auto; margin: 0; }
   .tile-full { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; align-items: center; }
 }
 .mini-bill { background: var(--surface-raised); border-radius: var(--r-md); padding: 6px 16px; }
