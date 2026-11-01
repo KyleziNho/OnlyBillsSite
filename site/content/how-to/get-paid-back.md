@@ -3,10 +3,11 @@ title: How to get paid back with OnlyBills
 seoTitle: Get paid back by Monzo, Starling, Revolut, PayPal or bank
 description: Add your Monzo, Starling, Revolut or PayPal link or bank details once. Then friends pay their exact share from a link, and you tick them off as the money lands.
 date: 2026-10-21
+updated: 2026-11-01
 order: 7
 summary: Set up how you get paid, send requests, and mark people as paid.
 art: payout
-related: ask-friend-to-pay-you-back, split-bill-monzo-revolut-starling, track-who-owes-you
+related: ask-friend-to-pay-you-back, split-bill-monzo-revolut-starling, is-it-safe-to-share-bank-details, track-who-owes-you
 ---
 
 To get paid back, add a way for friends to pay you: a Monzo, Starling, Revolut or PayPal link, or your bank details. You do it once. After that, friends on a live table see a pay button with their exact share, and on a bill you assigned yourself you can send each person a request with a link to pay.
@@ -42,7 +43,7 @@ Come back to OnlyBills and paste it, or type your username. **Test link** opens 
 
 Next, OnlyBills asks for the name on your account, sort code and account number. If you set up an app, this is a backup for friends who'd rather transfer, and you can tap **Skip for now**. If you chose None of these, bank transfer is how friends pay you.
 
-Check the numbers carefully. Transfers to the wrong account are hard to undo.
+Check the numbers carefully. Transfers to the wrong account are hard to undo. Wondering whether that's safe? See [is it safe to share your bank details](/blog/is-it-safe-to-share-bank-details/).
 
 ## What your friends need
 

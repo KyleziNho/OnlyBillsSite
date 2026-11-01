@@ -6,7 +6,7 @@ date: 2026-10-08
 updated: 2026-11-01
 category: Guides
 art: payout
-related: pay-without-downloading-app, ask-friend-to-pay-you-back, splitwise-alternatives, split-bill-iphone
+related: pay-without-downloading-app, pay-friend-without-bank-details-uk, how-long-does-bank-transfer-take-uk, ask-friend-to-pay-you-back
 ---
 
 All three banks let you split a card payment after you've made it: open the transaction in the app, tap split, pick your friends and send requests. The big difference is who can pay you. Revolut's split bill only works with other Revolut customers, while Monzo and Starling can send a payment link to friends at any bank.
@@ -96,6 +96,8 @@ You don't need everyone on the same bank to get paid back. You have three option
 - **Your bank's payment link:** Monzo's request link, a Revolut.me link or a Starling Settle Up link. Your friend taps it and pays on a web page, usually by card. Check each bank's limits (above) for bigger amounts.
 - **A plain bank transfer:** send your name, sort code and account number. Your friend pays from any UK banking app by Faster Payments. No limits from a link, but they have to type your details in.
 - **PayPal:** works if they already use it, though they may need a PayPal account.
+
+If you're the one paying and don't have their details, see [how to pay a friend back without their bank details](/blog/pay-friend-without-bank-details-uk/).
 
 :::shot guest-03-pay-sheet | In OnlyBills, friends see their exact share and pick how to pay you.
 

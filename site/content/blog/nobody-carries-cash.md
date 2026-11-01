@@ -42,7 +42,7 @@ Mostly the debit card, and mostly by tapping it.
 - **Debit cards** were used for 26.6 billion payments in 2025, 54% of all UK payments.
 - **Contactless** (cards and phones) made up 39% of all payments, up from 3% in 2015.
 - **Mobile wallets:** 65% of UK adults were registered for at least one mobile payment service like Apple Pay or Google Pay in 2025, up from 57% in 2024.
-- **Faster Payments and other remote banking** reached 6.2 billion payments, up 10% on the year, making it the second most used method after debit cards. 75% of UK adults used mobile banking.
+- **Faster Payments and other remote banking** reached 6.2 billion payments, up 10% on the year, making it the second most used method after debit cards. Faster Payments usually land almost immediately ([how long a bank transfer takes](/blog/how-long-does-bank-transfer-take-uk/)). 75% of UK adults used mobile banking.
 
 That last number is the one that matters for splitting the bill.
 

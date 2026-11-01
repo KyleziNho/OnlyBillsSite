@@ -25,6 +25,8 @@ The fairest moment to decide is at the start, not when a £240 bill lands. "Shal
 
 **Why:** people order differently depending on how they're paying. A well-known 2004 restaurant study found diners spent about 51 shekels each when the bill was split equally, against about 37 when each paid their own, about 36% more (Gneezy, Haruvy and Yafe, 2004). It was a small study of groups of six students in Israel, but the effect makes sense to anyone who's watched a table order a third bottle.
 
+If you're not sure how to raise it, here's [how to avoid an awkward bill split](/blog/avoid-awkward-bill-split/), with messages to copy for before, during and after the meal.
+
 ## 2. Splitting equally is fine when orders are similar
 
 If everyone had a main, a drink and shared a few starters, splitting equally is quick and nobody loses much. Don't get out a calculator over a £2 difference.

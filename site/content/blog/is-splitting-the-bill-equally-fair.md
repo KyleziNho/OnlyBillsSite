@@ -100,7 +100,7 @@ Equal is often unfair when:
 
 ## How to bring it up without sounding tight
 
-The best time is before anyone orders. Afterwards, it can feel like you're accusing someone. Some lines you can copy:
+The best time is before anyone orders. Afterwards, it can feel like you're accusing someone. If you're the one who ordered less, here's [how to say you only want to pay for what you had](/blog/pay-only-for-what-you-had/), with lines for the group chat and the table. Some lines you can copy:
 
 **Before ordering:**
 

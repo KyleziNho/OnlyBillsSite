@@ -91,7 +91,7 @@ What makes it easy:
 
 1. **Give each person an exact number.** "£34.62", not "about thirty-five".
 2. **Send a way to pay.** Your sort code and account number, or a payment link from your bank (Monzo, Starling and Revolut all do these). Friends at other banks can usually pay by card or bank transfer. See [how to split a bill with Monzo, Revolut and Starling](/blog/split-bill-monzo-revolut-starling/).
-3. **Do it at the table**, while everyone's phones are out.
+3. **Do it at the table**, while everyone's phones are out. If people have already left, [send the bill to the group chat](/blog/send-the-bill-to-the-group-chat/) the same evening.
 
 A message to copy into the group chat:
 

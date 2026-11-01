@@ -6,7 +6,7 @@ date: 2026-10-18
 updated: 2026-11-01
 category: Guides
 art: paid
-related: split-bill-monzo-revolut-starling, what-is-an-app-clip, ask-friend-to-pay-you-back, split-bill-iphone
+related: split-bill-monzo-revolut-starling, send-the-bill-to-the-group-chat, pay-friend-without-bank-details-uk, what-is-an-app-clip
 ---
 
 Your friends shouldn't need a new app to pay you £23.40 for dinner. In the UK they can pay from a link in their browser (by card, Apple Pay or bank transfer, depending on the link), or by a bank transfer from the banking app they already have. Splitting the bill itself can work the same way: friends open a web page or an iPhone App Clip, tick what they had, and see what they owe.
@@ -39,7 +39,7 @@ The big privacy plus: Starling points out that with a link there's no need to sh
 
 ### Bank transfer
 
-Still the universal option. Your friend pays from any UK banking app, by Faster Payments. The trade off is that you're handing out your sort code and account number. That's normal between friends, but you might not want it in a 15 person group chat.
+Still the universal option. Your friend pays from any UK banking app, by Faster Payments. The trade off is that you're handing out your sort code and account number. That's normal between friends, but you might not want it in a 15 person group chat. Here's [how long a bank transfer takes](/blog/how-long-does-bank-transfer-take-uk/) and why some get held.
 
 ## What is a web link split?
 
@@ -75,6 +75,8 @@ Generally yes, if you check three things before you pay:
 
 If you get a payment link out of the blue claiming you owe money, don't pay it. Ask the person directly, using a number or chat you already have.
 
+For what someone can and can't do with your sort code, and how scam refunds work, see [is it safe to share your bank details](/blog/is-it-safe-to-share-bank-details/).
+
 ## What do you share when you join a split?
 
 This depends on the app, so check its privacy policy. For OnlyBills, which we make, the privacy policy says a live table stores the receipt's items, the display names people type in and who claimed what, for the life of the shared session, so everyone at the table can see it update. A receipt image shared to the table may be stored too. Guests don't create an account. The host can end the table, which removes it. Payment happens with the host's bank or PayPal, not inside OnlyBills.
@@ -98,7 +100,7 @@ The host can also assign items for anyone who'd rather not tap anything, and jus
 
 > Here's the bill, tap what you had and it'll tell you what you owe: [link]. You can pay by card or bank transfer, no app needed.
 
-If someone still hasn't paid a few days later, [how to ask a friend to pay you back](/blog/ask-friend-to-pay-you-back/) has gentler and firmer follow ups.
+If someone still hasn't paid a few days later, [how to ask a friend to pay you back](/blog/ask-friend-to-pay-you-back/) has gentler and firmer follow ups. What the link looks like in iMessage, and how to follow up, is in [how to send the bill to the group chat](/blog/send-the-bill-to-the-group-chat/).
 
 ## FAQ
 

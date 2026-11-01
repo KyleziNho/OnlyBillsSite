@@ -20,6 +20,8 @@ Drinks are usually the biggest gap on a restaurant bill. A bottle of wine can co
 
 Non-drinkers aren't a small minority you can ignore. Around a quarter of adults in England didn't drink alcohol in 2024 (Health Survey for England, via Drinkaware), and plenty more are cutting down, driving home, pregnant, on medication or just not in the mood. Most groups have at least one.
 
+Ordered less food too, or on a budget? See [how to say you only want to pay for what you had](/blog/pay-only-for-what-you-had/).
+
 ## A worked example
 
 Four friends go out for dinner. Priya doesn't drink. Tom and Jess share a bottle of wine. Ali has two pints.

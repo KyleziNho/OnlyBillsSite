@@ -3,6 +3,7 @@ title: The cost of going out in the UK, and how to spend less
 seoTitle: Cost of going out in the UK in 2026, and how to spend less
 description: Half of Brits have turned down an invitation because of the cost, 63% in London. What going out costs now, and practical ways to socialise for less.
 date: 2026-10-20
+updated: 2026-11-01
 category: Money
 art: payout
 related: splitting-the-bill-equally-cost, is-splitting-the-bill-equally-fair, student-nights-out-split-costs, birthday-dinner-who-pays
@@ -71,7 +72,7 @@ If you're organising, picking the venue gives you the most control over cost. Ch
 
 ## 4. Pay for what you had
 
-This one gets overlooked. On an equal split, the people who order the least pay for everyone else's extras. In a 2016 OpenTable survey, people who felt they lost out on an equal split estimated it at about £8.73 a meal ([here's what that adds up to over a year](/blog/splitting-the-bill-equally-cost/)). That's real money if you're already on a tight social budget.
+This one gets overlooked. On an equal split, the people who order the least pay for everyone else's extras. In a 2016 OpenTable survey, people who felt they lost out on an equal split estimated it at about £8.73 a meal ([here's what that adds up to over a year](/blog/splitting-the-bill-equally-cost/)). That's real money if you're already on a tight social budget. If money's tight, here's [how to say you only want to pay for what you had](/blog/pay-only-for-what-you-had/).
 
 Agreeing to pay for what you each order means:
 

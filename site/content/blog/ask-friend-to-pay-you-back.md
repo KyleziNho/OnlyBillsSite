@@ -3,9 +3,10 @@ title: How to ask a friend to pay you back
 seoTitle: How to ask a friend to pay you back, with message templates
 description: Ask the same day, give the exact amount and send a way to pay. Copyable text and WhatsApp messages for dinners, trips, tickets and gentle reminders.
 date: 2026-10-02
+updated: 2026-11-01
 category: Etiquette
 art: payout
-related: someone-wont-pay-their-share, split-bill-monzo-revolut-starling, nobody-carries-cash, pay-without-downloading-app
+related: someone-wont-pay-their-share, send-the-bill-to-the-group-chat, pay-friend-without-bank-details-uk, pay-without-downloading-app
 ---
 
 The least awkward way to ask a friend to pay you back is to do it the same day, with the exact amount and a way to pay in the same message. "Hey, dinner came to £34.60 each, here's my link" feels normal. Waiting three weeks and then hinting is what makes it weird.
@@ -76,6 +77,8 @@ If you need to work the numbers out first, the [split the bill calculator](/tool
 
 > Right, sorting the bill from Saturday 🍕 It's £27.80 each. Link's here: [link]. I'll tick people off as it comes in.
 
+There's more on timing and what to send in [how to send the bill to the group chat](/blog/send-the-bill-to-the-group-chat/).
+
 ### A friend who's skint right now
 
 > No rush at all, but for when you're ready, your bit of Friday was £22.50. Happy for you to send it in a couple of goes if that's easier.
@@ -90,7 +93,7 @@ Put the amount in the first line. People skim messages, and "£31.20" is the bit
 
 ## Make paying back the easy part
 
-The biggest reason people pay late is friction. They read your message on the bus, mean to sort it later, and forget. If the message contains a tap-to-pay link, a lot of them will pay right then.
+The biggest reason people pay late is friction. They read your message on the bus, mean to sort it later, and forget. If the message contains a tap-to-pay link, a lot of them will pay right then. If they say they don't have your details, a link means they don't need them: [how to pay a friend back without their bank details](/blog/pay-friend-without-bank-details-uk/).
 
 Options that work in the UK:
 

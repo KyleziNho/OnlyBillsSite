@@ -81,7 +81,7 @@ If you do let it go, actually let it go. Don't bring it up months later. And don
 
 ## Step 6: stop it happening again
 
-For a repeat "forgetter", reminders aren't the answer. Changing how the bill gets paid is.
+For a repeat "forgetter", reminders aren't the answer. Changing how the bill gets paid is. Most of this is prevented before the meal: [how to avoid an awkward bill split](/blog/avoid-awkward-bill-split/).
 
 - **Don't be the one who pays.** Let someone else put it on their card, or [ask the restaurant to split the bill](/blog/can-you-ask-restaurant-to-split-bill/) by card for smaller groups.
 - **Sort it before anyone leaves.** "Shall we all send our bits now?" at the table works because everyone's still there and it's the norm.
