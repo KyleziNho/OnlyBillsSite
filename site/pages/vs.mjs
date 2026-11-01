@@ -2,14 +2,15 @@
 // price first (anchor: Splitwise Pro against free), make the effort visible (what you have
 // to think about in each app), remove risk (free, no account). Be fair: Splitwise has a free
 // plan too (daily expense cap), and OnlyBills free has a fair-use scan limit (30 in 30 days); both are
-// said plainly in the table and FAQ. Every ✗ against Splitwise must stay true. Checked
+// said plainly in the table and FAQ. Every "No" against Splitwise must stay true. Checked
 // Oct 2026: splitwise.com/pro, kb.splitwise.com, UK App Store (Pro £3.99/month, £39.99/year).
-import { SITE, esc, art, shot, abs, crumbs, crumbsLd, storeButton, appLd } from '../lib.mjs';
+import { esc, shot, abs, crumbsLd, storeButton, appLd, appCta } from '../lib.mjs';
 
-const OB_ICON = (s) => `<picture><source srcset="/assets/img/app-icon-dark-128.png" media="(prefers-color-scheme: dark)"><img class="vs-icon" src="/assets/img/app-icon-128.png" width="${s}" height="${s}" alt="OnlyBills"></picture>`;
-const SW_ICON = (s) => `<img class="vs-icon" src="/assets/img/splitwise-icon.png" width="${s}" height="${s}" alt="Splitwise">`;
-const YES = '<span class="vs-mark yes"><span aria-hidden="true">✓</span><span class="visually-hidden">Yes</span></span>';
-const NO = '<span class="vs-mark no"><span aria-hidden="true">✗</span><span class="visually-hidden">No</span></span>';
+// Logos appear once, in the table header. Everywhere else the names are plain words.
+const OB_ICON = (s) => `<picture><source srcset="/assets/img/app-icon-dark-128.png" media="(prefers-color-scheme: dark)"><img class="vs-icon" src="/assets/img/app-icon-128.png" width="${s}" height="${s}" alt=""></picture>`;
+const SW_ICON = (s) => `<img class="vs-icon" src="/assets/img/splitwise-icon.png" width="${s}" height="${s}" alt="">`;
+const YES = '<span class="vs-yes">Yes</span>';
+const NO = '<span class="vs-no">No</span>';
 const txt = (t) => `<span class="vs-txt">${t}</span>`;
 
 const ROWS = [
@@ -44,36 +45,34 @@ export const VS_FAQ = [
 ];
 
 export const vsAnchor = () => `
-    <div class="card vs-anchor" aria-label="Price per year: Splitwise Pro £39.99, OnlyBills free.">
+    <div class="card vs-anchor" role="group" aria-label="Price per year: Splitwise Pro £39.99, OnlyBills free.">
       <div class="vs-anchor-side them">
-        <div class="vs-anchor-name">${SW_ICON(36)}Splitwise Pro</div>
-        <div class="vs-anchor-price"><s>£39.99</s></div>
+        <span class="vs-anchor-name">Splitwise Pro</span>
+        <span class="vs-anchor-price"><s>£39.99</s></span>
         <span class="quiet">a year</span>
       </div>
-      <div class="vs-anchor-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <div class="vs-anchor-side us">
-        <div class="vs-anchor-name">${OB_ICON(36)}OnlyBills</div>
-        <div class="vs-anchor-price">Free</div>
+        <span class="vs-anchor-name">OnlyBills</span>
+        <span class="vs-anchor-price">Free</span>
         <span class="quiet">no sign-up</span>
       </div>
-      <div class="vs-save-badge">Keep your £39.99</div>
     </div>
 `;
 export const vsMinds = () => `
     <div class="vs-minds">
-      <div class="card vs-mind them reveal">
-        <div class="vs-mind-head">${SW_ICON(32)}<b>With Splitwise</b></div>
-        <ul class="vs-bubbles">${THEIR_THOUGHTS.map((t, i) => `<li style="--i:${i}">${esc(t)}</li>`).join('')}</ul>
+      <div class="vs-mind them reveal">
+        <b class="vs-mind-head">With Splitwise</b>
+        <ul class="vs-bubbles">${THEIR_THOUGHTS.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
       </div>
-      <div class="card vs-mind us reveal">
-        <div class="vs-mind-head">${OB_ICON(32)}<b>With OnlyBills</b></div>
+      <div class="vs-mind us reveal">
+        <b class="vs-mind-head">With OnlyBills</b>
         <ul class="vs-bubbles"><li class="one">Who had what?</li></ul>
         <p class="vs-thats-it">That’s it. Everyone taps their own, and pays you.</p>
       </div>
     </div>`;
 export const vsTable = (rows) => `
     <div class="card vs-table reveal" role="table" aria-label="OnlyBills compared with Splitwise">
-      <div class="vs-row vs-headrow" role="row"><span role="columnheader"><span class="visually-hidden">Feature</span></span><span role="columnheader" class="vs-col-us">${OB_ICON(28)}OnlyBills</span><span role="columnheader" class="vs-col-them">${SW_ICON(28)}Splitwise</span></div>
+      <div class="vs-row vs-headrow" role="row"><span role="columnheader"><span class="visually-hidden">Feature</span></span><span role="columnheader" class="vs-col-us">${OB_ICON(32)}OnlyBills</span><span role="columnheader" class="vs-col-them">${SW_ICON(32)}Splitwise</span></div>
       ${rows.map(([f, a, b]) => `<div class="vs-row" role="row"><span role="rowheader">${esc(f)}</span><span role="cell" class="vs-col-us">${a}</span><span role="cell">${b}</span></div>`).join('')}
     </div>`;
 export { ROWS as VS_ROWS };
@@ -81,18 +80,16 @@ export { ROWS as VS_ROWS };
 export function vsPage({ write, layout, assetsV, ogFor }) {
   const path = '/vs/splitwise/';
   const trail = [['Home', '/'], ['OnlyBills vs Splitwise', path]];
-  const reassure = '<ul class="vs-reassure"><li>No ads</li><li>No account</li><li>Nothing to cancel</li></ul>';
   const body = `
 <section class="vs-top">
   <div class="wrap">
     <div class="vs-hero">
-      <div class="vs-lockup" aria-hidden="true">${OB_ICON(72)}<span>vs</span>${SW_ICON(72)}</div>
+      <span class="eyebrow">OnlyBills vs Splitwise</span>
       <h1 class="display vs-h1">Same dinner.<br>Free.</h1>
       <p class="lede">Everything you need to split the bill. None of the sign-ups, ads or £39.99 a year.</p>
-      <div class="btn-row" style="justify-content:center">${storeButton('Download on the', 'vs-hero')}</div>
-      ${reassure}
+      ${storeButton('Download on the', 'vs-hero')}
+      <p class="vs-reassure">No ads · No account · Nothing to cancel</p>
     </div>
-
     ${vsAnchor()}
     <p class="vs-anchor-note">Splitwise has a free plan too, with a daily cap on new expenses. OnlyBills has no cap on bills you type in.</p>
   </div>
@@ -112,49 +109,31 @@ export function vsPage({ write, layout, assetsV, ogFor }) {
   <div class="wrap" style="max-width:calc(900px + 2 * var(--gutter))">
     <div class="section-head reveal"><h2 class="h2">Side by side.</h2></div>
     ${vsTable(ROWS)}
+    <p class="vs-lane">Keep Splitwise for the flat’s rent and bills. Use OnlyBills for the nights out.</p>
   </div>
 </section>
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="vs-shows">
-      <figure class="vs-show reveal">${shot('guest-03-pay-sheet', 'A friend paying their exact share with Monzo', 250)}<figcaption><b>Paid tonight.</b> Their exact share, straight to your bank.</figcaption></figure>
-      <figure class="vs-show reveal">${shot('guest-01-join', 'Joining a table: add your name and tap what you had', 250)}<figcaption><b>Nobody signs up.</b> Scan, type a name, tap what you had.</figcaption></figure>
-      <figure class="vs-show reveal">${shot('host-07-owed', 'The Owed page with friends’ faces around £68.13 owed', 250)}<figcaption><b>Still keeps the tab.</b> Every bill and IOU, in one place.</figcaption></figure>
-    </div>
+    <ol class="steps2-grid">
+      <li class="step2 reveal"><div class="step2-shot">${shot('guest-03-pay-sheet', 'A friend paying their exact share with Monzo', 0)}</div><div class="step2-text"><h3>Paid tonight</h3><p>Their exact share, straight to your bank, by Monzo, Starling, Revolut, PayPal or transfer.</p></div></li>
+      <li class="step2 reveal"><div class="step2-shot">${shot('guest-01-join', 'Joining a table: add your name and tap what you had', 0)}</div><div class="step2-text"><h3>Nobody signs up</h3><p>Friends scan the QR code, type a name and tap what they had. You don’t make an account either.</p></div></li>
+      <li class="step2 reveal"><div class="step2-shot">${shot('host-07-owed', 'The Owed page with friends’ faces around £68.13 owed', 0)}</div><div class="step2-text"><h3>Still keeps the tab</h3><p>Every bill and IOU in one place, with a nudge for anyone who hasn’t paid.</p></div></li>
+    </ol>
   </div>
 </section>
 
-<section class="section-tight">
-  <div class="wrap">
-    <div class="card vs-try reveal">
-      <div>
-        <h2 class="h2" style="font-size:clamp(28px,4vw,40px)">Try it on your next dinner.</h2>
-        <p class="lede">If it doesn’t make the end of the night easier, you’ve lost nothing.</p>
-        ${reassure}
-      </div>
-      ${storeButton('Download on the', 'vs-try')}
-    </div>
-    <p class="vs-lane reveal">Keep Splitwise for the flat’s rent and bills. Use OnlyBills for the nights out.</p>
-  </div>
-</section>
-
-<section class="section" style="padding-top:24px">
+<section class="section" style="padding-top:0">
   <div class="wrap">
     <div class="section-head reveal"><h2 class="h2">Questions</h2></div>
     <div class="faq reveal">${VS_FAQ.map(([q, a]) => `<details><summary>${esc(q)}</summary><div class="answer"><p>${esc(a)}</p></div></details>`).join('')}</div>
-    <p class="foot" style="text-align:center;margin-top:24px">Splitwise features from splitwise.com and its help centre; prices from the UK App Store, October 2026. Splitwise is a trademark of Splitwise, Inc., shown for comparison only. Comparing more apps? See <a href="/blog/splitwise-alternatives/">the best Splitwise alternatives</a>.</p>
+    <p class="foot vs-sources">Splitwise features from splitwise.com and its help centre; prices from the UK App Store, October 2026. Splitwise is a trademark of Splitwise, Inc., shown for comparison only. Comparing more apps? See <a href="/blog/splitwise-alternatives/">the best Splitwise alternatives</a>.</p>
   </div>
 </section>
 
-<section class="section-tight">
-  <div class="wrap">
-    <div class="card closer reveal">
-      ${art('paid', 160)}
-      <h2 class="h2">Take the maths out of special moments.</h2>
-      <p class="lede">Dinners should end with great conversations, not 15 minutes working out the bill.</p>
-      ${storeButton('Download on the', 'vs-closer')}
-    </div>
+<section class="section-tight" style="padding-top:0">
+  <div class="wrap" style="max-width:calc(900px + 2 * var(--gutter))">
+    ${appCta('Take the maths out of special moments.', 'Try it on your next dinner. If it doesn’t make the end of the night easier, you’ve lost nothing.', 'vs-closer')}
   </div>
 </section>`;
   write(path, layout({

@@ -68,12 +68,26 @@ export const icons = {
 export const storeButton = (label = 'Download on the', where = 'hero') =>
   `<a class="store" href="${SITE.appStore}" data-cta="${esc(where)}" rel="noopener">${icons.apple}<span><small>${esc(label)}</small><b>App Store</b></span></a>`;
 
-export const appCta = (heading = 'Split it fairly in a minute', sub = 'Scan the receipt. Friends tap what they had on their own phone. Free, with no sign-up.', where = 'article') => `
-<aside class="card app-cta" aria-label="Get OnlyBills">
-  <picture><source srcset="/assets/img/app-icon-dark-128.png" media="(prefers-color-scheme: dark)"><img class="icon" src="/assets/img/app-icon-128.png" width="64" height="64" alt="" loading="lazy"></picture>
-  <div><h3>${esc(heading)}</h3><p>${esc(sub)}</p></div>
-  <div class="btn-row"><a class="btn btn-primary" href="${SITE.appStore}" data-cta="${esc(where)}" rel="noopener">Get OnlyBills</a></div>
+/**
+ * The end-of-page app card: a small version of the home page's luminous blue closer, with a
+ * real screen rising from the bottom edge and one App Store button. One per page.
+ */
+export const appCta = (heading = 'Split it fairly in a minute', sub = 'Scan the receipt. Friends tap what they had on their own phone. Free, with no sign-up.', where = 'article', screen = ['guest-05-live', 'A live table: your share of £22.22 adds up as you tap what you had']) => `
+<aside class="end-cta" aria-label="Get OnlyBills">
+  <div class="end-cta-copy">
+    <h2 class="end-cta-h">${esc(heading)}</h2>
+    <p>${esc(sub)}</p>
+    ${storeButton('Download on the', where)}
+  </div>
+  <div class="end-cta-shot">${shot(screen[0], screen[1], 0)}</div>
 </aside>`;
+
+/**
+ * The `:::cta` block inside an article: one quiet text row between hairlines, so the body
+ * reads as advice, not an advert. The page's end card is the one real call to action.
+ */
+export const ctaLine = (heading = 'Split the bill by what everyone had', where = 'article-inline') => `
+<aside class="cta-line" aria-label="Get OnlyBills"><a data-cta="${esc(where)}" href="${SITE.appStore}" rel="noopener">${esc(heading)}</a><span>OnlyBills is free on iPhone, and your friends don’t need the app.</span></aside>`;
 
 const NAV = [
   ['/#how', 'How it works'],
