@@ -21,6 +21,16 @@ Rules in short: system light/dark, one blue accent, grouped surfaces, glass only
 chrome, one primary capsule CTA, faces not initials, rounded money digits, plain British copy
 with no em dashes, WCAG AA, mobile first (390px).
 
+Marketing pages (redesigned Nov 2026) lean on real screens, faces and type, not icons or repeated
+art. The home (`site/pages/home.mjs`, CSS block "Home, November 2026 redesign" at the end of
+`site/static/css/site.css`, JS `[data-film]`/`[data-chat]`/`data-lazy-loop` in `site.js`):
+- Hero film `static/video/preview-phone.*` is the App Store preview with its captions cropped off
+  and the end card removed; the captions are HTML, timed by `FILM` in `home.mjs`. Orbit loops
+  (`orbit-wide`, `orbit-square`) and the share card `og-card.jpg` come from
+  `SplitSwift/docs/app-clip/OnlyBills-*-Orbit-*.mp4`.
+- The "Saturday dinner" chat is an illustrative scene. The "What people say" quotes must stay real
+  user feedback (the same lines as the app's `PaywallMessages.welcomeChat`); never add made-up ones.
+
 ## Logic that must match the app
 `split-app/src/lib/money.js` (money engine) and `faces.js` (face assignment) are ports of the iOS
 code; shared fixtures in `src/lib/__fixtures__/` prove parity — run `node --test src/lib` after
