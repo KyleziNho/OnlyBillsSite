@@ -42,12 +42,68 @@ export const isPaidValue = (v) => {
   return s !== '' && !['owes', 'owing', 'unpaid', 'false', 'no', 'none'].includes(s);
 };
 
-/** A claim value: `true` today; spec allows a quantity number later. Count claimers. */
-const isClaim = (v) => v === true || (typeof v === 'number' && v > 0);
+/**
+ * A claim value `items.<id>.claimedBy.<gid>`: `true` = 1 unit, a positive number = that
+ * many units (may be fractional, e.g. 0.5 from a leftover split). Anything else = no claim.
+ * Mirrors GuestCore/LiveBill.swift.
+ */
+export const claimUnits = (v) => (v === true ? 1 : typeof v === 'number' && Number.isFinite(v) && v > 0 ? v : 0);
+
+/** Unit tolerance shared with the app: |x| < 1e-6 counts as 0. */
+export const UNIT_EPS = 1e-6;
+
+/** Units `gid` holds on a normalised item (0 when they haven't claimed it). */
+export const unitsOf = (item, gid) => {
+  if (item.claims) return item.claims[gid] || 0;
+  return item.claimedBy?.includes(gid) ? 1 : 0;
+};
+
+/** Σ units claimed on an item. */
+export const claimedUnits = (item) =>
+  (item.claimedBy || []).reduce((s, gid) => s + unitsOf(item, gid), 0);
+
+/** Units nobody has claimed yet: max(0, qty − claimed), snapped to 0 within 1e-6. */
+export const unitsLeft = (item) => {
+  const left = Math.max(0, item.qty - claimedUnits(item));
+  return left < UNIT_EPS ? 0 : left;
+};
+
+/** "Up for grabs": some of a positively priced item is still unclaimed. */
+export const isUpForGrabs = (item) => unitsLeft(item) > 0 && item.price > 0;
+
+/** Whole-unit quantity of 2 or more: the rows that get a units stepper. */
+export const isMultiUnit = (item) => item.qty >= 2 && Math.abs(item.qty - Math.round(item.qty)) < UNIT_EPS;
+
+/** A copy of `item` with `gid` holding `units` (≤ 0 removes their claim). */
+export const withClaim = (item, gid, units) => {
+  const claims = {};
+  (item.claimedBy || []).forEach((g) => { claims[g] = unitsOf(item, g); });
+  if (units > UNIT_EPS) claims[gid] = units; else delete claims[gid];
+  return { ...item, claims, claimedBy: Object.keys(claims).sort() };
+};
+
+/** Units for display: whole numbers as is, fractions to at most 2 places ("0.5"). */
+export const formatUnits = (u) => {
+  const r = Math.round(u);
+  return Math.abs(u - r) < UNIT_EPS ? String(r) : String(Number(u.toFixed(2)));
+};
+
+/** The Firestore value for a claim of `units`: `true` for one (what older apps write), else the number. */
+export const claimValue = (units) => (Math.abs(units - 1) < UNIT_EPS ? true : units);
 
 const num = (v, d = 0) => (typeof v === 'number' && Number.isFinite(v) ? v : d);
 
 // ── Live (schemaVersion 2) ────────────────────────────────
+/** claimedBy: who claimed (sorted ids, as before); claims: gid → units. */
+const parseClaims = (raw) => {
+  const claims = {};
+  Object.entries(raw && typeof raw === 'object' ? raw : {}).forEach(([k, v]) => {
+    const u = claimUnits(v);
+    if (u > 0) claims[k] = u;
+  });
+  return { claimedBy: Object.keys(claims).sort(), claims };
+};
+
 export const normalizeLive = (data) => {
   const items = Object.entries(data.items || {})
     .filter(([, it]) => it && typeof it === 'object')
@@ -59,7 +115,7 @@ export const normalizeLive = (data) => {
       // Item-level discount already taken off `price` (additive field; display + parity).
       discount: Math.max(0, num(it.discount)),
       qty: num(it.qty, 1) > 0 ? num(it.qty, 1) : 1,
-      claimedBy: Object.entries(it.claimedBy || {}).filter(([, v]) => isClaim(v)).map(([k]) => k).sort(),
+      ...parseClaims(it.claimedBy),
     }))
     .sort((a, b) => (a.order - b.order) || (a.id < b.id ? -1 : 1));
 
@@ -108,7 +164,12 @@ export const normalizeLive = (data) => {
     payment: data.payment || null,
     locked,
     status,
-    closed: locked || status === 'closed',
+    closed: locked || status === 'closed' || status === 'hostSplit',
+    // The host took the bill to split it themselves ("Split it myself instead" in the app).
+    hostSplit: status === 'hostSplit',
+    // The host split it in the app and sent everyone a link (status:"assigned", unlocked):
+    // shares are set, guests only see theirs and pay.
+    assigned: status === 'assigned' && !locked,
     closedAt: toDate(data.closedAt)?.getTime() ?? null,
     expiresAt: toDate(data.expiresAt)?.getTime() ?? null,
     items, charges, guests, paid, paidAmount,
@@ -133,7 +194,8 @@ export const liveEngineBill = (bill) => {
     },
     allocations: items.map((it) => {
       const row = {};
-      guests.forEach((g, p) => { if (it.claimedBy.includes(g.id)) row[p] = 1; });
+      // Each claimer holds their units (true = 1); over-claims scale down in the engine.
+      guests.forEach((g, p) => { const u = unitsOf(it, g.id); if (u > 0) row[p] = u; });
       return row;
     }),
   };
@@ -174,7 +236,8 @@ export const liveTotals = (bill) => {
     return share && i >= 0 ? amt(share.lines[i]) : 0;
   };
 
-  const unclaimed = items.filter((it) => it.claimedBy.length === 0 && it.price > 0);
+  // Items with units still unclaimed (a single claimer on a ×2 naan leaves one up for grabs).
+  const unclaimed = items.filter(isUpForGrabs);
   const unclaimedValue = amt(split.unassigned.total);
 
   return {
@@ -201,10 +264,21 @@ const HOUR = 36e5;
 /**
  * Where the table is in its life, from the guest's side.
  *  open     — claims, edits, joins, payments
- *  closed   — host finished (locked / status:"closed"); payments only, for 7 days
+ *  closed   — host finished (locked / status:"closed"); payments only, for 7 days.
+ *             hostSplit: the host is splitting it themselves (status:"hostSplit");
+ *             nothing to pay here, they send everyone what they owe.
  *  expired  — past expiresAt without being finished; payments only
+ *  assigned — the host split it themselves and sent links (status:"assigned", unlocked):
+ *             no claims or edits, paying stays open (the rules allow it after expiry too).
+ *             A deleted doc (denied) falls through to expired.
  */
 export const tablePhase = (bill, { now = Date.now(), denied = false } = {}) => {
+  if (bill.assigned && !denied) {
+    return { phase: 'assigned', canEdit: false, canPay: true };
+  }
+  if (bill.hostSplit) {
+    return { phase: 'closed', canEdit: false, canPay: false, hostSplit: true };
+  }
   if (bill.closed) {
     const payWindowOpen = !bill.closedAt || now < bill.closedAt + 7 * 24 * HOUR;
     return { phase: 'closed', canEdit: false, canPay: payWindowOpen };
@@ -213,6 +287,18 @@ export const tablePhase = (bill, { now = Date.now(), denied = false } = {}) => {
     return { phase: 'expired', canEdit: false, canPay: true };
   }
   return { phase: 'open', canEdit: true, canPay: true };
+};
+
+/** A per-person link's guest id (`&p=gst_…`), as the app writes it. */
+export const GUEST_ID_PATTERN = /^gst_[a-z0-9]{4,32}$/;
+
+/**
+ * The guest a per-person link points at (`?id=<doc>&p=<gid>`), or null. Never the host:
+ * the host's own link opens as a plain table.
+ */
+export const personFromLink = (bill, p) => {
+  if (typeof p !== 'string' || !GUEST_ID_PATTERN.test(p) || p === HOST_ID) return null;
+  return (bill?.guests || []).find((g) => g.id === p && !g.isHost) || null;
 };
 
 // ── Static (v1 snapshot) ─────────────────────────────────
@@ -257,18 +343,18 @@ export const normalizeStatic = (data) => ({
  * guests read "Monzo" as "I need Monzo" and stopped (founder feedback, Oct 2026).
  */
 export const PAY_WITH = {
-  monzo: 'Card, Apple Pay or bank transfer',
-  starling: 'Card or Apple Pay',
-  revolut: 'Card or Apple Pay',
+  monzo: 'Apple Pay, card or bank transfer',
+  starling: 'Apple Pay or card',
+  revolut: 'Apple Pay or card',
   paypal: 'PayPal',
   venmo: 'Venmo',
   bank: 'Bank transfer',
 };
 
 export const CAPABILITY = {
-  monzo: 'Card, Apple Pay or bank transfer. No Monzo account needed',
-  starling: 'Card or Apple Pay. No Starling account needed',
-  revolut: 'Card or Apple Pay. No Revolut account needed',
+  monzo: 'Apple Pay, card or bank transfer. No Monzo account needed',
+  starling: 'Apple Pay or card. No Starling account needed',
+  revolut: 'Apple Pay or card. No Revolut account needed',
   paypal: 'PayPal account may be needed',
   venmo: 'Venmo account needed',
   bank: 'From any banking app',

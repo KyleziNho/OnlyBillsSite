@@ -2,13 +2,14 @@
 //
 // For a bill link (`/split/?id=<table>`) it looks the table up in Firestore and rewrites
 // ONLY the preview tags in <head> (og:title, og:image, og:url, twitter:*, <title>) so iMessage shows
-// "Saffron House · Tap what you had" with the venue photo. The page itself (scripts, body,
+// "Saffron House · Tap what you had" with the venue photo. A per-person link (`&p=<gid>`)
+// reads "Saffron House · Your share £4.38". The page itself (scripts, body,
 // assets) passes through byte for byte, so splitting on the website works exactly as before.
 //
 // Fails open: anything other than a clean, quick answer (no id, a demo, not HTML, Firestore
 // slow or down, unknown table, any exception) returns GitHub Pages' response untouched.
 
-import { isBillPage, tableId, firestoreUrl, previewFor, canonicalUrl } from './meta.js';
+import { isBillPage, tableId, personId, revision, firestoreUrl, previewFor, canonicalUrl } from './meta.js';
 
 const LOOKUP_TIMEOUT_MS = 1500;
 const CACHE_SECONDS = 300;
@@ -23,16 +24,17 @@ export default {
     if (!id || !upstream.ok) return upstream;
     if (!(upstream.headers.get('content-type') || '').includes('text/html')) return upstream;
 
+    const person = personId(url);
     let preview = null;
     try {
-      preview = await withTimeout(lookup(id, env, ctx), LOOKUP_TIMEOUT_MS);
+      preview = await withTimeout(lookup(id, person, env, ctx), LOOKUP_TIMEOUT_MS);
     } catch {
       return upstream;
     }
     if (!preview) return upstream;
 
     try {
-      return rewrite(upstream, preview, canonicalUrl(id));
+      return rewrite(upstream, preview, canonicalUrl(id, person, revision(url)));
     } catch {
       return upstream;
     }
@@ -46,23 +48,28 @@ function fetchOrigin(request, url, env) {
   return fetch(new Request(target, request));
 }
 
-async function lookup(id, env, ctx) {
-  const cache = caches.default;
-  const cacheKey = new Request(`https://link-preview.onlybills.internal/v1/${id}`);
-  const hit = await cache.match(cacheKey);
-  if (hit) return hit.json();
+async function lookup(id, person, env, ctx) {
+  // Per-person links skip the edge cache: the share changes when the host edits the bill,
+  // and each link is fetched about once (by the messaging app building its preview).
+  const cache = person ? null : caches.default;
+  // v2: the preview now depends on status (assigned tables read "Find your share").
+  const cacheKey = new Request(`https://link-preview.onlybills.internal/v2/${id}`);
+  if (cache) {
+    const hit = await cache.match(cacheKey);
+    if (hit) return hit.json();
+  }
 
-  const response = await fetch(firestoreUrl(id, { projectId: env.FIREBASE_PROJECT_ID, apiKey: env.FIREBASE_API_KEY }), {
+  const response = await fetch(firestoreUrl(id, { projectId: env.FIREBASE_PROJECT_ID, apiKey: env.FIREBASE_API_KEY, person }), {
     cf: { cacheTtl: 0 },
   });
   // 404: unknown table. 403/429/5xx: leave the page alone (and don't cache a failure).
   if (response.status === 404) {
-    ctx.waitUntil(cache.put(cacheKey, cached(null)));
+    if (cache) ctx.waitUntil(cache.put(cacheKey, cached(null)));
     return null;
   }
   if (!response.ok) return null;
-  const preview = previewFor(await response.json());
-  ctx.waitUntil(cache.put(cacheKey, cached(preview)));
+  const preview = previewFor(await response.json(), person);
+  if (cache) ctx.waitUntil(cache.put(cacheKey, cached(preview)));
   return preview;
 }
 

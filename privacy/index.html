@@ -498,7 +498,7 @@
             <!-- Privacy Policy Sections -->
             <section class="policy-section" id="overview" aria-labelledby="h-overview">
                 <h2 id="h-overview">Privacy Policy</h2>
-                <p class="meta">Last Updated: <span id="current-date">30 October 2026</span></p>
+                <p class="meta">Last Updated: <span id="current-date">3 November 2026</span></p>
                 <p>OnlyBills is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our app, including when receipt scanning, Live Split, venue lookups, bill link previews, feedback notes and usage analytics use secure third-party cloud services.</p>
             </section>
 
@@ -516,8 +516,9 @@
                     <li><span class="bullet" aria-hidden="true">•</span> Receipt scanning uploads the receipt image to Google's Gemini API for analysis</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Live Split stores the receipt's items, the display names people enter, who claimed what, and who has marked themselves as paid in Google Firebase so guests can join and split in real time. Receipt images shared during Live Split may be stored in Firebase Storage.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> When you share a live table, the payment links and bank details you have chosen to show (for example your Monzo username, or your account name, sort code and account number) are included so guests can pay you. They are visible to anyone with the table link.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> When you tap Request or share a bill you split yourself, the app uploads that bill to the same Google Firebase service as Live Split so each person can open their own link and pay you: the venue name and photo, the items, the names you gave people, what each person owes, and the payment links or bank details you have chosen to show guests. Anyone with one of these links can see the whole bill.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> To show a restaurant's name and photo, the venue name and address read from your receipt are sent to Google Places. Nothing about you or your friends is included.</li>
-                    <li><span class="bullet" aria-hidden="true">•</span> When someone opens a bill link, or an app like Messages or WhatsApp shows a preview of it, the request goes through Cloudflare, which serves our website. For a bill link, Cloudflare reads that table's venue name and photo so the preview can show them. Anyone with the link can already see these on the bill page.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> When someone opens a bill link, or an app like Messages or WhatsApp shows a preview of it, the request goes through Cloudflare, which serves our website. For a bill link, Cloudflare reads that table's venue name and photo so the preview can show them. For a link sent to one person, it also reads the bill's items and names to work out that person's share for the preview. Anyone with the link can already see all of this on the bill page.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> If you send us a note from the app or a bill page, we store your message, the screen you sent it from, your app and iOS version and device model, and, only if you give it, the email or number you'd like a reply on.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Receipt scanning has a fair-use limit. To apply it, the app keeps a count of your recent scans on your device. The count is not sent to us and is not linked to an account.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> If you subscribe to OnlyBills Pro, Apple handles the purchase. The app checks with Apple whether your subscription is active. We never see your name, Apple ID or payment details.</li>
@@ -561,6 +562,7 @@
                 <ul class="doc-list">
                     <li><span class="bullet" aria-hidden="true">•</span> Receipt images are transmitted to Google's Gemini API for scanning and are not retained by us</li>
                     <li><span class="bullet" aria-hidden="true">•</span> When you start a Live Split, that bill's items, guest names, and claims are stored in Google Firebase, together with the payment details you chose to share, for the life of the shared session so guests can join and update it. You can end and remove a live table from the app.</li>
+                    <li><span class="bullet" aria-hidden="true">•</span> When you send a bill as links, it is stored the same way as a live table, for the life of those links, so people can see their share and mark themselves as paid. Deleting the bill in the app ends its links.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Anonymous usage analytics events are stored by Google Firebase Analytics under a random app-install identifier. Deleting the app resets that identifier.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Feedback notes are stored in Google Firebase. Email us and we will delete yours.</li>
                     <li><span class="bullet" aria-hidden="true">•</span> Cloudflare keeps a bill link's venue name and photo for up to 5 minutes so previews load quickly. It does not store the bill's items, names or payment details.</li>

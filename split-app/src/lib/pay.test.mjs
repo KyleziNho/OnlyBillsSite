@@ -15,8 +15,8 @@ test('Starling Settle Up link: profile only, guest enters the amount', () => {
   assert.equal(o.logo, 'logo-starling.png');
   assert.equal(o.prefilled, false);
   assert.equal(o.note, 'Enter £11.00 when it opens');
-  assert.equal(o.capability, 'Card or Apple Pay. No Starling account needed');
-  assert.equal(o.payWith, 'Card or Apple Pay');
+  assert.equal(o.capability, 'Apple Pay or card. No Starling account needed');
+  assert.equal(o.payWith, 'Apple Pay or card');
 });
 
 test('what you pay with never names the host\'s bank', () => {
@@ -24,7 +24,7 @@ test('what you pay with never names the host\'s bank', () => {
   for (const x of o.filter((x) => ['monzo', 'starling', 'revolut'].includes(x.key))) {
     assert.doesNotMatch(x.payWith, /Monzo|Starling|Revolut/);
   }
-  assert.equal(o[0].payWith, 'Card, Apple Pay or bank transfer');
+  assert.equal(o[0].payWith, 'Apple Pay, card or bank transfer');
   assert.equal(o[3].payWith, 'PayPal');
 });
 
@@ -38,8 +38,8 @@ test('links keep their formats; best payer experience first', () => {
 });
 
 test('capability copy is accurate and never implies the host app is needed', () => {
-  assert.equal(CAPABILITY.monzo, 'Card, Apple Pay or bank transfer. No Monzo account needed');
-  assert.equal(CAPABILITY.revolut, 'Card or Apple Pay. No Revolut account needed');
+  assert.equal(CAPABILITY.monzo, 'Apple Pay, card or bank transfer. No Monzo account needed');
+  assert.equal(CAPABILITY.revolut, 'Apple Pay or card. No Revolut account needed');
   assert.equal(CAPABILITY.paypal, 'PayPal account may be needed');
   assert.equal(CAPABILITY.bank, 'From any banking app');
 });

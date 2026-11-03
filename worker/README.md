@@ -3,6 +3,29 @@
 Shared bill links (`https://onlybills.app/split/?id=<table>`) show the venue in iMessage,
 WhatsApp and Slack: **"Roti King Battersea · Tap what you had"** with the venue photo.
 
+## Per-person links (link-only requests, app 2.2)
+
+The app's Request pill sends each person their own link,
+`https://onlybills.app/split/?id=<table>&p=<gid>` (plus `&r=<n>` after the host edits the
+bill, so iMessage builds a fresh preview). For those:
+
+| Link | Title | Description |
+|---|---|---|
+| `&p=` names a guest | `<Venue> · Your share £4.38` (no venue: `Your share £4.38`) | `See what you had and pay <Host>. No app needed.` |
+| assigned table (`status: "assigned"`), no or unknown `p` | `<Venue> · Find your share` | `Find your name and pay your share. No app needed.` |
+| live QR table | `<Venue> · Tap what you had` (unchanged) | unchanged |
+
+- The share is worked out by the guest page's own engine (`split-app/src/lib/bill.js`
+  `liveTotals`, `format.js` `formatMoney`), imported by `src/meta.js` and bundled by
+  wrangler, so the preview and the page agree to the penny. Changing those files changes
+  the worker on its next deploy.
+- With `p` the Firestore lookup also reads `currency`, `items`, `charges` and `guests`
+  (`fromRest()` turns the REST document into the page's shape) and **skips the edge cache**
+  (a share changes when the host edits). Plain links read `storeName`, `restaurantPhotoUrl`,
+  `status`, `locked` and stay cached for 5 minutes under `v2/<id>`.
+- `og:url` keeps `p` and `r` and drops everything else.
+- An unknown `p`, or the host's own id, previews as the table.
+
 ## What it changes (and what it doesn't)
 
 - Runs only on `onlybills.app/split*`. Everything else (the privacy page, the App Clip's
@@ -35,8 +58,9 @@ dropped and the id escaped. **Never put a fixed `og:url` in `split/index.html` o
 preview. A test fails if the page ever gains one. Pages the worker leaves alone (demo, unknown
 table, Firestore slow) still have no `og:url`, so WhatsApp may show a plain link for those.
 
-Because `og:url` drops extra parameters, the `&p=2` re-test trick below may not refresh a
-WhatsApp preview; test WhatsApp with a table it hasn't seen.
+Because `og:url` drops extra parameters (everything but `p` and `r`), the `&x=1` re-test
+trick below may not refresh a WhatsApp preview; test WhatsApp with a table it hasn't seen.
+Don't use `&p=` as a cache-buster any more: it now means a person.
 
 ### Deploying this change (the worker isn't deployed from git)
 
@@ -50,6 +74,8 @@ From `worker/` on the branch that has this change:
    `curl -s 'https://onlybills.app/split/?id=<real id>&x=1' | grep -o '<meta property="og:[a-z:]*" content="[^"]*"'`
    should show `og:url` = `https://onlybills.app/split/?id=<real id>` (no `&x=1`), plus the
    venue title. `curl -s 'https://onlybills.app/split/?demo=2' | grep -c og:url` should print 0.
+   For a request doc from app 2.2, `curl -s 'https://onlybills.app/split/?id=<id>&p=<gid>' | grep -o '<meta property="og:title" content="[^"]*"'`
+   should show `<Venue> · Your share £x` matching the page, and `og:url` should keep `&p=`.
 5. Send a fresh table link in WhatsApp (and iMessage) and check the preview.
 
 Roll back: `npx wrangler@4.20.0 rollback` (or Cloudflare dashboard → Workers →
@@ -68,7 +94,7 @@ Roll back: `npx wrangler@4.20.0 rollback` (or Cloudflare dashboard → Workers �
 5. From this folder: `npx wrangler@4.20.0 login`, then `npm run deploy`. The route
    `onlybills.app/split*` is in `wrangler.toml`.
 6. Test: paste a real bill link into Messages. iMessage caches previews per URL, so add a
-   throwaway parameter when re-testing (`…&p=2`).
+   throwaway parameter when re-testing (`…&x=1`; not `&p=`, which names a person).
 
 Undo: Cloudflare dashboard → Workers → `onlybills-link-previews` → delete the route (or the
 worker). The site keeps working from GitHub Pages either way.
@@ -83,4 +109,6 @@ Notes:
 ## Tests
 
 `npm test` (Node 20): the preview rules in `src/meta.js` (which links, ids, trusted photos,
-names, fallbacks, the og:url), and that `split/index.html` has no static `og:url`.
+names, fallbacks, the og:url, per-person shares, assigned tables, `fromRest`), and that
+`split/index.html` has no static `og:url`. Check the bundle (the split-app imports) with
+`npx wrangler@4.20.0 deploy --dry-run --outdir /tmp/ob-worker`.
