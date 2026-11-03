@@ -322,18 +322,18 @@ export const normalizeStatic = (data) => ({
  * guests read "Monzo" as "I need Monzo" and stopped (founder feedback, Oct 2026).
  */
 export const PAY_WITH = {
-  monzo: 'Card, Apple Pay or bank transfer',
-  starling: 'Card or Apple Pay',
-  revolut: 'Card or Apple Pay',
+  monzo: 'Apple Pay, card or bank transfer',
+  starling: 'Apple Pay or card',
+  revolut: 'Apple Pay or card',
   paypal: 'PayPal',
   venmo: 'Venmo',
   bank: 'Bank transfer',
 };
 
 export const CAPABILITY = {
-  monzo: 'Card, Apple Pay or bank transfer. No Monzo account needed',
-  starling: 'Card or Apple Pay. No Starling account needed',
-  revolut: 'Card or Apple Pay. No Revolut account needed',
+  monzo: 'Apple Pay, card or bank transfer. No Monzo account needed',
+  starling: 'Apple Pay or card. No Starling account needed',
+  revolut: 'Apple Pay or card. No Revolut account needed',
   paypal: 'PayPal account may be needed',
   venmo: 'Venmo account needed',
   bank: 'From any banking app',

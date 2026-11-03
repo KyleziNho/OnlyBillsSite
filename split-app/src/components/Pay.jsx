@@ -1,5 +1,5 @@
 // Paying the host. One big primary button for the host's default method ("Pay Kyle
-// £11.00") and one line on what the guest pays WITH ("Card or Apple Pay · £11.00 filled in
+// £11.00") and one line on what the guest pays WITH ("Apple Pay or card · £11.00 filled in
 // for you"). Never the host's bank name: guests read "via Monzo" as "I need Monzo" and
 // stopped (Oct 2026). Then "Other ways to pay": the remaining links, titled the same way,
 // and bank details ALWAYS (copy per line), plus an optional payment QR.
@@ -37,7 +37,7 @@ export function PayOption({ opt, index, onOpen }) {
   );
 }
 
-/** "[card] Card or Apple Pay · £11.00 filled in for you": what you pay with, never whose bank. */
+/** "[card] Apple Pay or card · £11.00 filled in for you": what you pay with, never whose bank. */
 function PayWithLine({ opt }) {
   const card = !opt || usesCard(opt);
   const text = opt ? opt.payWith : `${PAY_WITH.bank} from any banking app`;
