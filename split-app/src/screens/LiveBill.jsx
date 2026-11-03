@@ -3,7 +3,7 @@
 // field-level Firestore updates, so a whole table tapping at once merges cleanly.
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  HOST_ID, liveTotals, normalizeLive, percentChargeRefresh, pickGuestColor, tablePhase, hasAnyPayMethod,
+  HOST_ID, liveTotals, normalizeLive, percentChargeRefresh, personFromLink, pickGuestColor, tablePhase, hasAnyPayMethod,
   UNIT_EPS, claimValue, claimedUnits, formatUnits, isMultiUnit, unitsLeft, unitsOf, withClaim,
 } from '../lib/bill.js';
 import { cleanVenueName, formatMoney, haptic, plural, roundMoney } from '../lib/format.js';
@@ -54,9 +54,16 @@ const useNow = (ms = 30000) => {
 };
 
 // ── Page ─────────────────────────────────────────────────
-export default function LiveBill({ docId, initialData, demo = null }) {
+export default function LiveBill({ docId, initialData, demo = null, personId = null }) {
   const [bill, setBill] = useState(() => normalizeLive(initialData));
-  const [identity, setIdentity] = useState(() => (demo ? demo.identity || null : loadIdentity(docId)));
+  // A per-person link (&p=gst_…) names who this is, and wins over a saved identity.
+  // "Not you?" still works; the link applies again on the next open.
+  const [linked] = useState(() => {
+    const g = personFromLink(bill, personId);
+    return g ? { gid: g.id, name: g.name } : null;
+  });
+  const [identity, setIdentity] = useState(() => linked || (demo ? demo.identity || null : loadIdentity(docId)));
+  useEffect(() => { if (linked && !demo) saveIdentity(docId, linked); }, [linked, demo, docId]);
   const [sheet, setSheet] = useState(() => {                        // 'pay' | {edit: item | 'new'}
     if (demo?.sheetEdit) return { edit: normalizeLive(initialData).items.find((i) => i.id === demo.sheetEdit) || 'new' };
     return demo?.sheet || null;
@@ -160,6 +167,24 @@ export default function LiveBill({ docId, initialData, demo = null }) {
   const currentPayMode = isPaid && !owesTopUp ? 'settled' : owesTopUp ? 'topup' : 'pay';
   const sheetMode = payMode || currentPayMode;
   const openPay = () => { setPayMode(currentPayMode); setSheet('pay'); haptic(6); };
+  const assigned = phase === 'assigned';
+
+  // Opened from a per-person link and there's money to send: show the pay sheet once
+  // (per browser session), after the page has landed. Not while claims are still open.
+  const owesNow = !!me && myTotal > 0.005 && (!isPaid || owesTopUp);
+  const autoPayFor = linked && me?.id === linked.gid && canPay && phase !== 'open' && owesNow && !demo?.sheet
+    ? currentPayMode : null;
+  useEffect(() => {
+    if (!autoPayFor || !linked) return undefined;
+    const key = `ob_autopay_${docId}_${linked.gid}`;
+    try { if (sessionStorage.getItem(key)) return undefined; } catch { /* private mode */ }
+    const t = setTimeout(() => {
+      try { sessionStorage.setItem(key, '1'); } catch { /* private mode */ }
+      setPayMode(autoPayFor);
+      setSheet((s) => s || 'pay');
+    }, 450);
+    return () => clearTimeout(t);
+  }, [autoPayFor, linked, docId]);
 
   // ── Actions ─────────────────────────────────────────────
   const join = (raw) => {
@@ -186,7 +211,7 @@ export default function LiveBill({ docId, initialData, demo = null }) {
       setIdentity(mine);
       if (!demo) saveIdentity(docId, mine);
     });
-    showToast(`Welcome back, ${g.name}`, { person: g });
+    showToast(phase === 'assigned' ? `Hi ${g.name}` : `Welcome back, ${g.name}`, { person: g });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -328,10 +353,12 @@ export default function LiveBill({ docId, initialData, demo = null }) {
         <Backdrop photo={bill.restaurantPhotoUrl} />
         <CompactBar headerRef={headerRef} bill={bill}
           trailing={me && myItems.length > 0 ? <Money value={myTotal} currency={bill.currency} className="compact-money" /> : null} />
-        <VenueHeader bill={bill} headerRef={headerRef} badge={<LiveBadge phase={hostSplit ? 'expired' : phase} />}
+        <VenueHeader bill={bill} headerRef={headerRef} badge={assigned ? null : <LiveBadge phase={hostSplit ? 'expired' : phase} />}
           extraMeta={bill.guests.length > 1 ? `${bill.guests.length} at the table` : null} />
 
-        {phase !== 'open' && (
+        {assigned ? (
+          <AssignedNote host={host} hostName={hostName} />
+        ) : phase !== 'open' && (
           <PhaseBanner phase={phase} hostName={hostName} canPay={canPay} joined={!!me} gone={gone} hostSplit={hostSplit} />
         )}
 
@@ -352,7 +379,7 @@ export default function LiveBill({ docId, initialData, demo = null }) {
 
         <ExtrasSection bill={bill} totals={totals} />
 
-        {(me || phase !== 'open') && bill.guests.length > 0 && (
+        {(me || (phase !== 'open' && !assigned)) && bill.guests.length > 0 && (
           <TableSection bill={bill} totals={totals} me={me} />
         )}
 
@@ -427,6 +454,17 @@ function PhaseBanner({ phase, hostName, canPay, joined, gone, hostSplit }) {
         </p>
       </div>
     </section>
+  );
+}
+
+/** Assigned tables: no banner, just who split it. */
+function AssignedNote({ host, hostName }) {
+  const name = hostName === 'the host' ? 'The host' : hostName;
+  return (
+    <p className="assigned-note">
+      {host && <Avatar id={host.id} name={host.name} color={host.color} size={22} />}
+      <span><strong>{name}</strong> split the bill</span>
+    </p>
   );
 }
 
@@ -505,7 +543,7 @@ function ShareCard({ me, bill, totals, myItems, myTotal, isPaid, paidAmt, topUp,
   const shared = myItems.filter((i) => i.claimedBy.length > 1).length;
   let sub;
   if (!myItems.length) {
-    sub = phase === 'open' ? 'Tap what you had below.' : 'You didn’t claim anything here.';
+    sub = phase === 'open' ? 'Tap what you had below.' : phase === 'assigned' ? 'Nothing on this bill is down to you.' : 'You didn’t claim anything here.';
   } else {
     const bits = [plural(myItems.length, 'item')];
     if (shared) bits.push(`${shared} shared`);
@@ -567,7 +605,7 @@ function useLongPress(onLong, ms = 480) {
   };
 }
 
-function ItemRow({ item, index, bill, me, myShare, canClaim, canEdit, editMode, onClaim, onUnits, onEdit }) {
+function ItemRow({ item, index, bill, me, myShare, canClaim, canEdit, editMode, onClaim, onUnits, onEdit, assigned = false }) {
   const guestById = useMemo(() => Object.fromEntries(bill.guests.map((g) => [g.id, g])), [bill.guests]);
   const claimers = item.claimedBy.map((id) => guestById[id]).filter(Boolean);
   const mine = !!me && item.claimedBy.includes(me.id);
@@ -583,7 +621,7 @@ function ItemRow({ item, index, bill, me, myShare, canClaim, canEdit, editMode, 
   const stepper = multi && mine && !editMode && canClaim && canEdit;
 
   const who = claimers.length === 0 ? null
-    : multi && claimed <= item.qty + UNIT_EPS
+    : multi && !assigned && claimed <= item.qty + UNIT_EPS
       ? `${formatUnits(claimed)} of ${qty} claimed${left > 0 ? ` · ${formatUnits(left)} left` : ''}`
       : claimers.length === 1 ? (claimers[0].id === me?.id ? 'You' : claimers[0].name)
         : `split ${claimers.length} ways`;
@@ -599,7 +637,7 @@ function ItemRow({ item, index, bill, me, myShare, canClaim, canEdit, editMode, 
         <span className="row-title">{item.name}</span>
         <span className="row-sub">
           {claimers.length === 0
-            ? <span className="grabs">Up for grabs</span>
+            ? <span className="grabs">{assigned ? 'Not split' : 'Up for grabs'}</span>
             : <><AvatarStack people={claimers} size={20} label={claimers.map((c) => c.name).join(', ')} /><span>{who}</span></>}
         </span>
       </span>
@@ -657,11 +695,12 @@ function ItemRow({ item, index, bill, me, myShare, canClaim, canEdit, editMode, 
 function BillSection({ bill, totals, me, canEdit, phase, editMode, setEditMode, onClaim, onUnits, onEdit }) {
   const grabs = totals.unclaimed.length;
   const canClaim = phase === 'open';
+  const assigned = phase === 'assigned';
   const trailing = editMode
     ? <button type="button" className="text-btn" onClick={() => setEditMode(false)}>Done</button>
     : grabs > 0
-      ? <span className="quiet">{grabs} up for grabs · {formatMoney(totals.unclaimedValue, bill.currency)}</span>
-      : bill.items.length > 0 ? <span className="all-claimed"><CheckIcon size={13} strokeWidth={3} />All claimed</span> : null;
+      ? <span className="quiet">{grabs} {assigned ? 'not split' : 'up for grabs'} · {formatMoney(totals.unclaimedValue, bill.currency)}</span>
+      : bill.items.length > 0 && !assigned ? <span className="all-claimed"><CheckIcon size={13} strokeWidth={3} />All claimed</span> : null;
 
   return (
     <Section title="The bill" trailing={trailing} className={`bill-section ${editMode ? 'is-editing' : ''}`} id="the-bill" labelId="bill-title">
@@ -671,7 +710,8 @@ function BillSection({ bill, totals, me, canEdit, phase, editMode, setEditMode, 
       {bill.items.map((item, i) => (
         <ItemRow key={item.id} item={item} index={i} bill={bill} me={me}
           myShare={me ? totals.itemShareFor(item, me.id) : 0}
-          canClaim={canClaim} canEdit={canEdit} editMode={editMode} onClaim={onClaim} onUnits={onUnits} onEdit={onEdit} />
+          canClaim={canClaim} canEdit={canEdit} editMode={editMode} onClaim={onClaim} onUnits={onUnits} onEdit={onEdit}
+          assigned={assigned} />
       ))}
       {editMode && canEdit && (
         <Row onClick={() => onEdit('new')} className="add-row" inset="leading"

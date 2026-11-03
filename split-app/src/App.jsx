@@ -39,6 +39,8 @@ export default function App() {
     const id = params.get('id');
     const demo = params.get('demo');
     const state = params.get('state');
+    // A per-person link (?id=<doc>&p=<gid>): open as that guest.
+    const person = params.get('p');
     const go = (p) => { if (!cancelled) setPage(p); };
 
     const run = async () => {
@@ -48,7 +50,7 @@ export default function App() {
         const { LIVE_STATES } = await loadDemo();
         const fixture = (LIVE_STATES[state] || LIVE_STATES.claiming)();
         setTitle(fixture.data.storeName);
-        go({ state: 'live', id: `demo-${state || 'claiming'}`, data: fixture.data, demo: fixture });
+        go({ state: 'live', id: `demo-${state || 'claiming'}`, data: fixture.data, demo: fixture, person });
         return;
       }
       if (demo === '1' || (!id && import.meta.env.DEV)) {
@@ -63,7 +65,7 @@ export default function App() {
         const data = await fetchShared(id);
         if (!data) { go({ state: 'notfound' }); return; }
         setTitle(data.storeName);
-        if (data.schemaVersion === 2) go({ state: 'live', id, data });
+        if (data.schemaVersion === 2) go({ state: 'live', id, data, person });
         else go({ state: 'static', data, person: preselect(data.people, params.get('person')) });
       } catch (e) {
         console.error(e);
@@ -106,7 +108,7 @@ export default function App() {
           secondary={GET_APP} />
       );
     case 'live':
-      return <LiveBill docId={page.id} initialData={page.data} demo={page.demo || null} />;
+      return <LiveBill docId={page.id} initialData={page.data} demo={page.demo || null} personId={page.person || null} />;
     default:
       return <StaticBill data={page.data} initialPerson={page.person} initialSheet={page.sheet} />;
   }

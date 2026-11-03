@@ -9,7 +9,7 @@ GitHub Pages site for OnlyBills. **`main` is live** at onlybills.app (push to `m
   change its wording without the founder; styling changes are fine.
 - `split-app/` — the guest bill page source (React + Vite). Built output is committed to `split/`
   (`npm run build`, then `rsync -a --delete dist/ ../split/` from `split-app/`). Served at
-  onlybills.app/split/?id=<table>. Demo states: `?demo=2&state=join|claiming|pay|paid|settled|expired`, `?demo=1`.
+  onlybills.app/split/?id=<table>. Demo states: `?demo=2&state=join|claiming|pay|paid|settled|expired|assigned` (add `&p=gst_a3f9c2e1` for a per-person link), `?demo=1`.
 - `.well-known/apple-app-site-association` + `.nojekyll` — App Clip + universal links. Don't remove.
 
 ## Design

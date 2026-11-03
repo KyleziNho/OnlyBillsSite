@@ -2,6 +2,8 @@
 // guest-facing state, so every screen can be previewed without touching production.
 //
 //   ?demo=2&state=<state>   live table (v2) — see LIVE_STATES below
+//                           (assigned: a bill the host split and sent as links; add
+//                            &p=gst_a3f9c2e1 for Ana's per-person link)
 //                           (pay, pay-default, pay-starling, pay-paypal, pay-bank: getting paid)
 //   ?demo=1[&person=Dad][&state=pay]   static shared bill (v1)
 //   ?demo=loading | notfound | error | offline   app-level pages
@@ -167,6 +169,33 @@ export const LIVE_STATES = {
     const d = withMe(baseLive(), ['itm_001']);
     delete d.expiresAt;
     return { data: d, identity: ME, denyEdits: true };
+  },
+  // Link-only request: the host split it in the app (status "assigned", unlocked) and
+  // sent everyone their own link. No claims; find your name or arrive via &p=<gid>.
+  assigned: () => {
+    const d = baseLive();
+    Object.assign(d, { status: 'assigned', locked: false, expiresAt: new Date(Date.now() + 7 * 24 * HOUR), requestedAt: t(0.2 * HOUR) });
+    d.storeName = 'Dishoom Kensington';
+    d.rating = 4.6; d.ratingCount = 9120; d.placeType = 'Indian restaurant';
+    d.items = {
+      itm_000: { order: 0, name: 'Chicken Ruby', price: 14.9, qty: 1, claimedBy: { gst_host: true } },
+      itm_001: { order: 1, name: 'House Black Daal', price: 7.9, qty: 1, claimedBy: { gst_host: true, gst_a3f9c2e1: true } },
+      itm_002: { order: 2, name: 'Garlic Naan', price: 10.5, qty: 3, claimedBy: { gst_a3f9c2e1: 2, gst_7b2e4d90: true } },
+      itm_003: { order: 3, name: 'Lamb Raan Bun', price: 12.5, qty: 1, claimedBy: { gst_7b2e4d90: true } },
+      itm_004: { order: 4, name: 'Paneer Tikka', price: 9.5, qty: 1, claimedBy: { gst_a3f9c2e1: true } },
+      itm_005: { order: 5, name: 'Mango Lassi', price: 11.0, qty: 2, claimedBy: { gst_a3f9c2e1: true, gst_c41e8a07: true } },
+      itm_006: { order: 6, name: 'Okra Fries', price: 6.5, qty: 1, claimedBy: { gst_c41e8a07: true } },
+    };
+    d.charges = { chg_000: { name: 'Service (12.5%)', amount: 9.1, percent: 12.5 } };
+    d.guests = {
+      gst_host: { name: 'Kyle', color: '#ff5a3c', joinedAt: t(0.2 * HOUR + 4000) },
+      gst_a3f9c2e1: { name: 'Ana', color: '#4dcc80', joinedAt: t(0.2 * HOUR + 3000), addedByHost: true },
+      gst_7b2e4d90: { name: 'Dad', color: '#4dabf7', joinedAt: t(0.2 * HOUR + 2000), addedByHost: true },
+      gst_c41e8a07: { name: 'Gran', color: '#5E5CE6', joinedAt: t(0.2 * HOUR + 1000), addedByHost: true },
+    };
+    d.paid = { gst_c41e8a07: 'confirmed' };
+    d.paidAmount = { gst_c41e8a07: 13.5 };
+    return { data: d, identity: null };
   },
   offline: () => ({ data: withMe(baseLive(), ['itm_001', 'itm_003']), identity: ME, conn: 'offline' }),
   busy: () => {

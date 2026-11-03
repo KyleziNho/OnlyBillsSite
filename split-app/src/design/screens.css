@@ -587,3 +587,20 @@
   .join-field.is-nudged { animation: none; }
   .venue-thumb, .state-page .state-card { animation: fade-in 240ms ease backwards; }
 }
+
+/* ── Assigned tables (the host split it and sent links) ───── */
+.assigned-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: var(--fs-subhead);
+  line-height: 20px;
+  color: var(--text-2);
+}
+.assigned-note strong { color: var(--text); font-weight: 600; }
+.assigned-note + .card, .assigned-note + .section { margin-top: 14px; }
+@media (prefers-color-scheme: light) {
+  /* Sits on the photo wash like the header: the same firmer secondary tone. */
+  .assigned-note { --text-2: rgba(40, 40, 46, 0.86); }
+}

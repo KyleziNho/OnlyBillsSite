@@ -167,6 +167,9 @@ export const normalizeLive = (data) => {
     closed: locked || status === 'closed' || status === 'hostSplit',
     // The host took the bill to split it themselves ("Split it myself instead" in the app).
     hostSplit: status === 'hostSplit',
+    // The host split it in the app and sent everyone a link (status:"assigned", unlocked):
+    // shares are set, guests only see theirs and pay.
+    assigned: status === 'assigned' && !locked,
     closedAt: toDate(data.closedAt)?.getTime() ?? null,
     expiresAt: toDate(data.expiresAt)?.getTime() ?? null,
     items, charges, guests, paid, paidAmount,
@@ -265,8 +268,14 @@ const HOUR = 36e5;
  *             hostSplit: the host is splitting it themselves (status:"hostSplit");
  *             nothing to pay here, they send everyone what they owe.
  *  expired  — past expiresAt without being finished; payments only
+ *  assigned — the host split it themselves and sent links (status:"assigned", unlocked):
+ *             no claims or edits, paying stays open (the rules allow it after expiry too).
+ *             A deleted doc (denied) falls through to expired.
  */
 export const tablePhase = (bill, { now = Date.now(), denied = false } = {}) => {
+  if (bill.assigned && !denied) {
+    return { phase: 'assigned', canEdit: false, canPay: true };
+  }
   if (bill.hostSplit) {
     return { phase: 'closed', canEdit: false, canPay: false, hostSplit: true };
   }
@@ -278,6 +287,18 @@ export const tablePhase = (bill, { now = Date.now(), denied = false } = {}) => {
     return { phase: 'expired', canEdit: false, canPay: true };
   }
   return { phase: 'open', canEdit: true, canPay: true };
+};
+
+/** A per-person link's guest id (`&p=gst_…`), as the app writes it. */
+export const GUEST_ID_PATTERN = /^gst_[a-z0-9]{4,32}$/;
+
+/**
+ * The guest a per-person link points at (`?id=<doc>&p=<gid>`), or null. Never the host:
+ * the host's own link opens as a plain table.
+ */
+export const personFromLink = (bill, p) => {
+  if (typeof p !== 'string' || !GUEST_ID_PATTERN.test(p) || p === HOST_ID) return null;
+  return (bill?.guests || []).find((g) => g.id === p && !g.isHost) || null;
 };
 
 // ── Static (v1 snapshot) ─────────────────────────────────
