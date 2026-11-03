@@ -236,13 +236,45 @@ export const liveTotals = (bill) => {
     return share && i >= 0 ? amt(share.lines[i]) : 0;
   };
 
+  /**
+   * One guest's breakdown, as the app's share card lists it (GuestBreakdownRows): their
+   * items (their penny-exact slice of each, with why it's a slice), then their share of each
+   * charge that isn't zero. `items` + `charges` sum exactly to `totalFor(gid)`.
+   */
+  const breakdownFor = (gid) => {
+    const share = shareOf(gid);
+    if (!share) return { items: [], charges: [], total: 0 };
+    const rows = [];
+    items.forEach((it, i) => {
+      if (!it.claimedBy.includes(gid)) return;
+      const ways = it.claimedBy.length;
+      const mine = unitsOf(it, gid);
+      // Mine alone, every unit: a "×2" then means what it says.
+      const whole = ways === 1 && mine >= it.qty - UNIT_EPS;
+      const line = formatMoney(it.price, cur);
+      // Why it's a slice: "2 of 3" when units were claimed (and fit), else "Split 3 ways".
+      const byUnits = isMultiUnit(it) && !whole && claimedUnits(it) <= it.qty + UNIT_EPS;
+      const detail = byUnits ? `${formatUnits(mine)} of ${Math.round(it.qty)} · ${line}`
+        : ways > 1 ? `Split ${ways} ways · ${line}`
+          : null;
+      rows.push({ id: it.id, name: it.name, detail, qty: whole && it.qty > 1.5 ? Math.round(it.qty) : 1, amount: amt(share.lines[i]) });
+    });
+    const charges = split.slots
+      .map((slot, k) => ({
+        id: slot.index >= 0 ? bill.charges[slot.index].id : `slot_${k}`,
+        name: slot.name, kind: slot.kind, amount: amt(share.charges[k]),
+      }))
+      .filter((c, k) => share.charges[k] !== 0);
+    return { items: rows, charges, total: amt(share.total) };
+  };
+
   // Items with units still unclaimed (a single claimer on a ×2 naan leaves one up for grabs).
   const unclaimed = items.filter(isUpForGrabs);
   const unclaimedValue = amt(split.unassigned.total);
 
   return {
     itemsSubtotal, chargesNet, grandTotal, charges, subtotalFor, totalFor, totalMinorFor, chargesFor,
-    itemShareFor, unclaimed, unclaimedValue,
+    itemShareFor, breakdownFor, unclaimed, unclaimedValue,
   };
 };
 

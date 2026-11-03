@@ -23,7 +23,7 @@ import {
 } from '../components/Chrome.jsx';
 import { useToast } from '../lib/useToast.js';
 import {
-  CheckIcon, ChevronRight, MinusIcon, PencilIcon, PhotoIcon, PlusIcon, UndoIcon,
+  CheckIcon, ChevronDown, ChevronRight, MinusIcon, PencilIcon, PhotoIcon, PlusIcon, UndoIcon,
 } from '../components/Icons.jsx';
 
 // ── Per-device identity ──────────────────────────────────
@@ -564,19 +564,72 @@ function ShareCard({ me, bill, totals, myItems, myTotal, isPaid, paidAmt, topUp,
           <button type="button" className="text-btn small" onClick={onNotMe}>Not you?</button>
         ) : null}
       </div>
-      <Money value={myTotal} currency={bill.currency} className={`share-total ${myTotal < 0.005 ? 'is-zero' : ''}`} />
-      <p className="share-sub">{sub}</p>
-      {isPaid && (
-        <p className="share-paid-line">
-          {topUp > 0
-            ? <button type="button" className="text-btn topup" onClick={onOpenPay}><PlusIcon size={14} strokeWidth={2.8} />{formatMoney(topUp, bill.currency)} since you paid</button>
-            : paidAmt != null && paidAmt - myTotal > 0.005
-              ? <span className="overpaid">You paid {formatMoney(paidAmt, bill.currency)}, which is {formatMoney(paidAmt - myTotal, bill.currency)} over your share now. Sort it out with {hostName}.</span>
-              : <span>You paid {hostName} {formatMoney(paidAmt ?? myTotal, bill.currency)}</span>}
-        </p>
-      )}
-      {isPaid && !topUp && <HeroArt name="paid" size={104} className="share-art" delay={260} />}
+      {/* The paid coin sits beside the total, not over the breakdown below. */}
+      <div className="share-main">
+        <Money value={myTotal} currency={bill.currency} className={`share-total ${myTotal < 0.005 ? 'is-zero' : ''}`} />
+        <p className="share-sub">{sub}</p>
+        {isPaid && (
+          <p className="share-paid-line">
+            {topUp > 0
+              ? <button type="button" className="text-btn topup" onClick={onOpenPay}><PlusIcon size={14} strokeWidth={2.8} />{formatMoney(topUp, bill.currency)} since you paid</button>
+              : paidAmt != null && paidAmt - myTotal > 0.005
+                ? <span className="overpaid">You paid {formatMoney(paidAmt, bill.currency)}, which is {formatMoney(paidAmt - myTotal, bill.currency)} over your share now. Sort it out with {hostName}.</span>
+                : <span>You paid {hostName} {formatMoney(paidAmt ?? myTotal, bill.currency)}</span>}
+          </p>
+        )}
+        {isPaid && !topUp && <HeroArt name="paid" size={104} className="share-art" delay={260} />}
+      </div>
+      {myItems.length > 0 && <ShareBreakdown me={me} bill={bill} totals={totals} />}
     </section>
+  );
+}
+
+const BREAKDOWN_KEY = 'ob.shareBreakdown';
+
+/** "Show breakdown" under the share: my slice of each item, my share of each charge, my total. */
+function ShareBreakdown({ me, bill, totals }) {
+  const [open, setOpen] = useState(() => {
+    try { return sessionStorage.getItem(BREAKDOWN_KEY) === '1'; } catch { return false; }
+  });
+  const toggle = () => {
+    const next = !open;
+    setOpen(next);
+    haptic(6);
+    try { sessionStorage.setItem(BREAKDOWN_KEY, next ? '1' : '0'); } catch { /* private mode */ }
+  };
+  const { items, charges, total } = totals.breakdownFor(me.id);
+  const cur = bill.currency;
+  return (
+    <div className={`breakdown ${open ? 'is-open' : ''}`}>
+      <button type="button" className="breakdown-toggle" aria-expanded={open} aria-controls="share-breakdown" onClick={toggle}>
+        <span>{open ? 'Hide breakdown' : 'Show breakdown'}</span>
+        <ChevronDown size={16} strokeWidth={2.6} className="breakdown-chev" />
+      </button>
+      <div className="breakdown-body" id="share-breakdown" inert={!open}>
+        <ul className="breakdown-inner" aria-label="Your breakdown">
+          {items.map((r) => (
+            <li className="breakdown-row" key={r.id}>
+              <span className="breakdown-name">
+                <span>{r.name}</span>
+                {r.detail && <span className="breakdown-detail">{r.detail}</span>}
+              </span>
+              {r.qty > 1 && <span className="chip" aria-label={`quantity ${r.qty}`}>×{r.qty}</span>}
+              <Money value={r.amount} currency={cur} roll={false} className="breakdown-money" />
+            </li>
+          ))}
+          {charges.map((c) => (
+            <li className="breakdown-row is-quiet" key={c.id}>
+              <span className="breakdown-name">{c.name}</span>
+              <Money value={c.amount} currency={cur} roll={false} className="breakdown-money" />
+            </li>
+          ))}
+          <li className="breakdown-row is-total">
+            <span className="breakdown-name">Your total</span>
+            <Money value={total} currency={cur} roll={false} className="breakdown-money" />
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 }
 
