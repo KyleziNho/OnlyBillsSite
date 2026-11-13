@@ -4,7 +4,7 @@ import { preferredFace, assignFaces, faceKey } from '../split-app/src/lib/faces.
 export const SITE = {
   url: 'https://onlybills.app',
   name: 'OnlyBills',
-  appStore: 'https://apps.apple.com/gb/app/onlybills/id6754412082',
+  appStore: 'https://apps.apple.com/app/onlybills/id6754412082',
   appId: '6754412082',
   author: 'Kyle',
   authorName: 'Kyle O\'Sullivan', // full name for structured data; the visible byline stays "Kyle"
