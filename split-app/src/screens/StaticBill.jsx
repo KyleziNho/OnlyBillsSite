@@ -122,7 +122,7 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
           </Section>
         )}
 
-        <Footer />
+        <Footer screen="static" />
 
         {me && me.total > 0.004 && (
           <GlassBar>
