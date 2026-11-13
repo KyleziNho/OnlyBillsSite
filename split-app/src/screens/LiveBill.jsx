@@ -339,10 +339,12 @@ export default function LiveBill({ docId, initialData, demo = null, personId = n
         </Button>
       );
     } else {
+      // The same amount the sheet's buttons carry (the settle currency when the host set one).
+      const due = payNow(bill, myTotal, owesTopUp ? topUp : 0, paidAmt);
       cta = (
         <Button key={owesTopUp ? 'topup' : 'pay'} tone="accent" onClick={openPay}>
           {owesTopUp ? 'Pay the extra ' : `Pay ${hostName} `}
-          <Money value={owesTopUp ? topUp : myTotal} currency={bill.currency} />
+          <Money value={due.amount} currency={due.currency} />
         </Button>
       );
     }
@@ -835,17 +837,22 @@ function TableSection({ bill, totals, me }) {
 }
 
 // ── Pay sheet ────────────────────────────────────────────
+/** What the guest pays now. The host's settle currency (payment.settle): every button, link
+ *  and Amount row carries the converted share; a top-up is the converted new share less the
+ *  converted paid one. No settle: the bill's own currency, as before. */
+function payNow(bill, myTotal, topUp, paidAmt) {
+  const amount = topUp || myTotal;
+  const share = settledShare(bill.payment, bill.currency, myTotal);
+  if (!share.settle) return { amount, currency: bill.currency, settle: null };
+  if (!topUp) return share;
+  const paidThen = settledShare(bill.payment, bill.currency, paidAmt ?? 0);
+  return { ...share, amount: Math.max(0, share.amount - paidThen.amount) };
+}
+
 function PaySheetBody({ bill, totals, me, myItems, myTotal, mode, paidAmt, topUp, hostName, venue, onCopied, onOpenQr }) {
   const settled = mode === 'settled';
   const amount = mode === 'topup' && topUp ? topUp : myTotal;
-  // The host's settle currency (payment.settle): every button, link and Amount row carries
-  // the converted share. A top-up is the converted new share less the converted paid one.
-  const share = settledShare(bill.payment, bill.currency, myTotal);
-  let pay = share.settle ? share : { amount, currency: bill.currency, settle: null };
-  if (share.settle && mode === 'topup' && topUp) {
-    const paidThen = settledShare(bill.payment, bill.currency, paidAmt ?? 0);
-    pay = { ...share, amount: Math.max(0, share.amount - paidThen.amount) };
-  }
+  const pay = payNow(bill, myTotal, mode === 'topup' ? topUp : 0, paidAmt);
   const charges = totals.chargesFor(me.id).filter((c) => Math.abs(c.share) > 0.004);
   return (
     <div className="pay-sheet">
