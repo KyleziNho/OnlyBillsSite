@@ -608,7 +608,7 @@ function ShareBreakdown({ me, bill, totals }) {
   const { items, charges, total } = totals.breakdownFor(me.id);
   const cur = bill.currency;
   return (
-    <div className={`breakdown ${open ? 'is-open' : ''}`}>
+    <div className={`share-breakdown ${open ? 'is-open' : ''}`}>
       <button type="button" className="breakdown-toggle" aria-expanded={open} aria-controls="share-breakdown" onClick={toggle}>
         <span>{open ? 'Hide breakdown' : 'Show breakdown'}</span>
         <ChevronDown size={16} strokeWidth={2.6} className="breakdown-chev" />
