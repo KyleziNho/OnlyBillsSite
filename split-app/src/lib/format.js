@@ -1,5 +1,6 @@
 // Formatting helpers shared by every screen: money, dates, venue names, haptics.
-import { linkAmountMinor, toMinor, toAmount } from './money.js';
+import { displayDigits, exponent, linkAmountMinor, toMinor, toAmount } from './money.js';
+import { guestLocale } from './locale.js';
 
 const FALLBACK_SYMBOLS = {
   GBP: '£', USD: '$', EUR: '€', JPY: '¥', CAD: '$', AUD: '$',
@@ -7,41 +8,68 @@ const FALLBACK_SYMBOLS = {
 };
 
 const formatters = new Map();
-const formatterFor = (currency) => {
-  const code = (currency || 'GBP').toUpperCase();
-  if (!formatters.has(code)) {
+const formatterFor = (code, digits, locale) => {
+  const key = `${locale}|${code}|${digits}`;
+  if (!formatters.has(key)) {
     let f = null;
     try {
-      f = new Intl.NumberFormat('en-GB', {
-        style: 'currency', currency: code, currencyDisplay: 'narrowSymbol',
+      // `symbol`, as the app's Money.format: a local reads their own sign ("R$", "kr", "zł"),
+      // anyone else gets the unambiguous one ("US$", "MX$", "SEK") for a currency not theirs.
+      f = new Intl.NumberFormat(locale, {
+        style: 'currency', currency: code, currencyDisplay: 'symbol',
+        minimumFractionDigits: digits, maximumFractionDigits: digits,
       });
-    } catch { /* unknown ISO code → fallback below */ }
-    formatters.set(code, f);
+    } catch { /* unknown ISO code or locale → fallback below */ }
+    formatters.set(key, f);
   }
-  return [code, formatters.get(code)];
+  return formatters.get(key);
 };
 
-/** "£24.60", "−£1.50" (true minus), "¥2,460". Never "-£0.00". */
-export const formatMoney = (amount, currency) => {
-  const v = Number.isFinite(amount) ? amount : 0;
-  const rounded = Math.abs(v) < 0.005 ? 0 : v;
-  const [code, f] = formatterFor(currency);
-  const text = f
-    ? f.format(rounded)
-    : (FALLBACK_SYMBOLS[code] || code + ' ') + Math.abs(rounded).toFixed(2);
-  if (!f && rounded < 0) return '−' + text;
-  return text.replace('-', '−');
+/**
+ * The bill's currency, written the way the guest's locale writes money:
+ * "£24.60" (en-GB), "R$ 24,60" (pt-BR), "24,60 €" (de-DE), "$24.60" (en-US), "¥2,460".
+ * Rounded to the currency's minor unit first, as the engine and the links are, so the
+ * shown amount always matches what a link or the Amount row carries. "−" is a true minus.
+ * Never "-£0.00".
+ */
+export const formatMoney = (amount, currency, locale = guestLocale()) => {
+  const code = String(currency || 'GBP').trim().toUpperCase();
+  const minor = toMinor(Number.isFinite(amount) ? amount : 0, code);
+  const value = minor === 0 ? 0 : toAmount(minor, code);
+  // COP and HUF drop ",00" on a whole amount, as the links and the copied Amount do
+  // (money.js WHOLE_WHEN_EVEN, contract section 0).
+  const digits = displayDigits(minor, code);
+  const f = formatterFor(code, digits, locale);
+  if (!f) {
+    const text = (FALLBACK_SYMBOLS[code] || code + ' ') + Math.abs(value).toFixed(digits);
+    return value < 0 ? '−' + text : text;
+  }
+  return f.format(value).replace('-', '−');
 };
 
-/** The currency's narrow symbol, for input prefixes. */
-export const currencySymbol = (currency) => {
-  const [code, f] = formatterFor(currency);
-  if (!f) return FALLBACK_SYMBOLS[code] || code;
-  return f.formatToParts(0).find((p) => p.type === 'currency')?.value || code;
+/**
+ * The currency sign for an input, and which side of the number the guest's locale puts
+ * it: { symbol: '£', after: false } (en-GB), { symbol: '€', after: true } (de-DE).
+ */
+export const currencyAffix = (currency, locale = guestLocale()) => {
+  const code = String(currency || 'GBP').trim().toUpperCase();
+  const f = formatterFor(code, exponent(code), locale);
+  if (!f) return { symbol: FALLBACK_SYMBOLS[code] || code, after: false };
+  const parts = f.formatToParts(0);
+  const at = parts.findIndex((p) => p.type === 'currency');
+  if (at < 0) return { symbol: code, after: false };
+  return { symbol: parts[at].value, after: at > parts.findIndex((p) => p.type === 'integer') };
 };
 
 /** Amount as the plain decimal a payment link wants: "24.60", "333" for JPY. */
 export const linkAmount = (amount, currency = 'GBP') => linkAmountMinor(toMinor(amount || 0, currency), currency);
+
+/**
+ * The most one item line can cost, as a typo guard: 100,000 in most currencies, 100,000,000
+ * where a meal runs to tens of thousands (pesos in Chile or Colombia, forints, yen).
+ */
+const LARGE_UNIT = new Set(['ARS', 'CLP', 'COP', 'HUF', 'IDR', 'ISK', 'JPY', 'KRW', 'KZT', 'PYG', 'UGX', 'VND']);
+export const maxItemPrice = (currency) => (LARGE_UNIT.has(String(currency || '').trim().toUpperCase()) ? 1e8 : 1e5);
 
 /** Rounds to the currency's minor unit (pence; whole yen). */
 export const roundMoney = (v, currency = 'GBP') => toAmount(toMinor(v || 0, currency), currency);

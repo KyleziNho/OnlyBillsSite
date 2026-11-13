@@ -10,6 +10,8 @@ GitHub Pages site for OnlyBills. **`main` is live** at onlybills.app (push to `m
 - `split-app/` — the guest bill page source (React + Vite). Built output is committed to `split/`
   (`npm run build`, then `rsync -a --delete dist/ ../split/` from `split-app/`). Served at
   onlybills.app/split/?id=<table>. Demo states: `?demo=2&state=join|claiming|pay|paid|settled|expired|assigned` (add `&p=gst_a3f9c2e1` for a per-person link), `?demo=1`.
+  Regional payouts (documents with `payment.methods`): `state=pay-us|pay-es|pay-de|pay-br|pay-unknown|pay-link|pay-demoted`.
+  Settle currency (`payment.settle`, a UK host on a baht bill paid back in pounds): `state=pay-th|claiming-th`.
 - `.well-known/apple-app-site-association` + `.nojekyll` — App Clip + universal links. Don't remove.
 
 ## Design
@@ -32,6 +34,8 @@ art. The home (`site/pages/home.mjs`, CSS block "Home, November 2026 redesign" a
   user feedback (the same lines as the app's `PaywallMessages.welcomeChat`); never add made-up ones.
 
 ## Logic that must match the app
-`split-app/src/lib/money.js` (money engine) and `faces.js` (face assignment) are ports of the iOS
+`split-app/src/lib/money.js` (money engine), `faces.js` (face assignment) and `payMethods.js` +
+`pix.js` (how a guest pays: methods, link builders, the `payment` reader, Pix codes; contract in the
+app repo `docs/REGIONAL_PAYOUTS_CONTRACT.md`) are ports of the iOS
 code; shared fixtures in `src/lib/__fixtures__/` prove parity — run `node --test src/lib` after
 any change. Firestore writes must satisfy the deployed rules (app repo `SplitSwift/firebase/`).

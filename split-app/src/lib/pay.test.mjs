@@ -1,27 +1,33 @@
 // Getting paid: option ordering, the host's default, honest capability copy, Starling
 // links and compatibility with docs written by older apps. Run: node --test src/lib/
+// (Regional payouts: payVectors.test.mjs. The UK guarantee: payLegacy.test.mjs.)
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildPayOptions, payPlan, payeeOf, bankRows, hasAnyPayMethod, CAPABILITY } from './bill.js';
+import { payPlan, payeeOf, hasAnyPayMethod } from './bill.js';
+import { METHODS, ZELLE_NOTICE, fillText, iconFor, legacyBankRows } from './payMethods.js';
 
 const BANK = { bankAccountName: 'Kyle O', bankDetails: [{ label: 'Sort code', value: '04-00-04' }, { label: 'Account number', value: '12345678' }] };
 const ALL = { monzoUsername: 'kyle', starlingUsername: 'kylez', revolutUsername: 'kyler', paypalUsername: 'kylep', ...BANK };
 const opts = { amount: 11, currency: 'GBP', reference: "Nando's" };
+/** Every option in sheet order (primary first), and just the links. */
+const all = (payment) => { const p = payPlan(payment, opts); return p.primary ? [p.primary, ...p.others] : []; };
+const links = (payment) => all(payment).filter((o) => o.kind === 'link');
+const ids = (list) => list.map((o) => o.id);
 
 test('Starling Settle Up link: profile only, guest enters the amount', () => {
-  const [o] = buildPayOptions({ starlingUsername: ' @kylez ' }, opts);
-  assert.equal(o.key, 'starling');
-  assert.equal(o.href, 'https://settleup.starlingbank.com/kylez');
-  assert.equal(o.logo, 'logo-starling.png');
+  const [o] = links({ starlingUsername: ' @kylez ' });
+  assert.equal(o.id, 'starling');
+  assert.equal(o.url, 'https://settleup.starlingbank.com/kylez');
+  assert.deepEqual(iconFor(o), { type: 'card' });
   assert.equal(o.prefilled, false);
-  assert.equal(o.note, 'Enter £11.00 when it opens');
+  assert.equal(fillText(o.note, { amount: '£11.00' }), 'Enter £11.00 when it opens');
   assert.equal(o.capability, 'Apple Pay or card. No Starling account needed');
   assert.equal(o.payWith, 'Apple Pay or card');
 });
 
 test('what you pay with never names the host\'s bank', () => {
-  const o = buildPayOptions(ALL, opts);
-  for (const x of o.filter((x) => ['monzo', 'starling', 'revolut'].includes(x.key))) {
+  const o = links(ALL);
+  for (const x of o.filter((x) => ['monzo', 'starling', 'revolut'].includes(x.id))) {
     assert.doesNotMatch(x.payWith, /Monzo|Starling|Revolut/);
   }
   assert.equal(o[0].payWith, 'Apple Pay, card or bank transfer');
@@ -29,64 +35,64 @@ test('what you pay with never names the host\'s bank', () => {
 });
 
 test('links keep their formats; best payer experience first', () => {
-  const o = buildPayOptions(ALL, opts);
-  assert.deepEqual(o.map((x) => x.key), ['monzo', 'starling', 'revolut', 'paypal']);
-  assert.equal(o[0].href, "https://monzo.me/kyle/11.00?d=Nando's");
-  assert.equal(o[2].href, 'https://revolut.me/kyler');
-  assert.equal(o[3].href, 'https://paypal.me/kylep/11.00GBP');
-  assert.equal(o[0].note, '£11.00 filled in for you');
+  const o = links(ALL);
+  assert.deepEqual(ids(o), ['monzo', 'starling', 'revolut', 'paypal']);
+  // The apostrophe is percent-encoded now, as the app has always done (contract section 0, `enc`).
+  assert.equal(o[0].url, 'https://monzo.me/kyle/11.00?d=Nando%27s');
+  assert.equal(o[2].url, 'https://revolut.me/kyler');
+  assert.equal(o[3].url, 'https://paypal.me/kylep/11.00GBP');
+  assert.equal(fillText(o[0].note, { amount: '£11.00' }), '£11.00 filled in for you');
 });
 
 test('capability copy is accurate and never implies the host app is needed', () => {
-  assert.equal(CAPABILITY.monzo, 'Apple Pay, card or bank transfer. No Monzo account needed');
-  assert.equal(CAPABILITY.revolut, 'Apple Pay or card. No Revolut account needed');
-  assert.equal(CAPABILITY.paypal, 'PayPal account may be needed');
-  assert.equal(CAPABILITY.bank, 'From any banking app');
+  assert.equal(METHODS.monzo.capability, 'Apple Pay, card or bank transfer. No Monzo account needed');
+  assert.equal(METHODS.revolut.capability, 'Apple Pay or card. No Revolut account needed');
+  assert.equal(METHODS.paypal.capability, 'PayPal account may be needed');
+  assert.equal(METHODS.bank.payWith, 'Bank transfer');
 });
 
 test('defaultMethod leads; the rest + bank are other ways', () => {
   const p = payPlan({ ...ALL, defaultMethod: 'starling' }, opts);
   assert.equal(p.primary.kind, 'link');
-  assert.equal(p.primary.opt.key, 'starling');
-  assert.deepEqual(p.others.map((x) => x.key), ['monzo', 'revolut', 'paypal']);
-  assert.equal(p.bank, true);
+  assert.equal(p.primary.id, 'starling');
+  assert.deepEqual(ids(p.others), ['monzo', 'revolut', 'paypal', 'bank']);
 });
 
 test('1.1 docs (no defaultMethod) keep the old lead: first link, bank always shown', () => {
   const p = payPlan({ monzoUsername: 'kyle', revolutUsername: 'kyler', paypalUsername: 'kylep', ...BANK }, opts);
-  assert.equal(p.primary.opt.key, 'monzo');
-  assert.deepEqual(p.others.map((x) => x.key), ['revolut', 'paypal']);
-  assert.equal(p.bank, true);
+  assert.equal(p.primary.id, 'monzo');
+  assert.deepEqual(ids(p.others), ['revolut', 'paypal', 'bank']);
 });
 
 test('stale or unknown default falls back to the first link', () => {
-  assert.equal(payPlan({ monzoUsername: 'k', defaultMethod: 'revolut' }, opts).primary.opt.key, 'monzo');
-  assert.equal(payPlan({ paypalUsername: 'k', defaultMethod: 'nonsense' }, opts).primary.opt.key, 'paypal');
+  assert.equal(payPlan({ monzoUsername: 'k', defaultMethod: 'revolut' }, opts).primary.id, 'monzo');
+  assert.equal(payPlan({ paypalUsername: 'k', defaultMethod: 'nonsense' }, opts).primary.id, 'paypal');
   // "bank" without bank details → first link.
-  assert.equal(payPlan({ paypalUsername: 'k', defaultMethod: 'bank' }, opts).primary.opt.key, 'paypal');
+  assert.equal(payPlan({ paypalUsername: 'k', defaultMethod: 'bank' }, opts).primary.id, 'paypal');
 });
 
 test('bank default and bank-only', () => {
   const chosen = payPlan({ monzoUsername: 'k', ...BANK, defaultMethod: 'bank' }, opts);
-  assert.deepEqual(chosen.primary, { kind: 'bank' });
-  assert.deepEqual(chosen.others.map((x) => x.key), ['monzo']);
-  assert.equal(chosen.bank, false, 'bank is the primary, not repeated below');
+  assert.equal(chosen.primary.id, 'bank');
+  assert.deepEqual(ids(chosen.others), ['monzo'], 'bank is the primary, not repeated below');
   const only = payPlan(BANK, opts);
-  assert.deepEqual(only.primary, { kind: 'bank' });
+  assert.equal(only.primary.id, 'bank');
   assert.equal(only.others.length, 0);
 });
 
 test('PayPal-only: primary with the honest line, nothing else', () => {
   const p = payPlan({ paypalUsername: 'kylep', defaultMethod: 'paypal' }, opts);
-  assert.equal(p.primary.opt.capability, 'PayPal account may be needed');
+  assert.equal(p.primary.capability, 'PayPal account may be needed');
   assert.equal(p.others.length, 0);
-  assert.equal(p.bank, false);
 });
 
 test('nothing set up → no primary', () => {
   assert.equal(payPlan(null, opts).primary, null);
   assert.equal(hasAnyPayMethod(null), false);
   assert.equal(hasAnyPayMethod({ starlingUsername: 'k' }), true);
+  assert.equal(hasAnyPayMethod({ qrCodeUrl: 'https://example.com/qr.png' }), true);
+  assert.equal(hasAnyPayMethod({ methods: [{ id: 'zelle', fields: [{ label: 'Zelle', value: '+14155550100' }] }] }), true);
+  assert.equal(hasAnyPayMethod({ methods: [{ id: 'link', url: 'https://evil.example/x' }] }), false);
 });
 
 test('payee name: live host name, else static payeeName', () => {
@@ -97,5 +103,12 @@ test('payee name: live host name, else static payeeName', () => {
 });
 
 test('bank rows: name first, then each line', () => {
-  assert.deepEqual(bankRows(BANK).map((r) => r.label), ['Name', 'Sort code', 'Account number']);
+  assert.deepEqual(legacyBankRows(BANK).map((r) => r.label), ['Name', 'Sort code', 'Account number']);
+});
+
+test('Zelle: bank glyph, never a logo (no licence), and the fair-use notice', () => {
+  // zelle.com/zelle-trademark-guidelines, Fair Use items 2 and 4: logos only under licence.
+  assert.deepEqual(iconFor({ id: 'zelle', kind: 'copy' }), { type: 'bank' });
+  assert.match(ZELLE_NOTICE, /IS NOT AUTHORIZED, ENDORSED, OR SPONSORED BY EARLY WARNING SERVICES, LLC/);
+  assert.doesNotMatch(ZELLE_NOTICE, /with permission/);
 });

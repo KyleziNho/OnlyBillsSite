@@ -11,7 +11,8 @@ import { Row, Section } from '../components/Section.jsx';
 import { HeroArt } from '../components/HeroArt.jsx';
 import { Button, GlassBar } from '../components/Glass.jsx';
 import { Sheet } from '../components/Sheet.jsx';
-import { PayMethods } from '../components/Pay.jsx';
+import { PayMethods, SettleRateLine } from '../components/Pay.jsx';
+import { settledShare } from '../lib/payMethods.js';
 import { Backdrop, CompactBar, Footer, ImageViewer, Toast, VenueHeader } from '../components/Chrome.jsx';
 import { useToast } from '../lib/useToast.js';
 import { ChevronDown, ChevronRight } from '../components/Icons.jsx';
@@ -32,6 +33,7 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
   const [toast, showToast] = useToast();
   const headerRef = useRef(null);
   const me = meIndex != null ? bill.people[meIndex] : null;
+  const pay = me ? settledShare(bill.payment, bill.currency, me.total) : null;
   // Distinct faces for the bill's people, in bill order — as the app assigns them.
   const faces = useMemo(() => {
     const picked = assignFaces(bill.people.map((p, i) => ({ key: faceKey({ name: p.name, id: `p${i}` }) })));
@@ -69,6 +71,9 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
                 <button type="button" className="text-btn small" onClick={() => withViewTransition(() => setMeIndex(null))}>Not you?</button>
               </div>
               <Money value={me.total} currency={bill.currency} className="share-total" />
+              {pay?.settle && me.total > 0.005 && (
+                <p className="share-settle">Your share {formatMoney(me.total, bill.currency)} · you pay {formatMoney(pay.amount, pay.currency)}</p>
+              )}
               <p className="share-sub">
                 {[plural(me.items.length, 'item'), ...feesOf(me).map(([l, v]) => `${formatMoney(v, bill.currency)} ${l.toLowerCase()}`)].join(' · ')}
               </p>
@@ -133,12 +138,13 @@ export default function StaticBill({ data, initialPerson = null, initialSheet = 
         {me && (
           <div className="pay-sheet">
             <div className="pay-hero">
-              <Money value={me.total} currency={bill.currency} className="pay-amount" />
-              <p className="pay-hero-sub">{me.name}’s share at {venue}</p>
+              <Money value={pay.amount} currency={pay.currency} className="pay-amount" />
+              <p className="pay-hero-sub">{pay.settle ? `${me.name}’s share ${formatMoney(me.total, bill.currency)} at ${venue}` : `${me.name}’s share at ${venue}`}</p>
             </div>
-            <PayMethods payment={bill.payment} amount={me.total} currency={bill.currency} reference={venue}
+            <PayMethods payment={bill.payment} amount={pay.amount} currency={pay.currency} reference={venue}
               onCopied={(label, ok) => showToast(ok ? `${label} copied` : 'Couldn’t copy. Press and hold to select it', { tone: ok ? undefined : 'quiet' })}
               onOpenQr={setViewer} />
+            <SettleRateLine settle={pay.settle} billCurrency={bill.currency} host={bill.payment?.payeeName || ''} />
             {hasAnyPayMethod(bill.payment) && <p className="pay-note">Payments go straight to whoever paid the bill.</p>}
           </div>
         )}

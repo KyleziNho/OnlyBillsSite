@@ -8,6 +8,7 @@ import { Button } from './components/Glass.jsx';
 import { RefreshIcon } from './components/Icons.jsx';
 import LiveBill from './screens/LiveBill.jsx';
 import StaticBill from './screens/StaticBill.jsx';
+import { APP_STORE_URL } from './lib/appStore.js';
 
 // Demo fixtures only load when asked for — they never ship in the main path.
 const loadDemo = () => import('./demoData.js');
@@ -25,7 +26,7 @@ const preselect = (people, who) => {
 };
 
 const GET_APP = (
-  <a className="text-btn" href="https://apps.apple.com/app/onlybills" target="_blank" rel="noopener noreferrer">Get OnlyBills for iPhone</a>
+  <a className="text-btn" href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">Get OnlyBills for iPhone</a>
 );
 
 export default function App() {

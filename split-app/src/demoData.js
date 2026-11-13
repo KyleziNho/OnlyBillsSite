@@ -5,6 +5,10 @@
 //                           (assigned: a bill the host split and sent as links; add
 //                            &p=gst_a3f9c2e1 for Ana's per-person link)
 //                           (pay, pay-default, pay-starling, pay-paypal, pay-bank: getting paid)
+//                           (pay-us, pay-es, pay-de, pay-br, pay-unknown, pay-link, pay-demoted:
+//                            regional payouts, documents with `payment.methods`)
+//                           (pay-th: a UK host on a baht bill, paid back in pounds at a frozen
+//                            rate, `payment.settle`; claiming-th: the same table, share card)
 //   ?demo=1[&person=Dad][&state=pay]   static shared bill (v1)
 //   ?demo=loading | notfound | error | offline   app-level pages
 //
@@ -73,6 +77,28 @@ const withMe = (d, claims = []) => {
   return d;
 };
 
+/** A table in another currency with the pay sheet open, for the regional payout states. */
+const payDemo = (currency, storeName, payment) => {
+  const d = withMe(baseLive(), ['itm_001', 'itm_003']);
+  Object.assign(d, { currency, storeName, payment });
+  return { data: d, identity: ME, sheet: 'pay' };
+};
+
+/** A Bangkok table in baht (prices ×40), its host paid back in pounds (`payment.settle`). */
+const thaiDemo = (sheet) => {
+  const d = withMe(baseLive(), ['itm_001', 'itm_003']);
+  Object.values(d.items).forEach((it) => { it.price = Math.round(it.price * 40); });
+  Object.values(d.charges).forEach((c) => { c.amount = Math.round(c.amount * 40); });
+  Object.assign(d, {
+    currency: 'THB', storeName: 'Jay Fai',
+    payment: {
+      monzoUsername: 'kylezinho', defaultMethod: 'monzo', payeeName: 'Kyle',
+      settle: { cur: 'GBP', base: 'GBP', rate: '43.80', src: 'frankfurter', date: '2026-11-13' },
+    },
+  });
+  return { data: d, identity: ME, ...(sheet ? { sheet: 'pay' } : {}) };
+};
+
 /** state → { data, identity, sheet, denyEdits, conn } */
 export const LIVE_STATES = {
   join: () => ({ data: baseLive(), identity: null }),
@@ -113,6 +139,65 @@ export const LIVE_STATES = {
     d.payment = { bankAccountName: PAYMENT.bankAccountName, bankDetails: PAYMENT.bankDetails, defaultMethod: 'bank' };
     return { data: d, identity: ME, sheet: 'pay' };
   },
+  // Regional payouts: documents with `payment.methods`, as the app writes them (the legacy
+  // keys beside it are the mirror rows older clients show; this page ignores them).
+  'pay-us': () => payDemo('USD', 'Taqueria El Farolito', {
+    v: 2, payeeName: 'Kyle', defaultMethod: 'bank', bankAccountName: 'Kyle',
+    bankDetails: [{ label: 'Venmo', value: '@kyle-z' }, { label: 'Zelle', value: '+14155550100' }],
+    methods: [
+      { id: 'venmo', kind: 'link', label: 'Venmo', handle: 'kyle-z', cur: ['USD'], fields: [{ label: 'Venmo', value: '@kyle-z' }] },
+      { id: 'zelle', kind: 'copy', label: 'Zelle', cur: ['USD'], fields: [{ label: 'Zelle', value: '+14155550100' }] },
+    ],
+  }),
+  'pay-es': () => payDemo('EUR', 'Bar Tomate', {
+    v: 2, payeeName: 'Kyle', revolutUsername: 'kylezinho', defaultMethod: 'bank', bankAccountName: 'Kyle',
+    bankDetails: [{ label: 'Bizum', value: '+34612345678' }],
+    methods: [
+      { id: 'bizum', kind: 'copy', label: 'Bizum', cur: ['EUR'], fields: [{ label: 'Bizum', value: '+34612345678' }] },
+      { id: 'revolut', kind: 'link', label: 'Revolut', handle: 'kylezinho' },
+    ],
+  }),
+  'pay-de': () => payDemo('EUR', 'Zur Letzten Instanz', {
+    v: 2, payeeName: 'Kyle', paypalUsername: 'kylezinho', defaultMethod: 'paypal', bankAccountName: 'Kyle O Sullivan',
+    bankDetails: [{ label: 'IBAN', value: 'DE89370400440532013000' }],
+    methods: [
+      { id: 'paypal', kind: 'link', label: 'PayPal', handle: 'kylezinho' },
+      { id: 'iban', kind: 'copy', label: 'IBAN', fields: [{ label: 'IBAN', value: 'DE89370400440532013000' }, { label: 'Name', value: 'Kyle O Sullivan' }] },
+    ],
+  }),
+  'pay-br': () => payDemo('BRL', 'Boteco do Zé', {
+    v: 2, payeeName: 'Kyle', defaultMethod: 'bank', bankAccountName: 'Kyle',
+    bankDetails: [{ label: 'Pix key', value: '123e4567-e12b-12d1-a456-426655440000' }],
+    methods: [
+      { id: 'pix', kind: 'pix', label: 'Pix', cur: ['BRL'], key: '123e4567-e12b-12d1-a456-426655440000', name: 'KYLE O', city: 'BRASIL',
+        fields: [{ label: 'Pix key', value: '123e4567-e12b-12d1-a456-426655440000' }] },
+    ],
+  }),
+  // A method id this build has never heard of: labelled copy rows, never a link.
+  'pay-unknown': () => payDemo('INR', 'Bombay Canteen', {
+    v: 2, payeeName: 'Kyle',
+    methods: [
+      { id: 'upi', kind: 'link', label: 'UPI', url: 'https://upi.example/kyle', cur: ['INR'],
+        fields: [{ label: 'UPI ID', value: 'kyle@okbank' }, { label: 'Name', value: 'Kyle O Sullivan' }] },
+    ],
+  }),
+  // Only a pasted link (the Netherlands): named from the allow-list, never from the document.
+  'pay-link': () => payDemo('EUR', 'Café de Jaren', {
+    v: 2, payeeName: 'Kyle',
+    methods: [{ id: 'link', kind: 'link', label: 'Tikkie', url: 'https://tikkie.me/pay/Kyle/abc123XYZ' }],
+  }),
+  // A US host on a euro bill: nothing takes the currency, so the order stays and each says why.
+  'pay-demoted': () => payDemo('EUR', 'Bar Tomate', {
+    v: 2, payeeName: 'Kyle',
+    methods: [
+      { id: 'venmo', kind: 'link', label: 'Venmo', handle: 'kyle-z', cur: ['USD'] },
+      { id: 'zelle', kind: 'copy', label: 'Zelle', cur: ['USD'], fields: [{ label: 'Zelle', value: 'kyle@example.com' }] },
+      { id: 'pix', kind: 'pix', label: 'Pix', cur: ['BRL'], key: '123e4567-e12b-12d1-a456-426655440000', name: 'KYLE O', city: 'BRASIL' },
+    ],
+  }),
+  // Settle currency: a UK Monzo host on a baht bill, paid back in pounds at £1 = ฿43.80.
+  'pay-th': () => thaiDemo(true),
+  'claiming-th': () => thaiDemo(false),
   nopay: () => {
     const d = withMe(baseLive(), ['itm_001', 'itm_003']);
     d.payment = null;

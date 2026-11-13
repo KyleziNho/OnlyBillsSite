@@ -5527,6 +5527,690 @@
      "subtotal": 0
     }
    }
+  },
+  {
+   "id": "E-clp-thirds-propina",
+   "note": "whole pesos, 10% propina, a shared board in thirds",
+   "currency": "CLP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Lomo a lo pobre",
+     "quantity": 1,
+     "amount": 12990,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Pisco sour",
+     "quantity": 1,
+     "amount": 8990,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Tabla",
+     "quantity": 1,
+     "amount": 10000,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Propina 10%",
+     "amount": 3198,
+     "kind": "tip",
+     "percent": 10
+    }
+   ],
+   "partyCount": 3,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     }
+    ]
+   ],
+   "expect": {
+    "total": 35178,
+    "netItems": 31980,
+    "lineNet": [
+     12990,
+     8990,
+     10000
+    ],
+    "charges": [
+     3198
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 17956,
+      "subtotal": 16324,
+      "lines": [
+       12990,
+       0,
+       3334
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       1632
+      ]
+     },
+     {
+      "total": 13555,
+      "subtotal": 12323,
+      "lines": [
+       0,
+       8990,
+       3333
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       1232
+      ]
+     },
+     {
+      "total": 3667,
+      "subtotal": 3333,
+      "lines": [
+       0,
+       0,
+       3333
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       334
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "E-cop-thirds",
+   "note": "COP keeps centavos in the engine: 100.000 in thirds is 33.333,34/33.333,33/33.333,33",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Bandeja paisa x4",
+     "quantity": 1,
+     "amount": 10000000,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 3,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     }
+    ]
+   ],
+   "expect": {
+    "total": 10000000,
+    "netItems": 10000000,
+    "lineNet": [
+     10000000
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 3333334,
+      "subtotal": 3333334,
+      "lines": [
+       3333334
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 3333333,
+      "subtotal": 3333333,
+      "lines": [
+       3333333
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 3333333,
+      "subtotal": 3333333,
+      "lines": [
+       3333333
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "E-cop-servicio",
+   "note": "Colombian voluntary service 10%",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Ajiaco",
+     "quantity": 1,
+     "amount": 4500000,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Churrasco",
+     "quantity": 1,
+     "amount": 3800000,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Limonada",
+     "quantity": 1,
+     "amount": 1200000,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Servicio 10%",
+     "amount": 950000,
+     "kind": "service",
+     "percent": 10
+    }
+   ],
+   "partyCount": 2,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 10450000,
+    "netItems": 9500000,
+    "lineNet": [
+     4500000,
+     3800000,
+     1200000
+    ],
+    "charges": [
+     950000
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 5610000,
+      "subtotal": 5100000,
+      "lines": [
+       4500000,
+       0,
+       600000
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       510000
+      ]
+     },
+     {
+      "total": 4840000,
+      "subtotal": 4400000,
+      "lines": [
+       0,
+       3800000,
+       600000
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       440000
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "E-brl-servico",
+   "note": "Brazilian 10% servico",
+   "currency": "BRL",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Picanha",
+     "quantity": 1,
+     "amount": 5990,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Caipirinha",
+     "quantity": 1,
+     "amount": 1890,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Farofa",
+     "quantity": 1,
+     "amount": 2490,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Servico 10%",
+     "amount": 1037,
+     "kind": "service",
+     "percent": 10
+    }
+   ],
+   "partyCount": 3,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     }
+    ]
+   ],
+   "expect": {
+    "total": 11407,
+    "netItems": 10370,
+    "lineNet": [
+     5990,
+     1890,
+     2490
+    ],
+    "charges": [
+     1037
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 7502,
+      "subtotal": 6820,
+      "lines": [
+       5990,
+       0,
+       830
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       682
+      ]
+     },
+     {
+      "total": 2992,
+      "subtotal": 2720,
+      "lines": [
+       0,
+       1890,
+       830
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       272
+      ]
+     },
+     {
+      "total": 913,
+      "subtotal": 830,
+      "lines": [
+       0,
+       0,
+       830
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       83
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "E-sek-moms-included",
+   "note": "Swedish VAT included, never added",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Kottbullar",
+     "quantity": 1,
+     "amount": 18900,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Ol",
+     "quantity": 1,
+     "amount": 8900,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Lax",
+     "quantity": 1,
+     "amount": 13500,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Moms 12% ingar",
+     "amount": 4425,
+     "kind": "tax",
+     "included": true
+    }
+   ],
+   "partyCount": 2,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 41300,
+    "netItems": 41300,
+    "lineNet": [
+     18900,
+     8900,
+     13500
+    ],
+    "charges": [
+     0
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 25650,
+      "subtotal": 25650,
+      "lines": [
+       18900,
+       0,
+       6750
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 15650,
+      "subtotal": 15650,
+      "lines": [
+       0,
+       8900,
+       6750
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "E-chf-thirds",
+   "note": "Swiss francs, fondue for three",
+   "currency": "CHF",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Rosti",
+     "quantity": 1,
+     "amount": 3450,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Fondue",
+     "quantity": 1,
+     "amount": 6200,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 3,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     }
+    ]
+   ],
+   "expect": {
+    "total": 9650,
+    "netItems": 9650,
+    "lineNet": [
+     3450,
+     6200
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 5517,
+      "subtotal": 5517,
+      "lines": [
+       3450,
+       2067
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 2067,
+      "subtotal": 2067,
+      "lines": [
+       0,
+       2067
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 2066,
+      "subtotal": 2066,
+      "lines": [
+       0,
+       2066
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": []
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
   }
  ],
  "live": [
@@ -6244,6 +6928,153 @@
      "gst_b": 466
     },
     "chargeAmounts": []
+   }
+  },
+  {
+   "id": "L-cop-thirds",
+   "note": "COP keeps centavos in the engine; the guests still sum to the total",
+   "doc": {
+    "schemaVersion": 2,
+    "storeName": "Test",
+    "currency": "COP",
+    "items": {
+     "itm_000": {
+      "order": 0,
+      "name": "Bandeja paisa",
+      "price": 100000,
+      "qty": 1,
+      "claimedBy": {
+       "gst_host": true,
+       "gst_a": true,
+       "gst_b": true
+      }
+     },
+     "itm_001": {
+      "order": 1,
+      "name": "Limonada",
+      "price": 12000,
+      "qty": 1,
+      "claimedBy": {
+       "gst_a": true
+      }
+     }
+    },
+    "charges": {},
+    "guests": {
+     "gst_host": {
+      "name": "Kyle",
+      "joinedAt": {
+       "seconds": 1
+      }
+     },
+     "gst_a": {
+      "name": "Camila",
+      "joinedAt": {
+       "seconds": 2
+      }
+     },
+     "gst_b": {
+      "name": "Andres",
+      "joinedAt": {
+       "seconds": 3
+      }
+     }
+    },
+    "paid": {}
+   },
+   "expect": {
+    "unitsLeft": {
+     "itm_000": 0,
+     "itm_001": 0
+    },
+    "itemsSubtotal": 11200000,
+    "chargesNet": 0,
+    "grandTotal": 11200000,
+    "unclaimed": 0,
+    "guests": {
+     "gst_host": 3333333,
+     "gst_a": 4533334,
+     "gst_b": 3333333
+    },
+    "chargeAmounts": []
+   }
+  },
+  {
+   "id": "L-clp",
+   "note": "whole pesos with a 10% propina",
+   "doc": {
+    "schemaVersion": 2,
+    "storeName": "Test",
+    "currency": "CLP",
+    "items": {
+     "itm_000": {
+      "order": 0,
+      "name": "Completo",
+      "price": 3990,
+      "qty": 2,
+      "claimedBy": {
+       "gst_host": true,
+       "gst_a": true
+      }
+     },
+     "itm_001": {
+      "order": 1,
+      "name": "Pisco sour",
+      "price": 12990,
+      "qty": 1,
+      "claimedBy": {
+       "gst_host": true,
+       "gst_a": true,
+       "gst_b": true
+      }
+     }
+    },
+    "charges": {
+     "chg_000": {
+      "name": "Propina 10%",
+      "amount": 2097,
+      "percent": 10
+     }
+    },
+    "guests": {
+     "gst_host": {
+      "name": "Kyle",
+      "joinedAt": {
+       "seconds": 1
+      }
+     },
+     "gst_a": {
+      "name": "Ignacio",
+      "joinedAt": {
+       "seconds": 2
+      }
+     },
+     "gst_b": {
+      "name": "Fernanda",
+      "joinedAt": {
+       "seconds": 3
+      }
+     }
+    },
+    "paid": {}
+   },
+   "expect": {
+    "unitsLeft": {
+     "itm_000": 0,
+     "itm_001": 0
+    },
+    "itemsSubtotal": 16980,
+    "chargesNet": 1698,
+    "grandTotal": 18678,
+    "unclaimed": 0,
+    "guests": {
+     "gst_host": 6958,
+     "gst_a": 6957,
+     "gst_b": 4763
+    },
+    "chargeAmounts": [
+     1698
+    ]
    }
   }
  ],
@@ -44323,6 +45154,12043 @@
      "subtotal": 8281
     }
    }
+  },
+  {
+   "id": "RNDR-000",
+   "note": "random",
+   "currency": "BRL",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0.5,
+     "amount": 2982,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 5,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 2982,
+    "netItems": 2982,
+    "lineNet": [
+     2982
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 2982,
+      "subtotal": 2982,
+      "lines": [
+       2982
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-001",
+   "note": "random",
+   "currency": "MXN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0.5,
+     "amount": 4916,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 2,
+      "units": 0.08333333333333333
+     },
+     {
+      "party": 4,
+      "units": 0.08333333333333333
+     },
+     {
+      "party": 3,
+      "units": 0.08333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.08333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.08333333333333333
+     },
+     {
+      "party": 5,
+      "units": 0.08333333333333333
+     }
+    ]
+   ],
+   "expect": {
+    "total": 4916,
+    "netItems": 4916,
+    "lineNet": [
+     4916
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 820,
+      "subtotal": 820,
+      "lines": [
+       820
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 820,
+      "subtotal": 820,
+      "lines": [
+       820
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 819,
+      "subtotal": 819,
+      "lines": [
+       819
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 819,
+      "subtotal": 819,
+      "lines": [
+       819
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 819,
+      "subtotal": 819,
+      "lines": [
+       819
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 819,
+      "subtotal": 819,
+      "lines": [
+       819
+      ],
+      "savings": [
+       0
+      ],
+      "charges": []
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-002",
+   "note": "random",
+   "currency": "MXN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 2316,
+     "discount": 679
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 3228,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 0.5,
+     "amount": 5420,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 1,
+     "amount": 2253,
+     "discount": 644
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 4,
+     "amount": -997,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 2,
+     "amount": 4203,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -667,
+     "kind": "discount",
+     "percent": 18
+    }
+   ],
+   "partyCount": 1,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 4
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 2.0
+     }
+    ]
+   ],
+   "expect": {
+    "total": 12382,
+    "netItems": 15100,
+    "lineNet": [
+     1637,
+     3228,
+     5420,
+     1609,
+     -997,
+     4203
+    ],
+    "charges": [
+     -2718
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 11055,
+      "subtotal": 13481,
+      "lines": [
+       1091,
+       3228,
+       5420,
+       536,
+       -997,
+       4203
+      ],
+      "savings": [
+       453,
+       0,
+       0,
+       215,
+       0,
+       0
+      ],
+      "charges": [
+       -2426
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 1327,
+     "subtotal": 1619
+    }
+   }
+  },
+  {
+   "id": "RNDR-003",
+   "note": "random",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 2931,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 2559,
+     "discount": 952
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 2,
+     "amount": 2866,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 1,
+     "amount": 2671,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 0,
+     "amount": 3362,
+     "discount": 2119
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 2,
+     "amount": 164,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 0.5,
+     "amount": 2376,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 0,
+     "amount": 4400,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 4,
+     "amount": -565,
+     "discount": 0
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 1,
+     "amount": 4847,
+     "discount": 4602
+    },
+    {
+     "id": "l10",
+     "name": "Line 10",
+     "quantity": 1,
+     "amount": 2485,
+     "discount": 0
+    },
+    {
+     "id": "l11",
+     "name": "Line 11",
+     "quantity": 0.5,
+     "amount": 5817,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 1421,
+     "kind": "rounding"
+    }
+   ],
+   "partyCount": 2,
+   "allocations": [
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 2.0
+     }
+    ],
+    [],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 2.0
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 4
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 27661,
+    "netItems": 26240,
+    "lineNet": [
+     2931,
+     1607,
+     2866,
+     2671,
+     1243,
+     164,
+     2376,
+     4400,
+     -565,
+     245,
+     2485,
+     5817
+    ],
+    "charges": [
+     1421
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 5634,
+      "subtotal": 5344,
+      "lines": [
+       0,
+       1071,
+       2866,
+       0,
+       1243,
+       164,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       635,
+       0,
+       0,
+       2119,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       290
+      ]
+     },
+     {
+      "total": 18197,
+      "subtotal": 17263,
+      "lines": [
+       2931,
+       402,
+       0,
+       0,
+       0,
+       0,
+       2376,
+       4400,
+       -565,
+       245,
+       1657,
+       5817
+      ],
+      "savings": [
+       0,
+       238,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       4602,
+       0,
+       0
+      ],
+      "charges": [
+       934
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 3830,
+     "subtotal": 3633
+    }
+   }
+  },
+  {
+   "id": "RNDR-004",
+   "note": "random",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 1619,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 1092,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 2729,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 3,
+     "amount": -584,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 1,
+     "amount": 3300,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 1,
+     "amount": 4742,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 2,
+     "amount": 5455,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 4,
+     "amount": 871,
+     "discount": 1282
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 1,
+     "amount": 2832,
+     "discount": 1446
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 1,
+     "amount": 3615,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 472,
+     "kind": "tax",
+     "percent": 12.5
+    },
+    {
+     "name": "Charge 1",
+     "amount": 875,
+     "kind": "service"
+    },
+    {
+     "name": "Charge 2",
+     "amount": 1190,
+     "kind": "other"
+    },
+    {
+     "name": "Charge 3",
+     "amount": 1475,
+     "kind": "service"
+    }
+   ],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 4,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 2,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.16666666666666666
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.5
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 4,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 3,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 5,
+      "units": 0.6666666666666666
+     }
+    ],
+    [],
+    [
+     {
+      "party": 4,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 2,
+      "units": 0.16666666666666666
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 2,
+      "units": 1
+     },
+     {
+      "party": 4,
+      "units": 1
+     },
+     {
+      "party": 5,
+      "units": 0.5
+     },
+     {
+      "party": 1,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 1
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 5,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 3,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 1,
+      "units": 1
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.8
+     },
+     {
+      "party": 3,
+      "units": 0.8
+     },
+     {
+      "party": 2,
+      "units": 0.8
+     },
+     {
+      "party": 0,
+      "units": 0.8
+     },
+     {
+      "party": 4,
+      "units": 0.8
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 2,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.16666666666666666
+     }
+    ]
+   ],
+   "expect": {
+    "total": 29351,
+    "netItems": 23354,
+    "lineNet": [
+     1619,
+     1092,
+     2729,
+     -584,
+     3300,
+     4742,
+     5455,
+     0,
+     1386,
+     3615
+    ],
+    "charges": [
+     2868,
+     875,
+     1190,
+     1475
+    ],
+    "overflow": -411,
+    "spread": [
+     3
+    ],
+    "parties": [
+     {
+      "total": 3101,
+      "subtotal": 2530,
+      "lines": [
+       270,
+       0,
+       0,
+       0,
+       550,
+       395,
+       712,
+       0,
+       0,
+       603
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       175,
+       0,
+       0
+      ],
+      "charges": [
+       303,
+       92,
+       126,
+       156,
+       -44,
+       -62
+      ]
+     },
+     {
+      "total": 4537,
+      "subtotal": 3701,
+      "lines": [
+       270,
+       262,
+       0,
+       0,
+       550,
+       593,
+       1423,
+       0,
+       0,
+       603
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       174,
+       0,
+       0
+      ],
+      "charges": [
+       443,
+       135,
+       184,
+       228,
+       -64,
+       -90
+      ]
+     },
+     {
+      "total": 3994,
+      "subtotal": 3258,
+      "lines": [
+       270,
+       175,
+       0,
+       0,
+       550,
+       1186,
+       474,
+       0,
+       0,
+       603
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       174,
+       0,
+       0
+      ],
+      "charges": [
+       390,
+       119,
+       162,
+       201,
+       -56,
+       -80
+      ]
+     },
+     {
+      "total": 4037,
+      "subtotal": 3292,
+      "lines": [
+       270,
+       131,
+       0,
+       0,
+       550,
+       790,
+       949,
+       0,
+       0,
+       602
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       174,
+       0,
+       0
+      ],
+      "charges": [
+       394,
+       120,
+       164,
+       203,
+       -56,
+       -80
+      ]
+     },
+     {
+      "total": 7070,
+      "subtotal": 5765,
+      "lines": [
+       270,
+       349,
+       0,
+       0,
+       550,
+       1185,
+       1423,
+       0,
+       1386,
+       602
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       174,
+       1446,
+       0
+      ],
+      "charges": [
+       691,
+       211,
+       287,
+       355,
+       -99,
+       -140
+      ]
+     },
+     {
+      "total": 5497,
+      "subtotal": 4482,
+      "lines": [
+       269,
+       175,
+       1819,
+       0,
+       550,
+       593,
+       474,
+       0,
+       0,
+       602
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       537,
+       164,
+       223,
+       277,
+       -77,
+       -109
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 1115,
+     "subtotal": 910
+    }
+   }
+  },
+  {
+   "id": "RNDR-005",
+   "note": "random",
+   "currency": "CHF",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 2821,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 0.5,
+     "amount": 4275,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 2,
+     "amount": 1857,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 2,
+     "amount": 5255,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 3,
+     "amount": 751,
+     "discount": 704
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 0.5,
+     "amount": -658,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 0,
+     "amount": 2199,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 2,
+     "amount": 1186,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 1,
+     "amount": 788,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 1461,
+     "kind": "tip",
+     "percent": 8.875
+    }
+   ],
+   "partyCount": 1,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 2.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 2.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 3.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     }
+    ],
+    [],
+    [
+     {
+      "party": 0,
+      "units": 2.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ]
+   ],
+   "expect": {
+    "total": 19347,
+    "netItems": 17770,
+    "lineNet": [
+     2821,
+     4275,
+     1857,
+     5255,
+     47,
+     -658,
+     2199,
+     1186,
+     788
+    ],
+    "charges": [
+     1577
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 16953,
+      "subtotal": 15571,
+      "lines": [
+       2821,
+       4275,
+       1857,
+       5255,
+       47,
+       -658,
+       0,
+       1186,
+       788
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       704,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       1382
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 2394,
+     "subtotal": 2199
+    }
+   }
+  },
+  {
+   "id": "RNDR-006",
+   "note": "random",
+   "currency": "CLP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 3,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 2,
+     "amount": 26,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": -10,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 4,
+     "amount": 21,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 4,
+     "amount": 3,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 4,
+     "amount": 43,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 0,
+     "amount": 12,
+     "discount": 5
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 1,
+     "amount": 10,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 0.5,
+     "amount": -7,
+     "discount": 0
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 3,
+     "amount": 45,
+     "discount": 6
+    },
+    {
+     "id": "l10",
+     "name": "Line 10",
+     "quantity": 2,
+     "amount": 47,
+     "discount": 0
+    },
+    {
+     "id": "l11",
+     "name": "Line 11",
+     "quantity": 1,
+     "amount": 40,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 2,
+     "kind": "other"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 13,
+     "kind": "other",
+     "percent": 12.5
+    }
+   ],
+   "partyCount": 4,
+   "allocations": [
+    [
+     {
+      "party": 1,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     }
+    ],
+    [],
+    [
+     {
+      "party": 2,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 4
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1.0
+     },
+     {
+      "party": 3,
+      "units": 1.0
+     },
+     {
+      "party": 0,
+      "units": 1.0
+     },
+     {
+      "party": 1,
+      "units": 1.0
+     }
+    ],
+    [],
+    [
+     {
+      "party": 2,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.125
+     },
+     {
+      "party": 0,
+      "units": 0.125
+     },
+     {
+      "party": 1,
+      "units": 0.125
+     },
+     {
+      "party": 3,
+      "units": 0.125
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 1
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 252,
+    "netItems": 222,
+    "lineNet": [
+     3,
+     26,
+     -10,
+     21,
+     3,
+     43,
+     7,
+     10,
+     -7,
+     39,
+     47,
+     40
+    ],
+    "charges": [
+     2,
+     28
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 36,
+      "subtotal": 32,
+      "lines": [
+       1,
+       0,
+       0,
+       0,
+       0,
+       11,
+       0,
+       0,
+       -2,
+       0,
+       12,
+       10
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       4
+      ]
+     },
+     {
+      "total": 23,
+      "subtotal": 20,
+      "lines": [
+       1,
+       0,
+       0,
+       4,
+       0,
+       11,
+       0,
+       0,
+       -2,
+       0,
+       0,
+       6
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       3
+      ]
+     },
+     {
+      "total": 20,
+      "subtotal": 18,
+      "lines": [
+       0,
+       0,
+       -10,
+       0,
+       0,
+       11,
+       0,
+       5,
+       -2,
+       9,
+       0,
+       5
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       2
+      ]
+     },
+     {
+      "total": 52,
+      "subtotal": 46,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       3,
+       10,
+       0,
+       0,
+       -1,
+       3,
+       12,
+       19
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       6
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 121,
+     "subtotal": 106
+    }
+   }
+  },
+  {
+   "id": "RNDR-007",
+   "note": "random",
+   "currency": "CLP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 4,
+     "amount": 6,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": -5,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 4,
+     "kind": "service"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 3,
+     "kind": "tip",
+     "percent": 20
+    },
+    {
+     "name": "Charge 2",
+     "amount": 8,
+     "kind": "tax",
+     "percent": 20,
+     "included": true
+    },
+    {
+     "name": "Charge 3",
+     "amount": -6,
+     "kind": "rounding",
+     "percent": 18
+    }
+   ],
+   "partyCount": 2,
+   "allocations": [
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ]
+   ],
+   "expect": {
+    "total": 5,
+    "netItems": 1,
+    "lineNet": [
+     6,
+     -5
+    ],
+    "charges": [
+     4,
+     0,
+     0,
+     0
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 0,
+      "subtotal": -5,
+      "lines": [
+       0,
+       -5
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": [
+       2,
+       1,
+       1,
+       1
+      ]
+     },
+     {
+      "total": 1,
+      "subtotal": 2,
+      "lines": [
+       2,
+       0
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       -1,
+       0,
+       0
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 4,
+     "subtotal": 4
+    }
+   }
+  },
+  {
+   "id": "RNDR-008",
+   "note": "random",
+   "currency": "BRL",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 3890,
+     "discount": 3466
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 4308,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 0.5,
+     "amount": 4752,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0.5,
+     "amount": 4964,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 1299,
+     "kind": "tip",
+     "percent": 10
+    },
+    {
+     "name": "Charge 1",
+     "amount": 1380,
+     "kind": "tip"
+    },
+    {
+     "name": "Charge 2",
+     "amount": 343,
+     "kind": "tip",
+     "percent": 12.5
+    }
+   ],
+   "partyCount": 3,
+   "allocations": [
+    [
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     }
+    ],
+    [],
+    [
+     {
+      "party": 0,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 2,
+      "units": 0.16666666666666666
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 19079,
+    "netItems": 14448,
+    "lineNet": [
+     424,
+     4308,
+     4752,
+     4964
+    ],
+    "charges": [
+     1445,
+     1380,
+     1806
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 8834,
+      "subtotal": 6690,
+      "lines": [
+       142,
+       0,
+       1584,
+       4964
+      ],
+      "savings": [
+       1155,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       669,
+       639,
+       836
+      ]
+     },
+     {
+      "total": 2278,
+      "subtotal": 1725,
+      "lines": [
+       141,
+       0,
+       1584,
+       0
+      ],
+      "savings": [
+       1156,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       172,
+       165,
+       216
+      ]
+     },
+     {
+      "total": 2278,
+      "subtotal": 1725,
+      "lines": [
+       141,
+       0,
+       1584,
+       0
+      ],
+      "savings": [
+       1155,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       172,
+       165,
+       216
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 5689,
+     "subtotal": 4308
+    }
+   }
+  },
+  {
+   "id": "RNDR-009",
+   "note": "random",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 2,
+     "amount": 2002,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": -853,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 4,
+     "amount": 137,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 5,
+   "allocations": [
+    [
+     {
+      "party": 4,
+      "units": 0.5
+     },
+     {
+      "party": 3,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 2,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 3,
+      "units": 1
+     },
+     {
+      "party": 4,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 1
+     },
+     {
+      "party": 2,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 4
+     }
+    ]
+   ],
+   "expect": {
+    "total": 1286,
+    "netItems": 1286,
+    "lineNet": [
+     2002,
+     -853,
+     137
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 216,
+      "subtotal": 232,
+      "lines": [
+       501,
+       -269,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -16
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": -90,
+      "lines": [
+       0,
+       -90,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       90
+      ]
+     },
+     {
+      "total": 470,
+      "subtotal": 503,
+      "lines": [
+       501,
+       -135,
+       137
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -33
+      ]
+     },
+     {
+      "total": 216,
+      "subtotal": 231,
+      "lines": [
+       500,
+       -269,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -15
+      ]
+     },
+     {
+      "total": 384,
+      "subtotal": 410,
+      "lines": [
+       500,
+       -90,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -26
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-010",
+   "note": "random",
+   "currency": "MXN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 5644,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 0,
+     "amount": 225,
+     "discount": 145
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 1295,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0,
+     "amount": 1499,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 1,
+     "amount": 4788,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 1,
+     "amount": 3657,
+     "discount": 2424
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 1,
+     "amount": -421,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 1431,
+     "kind": "tip",
+     "percent": 20
+    },
+    {
+     "name": "Charge 1",
+     "amount": 975,
+     "kind": "rounding"
+    }
+   ],
+   "partyCount": 5,
+   "allocations": [
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 4,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 4,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     }
+    ],
+    [],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ]
+   ],
+   "expect": {
+    "total": 17917,
+    "netItems": 14118,
+    "lineNet": [
+     5644,
+     80,
+     1295,
+     1499,
+     4788,
+     1233,
+     -421
+    ],
+    "charges": [
+     2824,
+     975
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 3368,
+      "subtotal": 2654,
+      "lines": [
+       0,
+       80,
+       299,
+       1499,
+       1197,
+       0,
+       -421
+      ],
+      "savings": [
+       0,
+       145,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       531,
+       183
+      ]
+     },
+     {
+      "total": 8935,
+      "subtotal": 7040,
+      "lines": [
+       5644,
+       0,
+       199,
+       0,
+       1197,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       1409,
+       486
+      ]
+     },
+     {
+      "total": 1772,
+      "subtotal": 1396,
+      "lines": [
+       0,
+       0,
+       199,
+       0,
+       1197,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       279,
+       97
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       0
+      ]
+     },
+     {
+      "total": 2277,
+      "subtotal": 1795,
+      "lines": [
+       0,
+       0,
+       598,
+       0,
+       1197,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       359,
+       123
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 1565,
+     "subtotal": 1233
+    }
+   }
+  },
+  {
+   "id": "RNDR-011",
+   "note": "random",
+   "currency": "BRL",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 3,
+     "amount": 172,
+     "discount": 303
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 2,
+     "amount": 3309,
+     "discount": 966
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 2,
+     "amount": 1861,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -1361,
+     "kind": "rounding"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 1286,
+     "kind": "other"
+    },
+    {
+     "name": "Charge 2",
+     "amount": 1331,
+     "kind": "tax"
+    },
+    {
+     "name": "Charge 3",
+     "amount": 496,
+     "kind": "service",
+     "percent": 5
+    }
+   ],
+   "partyCount": 2,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 3.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1.0
+     },
+     {
+      "party": 1,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 2
+     }
+    ]
+   ],
+   "expect": {
+    "total": 5465,
+    "netItems": 4204,
+    "lineNet": [
+     0,
+     2343,
+     1861
+    ],
+    "charges": [
+     -1361,
+     1286,
+     1331,
+     136
+    ],
+    "overflow": -131,
+    "spread": [],
+    "parties": [
+     {
+      "total": 1523,
+      "subtotal": 1172,
+      "lines": [
+       0,
+       1172,
+       0
+      ],
+      "savings": [
+       172,
+       483,
+       0
+      ],
+      "charges": [
+       -379,
+       358,
+       371,
+       38,
+       -37
+      ]
+     },
+     {
+      "total": 3942,
+      "subtotal": 3032,
+      "lines": [
+       0,
+       1171,
+       1861
+      ],
+      "savings": [
+       0,
+       483,
+       0
+      ],
+      "charges": [
+       -982,
+       928,
+       960,
+       98,
+       -94
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-012",
+   "note": "random",
+   "currency": "PLN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 4,
+     "amount": 1387,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 3,
+     "amount": -682,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 2,
+     "amount": 300,
+     "discount": 259
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 1,
+     "amount": 4705,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 1,
+     "amount": 1910,
+     "discount": 1121
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 1,
+     "amount": 1600,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 4,
+      "units": 0.5
+     },
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 3.0
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.25
+     },
+     {
+      "party": 5,
+      "units": 0.5
+     },
+     {
+      "party": 3,
+      "units": 1
+     },
+     {
+      "party": 4,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 7840,
+    "netItems": 7840,
+    "lineNet": [
+     1387,
+     -682,
+     41,
+     4705,
+     789,
+     1600
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 817,
+      "subtotal": 887,
+      "lines": [
+       87,
+       0,
+       0,
+       0,
+       0,
+       800
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -70
+      ]
+     },
+     {
+      "total": 4550,
+      "subtotal": 4936,
+      "lines": [
+       231,
+       0,
+       0,
+       4705,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -386
+      ]
+     },
+     {
+      "total": 944,
+      "subtotal": 1024,
+      "lines": [
+       231,
+       0,
+       4,
+       0,
+       789,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       27,
+       0,
+       1121,
+       0
+      ],
+      "charges": [
+       -80
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": -665,
+      "lines": [
+       0,
+       -682,
+       17,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       107,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       665
+      ]
+     },
+     {
+      "total": 908,
+      "subtotal": 984,
+      "lines": [
+       173,
+       0,
+       11,
+       0,
+       0,
+       800
+      ],
+      "savings": [
+       0,
+       0,
+       72,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -76
+      ]
+     },
+     {
+      "total": 8,
+      "subtotal": 9,
+      "lines": [
+       0,
+       0,
+       9,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       53,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -1
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 613,
+     "subtotal": 665
+    }
+   }
+  },
+  {
+   "id": "RNDR-013",
+   "note": "random",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0,
+     "amount": 4346,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 0.5,
+     "amount": 64,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 3,
+     "amount": 2619,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 1,
+     "amount": 1780,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 1,
+     "amount": 3624,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 0,
+     "amount": 549,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 1,
+     "amount": 3837,
+     "discount": 956
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 0.5,
+     "amount": -787,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 3,
+   "allocations": [
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1.5
+     },
+     {
+      "party": 0,
+      "units": 1.5
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.5
+     }
+    ],
+    [],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 15076,
+    "netItems": 15076,
+    "lineNet": [
+     4346,
+     64,
+     2619,
+     1780,
+     3624,
+     549,
+     2881,
+     -787
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 4242,
+      "subtotal": 4243,
+      "lines": [
+       0,
+       0,
+       1310,
+       1780,
+       0,
+       0,
+       1153,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       382,
+       0
+      ],
+      "charges": [
+       -1
+      ]
+     },
+     {
+      "total": 5681,
+      "subtotal": 5681,
+      "lines": [
+       4346,
+       64,
+       0,
+       0,
+       906,
+       0,
+       1152,
+       -787
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       383,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 3698,
+      "subtotal": 3697,
+      "lines": [
+       0,
+       0,
+       1309,
+       0,
+       1812,
+       0,
+       576,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       191,
+       0
+      ],
+      "charges": [
+       1
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 1455,
+     "subtotal": 1455
+    }
+   }
+  },
+  {
+   "id": "RNDR-014",
+   "note": "random",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0.5,
+     "amount": 1544,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": -62,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 4,
+     "amount": 1336,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 4,
+     "amount": 2186,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 4,
+     "amount": 1004,
+     "discount": 982
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 3,
+     "amount": 1121,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 1,
+     "amount": 5442,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 3,
+     "amount": 2944,
+     "discount": 3002
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 1,
+     "amount": 4665,
+     "discount": 0
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 0,
+     "amount": -181,
+     "discount": 0
+    },
+    {
+     "id": "l10",
+     "name": "Line 10",
+     "quantity": 1,
+     "amount": 3483,
+     "discount": 1226
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 669,
+     "kind": "other"
+    },
+    {
+     "name": "Charge 1",
+     "amount": -754,
+     "kind": "discount"
+    },
+    {
+     "name": "Charge 2",
+     "amount": -290,
+     "kind": "rounding",
+     "percent": 18
+    }
+   ],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 4
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 3,
+      "units": 1
+     }
+    ],
+    [],
+    [],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1.5
+     },
+     {
+      "party": 3,
+      "units": 1.5
+     }
+    ],
+    [
+     {
+      "party": 5,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 2,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     }
+    ]
+   ],
+   "expect": {
+    "total": 14888,
+    "netItems": 18330,
+    "lineNet": [
+     1544,
+     -62,
+     1336,
+     2186,
+     22,
+     1121,
+     5442,
+     0,
+     4665,
+     -181,
+     2257
+    ],
+    "charges": [
+     669,
+     -754,
+     -3299
+    ],
+    "overflow": -58,
+    "spread": [],
+    "parties": [
+     {
+      "total": 6433,
+      "subtotal": 7921,
+      "lines": [
+       1544,
+       0,
+       0,
+       182,
+       0,
+       0,
+       5442,
+       0,
+       0,
+       0,
+       753
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       408
+      ],
+      "charges": [
+       289,
+       -326,
+       -1426,
+       -25
+      ]
+     },
+     {
+      "total": 1181,
+      "subtotal": 1454,
+      "lines": [
+       0,
+       0,
+       0,
+       182,
+       0,
+       0,
+       0,
+       0,
+       1272,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1472,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       53,
+       -60,
+       -262,
+       -4
+      ]
+     },
+     {
+      "total": 3025,
+      "subtotal": 3724,
+      "lines": [
+       0,
+       -62,
+       1336,
+       182,
+       0,
+       0,
+       0,
+       0,
+       1697,
+       -181,
+       752
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       409
+      ],
+      "charges": [
+       136,
+       -153,
+       -670,
+       -12
+      ]
+     },
+     {
+      "total": 1055,
+      "subtotal": 1299,
+      "lines": [
+       0,
+       0,
+       0,
+       547,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       752
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1472,
+       0,
+       0,
+       409
+      ],
+      "charges": [
+       47,
+       -53,
+       -234,
+       -4
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "total": 1378,
+      "subtotal": 1696,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1696,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       62,
+       -70,
+       -305,
+       -5
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 1816,
+     "subtotal": 2236
+    }
+   }
+  },
+  {
+   "id": "RNDR-015",
+   "note": "random",
+   "currency": "PLN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0.5,
+     "amount": 3445,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 2,
+     "amount": 3817,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 4720,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 4,
+     "amount": 2179,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 2,
+     "amount": 596,
+     "discount": 136
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 1,
+     "amount": 270,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 0,
+     "amount": 1162,
+     "discount": 22
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 1,
+     "amount": 5977,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 1,
+     "amount": 1362,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 889,
+     "kind": "tip"
+    }
+   ],
+   "partyCount": 5,
+   "allocations": [
+    [
+     {
+      "party": 1,
+      "units": 0.1
+     },
+     {
+      "party": 3,
+      "units": 0.1
+     },
+     {
+      "party": 2,
+      "units": 0.1
+     },
+     {
+      "party": 0,
+      "units": 0.1
+     },
+     {
+      "party": 4,
+      "units": 0.1
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 2
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 3,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 4,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 2.0
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 4,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.2
+     },
+     {
+      "party": 2,
+      "units": 0.2
+     },
+     {
+      "party": 0,
+      "units": 0.2
+     },
+     {
+      "party": 1,
+      "units": 0.2
+     },
+     {
+      "party": 4,
+      "units": 0.2
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.25
+     },
+     {
+      "party": 3,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     },
+     {
+      "party": 4,
+      "units": 0.25
+     }
+    ]
+   ],
+   "expect": {
+    "total": 24259,
+    "netItems": 23370,
+    "lineNet": [
+     3445,
+     3817,
+     4720,
+     2179,
+     460,
+     270,
+     1140,
+     5977,
+     1362
+    ],
+    "charges": [
+     889
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 1805,
+      "subtotal": 1739,
+      "lines": [
+       689,
+       0,
+       0,
+       272,
+       460,
+       90,
+       228,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       136,
+       0,
+       5,
+       0,
+       0
+      ],
+      "charges": [
+       66
+      ]
+     },
+     {
+      "total": 3139,
+      "subtotal": 3025,
+      "lines": [
+       689,
+       0,
+       0,
+       272,
+       0,
+       0,
+       228,
+       1495,
+       341
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       5,
+       0,
+       0
+      ],
+      "charges": [
+       114
+      ]
+     },
+     {
+      "total": 6912,
+      "subtotal": 6659,
+      "lines": [
+       689,
+       3817,
+       0,
+       0,
+       0,
+       90,
+       228,
+       1494,
+       341
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       4,
+       0,
+       0
+      ],
+      "charges": [
+       253
+      ]
+     },
+     {
+      "total": 3045,
+      "subtotal": 2933,
+      "lines": [
+       689,
+       0,
+       0,
+       182,
+       0,
+       0,
+       228,
+       1494,
+       340
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       4,
+       0,
+       0
+      ],
+      "charges": [
+       112
+      ]
+     },
+     {
+      "total": 7991,
+      "subtotal": 7697,
+      "lines": [
+       689,
+       0,
+       4720,
+       136,
+       0,
+       90,
+       228,
+       1494,
+       340
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       4,
+       0,
+       0
+      ],
+      "charges": [
+       294
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 1367,
+     "subtotal": 1317
+    }
+   }
+  },
+  {
+   "id": "RNDR-016",
+   "note": "random",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 2,
+     "amount": 1934,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 3,
+     "amount": 942,
+     "discount": 1195
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 0,
+     "amount": 1096,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0.5,
+     "amount": 1853,
+     "discount": 1688
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 0,
+     "amount": 5820,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 1,
+     "amount": 1262,
+     "discount": 1010
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 1,
+     "amount": 5873,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 1,
+     "amount": 433,
+     "discount": 380
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 689,
+     "kind": "tax",
+     "percent": 12.5
+    },
+    {
+     "name": "Charge 1",
+     "amount": 81,
+     "kind": "rounding"
+    },
+    {
+     "name": "Charge 2",
+     "amount": 519,
+     "kind": "service"
+    }
+   ],
+   "partyCount": 1,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 3.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [],
+    [
+     {
+      "party": 0,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     }
+    ]
+   ],
+   "expect": {
+    "total": 17408,
+    "netItems": 15193,
+    "lineNet": [
+     1934,
+     0,
+     1096,
+     165,
+     5820,
+     252,
+     5873,
+     53
+    ],
+    "charges": [
+     1868,
+     81,
+     519
+    ],
+    "overflow": -253,
+    "spread": [],
+    "parties": [
+     {
+      "total": 5488,
+      "subtotal": 4790,
+      "lines": [
+       322,
+       0,
+       1096,
+       165,
+       0,
+       252,
+       2937,
+       18
+      ],
+      "savings": [
+       0,
+       942,
+       0,
+       1688,
+       0,
+       1010,
+       0,
+       126
+      ],
+      "charges": [
+       589,
+       25,
+       164,
+       -80
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 11920,
+     "subtotal": 10403
+    }
+   }
+  },
+  {
+   "id": "RNDR-017",
+   "note": "random",
+   "currency": "PLN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 3,
+     "amount": 3111,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 1980,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 3559,
+     "discount": 297
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 2,
+     "amount": 5591,
+     "discount": 3823
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 2,
+     "amount": 2325,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 4,
+     "amount": -703,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 2,
+     "amount": -806,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 1,
+     "amount": 5950,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 1206,
+     "kind": "service",
+     "percent": 8.875
+    },
+    {
+     "name": "Charge 1",
+     "amount": -874,
+     "kind": "discount",
+     "targets": [
+      "l4",
+      "l2",
+      "l0",
+      "l7",
+      "l1"
+     ]
+    }
+   ],
+   "partyCount": 5,
+   "allocations": [
+    [
+     {
+      "party": 3,
+      "units": 1
+     },
+     {
+      "party": 2,
+      "units": 0.5
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 4,
+      "units": 1
+     },
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.5
+     },
+     {
+      "party": 4,
+      "units": 0.5
+     },
+     {
+      "party": 2,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 4
+     }
+    ],
+    [],
+    [
+     {
+      "party": 2,
+      "units": 0.25
+     },
+     {
+      "party": 3,
+      "units": 0.25
+     },
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     }
+    ]
+   ],
+   "expect": {
+    "total": 17434,
+    "netItems": 16013,
+    "lineNet": [
+     2947,
+     1876,
+     3091,
+     1768,
+     2203,
+     -703,
+     -806,
+     5637
+    ],
+    "charges": [
+     1421,
+     0
+    ],
+    "overflow": 0,
+    "spread": [
+     6
+    ],
+    "parties": [
+     {
+      "total": 2496,
+      "subtotal": 2409,
+      "lines": [
+       561,
+       0,
+       0,
+       590,
+       551,
+       -703,
+       0,
+       1410
+      ],
+      "savings": [
+       32,
+       0,
+       0,
+       1274,
+       31,
+       0,
+       0,
+       78
+      ],
+      "charges": [
+       203,
+       0,
+       -116
+      ]
+     },
+     {
+      "total": 2362,
+      "subtotal": 2279,
+      "lines": [
+       281,
+       0,
+       0,
+       589,
+       0,
+       0,
+       0,
+       1409
+      ],
+      "savings": [
+       15,
+       0,
+       0,
+       1275,
+       0,
+       0,
+       0,
+       79
+      ],
+      "charges": [
+       192,
+       0,
+       -109
+      ]
+     },
+     {
+      "total": 2468,
+      "subtotal": 2381,
+      "lines": [
+       421,
+       0,
+       0,
+       0,
+       551,
+       0,
+       0,
+       1409
+      ],
+      "savings": [
+       23,
+       0,
+       0,
+       0,
+       30,
+       0,
+       0,
+       78
+      ],
+      "charges": [
+       201,
+       0,
+       -114
+      ]
+     },
+     {
+      "total": 5460,
+      "subtotal": 5267,
+      "lines": [
+       842,
+       1876,
+       0,
+       589,
+       551,
+       0,
+       0,
+       1409
+      ],
+      "savings": [
+       47,
+       104,
+       0,
+       1274,
+       30,
+       0,
+       0,
+       78
+      ],
+      "charges": [
+       445,
+       0,
+       -252
+      ]
+     },
+     {
+      "total": 4648,
+      "subtotal": 4483,
+      "lines": [
+       842,
+       0,
+       3091,
+       0,
+       550,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       47,
+       0,
+       468,
+       0,
+       31,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       379,
+       0,
+       -214
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-018",
+   "note": "random",
+   "currency": "MXN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 885,
+     "discount": 695
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 3025,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 2,
+     "amount": 599,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -848,
+     "kind": "discount",
+     "percent": 12.5
+    }
+   ],
+   "partyCount": 4,
+   "allocations": [
+    [
+     {
+      "party": 3,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     },
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 2
+     }
+    ]
+   ],
+   "expect": {
+    "total": 3337,
+    "netItems": 3814,
+    "lineNet": [
+     190,
+     3025,
+     599
+    ],
+    "charges": [
+     -477
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 3212,
+      "subtotal": 3672,
+      "lines": [
+       48,
+       3025,
+       599
+      ],
+      "savings": [
+       174,
+       0,
+       0
+      ],
+      "charges": [
+       -460
+      ]
+     },
+     {
+      "total": 42,
+      "subtotal": 48,
+      "lines": [
+       48,
+       0,
+       0
+      ],
+      "savings": [
+       173,
+       0,
+       0
+      ],
+      "charges": [
+       -6
+      ]
+     },
+     {
+      "total": 42,
+      "subtotal": 47,
+      "lines": [
+       47,
+       0,
+       0
+      ],
+      "savings": [
+       174,
+       0,
+       0
+      ],
+      "charges": [
+       -5
+      ]
+     },
+     {
+      "total": 41,
+      "subtotal": 47,
+      "lines": [
+       47,
+       0,
+       0
+      ],
+      "savings": [
+       174,
+       0,
+       0
+      ],
+      "charges": [
+       -6
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-019",
+   "note": "random",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": -253,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 1389,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 3,
+     "amount": 878,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0,
+     "amount": 2676,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 0.5,
+     "amount": 4225,
+     "discount": 3903
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 2,
+     "amount": -515,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 4,
+     "amount": 869,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 0.5,
+     "amount": 5618,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 109,
+     "kind": "tip"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 340,
+     "kind": "other"
+    }
+   ],
+   "partyCount": 2,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 1
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1.5
+     },
+     {
+      "party": 0,
+      "units": 1.5
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 2.0
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 2.0
+     },
+     {
+      "party": 0,
+      "units": 2.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 11433,
+    "netItems": 10984,
+    "lineNet": [
+     -253,
+     1389,
+     878,
+     2676,
+     322,
+     -515,
+     869,
+     5618
+    ],
+    "charges": [
+     109,
+     340
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 9184,
+      "subtotal": 8824,
+      "lines": [
+       -202,
+       1389,
+       439,
+       1338,
+       322,
+       -515,
+       435,
+       5618
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       3903,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       87,
+       273
+      ]
+     },
+     {
+      "total": 2249,
+      "subtotal": 2160,
+      "lines": [
+       -51,
+       0,
+       439,
+       1338,
+       0,
+       0,
+       434,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       22,
+       67
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-020",
+   "note": "random",
+   "currency": "CLP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0.5,
+     "amount": 1,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 2,
+     "amount": 45,
+     "discount": 25
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 17,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 4,
+     "amount": 18,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -3,
+     "kind": "discount",
+     "percent": 12.5,
+     "targets": [
+      "l2",
+      "l3",
+      "l1",
+      "l0"
+     ]
+    },
+    {
+     "name": "Charge 1",
+     "amount": 15,
+     "kind": "service",
+     "percent": 8.875
+    },
+    {
+     "name": "Charge 2",
+     "amount": -3,
+     "kind": "discount"
+    }
+   ],
+   "partyCount": 4,
+   "allocations": [
+    [
+     {
+      "party": 1,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 2,
+      "units": 0.16666666666666666
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 2.0
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 1
+     },
+     {
+      "party": 0,
+      "units": 1
+     },
+     {
+      "party": 3,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 4
+     }
+    ]
+   ],
+   "expect": {
+    "total": 50,
+    "netItems": 49,
+    "lineNet": [
+     1,
+     17,
+     15,
+     16
+    ],
+    "charges": [
+     0,
+     4,
+     -3
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 6,
+      "subtotal": 6,
+      "lines": [
+       1,
+       0,
+       5,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       1,
+       0
+      ],
+      "charges": [
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "total": 23,
+      "subtotal": 22,
+      "lines": [
+       0,
+       17,
+       5,
+       0
+      ],
+      "savings": [
+       0,
+       28,
+       1,
+       0
+      ],
+      "charges": [
+       0,
+       2,
+       -1
+      ]
+     },
+     {
+      "total": 18,
+      "subtotal": 18,
+      "lines": [
+       0,
+       0,
+       2,
+       16
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       2
+      ],
+      "charges": [
+       0,
+       1,
+       -1
+      ]
+     },
+     {
+      "total": 3,
+      "subtotal": 3,
+      "lines": [
+       0,
+       0,
+       3,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       0,
+       0
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-021",
+   "note": "random",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 5241,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 2,
+     "amount": 4781,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -343,
+     "kind": "rounding"
+    }
+   ],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 2,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 5,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.5
+     },
+     {
+      "party": 3,
+      "units": 0.25
+     },
+     {
+      "party": 4,
+      "units": 0.5
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     }
+    ]
+   ],
+   "expect": {
+    "total": 9679,
+    "netItems": 10022,
+    "lineNet": [
+     5241,
+     4781
+    ],
+    "charges": [
+     -343
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 1154,
+      "subtotal": 1195,
+      "lines": [
+       0,
+       1195
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": [
+       -41
+      ]
+     },
+     {
+      "total": 3301,
+      "subtotal": 3418,
+      "lines": [
+       2621,
+       797
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": [
+       -117
+      ]
+     },
+     {
+      "total": 577,
+      "subtotal": 598,
+      "lines": [
+       0,
+       598
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": [
+       -21
+      ]
+     },
+     {
+      "total": 1154,
+      "subtotal": 1195,
+      "lines": [
+       0,
+       1195
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": [
+       -41
+      ]
+     },
+     {
+      "total": 770,
+      "subtotal": 797,
+      "lines": [
+       0,
+       797
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": [
+       -27
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 2723,
+     "subtotal": 2819
+    }
+   }
+  },
+  {
+   "id": "RNDR-022",
+   "note": "random",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 4255,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 4,
+     "amount": 3734,
+     "discount": 1124
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 4157,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 732,
+     "kind": "rounding"
+    },
+    {
+     "name": "Charge 1",
+     "amount": -81,
+     "kind": "rounding"
+    },
+    {
+     "name": "Charge 2",
+     "amount": 993,
+     "kind": "other",
+     "percent": 15
+    },
+    {
+     "name": "Charge 3",
+     "amount": 1118,
+     "kind": "other"
+    }
+   ],
+   "partyCount": 1,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 4.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1.0
+     }
+    ]
+   ],
+   "expect": {
+    "total": 14432,
+    "netItems": 11022,
+    "lineNet": [
+     4255,
+     2610,
+     4157
+    ],
+    "charges": [
+     732,
+     -81,
+     1641,
+     1118
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 14432,
+      "subtotal": 11022,
+      "lines": [
+       4255,
+       2610,
+       4157
+      ],
+      "savings": [
+       0,
+       1124,
+       0
+      ],
+      "charges": [
+       732,
+       -81,
+       1641,
+       1118
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-023",
+   "note": "random",
+   "currency": "CLP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0,
+     "amount": 19,
+     "discount": 11
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 0,
+     "amount": 44,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 4,
+     "amount": -1,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0.5,
+     "amount": 54,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 2,
+     "amount": 22,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 3,
+     "amount": 59,
+     "discount": 60
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 3,
+     "amount": 17,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 4,
+     "amount": 55,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 5,
+   "allocations": [
+    [
+     {
+      "party": 3,
+      "units": 0.25
+     },
+     {
+      "party": 4,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     },
+     {
+      "party": 0,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.8
+     },
+     {
+      "party": 4,
+      "units": 0.8
+     },
+     {
+      "party": 3,
+      "units": 0.8
+     },
+     {
+      "party": 0,
+      "units": 0.8
+     },
+     {
+      "party": 2,
+      "units": 0.8
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.4
+     },
+     {
+      "party": 3,
+      "units": 0.4
+     },
+     {
+      "party": 2,
+      "units": 0.4
+     },
+     {
+      "party": 0,
+      "units": 0.4
+     },
+     {
+      "party": 1,
+      "units": 0.4
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 1.5
+     },
+     {
+      "party": 0,
+      "units": 1.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1.5
+     },
+     {
+      "party": 3,
+      "units": 1.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.25
+     }
+    ]
+   ],
+   "expect": {
+    "total": 198,
+    "netItems": 199,
+    "lineNet": [
+     8,
+     44,
+     -1,
+     54,
+     22,
+     0,
+     17,
+     55
+    ],
+    "charges": [],
+    "overflow": -1,
+    "spread": [],
+    "parties": [
+     {
+      "total": 10,
+      "subtotal": 9,
+      "lines": [
+       2,
+       0,
+       -1,
+       0,
+       5,
+       0,
+       0,
+       3
+      ],
+      "savings": [
+       3,
+       0,
+       0,
+       0,
+       0,
+       30,
+       0,
+       0
+      ],
+      "charges": [
+       1
+      ]
+     },
+     {
+      "total": 6,
+      "subtotal": 7,
+      "lines": [
+       2,
+       0,
+       0,
+       0,
+       5,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       3,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -1
+      ]
+     },
+     {
+      "total": 17,
+      "subtotal": 18,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       4,
+       0,
+       9,
+       5
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -1
+      ]
+     },
+     {
+      "total": 112,
+      "subtotal": 112,
+      "lines": [
+       2,
+       44,
+       0,
+       54,
+       4,
+       0,
+       8,
+       0
+      ],
+      "savings": [
+       3,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 6,
+      "subtotal": 6,
+      "lines": [
+       2,
+       0,
+       0,
+       0,
+       4,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       2,
+       0,
+       0,
+       0,
+       0,
+       29,
+       0,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 47,
+     "subtotal": 47
+    }
+   }
+  },
+  {
+   "id": "RNDR-024",
+   "note": "random",
+   "currency": "MXN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 2,
+     "amount": 1879,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 0,
+     "amount": 5452,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 3,
+     "amount": 5887,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 3,
+     "amount": 2901,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 4,
+     "amount": 2616,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 0.5,
+     "amount": 2844,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 0,
+     "amount": 3946,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 1,
+     "amount": 4631,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 0.5,
+     "amount": 2595,
+     "discount": 2407
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 0.5,
+     "amount": 2460,
+     "discount": 0
+    },
+    {
+     "id": "l10",
+     "name": "Line 10",
+     "quantity": 4,
+     "amount": 3987,
+     "discount": 1007
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 154,
+     "kind": "tip",
+     "percent": 15
+    }
+   ],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 3,
+      "units": 0.5
+     },
+     {
+      "party": 2,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 3
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 1.5
+     },
+     {
+      "party": 2,
+      "units": 1.5
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 4
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1.0
+     }
+    ],
+    [],
+    [
+     {
+      "party": 2,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 5,
+      "units": 1
+     },
+     {
+      "party": 3,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 4,
+      "units": 0.5
+     },
+     {
+      "party": 2,
+      "units": 1
+     },
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 4,
+      "units": 0.6666666666666666
+     }
+    ]
+   ],
+   "expect": {
+    "total": 41152,
+    "netItems": 35784,
+    "lineNet": [
+     1879,
+     5452,
+     5887,
+     2901,
+     2616,
+     2844,
+     3946,
+     4631,
+     188,
+     2460,
+     2980
+    ],
+    "charges": [
+     5368
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 7702,
+      "subtotal": 6697,
+      "lines": [
+       313,
+       0,
+       5887,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       497
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       168
+      ],
+      "charges": [
+       1005
+      ]
+     },
+     {
+      "total": 7265,
+      "subtotal": 6318,
+      "lines": [
+       0,
+       5452,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       369,
+       497
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       168
+      ],
+      "charges": [
+       947
+      ]
+     },
+     {
+      "total": 8562,
+      "subtotal": 7446,
+      "lines": [
+       626,
+       0,
+       0,
+       1451,
+       0,
+       0,
+       3946,
+       0,
+       188,
+       738,
+       497
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       2407,
+       0,
+       168
+      ],
+      "charges": [
+       1116
+      ]
+     },
+     {
+      "total": 7673,
+      "subtotal": 6673,
+      "lines": [
+       470,
+       0,
+       0,
+       0,
+       2616,
+       2844,
+       0,
+       0,
+       0,
+       246,
+       497
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       167
+      ],
+      "charges": [
+       1000
+      ]
+     },
+     {
+      "total": 2664,
+      "subtotal": 2315,
+      "lines": [
+       0,
+       0,
+       0,
+       1450,
+       0,
+       0,
+       0,
+       0,
+       0,
+       369,
+       496
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       168
+      ],
+      "charges": [
+       349
+      ]
+     },
+     {
+      "total": 1420,
+      "subtotal": 1234,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       738,
+       496
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       168
+      ],
+      "charges": [
+       186
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 5866,
+     "subtotal": 5101
+    }
+   }
+  },
+  {
+   "id": "RNDR-025",
+   "note": "random",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0,
+     "amount": -91,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 2240,
+     "discount": 585
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 0.5,
+     "amount": -729,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0.5,
+     "amount": 4273,
+     "discount": 789
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 911,
+     "kind": "other",
+     "percent": 12.5
+    },
+    {
+     "name": "Charge 1",
+     "amount": 144,
+     "kind": "tax",
+     "percent": 12.5
+    },
+    {
+     "name": "Charge 2",
+     "amount": 577,
+     "kind": "tax",
+     "included": true
+    },
+    {
+     "name": "Charge 3",
+     "amount": 253,
+     "kind": "other"
+    }
+   ],
+   "partyCount": 3,
+   "allocations": [
+    [
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.5
+     }
+    ],
+    []
+   ],
+   "expect": {
+    "total": 5652,
+    "netItems": 4319,
+    "lineNet": [
+     -91,
+     1655,
+     -729,
+     3484
+    ],
+    "charges": [
+     540,
+     540,
+     0,
+     253
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 0,
+      "subtotal": -31,
+      "lines": [
+       -31,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       8,
+       8,
+       8,
+       7
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": -30,
+      "lines": [
+       -30,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       8,
+       8,
+       7,
+       7
+      ]
+     },
+     {
+      "total": 1156,
+      "subtotal": 896,
+      "lines": [
+       -30,
+       1655,
+       -729,
+       0
+      ],
+      "savings": [
+       0,
+       585,
+       0,
+       0
+      ],
+      "charges": [
+       107,
+       107,
+       -3,
+       49
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 4496,
+     "subtotal": 3484
+    }
+   }
+  },
+  {
+   "id": "RNDR-026",
+   "note": "random",
+   "currency": "HUF",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 4,
+     "amount": 2382,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 0,
+     "amount": 3690,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 5041,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0.5,
+     "amount": 2287,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 0,
+     "amount": 1317,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 3,
+     "amount": 2063,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 1,
+     "amount": -650,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 1,
+     "amount": -894,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -1251,
+     "kind": "discount"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 350,
+     "kind": "tax",
+     "percent": 12.5
+    },
+    {
+     "name": "Charge 2",
+     "amount": 453,
+     "kind": "other"
+    }
+   ],
+   "partyCount": 5,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 4
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.2
+     },
+     {
+      "party": 4,
+      "units": 0.2
+     },
+     {
+      "party": 2,
+      "units": 0.2
+     },
+     {
+      "party": 0,
+      "units": 0.2
+     },
+     {
+      "party": 3,
+      "units": 0.2
+     }
+    ],
+    [],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 1
+     }
+    ]
+   ],
+   "expect": {
+    "total": 16186,
+    "netItems": 15236,
+    "lineNet": [
+     2382,
+     3690,
+     5041,
+     2287,
+     1317,
+     2063,
+     -650,
+     -894
+    ],
+    "charges": [
+     -1251,
+     1748,
+     453
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 5607,
+      "subtotal": 5497,
+      "lines": [
+       2382,
+       0,
+       2521,
+       980,
+       264,
+       0,
+       -650,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -506,
+       532,
+       84
+      ]
+     },
+     {
+      "total": 6604,
+      "subtotal": 6474,
+      "lines": [
+       0,
+       3690,
+       2520,
+       0,
+       264,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -596,
+       627,
+       99
+      ]
+     },
+     {
+      "total": 269,
+      "subtotal": 263,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       263,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -24,
+       26,
+       4
+      ]
+     },
+     {
+      "total": 1602,
+      "subtotal": 1570,
+      "lines": [
+       0,
+       0,
+       0,
+       1307,
+       263,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -144,
+       152,
+       24
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": -631,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       263,
+       0,
+       0,
+       -894
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       211,
+       210,
+       210
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 2104,
+     "subtotal": 2063
+    }
+   }
+  },
+  {
+   "id": "RNDR-027",
+   "note": "random",
+   "currency": "CHF",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 3,
+     "amount": 2285,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 2,
+     "amount": 3703,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 2,
+     "amount": -359,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -1007,
+     "kind": "discount"
+    },
+    {
+     "name": "Charge 1",
+     "amount": -1199,
+     "kind": "discount",
+     "targets": [
+      "l1",
+      "l0"
+     ]
+    },
+    {
+     "name": "Charge 2",
+     "amount": 572,
+     "kind": "other"
+    }
+   ],
+   "partyCount": 4,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 3
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 2
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     },
+     {
+      "party": 3,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 3995,
+    "netItems": 4430,
+    "lineNet": [
+     1827,
+     2962,
+     -359
+    ],
+    "charges": [
+     -1007,
+     0,
+     572
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 1461,
+      "subtotal": 1708,
+      "lines": [
+       1827,
+       0,
+       -119
+      ],
+      "savings": [
+       458,
+       0,
+       0
+      ],
+      "charges": [
+       -398,
+       -29,
+       180
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": -45,
+      "lines": [
+       0,
+       0,
+       -45
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       15,
+       15,
+       15
+      ]
+     },
+     {
+      "total": 2534,
+      "subtotal": 2962,
+      "lines": [
+       0,
+       2962,
+       0
+      ],
+      "savings": [
+       0,
+       741,
+       0
+      ],
+      "charges": [
+       -689,
+       -51,
+       312
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": -90,
+      "lines": [
+       0,
+       0,
+       -90
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       30,
+       30,
+       30
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": -105
+    }
+   }
+  },
+  {
+   "id": "RNDR-028",
+   "note": "random",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 3,
+     "amount": -307,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 5115,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 1753,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0,
+     "amount": -203,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 1,
+     "amount": 2147,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 0,
+     "amount": 881,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 1,
+     "amount": 1090,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 1,
+     "amount": 4371,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 4,
+     "amount": 3761,
+     "discount": 0
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 0.5,
+     "amount": 2513,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -274,
+     "kind": "discount"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 906,
+     "kind": "other"
+    },
+    {
+     "name": "Charge 2",
+     "amount": 412,
+     "kind": "service",
+     "percent": 8.875
+    }
+   ],
+   "partyCount": 5,
+   "allocations": [
+    [
+     {
+      "party": 3,
+      "units": 1.0
+     },
+     {
+      "party": 4,
+      "units": 1.0
+     },
+     {
+      "party": 1,
+      "units": 1.0
+     }
+    ],
+    [],
+    [],
+    [
+     {
+      "party": 4,
+      "units": 0.2
+     },
+     {
+      "party": 2,
+      "units": 0.2
+     },
+     {
+      "party": 1,
+      "units": 0.2
+     },
+     {
+      "party": 0,
+      "units": 0.2
+     },
+     {
+      "party": 3,
+      "units": 0.2
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.2
+     },
+     {
+      "party": 0,
+      "units": 0.2
+     },
+     {
+      "party": 2,
+      "units": 0.2
+     },
+     {
+      "party": 3,
+      "units": 0.2
+     },
+     {
+      "party": 4,
+      "units": 0.2
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     },
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 4
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.25
+     },
+     {
+      "party": 4,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 2,
+      "units": 1
+     }
+    ]
+   ],
+   "expect": {
+    "total": 23603,
+    "netItems": 21121,
+    "lineNet": [
+     -307,
+     5115,
+     1753,
+     -203,
+     2147,
+     881,
+     1090,
+     4371,
+     3761,
+     2513
+    ],
+    "charges": [
+     -274,
+     906,
+     1850
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 7064,
+      "subtotal": 6323,
+      "lines": [
+       0,
+       0,
+       0,
+       -41,
+       430,
+       221,
+       1090,
+       4371,
+       0,
+       252
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -83,
+       271,
+       553
+      ]
+     },
+     {
+      "total": 941,
+      "subtotal": 841,
+      "lines": [
+       -103,
+       0,
+       0,
+       -41,
+       430,
+       220,
+       0,
+       0,
+       0,
+       335
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -11,
+       37,
+       74
+      ]
+     },
+     {
+      "total": 1804,
+      "subtotal": 1613,
+      "lines": [
+       0,
+       0,
+       0,
+       -41,
+       429,
+       220,
+       0,
+       0,
+       0,
+       1005
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -21,
+       70,
+       142
+      ]
+     },
+     {
+      "total": 601,
+      "subtotal": 538,
+      "lines": [
+       -102,
+       0,
+       0,
+       -40,
+       429,
+       0,
+       0,
+       0,
+       0,
+       251
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -7,
+       23,
+       47
+      ]
+     },
+     {
+      "total": 5518,
+      "subtotal": 4938,
+      "lines": [
+       -102,
+       0,
+       0,
+       -40,
+       429,
+       220,
+       0,
+       0,
+       3761,
+       670
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -64,
+       212,
+       432
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 7675,
+     "subtotal": 6868
+    }
+   }
+  },
+  {
+   "id": "RNDR-029",
+   "note": "random",
+   "currency": "MXN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 3691,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 2130,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 0.5,
+     "amount": 3081,
+     "discount": 296
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 2,
+     "amount": 5150,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 0.5,
+     "amount": 3998,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 2
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 1
+     },
+     {
+      "party": 5,
+      "units": 0.6666666666666666
+     }
+    ]
+   ],
+   "expect": {
+    "total": 17754,
+    "netItems": 17754,
+    "lineNet": [
+     3691,
+     2130,
+     2785,
+     5150,
+     3998
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 5690,
+      "subtotal": 5690,
+      "lines": [
+       3691,
+       0,
+       0,
+       0,
+       1999
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 1592,
+      "subtotal": 1591,
+      "lines": [
+       0,
+       0,
+       1591,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       170,
+       0,
+       0
+      ],
+      "charges": [
+       1
+      ]
+     },
+     {
+      "total": 7280,
+      "subtotal": 7280,
+      "lines": [
+       0,
+       2130,
+       0,
+       5150,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 666,
+      "subtotal": 666,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       666
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 2526,
+      "subtotal": 2527,
+      "lines": [
+       0,
+       0,
+       1194,
+       0,
+       1333
+      ],
+      "savings": [
+       0,
+       0,
+       126,
+       0,
+       0
+      ],
+      "charges": [
+       -1
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-030",
+   "note": "random",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0.5,
+     "amount": 971,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 4943,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 4,
+     "amount": -575,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 1,
+     "amount": 87,
+     "discount": 554
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 3,
+     "amount": 4304,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 18,
+     "kind": "service"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 602,
+     "kind": "tax"
+    },
+    {
+     "name": "Charge 2",
+     "amount": -322,
+     "kind": "discount",
+     "percent": 10
+    },
+    {
+     "name": "Charge 3",
+     "amount": 213,
+     "kind": "rounding"
+    }
+   ],
+   "partyCount": 5,
+   "allocations": [
+    [
+     {
+      "party": 1,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 0,
+      "units": 1
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 3
+     }
+    ]
+   ],
+   "expect": {
+    "total": 9045,
+    "netItems": 9643,
+    "lineNet": [
+     971,
+     4943,
+     -575,
+     0,
+     4304
+    ],
+    "charges": [
+     18,
+     602,
+     -964,
+     213
+    ],
+    "overflow": -467,
+    "spread": [],
+    "parties": [
+     {
+      "total": 2299,
+      "subtotal": 2579,
+      "lines": [
+       0,
+       2579,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -21,
+       127,
+       -271,
+       29,
+       -144
+      ]
+     },
+     {
+      "total": 1008,
+      "subtotal": 1131,
+      "lines": [
+       486,
+       645,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -9,
+       56,
+       -119,
+       12,
+       -63
+      ]
+     },
+     {
+      "total": 433,
+      "subtotal": 485,
+      "lines": [
+       485,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       87,
+       0
+      ],
+      "charges": [
+       -4,
+       24,
+       -51,
+       6,
+       -27
+      ]
+     },
+     {
+      "total": 5305,
+      "subtotal": 5951,
+      "lines": [
+       0,
+       1719,
+       -72,
+       0,
+       4304
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -48,
+       294,
+       -625,
+       66,
+       -333
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": -503
+    }
+   }
+  },
+  {
+   "id": "RNDR-031",
+   "note": "random",
+   "currency": "MXN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0,
+     "amount": 4498,
+     "discount": 1527
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 673,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 2,
+     "amount": -215,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 3,
+     "amount": 4772,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 2,
+     "amount": 2454,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 1,
+     "amount": 2412,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 2,
+     "amount": -321,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 2,
+     "amount": 2092,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 0,
+     "amount": 176,
+     "discount": 0
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 2,
+     "amount": 374,
+     "discount": 91
+    },
+    {
+     "id": "l10",
+     "name": "Line 10",
+     "quantity": 1,
+     "amount": 3623,
+     "discount": 0
+    },
+    {
+     "id": "l11",
+     "name": "Line 11",
+     "quantity": 1,
+     "amount": 859,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 1294,
+     "kind": "other"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 613,
+     "kind": "service"
+    }
+   ],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 2,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 1
+     },
+     {
+      "party": 4,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.25
+     },
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 5,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 2
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 3
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 3,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     }
+    ],
+    [],
+    [
+     {
+      "party": 3,
+      "units": 2
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1.0
+     }
+    ],
+    [],
+    [
+     {
+      "party": 5,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 1
+     }
+    ]
+   ],
+   "expect": {
+    "total": 21686,
+    "netItems": 19779,
+    "lineNet": [
+     2971,
+     673,
+     -215,
+     4772,
+     2454,
+     2412,
+     -321,
+     2092,
+     176,
+     283,
+     3623,
+     859
+    ],
+    "charges": [
+     1294,
+     613
+    ],
+    "overflow": 0,
+    "spread": [
+     6
+    ],
+    "parties": [
+     {
+      "total": 703,
+      "subtotal": 652,
+      "lines": [
+       0,
+       169,
+       0,
+       0,
+       307,
+       0,
+       0,
+       0,
+       176,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       42,
+       20,
+       -11
+      ]
+     },
+     {
+      "total": 1374,
+      "subtotal": 1274,
+      "lines": [
+       1321,
+       168,
+       -215,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       678,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       82,
+       39,
+       -21
+      ]
+     },
+     {
+      "total": 6372,
+      "subtotal": 5906,
+      "lines": [
+       330,
+       0,
+       0,
+       4772,
+       0,
+       804,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       170,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       380,
+       180,
+       -94
+      ]
+     },
+     {
+      "total": 3321,
+      "subtotal": 3078,
+      "lines": [
+       0,
+       168,
+       0,
+       0,
+       818,
+       0,
+       0,
+       2092,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       198,
+       94,
+       -49
+      ]
+     },
+     {
+      "total": 1877,
+      "subtotal": 1739,
+      "lines": [
+       880,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       859
+      ],
+      "savings": [
+       453,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       112,
+       53,
+       -27
+      ]
+     },
+     {
+      "total": 4565,
+      "subtotal": 4231,
+      "lines": [
+       440,
+       168,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       3623,
+       0
+      ],
+      "savings": [
+       226,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       272,
+       129,
+       -67
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 3474,
+     "subtotal": 3220
+    }
+   }
+  },
+  {
+   "id": "RNDR-032",
+   "note": "random",
+   "currency": "CLP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 47,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 30,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 3,
+     "amount": 18,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 15,
+     "kind": "tax"
+    },
+    {
+     "name": "Charge 1",
+     "amount": -3,
+     "kind": "discount"
+    },
+    {
+     "name": "Charge 2",
+     "amount": 10,
+     "kind": "tax"
+    },
+    {
+     "name": "Charge 3",
+     "amount": 4,
+     "kind": "other",
+     "percent": 15
+    }
+   ],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 5,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     },
+     {
+      "party": 4,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.25
+     },
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     },
+     {
+      "party": 4,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.5
+     },
+     {
+      "party": 2,
+      "units": 0.5
+     },
+     {
+      "party": 1,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 5,
+      "units": 0.5
+     },
+     {
+      "party": 4,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 131,
+    "netItems": 95,
+    "lineNet": [
+     47,
+     30,
+     18
+    ],
+    "charges": [
+     15,
+     -3,
+     10,
+     14
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 31,
+      "subtotal": 23,
+      "lines": [
+       12,
+       8,
+       3
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       4,
+       -1,
+       2,
+       3
+      ]
+     },
+     {
+      "total": 20,
+      "subtotal": 15,
+      "lines": [
+       12,
+       0,
+       3
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       2,
+       -1,
+       2,
+       2
+      ]
+     },
+     {
+      "total": 15,
+      "subtotal": 11,
+      "lines": [
+       0,
+       8,
+       3
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       2,
+       0,
+       1,
+       1
+      ]
+     },
+     {
+      "total": 14,
+      "subtotal": 10,
+      "lines": [
+       0,
+       7,
+       3
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       2,
+       0,
+       1,
+       1
+      ]
+     },
+     {
+      "total": 31,
+      "subtotal": 22,
+      "lines": [
+       12,
+       7,
+       3
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       4,
+       -1,
+       3,
+       3
+      ]
+     },
+     {
+      "total": 20,
+      "subtotal": 14,
+      "lines": [
+       11,
+       0,
+       3
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       2,
+       0,
+       2,
+       2
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-033",
+   "note": "random",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 4,
+     "amount": 2296,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 744,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 146,
+     "kind": "service"
+    },
+    {
+     "name": "Charge 1",
+     "amount": -163,
+     "kind": "discount",
+     "targets": [
+      "l0",
+      "l1"
+     ]
+    },
+    {
+     "name": "Charge 2",
+     "amount": 1175,
+     "kind": "service",
+     "percent": 18
+    }
+   ],
+   "partyCount": 2,
+   "allocations": [
+    [
+     {
+      "party": 1,
+      "units": 2.0
+     },
+     {
+      "party": 0,
+      "units": 2.0
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 3541,
+    "netItems": 2877,
+    "lineNet": [
+     2173,
+     704
+    ],
+    "charges": [
+     146,
+     0,
+     518
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 1771,
+      "subtotal": 1439,
+      "lines": [
+       1087,
+       352
+      ],
+      "savings": [
+       61,
+       20
+      ],
+      "charges": [
+       73,
+       0,
+       259
+      ]
+     },
+     {
+      "total": 1770,
+      "subtotal": 1438,
+      "lines": [
+       1086,
+       352
+      ],
+      "savings": [
+       62,
+       20
+      ],
+      "charges": [
+       73,
+       0,
+       259
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-034",
+   "note": "random",
+   "currency": "PLN",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0.5,
+     "amount": 3170,
+     "discount": 3101
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 2,
+     "amount": 921,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 0,
+     "amount": -423,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0.5,
+     "amount": 920,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 3,
+     "amount": 221,
+     "discount": 87
+    }
+   ],
+   "charges": [],
+   "partyCount": 2,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 2
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     },
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     }
+    ]
+   ],
+   "expect": {
+    "total": 1621,
+    "netItems": 1621,
+    "lineNet": [
+     69,
+     921,
+     -423,
+     920,
+     134
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 151,
+      "subtotal": 151,
+      "lines": [
+       69,
+       0,
+       -423,
+       460,
+       45
+      ],
+      "savings": [
+       3101,
+       0,
+       0,
+       0,
+       29
+      ],
+      "charges": []
+     },
+     {
+      "total": 1411,
+      "subtotal": 1411,
+      "lines": [
+       0,
+       921,
+       0,
+       460,
+       30
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       19
+      ],
+      "charges": []
+     }
+    ],
+    "unassigned": {
+     "total": 59,
+     "subtotal": 59
+    }
+   }
+  },
+  {
+   "id": "RNDR-035",
+   "note": "random",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 4,
+     "amount": 4967,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 1159,
+     "kind": "other"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 210,
+     "kind": "other"
+    }
+   ],
+   "partyCount": 1,
+   "allocations": [
+    []
+   ],
+   "expect": {
+    "total": 6336,
+    "netItems": 4967,
+    "lineNet": [
+     4967
+    ],
+    "charges": [
+     1159,
+     210
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       0,
+       0
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 6336,
+     "subtotal": 4967
+    }
+   }
+  },
+  {
+   "id": "RNDR-036",
+   "note": "random",
+   "currency": "CLP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 2,
+     "amount": 41,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 3,
+     "amount": 41,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 3,
+     "amount": 32,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 1,
+     "amount": 8,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 4,
+   "allocations": [
+    [],
+    [
+     {
+      "party": 0,
+      "units": 3
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     },
+     {
+      "party": 3,
+      "units": 0.3333333333333333
+     }
+    ],
+    []
+   ],
+   "expect": {
+    "total": 122,
+    "netItems": 122,
+    "lineNet": [
+     41,
+     41,
+     32,
+     8
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 52,
+      "subtotal": 52,
+      "lines": [
+       0,
+       41,
+       11,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 3,
+      "subtotal": 3,
+      "lines": [
+       0,
+       0,
+       3,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": []
+     },
+     {
+      "total": 3,
+      "subtotal": 3,
+      "lines": [
+       0,
+       0,
+       3,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": []
+     }
+    ],
+    "unassigned": {
+     "total": 64,
+     "subtotal": 64
+    }
+   }
+  },
+  {
+   "id": "RNDR-037",
+   "note": "random",
+   "currency": "CLP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 4,
+     "amount": 47,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 7,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 30,
+     "discount": 5
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0.5,
+     "amount": 9,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 2,
+     "amount": 59,
+     "discount": 19
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 1,
+     "amount": 53,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 2,
+     "amount": 40,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 0.5,
+     "amount": 11,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 4,
+     "amount": 8,
+     "discount": 1
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 1,
+     "amount": -4,
+     "discount": 0
+    },
+    {
+     "id": "l10",
+     "name": "Line 10",
+     "quantity": 1,
+     "amount": 27,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 4,
+     "kind": "other"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 11,
+     "kind": "service"
+    }
+   ],
+   "partyCount": 3,
+   "allocations": [
+    [],
+    [
+     {
+      "party": 2,
+      "units": 0.5
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 2
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.5
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 277,
+    "netItems": 262,
+    "lineNet": [
+     47,
+     7,
+     25,
+     9,
+     40,
+     53,
+     40,
+     11,
+     7,
+     -4,
+     27
+    ],
+    "charges": [
+     4,
+     11
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 90,
+      "subtotal": 87,
+      "lines": [
+       0,
+       2,
+       0,
+       0,
+       14,
+       53,
+       0,
+       6,
+       0,
+       -2,
+       14
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       6,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       3
+      ]
+     },
+     {
+      "total": 24,
+      "subtotal": 22,
+      "lines": [
+       0,
+       2,
+       0,
+       9,
+       13,
+       0,
+       0,
+       0,
+       0,
+       -2,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       7,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       1,
+       1
+      ]
+     },
+     {
+      "total": 107,
+      "subtotal": 100,
+      "lines": [
+       0,
+       3,
+       25,
+       0,
+       13,
+       0,
+       40,
+       5,
+       1,
+       0,
+       13
+      ],
+      "savings": [
+       0,
+       0,
+       5,
+       0,
+       6,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       2,
+       5
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 56,
+     "subtotal": 53
+    }
+   }
+  },
+  {
+   "id": "RNDR-038",
+   "note": "random",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 5776,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 2,
+     "amount": 1488,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 4,
+     "amount": 5667,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -118,
+     "kind": "discount",
+     "targets": [
+      "l0",
+      "l1",
+      "l2"
+     ]
+    },
+    {
+     "name": "Charge 1",
+     "amount": -1419,
+     "kind": "discount",
+     "targets": [
+      "l1"
+     ]
+    },
+    {
+     "name": "Charge 2",
+     "amount": 1210,
+     "kind": "other",
+     "percent": 8.875
+    },
+    {
+     "name": "Charge 3",
+     "amount": -846,
+     "kind": "discount",
+     "targets": [
+      "l2"
+     ]
+    }
+   ],
+   "partyCount": 4,
+   "allocations": [
+    [],
+    [
+     {
+      "party": 1,
+      "units": 2
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 2.0
+     },
+     {
+      "party": 2,
+      "units": 2.0
+     }
+    ]
+   ],
+   "expect": {
+    "total": 11484,
+    "netItems": 10548,
+    "lineNet": [
+     5723,
+     56,
+     4769
+    ],
+    "charges": [
+     0,
+     0,
+     936,
+     0
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       0,
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "total": 61,
+      "subtotal": 56,
+      "lines": [
+       0,
+       56,
+       0
+      ],
+      "savings": [
+       0,
+       1432,
+       0
+      ],
+      "charges": [
+       0,
+       0,
+       5,
+       0
+      ]
+     },
+     {
+      "total": 2596,
+      "subtotal": 2385,
+      "lines": [
+       0,
+       0,
+       2385
+      ],
+      "savings": [
+       0,
+       0,
+       449
+      ],
+      "charges": [
+       0,
+       0,
+       211,
+       0
+      ]
+     },
+     {
+      "total": 2596,
+      "subtotal": 2384,
+      "lines": [
+       0,
+       0,
+       2384
+      ],
+      "savings": [
+       0,
+       0,
+       449
+      ],
+      "charges": [
+       0,
+       0,
+       212,
+       0
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 6231,
+     "subtotal": 5723
+    }
+   }
+  },
+  {
+   "id": "RNDR-039",
+   "note": "random",
+   "currency": "CLP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0.5,
+     "amount": 9,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 3,
+     "amount": 4,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -10,
+     "kind": "discount"
+    }
+   ],
+   "partyCount": 2,
+   "allocations": [
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 3.0
+     }
+    ]
+   ],
+   "expect": {
+    "total": 3,
+    "netItems": 13,
+    "lineNet": [
+     9,
+     4
+    ],
+    "charges": [
+     -10
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 3,
+      "subtotal": 13,
+      "lines": [
+       9,
+       4
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": [
+       -10
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0
+      ],
+      "charges": [
+       0
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-040",
+   "note": "random",
+   "currency": "HUF",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0,
+     "amount": 2312,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 2,
+     "amount": -839,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 2701,
+     "discount": 364
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0.5,
+     "amount": 3964,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 2,
+     "amount": 259,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 0.5,
+     "amount": 4653,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 1,
+     "amount": 1763,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 1,
+     "amount": 1649,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 4,
+     "amount": -512,
+     "discount": 0
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 2,
+     "amount": 5748,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 577,
+     "kind": "other",
+     "percent": 20
+    },
+    {
+     "name": "Charge 1",
+     "amount": 823,
+     "kind": "rounding"
+    },
+    {
+     "name": "Charge 2",
+     "amount": 545,
+     "kind": "other",
+     "percent": 20
+    }
+   ],
+   "partyCount": 6,
+   "allocations": [
+    [],
+    [
+     {
+      "party": 5,
+      "units": 1
+     },
+     {
+      "party": 2,
+      "units": 1
+     },
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 2,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.16666666666666666
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.16666666666666666
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 4,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 5,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     }
+    ],
+    [],
+    [],
+    [
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 3,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 5,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 4
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.6666666666666666
+     }
+    ]
+   ],
+   "expect": {
+    "total": 30691,
+    "netItems": 21334,
+    "lineNet": [
+     2312,
+     -839,
+     2337,
+     3964,
+     259,
+     4653,
+     1763,
+     1649,
+     -512,
+     5748
+    ],
+    "charges": [
+     4267,
+     823,
+     4267
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 3232,
+      "subtotal": 2248,
+      "lines": [
+       0,
+       -140,
+       390,
+       0,
+       44,
+       0,
+       0,
+       550,
+       -512,
+       1916
+      ],
+      "savings": [
+       0,
+       0,
+       61,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       449,
+       86,
+       449
+      ]
+     },
+     {
+      "total": 2322,
+      "subtotal": 1615,
+      "lines": [
+       0,
+       -140,
+       390,
+       1322,
+       43,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       60,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       323,
+       62,
+       322
+      ]
+     },
+     {
+      "total": 321,
+      "subtotal": 223,
+      "lines": [
+       0,
+       -210,
+       390,
+       0,
+       43,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       60,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       45,
+       9,
+       44
+      ]
+     },
+     {
+      "total": 3968,
+      "subtotal": 2758,
+      "lines": [
+       0,
+       -140,
+       389,
+       0,
+       43,
+       0,
+       0,
+       550,
+       0,
+       1916
+      ],
+      "savings": [
+       0,
+       0,
+       61,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       552,
+       106,
+       552
+      ]
+     },
+     {
+      "total": 2523,
+      "subtotal": 1753,
+      "lines": [
+       0,
+       0,
+       389,
+       1321,
+       43,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       61,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       351,
+       68,
+       351
+      ]
+     },
+     {
+      "total": 5769,
+      "subtotal": 4009,
+      "lines": [
+       0,
+       -209,
+       389,
+       1321,
+       43,
+       0,
+       0,
+       549,
+       0,
+       1916
+      ],
+      "savings": [
+       0,
+       0,
+       61,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       803,
+       155,
+       802
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 12556,
+     "subtotal": 8728
+    }
+   }
+  },
+  {
+   "id": "RNDR-041",
+   "note": "random",
+   "currency": "HUF",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 1194,
+     "discount": 606
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 1,
+     "amount": 1907,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 3,
+     "amount": 4022,
+     "discount": 4217
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0,
+     "amount": 2111,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 2,
+     "amount": 4898,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 1,
+     "amount": 4321,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 4,
+     "amount": 547,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 1,
+     "amount": 4706,
+     "discount": 2184
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -765,
+     "kind": "rounding"
+    }
+   ],
+   "partyCount": 5,
+   "allocations": [
+    [],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 3
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.25
+     },
+     {
+      "party": 3,
+      "units": 0.25
+     },
+     {
+      "party": 4,
+      "units": 0.25
+     },
+     {
+      "party": 2,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 2
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 1.3333333333333333
+     },
+     {
+      "party": 3,
+      "units": 1.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.25
+     },
+     {
+      "party": 0,
+      "units": 0.25
+     }
+    ]
+   ],
+   "expect": {
+    "total": 15934,
+    "netItems": 16894,
+    "lineNet": [
+     588,
+     1907,
+     0,
+     2111,
+     4898,
+     4321,
+     547,
+     2522
+    ],
+    "charges": [
+     -765
+    ],
+    "overflow": -195,
+    "spread": [],
+    "parties": [
+     {
+      "total": 3063,
+      "subtotal": 3249,
+      "lines": [
+       0,
+       1907,
+       0,
+       528,
+       0,
+       0,
+       183,
+       631
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       546
+      ],
+      "charges": [
+       -148,
+       -38
+      ]
+     },
+     {
+      "total": 172,
+      "subtotal": 182,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       182,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       4022,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -8,
+       -2
+      ]
+     },
+     {
+      "total": 9193,
+      "subtotal": 9747,
+      "lines": [
+       0,
+       0,
+       0,
+       528,
+       4898,
+       4321,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -441,
+       -113
+      ]
+     },
+     {
+      "total": 670,
+      "subtotal": 710,
+      "lines": [
+       0,
+       0,
+       0,
+       528,
+       0,
+       0,
+       182,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       -32,
+       -8
+      ]
+     },
+     {
+      "total": 1092,
+      "subtotal": 1157,
+      "lines": [
+       0,
+       0,
+       0,
+       527,
+       0,
+       0,
+       0,
+       630
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       546
+      ],
+      "charges": [
+       -52,
+       -13
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 1744,
+     "subtotal": 1849
+    }
+   }
+  },
+  {
+   "id": "RNDR-042",
+   "note": "random",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 0,
+     "amount": 1712,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 764,
+     "kind": "other"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 399,
+     "kind": "tax",
+     "percent": 8.875,
+     "included": true
+    },
+    {
+     "name": "Charge 2",
+     "amount": 512,
+     "kind": "tax",
+     "included": true
+    },
+    {
+     "name": "Charge 3",
+     "amount": 258,
+     "kind": "tip",
+     "percent": 12.5
+    }
+   ],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 4,
+      "units": 0.25
+     },
+     {
+      "party": 5,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 2,
+      "units": 1
+     },
+     {
+      "party": 3,
+      "units": 0.5
+     }
+    ]
+   ],
+   "expect": {
+    "total": 2690,
+    "netItems": 1712,
+    "lineNet": [
+     1712
+    ],
+    "charges": [
+     764,
+     0,
+     0,
+     214
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 461,
+      "subtotal": 293,
+      "lines": [
+       293
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       131,
+       0,
+       0,
+       37
+      ]
+     },
+     {
+      "total": 308,
+      "subtotal": 196,
+      "lines": [
+       196
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       87,
+       0,
+       0,
+       25
+      ]
+     },
+     {
+      "total": 922,
+      "subtotal": 587,
+      "lines": [
+       587
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       262,
+       0,
+       0,
+       73
+      ]
+     },
+     {
+      "total": 461,
+      "subtotal": 293,
+      "lines": [
+       293
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       131,
+       0,
+       0,
+       37
+      ]
+     },
+     {
+      "total": 231,
+      "subtotal": 147,
+      "lines": [
+       147
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       66,
+       0,
+       0,
+       18
+      ]
+     },
+     {
+      "total": 307,
+      "subtotal": 196,
+      "lines": [
+       196
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       87,
+       0,
+       0,
+       24
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-043",
+   "note": "random",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": 3024,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": -1321,
+     "kind": "discount",
+     "percent": 15
+    }
+   ],
+   "partyCount": 5,
+   "allocations": [
+    [
+     {
+      "party": 2,
+      "units": 0.2
+     },
+     {
+      "party": 4,
+      "units": 0.2
+     },
+     {
+      "party": 1,
+      "units": 0.2
+     },
+     {
+      "party": 3,
+      "units": 0.2
+     },
+     {
+      "party": 0,
+      "units": 0.2
+     }
+    ]
+   ],
+   "expect": {
+    "total": 2570,
+    "netItems": 3024,
+    "lineNet": [
+     3024
+    ],
+    "charges": [
+     -454
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 514,
+      "subtotal": 605,
+      "lines": [
+       605
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       -91
+      ]
+     },
+     {
+      "total": 514,
+      "subtotal": 605,
+      "lines": [
+       605
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       -91
+      ]
+     },
+     {
+      "total": 514,
+      "subtotal": 605,
+      "lines": [
+       605
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       -91
+      ]
+     },
+     {
+      "total": 514,
+      "subtotal": 605,
+      "lines": [
+       605
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       -91
+      ]
+     },
+     {
+      "total": 514,
+      "subtotal": 604,
+      "lines": [
+       604
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       -90
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-044",
+   "note": "random",
+   "currency": "BRL",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 2,
+     "amount": 4530,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 0,
+     "amount": 4555,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 0,
+     "amount": -27,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 0,
+     "amount": 867,
+     "discount": 410
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 0,
+     "amount": -327,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 2,
+     "amount": 2599,
+     "discount": 2044
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 1,
+     "amount": 5375,
+     "discount": 938
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 1,
+     "amount": -94,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 1,
+     "amount": 4494,
+     "discount": 0
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 4,
+     "amount": 4506,
+     "discount": 0
+    },
+    {
+     "id": "l10",
+     "name": "Line 10",
+     "quantity": 0,
+     "amount": 5853,
+     "discount": 0
+    },
+    {
+     "id": "l11",
+     "name": "Line 11",
+     "quantity": 1,
+     "amount": 1094,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 267,
+     "kind": "other"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 915,
+     "kind": "tip"
+    },
+    {
+     "name": "Charge 2",
+     "amount": 929,
+     "kind": "tax",
+     "percent": 20
+    },
+    {
+     "name": "Charge 3",
+     "amount": 1157,
+     "kind": "tax",
+     "percent": 12.5
+    }
+   ],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 3,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 4,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.2
+     },
+     {
+      "party": 4,
+      "units": 0.2
+     },
+     {
+      "party": 3,
+      "units": 0.2
+     },
+     {
+      "party": 1,
+      "units": 0.2
+     },
+     {
+      "party": 0,
+      "units": 0.2
+     }
+    ],
+    [],
+    [
+     {
+      "party": 5,
+      "units": 0.4
+     },
+     {
+      "party": 3,
+      "units": 0.4
+     },
+     {
+      "party": 0,
+      "units": 0.4
+     },
+     {
+      "party": 4,
+      "units": 0.4
+     },
+     {
+      "party": 2,
+      "units": 0.4
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 0.2
+     },
+     {
+      "party": 2,
+      "units": 0.2
+     },
+     {
+      "party": 5,
+      "units": 0.2
+     },
+     {
+      "party": 4,
+      "units": 0.2
+     },
+     {
+      "party": 1,
+      "units": 0.2
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 2,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 4,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.16666666666666666
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1
+     },
+     {
+      "party": 2,
+      "units": 1
+     },
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 5,
+      "units": 0.25
+     }
+    ],
+    [
+     {
+      "party": 5,
+      "units": 1.0
+     }
+    ],
+    []
+   ],
+   "expect": {
+    "total": 40976,
+    "netItems": 30033,
+    "lineNet": [
+     4530,
+     4555,
+     -27,
+     457,
+     -327,
+     555,
+     4437,
+     -94,
+     4494,
+     4506,
+     5853,
+     1094
+    ],
+    "charges": [
+     267,
+     915,
+     6007,
+     3754
+    ],
+    "overflow": 0,
+    "spread": [
+     4
+    ],
+    "parties": [
+     {
+      "total": 8192,
+      "subtotal": 6070,
+      "lines": [
+       0,
+       4555,
+       0,
+       92,
+       0,
+       111,
+       0,
+       0,
+       749,
+       563,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       82,
+       0,
+       409,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       53,
+       183,
+       1201,
+       750,
+       -65
+      ]
+     },
+     {
+      "total": 4655,
+      "subtotal": 3450,
+      "lines": [
+       1510,
+       0,
+       -9,
+       92,
+       0,
+       0,
+       0,
+       -19,
+       749,
+       1127,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       82,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       30,
+       104,
+       682,
+       426,
+       -37
+      ]
+     },
+     {
+      "total": 9786,
+      "subtotal": 7250,
+      "lines": [
+       755,
+       0,
+       0,
+       91,
+       0,
+       111,
+       4437,
+       -19,
+       749,
+       1126,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       82,
+       0,
+       409,
+       938,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       64,
+       218,
+       1435,
+       897,
+       -78
+      ]
+     },
+     {
+      "total": 2278,
+      "subtotal": 1687,
+      "lines": [
+       755,
+       0,
+       0,
+       91,
+       0,
+       111,
+       0,
+       -19,
+       749,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       82,
+       0,
+       409,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       15,
+       51,
+       334,
+       209,
+       -18
+      ]
+     },
+     {
+      "total": 3297,
+      "subtotal": 2442,
+      "lines": [
+       1510,
+       0,
+       0,
+       91,
+       0,
+       111,
+       0,
+       -19,
+       749,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       82,
+       0,
+       409,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       22,
+       74,
+       483,
+       302,
+       -26
+      ]
+     },
+     {
+      "total": 9415,
+      "subtotal": 6977,
+      "lines": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       111,
+       0,
+       -18,
+       749,
+       282,
+       5853,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       408,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       61,
+       210,
+       1380,
+       862,
+       -75
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 3353,
+     "subtotal": 2484
+    }
+   }
+  },
+  {
+   "id": "RNDR-045",
+   "note": "random",
+   "currency": "BRL",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 1,
+     "amount": -28,
+     "discount": 0
+    }
+   ],
+   "charges": [],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 2,
+      "units": 1
+     }
+    ]
+   ],
+   "expect": {
+    "total": 0,
+    "netItems": -28,
+    "lineNet": [
+     -28
+    ],
+    "charges": [],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": -28,
+      "lines": [
+       -28
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       28
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       0
+      ]
+     },
+     {
+      "total": 0,
+      "subtotal": 0,
+      "lines": [
+       0
+      ],
+      "savings": [
+       0
+      ],
+      "charges": [
+       0
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 0,
+     "subtotal": 0
+    }
+   }
+  },
+  {
+   "id": "RNDR-046",
+   "note": "random",
+   "currency": "COP",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 3,
+     "amount": 2449,
+     "discount": 1126
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 4,
+     "amount": -692,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 2,
+     "amount": 2207,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 1,
+     "amount": 577,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 1,
+     "amount": 4748,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 1,
+     "amount": 1084,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 1,
+     "amount": 5897,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 2,
+     "amount": 561,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 0,
+     "amount": 865,
+     "discount": 0
+    },
+    {
+     "id": "l9",
+     "name": "Line 9",
+     "quantity": 1,
+     "amount": -437,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 125,
+     "kind": "service"
+    },
+    {
+     "name": "Charge 1",
+     "amount": 561,
+     "kind": "other",
+     "percent": 10
+    },
+    {
+     "name": "Charge 2",
+     "amount": 381,
+     "kind": "service"
+    }
+   ],
+   "partyCount": 6,
+   "allocations": [
+    [
+     {
+      "party": 2,
+      "units": 0.25
+     },
+     {
+      "party": 4,
+      "units": 0.5
+     },
+     {
+      "party": 1,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 3,
+      "units": 1
+     },
+     {
+      "party": 0,
+      "units": 0.6666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 4
+     }
+    ],
+    [
+     {
+      "party": 5,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 1,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 2,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 4,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 3,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 5,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 2,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 4,
+      "units": 0.16666666666666666
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.3333333333333333
+     },
+     {
+      "party": 3,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 5,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 1,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 2,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 4,
+      "units": 0.16666666666666666
+     }
+    ],
+    [
+     {
+      "party": 4,
+      "units": 0.4
+     },
+     {
+      "party": 3,
+      "units": 0.4
+     },
+     {
+      "party": 2,
+      "units": 0.4
+     },
+     {
+      "party": 0,
+      "units": 0.4
+     },
+     {
+      "party": 5,
+      "units": 0.4
+     }
+    ],
+    [],
+    [
+     {
+      "party": 3,
+      "units": 1
+     }
+    ]
+   ],
+   "expect": {
+    "total": 18252,
+    "netItems": 16133,
+    "lineNet": [
+     1323,
+     -692,
+     2207,
+     577,
+     4748,
+     1084,
+     5897,
+     561,
+     865,
+     -437
+    ],
+    "charges": [
+     125,
+     1613,
+     381
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 2056,
+      "subtotal": 1819,
+      "lines": [
+       258,
+       0,
+       368,
+       97,
+       0,
+       0,
+       983,
+       113,
+       0,
+       0
+      ],
+      "savings": [
+       220,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       14,
+       181,
+       42
+      ]
+     },
+     {
+      "total": 1929,
+      "subtotal": 1705,
+      "lines": [
+       258,
+       0,
+       368,
+       96,
+       0,
+       0,
+       983,
+       0,
+       0,
+       0
+      ],
+      "savings": [
+       220,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       13,
+       171,
+       40
+      ]
+     },
+     {
+      "total": 3100,
+      "subtotal": 2740,
+      "lines": [
+       97,
+       0,
+       368,
+       96,
+       0,
+       1084,
+       983,
+       112,
+       0,
+       0
+      ],
+      "savings": [
+       82,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       21,
+       274,
+       65
+      ]
+     },
+     {
+      "total": 4506,
+      "subtotal": 3982,
+      "lines": [
+       387,
+       -692,
+       368,
+       96,
+       3165,
+       0,
+       983,
+       112,
+       0,
+       -437
+      ],
+      "savings": [
+       330,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       31,
+       399,
+       94
+      ]
+     },
+     {
+      "total": 3773,
+      "subtotal": 3336,
+      "lines": [
+       194,
+       0,
+       368,
+       96,
+       1583,
+       0,
+       983,
+       112,
+       0,
+       0
+      ],
+      "savings": [
+       164,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       26,
+       333,
+       78
+      ]
+     },
+     {
+      "total": 1910,
+      "subtotal": 1686,
+      "lines": [
+       129,
+       0,
+       367,
+       96,
+       0,
+       0,
+       982,
+       112,
+       0,
+       0
+      ],
+      "savings": [
+       110,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       14,
+       169,
+       41
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 978,
+     "subtotal": 865
+    }
+   }
+  },
+  {
+   "id": "RNDR-047",
+   "note": "random",
+   "currency": "SEK",
+   "lines": [
+    {
+     "id": "l0",
+     "name": "Line 0",
+     "quantity": 3,
+     "amount": 4163,
+     "discount": 0
+    },
+    {
+     "id": "l1",
+     "name": "Line 1",
+     "quantity": 0.5,
+     "amount": 2773,
+     "discount": 0
+    },
+    {
+     "id": "l2",
+     "name": "Line 2",
+     "quantity": 1,
+     "amount": 5927,
+     "discount": 0
+    },
+    {
+     "id": "l3",
+     "name": "Line 3",
+     "quantity": 2,
+     "amount": 1576,
+     "discount": 0
+    },
+    {
+     "id": "l4",
+     "name": "Line 4",
+     "quantity": 3,
+     "amount": 5530,
+     "discount": 0
+    },
+    {
+     "id": "l5",
+     "name": "Line 5",
+     "quantity": 1,
+     "amount": 3863,
+     "discount": 0
+    },
+    {
+     "id": "l6",
+     "name": "Line 6",
+     "quantity": 0.5,
+     "amount": 2472,
+     "discount": 0
+    },
+    {
+     "id": "l7",
+     "name": "Line 7",
+     "quantity": 4,
+     "amount": 3015,
+     "discount": 0
+    },
+    {
+     "id": "l8",
+     "name": "Line 8",
+     "quantity": 2,
+     "amount": 3506,
+     "discount": 0
+    }
+   ],
+   "charges": [
+    {
+     "name": "Charge 0",
+     "amount": 583,
+     "kind": "service"
+    }
+   ],
+   "partyCount": 4,
+   "allocations": [
+    [
+     {
+      "party": 3,
+      "units": 3
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 3,
+      "units": 0.16666666666666666
+     },
+     {
+      "party": 0,
+      "units": 0.16666666666666666
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 0.25
+     },
+     {
+      "party": 0,
+      "units": 0.3333333333333333
+     }
+    ],
+    [
+     {
+      "party": 3,
+      "units": 2
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1.5
+     },
+     {
+      "party": 2,
+      "units": 1.5
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 1
+     }
+    ],
+    [
+     {
+      "party": 2,
+      "units": 0.6666666666666666
+     }
+    ],
+    [
+     {
+      "party": 1,
+      "units": 1.0
+     },
+     {
+      "party": 3,
+      "units": 1.0
+     },
+     {
+      "party": 0,
+      "units": 1.0
+     },
+     {
+      "party": 2,
+      "units": 1.0
+     }
+    ],
+    [
+     {
+      "party": 0,
+      "units": 0.5
+     },
+     {
+      "party": 3,
+      "units": 1
+     },
+     {
+      "party": 1,
+      "units": 0.25
+     }
+    ]
+   ],
+   "expect": {
+    "total": 33408,
+    "netItems": 32825,
+    "lineNet": [
+     4163,
+     2773,
+     5927,
+     1576,
+     5530,
+     3863,
+     2472,
+     3015,
+     3506
+    ],
+    "charges": [
+     583
+    ],
+    "overflow": 0,
+    "spread": [],
+    "parties": [
+     {
+      "total": 8542,
+      "subtotal": 8395,
+      "lines": [
+       0,
+       925,
+       1976,
+       0,
+       0,
+       3863,
+       0,
+       754,
+       877
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       147
+      ]
+     },
+     {
+      "total": 5535,
+      "subtotal": 5439,
+      "lines": [
+       0,
+       0,
+       1482,
+       0,
+       2765,
+       0,
+       0,
+       754,
+       438
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       96
+      ]
+     },
+     {
+      "total": 7038,
+      "subtotal": 6915,
+      "lines": [
+       0,
+       924,
+       0,
+       0,
+       2765,
+       0,
+       2472,
+       754,
+       0
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       123
+      ]
+     },
+     {
+      "total": 9333,
+      "subtotal": 9169,
+      "lines": [
+       4163,
+       924,
+       0,
+       1576,
+       0,
+       0,
+       0,
+       753,
+       1753
+      ],
+      "savings": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "charges": [
+       164
+      ]
+     }
+    ],
+    "unassigned": {
+     "total": 2960,
+     "subtotal": 2907
+    }
+   }
   }
  ],
  "parse": [
@@ -44425,6 +57293,76 @@
    "10.999",
    "KWD",
    10.999
+  ],
+  [
+   "12.990",
+   "CLP",
+   12990
+  ],
+  [
+   "$12.990",
+   "CLP",
+   12990
+  ],
+  [
+   "$ 45.000",
+   "COP",
+   45000
+  ],
+  [
+   "45.000",
+   "COP",
+   45000
+  ],
+  [
+   "$ 1.234.567",
+   "COP",
+   1234567
+  ],
+  [
+   "1.234,50",
+   "BRL",
+   1234.5
+  ],
+  [
+   "R$ 89,90",
+   "BRL",
+   89.9
+  ],
+  [
+   "1 234,50 kr",
+   "SEK",
+   1234.5
+  ],
+  [
+   "1 234,50 kr",
+   "SEK",
+   1234.5
+  ],
+  [
+   "CHF 1’234.50",
+   "CHF",
+   1234.5
+  ],
+  [
+   "CHF 1'234.50",
+   "CHF",
+   1234.5
+  ],
+  [
+   "4 500 Ft",
+   "HUF",
+   4500
+  ],
+  [
+   "1 299,00 Kc",
+   "CZK",
+   1299
+  ],
+  [
+   "S/ 45.90",
+   "PEN",
+   45.9
   ]
  ],
  "kinds": [
@@ -44615,6 +57553,46 @@
    0,
    "USD",
    "0.00"
+  ],
+  [
+   12990,
+   "CLP",
+   "12990"
+  ],
+  [
+   4500000,
+   "COP",
+   "45000"
+  ],
+  [
+   3333333,
+   "COP",
+   "33333.33"
+  ],
+  [
+   450000,
+   "HUF",
+   "4500"
+  ],
+  [
+   333350,
+   "HUF",
+   "3333.50"
+  ],
+  [
+   0,
+   "COP",
+   "0"
+  ],
+  [
+   4550,
+   "BRL",
+   "45.50"
+  ],
+  [
+   123450,
+   "SEK",
+   "1234.50"
   ]
  ]
 }

@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  billMath, chargeKind, linkAmountMinor, parseAmount, splitBill, toMinor, scale,
+  billMath, chargeKind, convertMinor, linkAmountMinor, parseAmount, splitBill, toMinor, scale,
 } from './money.js';
 import {
   claimValue, claimedUnits, isMultiUnit, liveTotals, normalizeLive, percentChargeRefresh, unitsLeft, unitsOf, withClaim,
@@ -268,4 +268,13 @@ test('stepper writes: withClaim + claimValue (true for one unit, numbers otherwi
   assert.equal(unitsLeft(gone), 2);
   // A legacy-shaped item (no claims map) still reads as one unit per claimer.
   assert.equal(unitsLeft({ qty: 2, claimedBy: ['x'] }), 1);
+});
+
+test('convertMinor: bounds and shapes (settle currency)', () => {
+  assert.equal(convertMinor(1e15, 'THB', 'GBP', 'GBP', '43.80'), 22831050228311, 'the largest share still converts');
+  assert.equal(convertMinor(1e15, 'GBP', 'VND', 'GBP', '999999999.999999999'), null, 'a result past 9e15 is refused');
+  assert.equal(convertMinor(12.5, 'THB', 'GBP', 'GBP', '43.80'), null, 'minor units are integers');
+  assert.equal(convertMinor(100, 'THB', 'GBP', 'GBP', 43.8), null, 'the rate is a string');
+  assert.equal(convertMinor(Number.NaN, 'THB', 'GBP', 'GBP', '43.80'), null);
+  assert.equal(convertMinor(120000, 'thb', 'gbp', 'gbp', '43.80'), 2740, 'codes are case-insensitive');
 });

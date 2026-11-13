@@ -294,7 +294,6 @@
   flex: none;
   box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgba(0, 0, 0, 0.08);
 }
-.pay-mark { display: grid; place-items: center; color: #fff; font: 700 18px/1 var(--font-rounded); }
 .pay-qr { background: #fff; object-fit: contain; padding: 2px; }
 .pay-option .row-title { font-weight: 600; }
 .pay-go {
@@ -350,6 +349,7 @@
 .pay-with strong { color: var(--text); font-weight: 600; }
 .pay-with-icon { display: inline-grid; place-items: center; color: var(--accent-text); flex: none; }
 .pay-with-icon .pay-logo { border-radius: 4px; }
+.section-title .pay-logo { border-radius: 5px; box-shadow: 0 0 0 0.5px var(--hairline); }
 .pay-card { display: grid; place-items: center; color: var(--accent-text); background: var(--accent-soft); }
 .via-chip {
   display: inline-flex;
@@ -423,6 +423,23 @@
 .bank-row.is-copied .copy-chip { background: var(--positive-soft); }
 .bank-row.is-copied .copy-idle { opacity: 0; transform: scale(0.7); }
 .bank-row.is-copied .copy-done { opacity: 1; transform: none; }
+/* If a browser blocks the copy, press and hold still selects the whole value. */
+.bank-row { -webkit-touch-callout: default; }
+.bank-value { -webkit-user-select: all; user-select: all; }
+/* Copy-and-open methods (Zelle, Bizum, IBAN, Pix…): the same rows, plus one copy button. */
+/* Their values can be long (an IBAN, a Pix key, an email): wrap, never cut. */
+.wraps .bank-value { white-space: normal; overflow-wrap: anywhere; }
+.pay-sheet .pay-primary .section { margin-top: 12px; }
+.pay-copy-btn { margin-top: 12px; }
+.pay-primary.is-pix .pay-copy-btn { margin-top: 16px; }
+.pay-primary.is-pix .pay-primary-note { margin-top: 10px; text-align: center; }
+.pay-key { margin-top: 4px; text-align: center; }
+.pay-key > summary { display: inline-flex; list-style: none; cursor: pointer; margin: 0; }
+.pay-key > summary::-webkit-details-marker { display: none; }
+.pay-key .section { text-align: start; }
+.pix-qr { margin: 16px 0 0; display: grid; justify-items: center; gap: 10px; }
+.pix-qr figcaption { font-size: var(--fs-footnote); line-height: var(--lh-footnote); color: var(--text-2); }
+.pix-qr svg { border-radius: var(--r-sm); background: #fff; box-shadow: 0 0 0 0.5px var(--hairline); }
 .pay-note {
   margin-top: 16px;
   padding: 0 12px;
@@ -470,6 +487,7 @@
 .form-row:focus-within { background: color-mix(in srgb, var(--accent-soft) 45%, transparent); }
 .form-price { display: flex; align-items: center; gap: 2px; flex: 1; min-width: 0; justify-content: flex-end; }
 .form-sym { color: var(--text-2); font: 600 var(--fs-body)/1 var(--font-rounded); }
+.form-sym.after { margin-inline-start: 0.25em; }
 .money-input { font-family: var(--font-rounded); font-weight: 600; font-variant-numeric: tabular-nums; flex: 0 0 auto; max-width: 10ch; }
 .stepper {
   display: inline-flex;
@@ -604,3 +622,8 @@
   /* Sits on the photo wash like the header: the same firmer secondary tone. */
   .assigned-note { --text-2: rgba(40, 40, 46, 0.86); }
 }
+
+/* Settle currency: the host's frozen rate, and the Zelle trademark notice (footnotes). */
+.pay-rate { margin: 4px 0 0; text-align: center; font-size: var(--fs-footnote); line-height: 18px; color: var(--text-2); font-variant-numeric: tabular-nums; }
+.pay-legal { margin: 8px 16px 0; text-align: center; font-size: var(--fs-caption, 12px); line-height: 16px; color: var(--text-2); }
+.share-settle { margin: 2px 0 0; font-size: var(--fs-footnote); color: var(--text-2); font-variant-numeric: tabular-nums; }

@@ -6,8 +6,9 @@ import {
   HOST_ID, liveTotals, normalizeLive, percentChargeRefresh, personFromLink, pickGuestColor, tablePhase, hasAnyPayMethod,
   UNIT_EPS, claimValue, claimedUnits, formatUnits, isMultiUnit, unitsLeft, unitsOf, withClaim,
 } from '../lib/bill.js';
-import { cleanVenueName, formatMoney, haptic, plural, roundMoney } from '../lib/format.js';
-import { exponent, parseAmount } from '../lib/money.js';
+import { cleanVenueName, currencyAffix, formatMoney, haptic, maxItemPrice, plural, roundMoney } from '../lib/format.js';
+import { parseAmount, toMinor } from '../lib/money.js';
+import { localeDecimal, plainAmount } from '../lib/payText.js';
 import { DELETE, NOW, subscribeShared, updateShared } from '../lib/store.js';
 import { useOnline, withViewTransition } from '../lib/motion.js';
 import { Avatar, AvatarStack, FacesProvider } from '../components/Avatar.jsx';
@@ -17,7 +18,8 @@ import { Row, Section } from '../components/Section.jsx';
 import { HeroArt } from '../components/HeroArt.jsx';
 import { Button, GlassBar } from '../components/Glass.jsx';
 import { Sheet } from '../components/Sheet.jsx';
-import { PayMethods } from '../components/Pay.jsx';
+import { PayMethods, SettleRateLine } from '../components/Pay.jsx';
+import { settledShare } from '../lib/payMethods.js';
 import {
   Backdrop, CompactBar, Footer, ImageViewer, LiveBadge, StatusPill, Toast, VenueHeader,
 } from '../components/Chrome.jsx';
@@ -540,6 +542,7 @@ function FindYourself({ bill, totals, hostName, onPick }) {
 // ── Your share ───────────────────────────────────────────
 function ShareCard({ me, bill, totals, myItems, myTotal, isPaid, paidAmt, topUp, phase, hostName, onNotMe, onOpenPay }) {
   const extras = totals.chargesFor(me.id).reduce((s, c) => s + c.share, 0);
+  const settle = settledShare(bill.payment, bill.currency, myTotal);
   const shared = myItems.filter((i) => i.claimedBy.length > 1).length;
   let sub;
   if (!myItems.length) {
@@ -565,6 +568,9 @@ function ShareCard({ me, bill, totals, myItems, myTotal, isPaid, paidAmt, topUp,
         ) : null}
       </div>
       <Money value={myTotal} currency={bill.currency} className={`share-total ${myTotal < 0.005 ? 'is-zero' : ''}`} />
+      {settle.settle && !isPaid && myTotal > 0.005 && (
+        <p className="share-settle">Your share {formatMoney(myTotal, bill.currency)} · you pay {formatMoney(settle.amount, settle.currency)}</p>
+      )}
       <p className="share-sub">{sub}</p>
       {isPaid && (
         <p className="share-paid-line">
@@ -779,23 +785,32 @@ function TableSection({ bill, totals, me }) {
 function PaySheetBody({ bill, totals, me, myItems, myTotal, mode, paidAmt, topUp, hostName, venue, onCopied, onOpenQr }) {
   const settled = mode === 'settled';
   const amount = mode === 'topup' && topUp ? topUp : myTotal;
+  // The host's settle currency (payment.settle): every button, link and Amount row carries
+  // the converted share. A top-up is the converted new share less the converted paid one.
+  const share = settledShare(bill.payment, bill.currency, myTotal);
+  let pay = share.settle ? share : { amount, currency: bill.currency, settle: null };
+  if (share.settle && mode === 'topup' && topUp) {
+    const paidThen = settledShare(bill.payment, bill.currency, paidAmt ?? 0);
+    pay = { ...share, amount: Math.max(0, share.amount - paidThen.amount) };
+  }
   const charges = totals.chargesFor(me.id).filter((c) => Math.abs(c.share) > 0.004);
   return (
     <div className="pay-sheet">
       <div className={`pay-hero ${settled ? 'is-settled' : ''}`}>
         {settled && <HeroArt name="paid" size={120} eager />}
-        <Money value={amount} currency={bill.currency} className="pay-amount" />
+        <Money value={settled ? amount : pay.amount} currency={settled ? bill.currency : pay.currency} className="pay-amount" />
         <p className="pay-hero-sub">
           {settled ? `You told ${hostName} you’ve paid. Nice one.`
             : mode === 'topup' && topUp ? `Your share went from ${formatMoney(paidAmt, bill.currency)} to ${formatMoney(myTotal, bill.currency)} after a change.`
-              : `Your share at ${venue}`}
+              : pay.settle ? `Your share ${formatMoney(myTotal, bill.currency)} at ${venue}` : `Your share at ${venue}`}
         </p>
       </div>
 
       {!settled && (
-        <PayMethods payment={bill.payment} amount={amount} currency={bill.currency} reference={venue}
+        <PayMethods payment={bill.payment} amount={pay.amount} currency={pay.currency} reference={venue}
           payee={hostName} onCopied={onCopied} onOpenQr={onOpenQr} />
       )}
+      {!settled && <SettleRateLine settle={pay.settle} billCurrency={bill.currency} host={hostName === 'the host' ? '' : hostName} />}
 
       <Section title="Your items" className="breakdown">
         {myItems.map((it) => (
@@ -840,12 +855,13 @@ function EditSheet({ open, item, currency, onClose, onSave, onDelete }) {
 function EditForm({ item, currency, onSave, onDelete }) {
   const isNew = item === 'new';
   const [name, setName] = useState(isNew ? '' : item.name);
-  const [price, setPrice] = useState(isNew ? '' : item.price.toFixed(exponent(currency)));
+  // The guest's own decimal mark ("12,50" in Germany); parseAmount reads either.
+  const [price, setPrice] = useState(isNew ? '' : plainAmount(toMinor(item.price, currency), currency, localeDecimal()));
   const [qty, setQty] = useState(isNew ? 1 : Math.max(1, Math.round(item.qty)));
   // Thousands separators and comma decimals ("1,234.50", "12,50", "¥1,200") — B12.
   const parsed = parseAmount(price, currency) ?? NaN;
-  const valid = name.trim().length > 0 && parsed > 0 && parsed < 100000;
-  const sym = formatMoney(0, currency).replace(/[\d.,\s]/g, '');
+  const valid = name.trim().length > 0 && parsed > 0 && parsed < maxItemPrice(currency);
+  const sym = currencyAffix(currency);
 
   return (
     <form className="edit-form" onSubmit={(e) => { e.preventDefault(); if (valid) onSave(item, { name: name.trim().slice(0, 60), price: roundMoney(parsed, currency), qty }); }}>
@@ -858,10 +874,12 @@ function EditForm({ item, currency, onSave, onDelete }) {
         <label className="form-row">
           <span className="form-label">Price</span>
           <span className="form-price">
-            <span className="form-sym" aria-hidden="true">{sym}</span>
+            {!sym.after && <span className="form-sym" aria-hidden="true">{sym.symbol}</span>}
             <input className="form-input money-input" value={price} onChange={(e) => setPrice(e.target.value)}
               style={{ width: `${Math.max(4, String(price).length + 0.5)}ch` }}
-              inputMode="decimal" placeholder="0.00" enterKeyHint="done" aria-label={`Price for the whole line, in ${currency}`} />
+              inputMode="decimal" placeholder={plainAmount(0, currency, localeDecimal())} enterKeyHint="done"
+              aria-label={`Price for the whole line, in ${currency}`} />
+            {sym.after && <span className="form-sym after" aria-hidden="true">{sym.symbol}</span>}
           </span>
         </label>
         <div className="form-row">

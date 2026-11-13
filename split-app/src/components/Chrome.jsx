@@ -8,6 +8,7 @@ import { HeroArt } from './HeroArt.jsx';
 import { Avatar } from './Avatar.jsx';
 import { Button, GlassIconButton } from './Glass.jsx';
 import { ArrowUpRight, CheckIcon, CloseIcon, StarIcon, WifiOffIcon } from './Icons.jsx';
+import { APP_STORE_URL } from '../lib/appStore.js';
 
 /** Soft accent wash at the top of the page; with a venue photo, a blurred, saturated
  *  pool of it behind the header (VenueBackdrop on iOS). */
@@ -152,7 +153,7 @@ export function StatusPill({ kind }) {
 export function Footer() {
   return (
     <footer className="footer">
-      <a className="get-app" href="https://apps.apple.com/app/onlybills" target="_blank" rel="noopener noreferrer">
+      <a className="get-app" href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">
         <picture>
           <source srcSet="app-icon-dark-128.png" media="(prefers-color-scheme: dark)" />
           <img src="app-icon-128.png" alt="" width="44" height="44" loading="lazy" />

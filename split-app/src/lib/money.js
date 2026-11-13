@@ -43,14 +43,58 @@ export const roundHalfAway = (x) => {
 export const toMinor = (amount, currency) => roundHalfAway((Number(amount) || 0) * scale(currency));
 export const toAmount = (minor, currency) => minor / scale(currency);
 
-/** The plain decimal a payment link wants: "24.60", "333" (JPY). Never negative. */
+/**
+ * Currencies with a minor unit on paper (ISO: 2 decimals) that nobody writes on a bill
+ * (CLDR cash digits 0): a WHOLE amount is shown, linked and copied without decimals
+ * ("$ 45.000", "4500 Ft", "45000"). The engine keeps the ISO precision, so an amount with
+ * centavos or fillér still shows them. Same as Money.wholeWhenEven in the app.
+ */
+export const WHOLE_WHEN_EVEN = new Set(['COP', 'HUF']);
+
+/** Digits to show for `minor`: the exponent, or 0 for a whole COP/HUF amount. */
+export const displayDigits = (minor, currency) => {
+  const c = code(currency);
+  return WHOLE_WHEN_EVEN.has(c) && Math.round(minor) % scale(c) === 0 ? 0 : exponent(c);
+};
+
+/** The plain decimal a payment link wants: "24.60", "333" (JPY), "45000" (whole COP). Never negative. */
 export const linkAmountMinor = (minor, currency) => {
-  const e = exponent(currency);
   const m = Math.max(0, Math.round(minor) || 0);
-  if (e === 0) return String(m);
+  const e = displayDigits(m, currency);
+  if (e === 0) return String(Math.floor(m / scale(currency)));
   const s = scale(currency);
   const frac = String(m % s).padStart(e, '0');
   return `${Math.floor(m / s)}.${frac}`;
+};
+
+// ── Settle currency (contract section 11) ────────────────
+/** A frozen rate as stored: digits, at most one dot, no sign or exponent. */
+export const RATE_SHAPE = /^(0|[1-9][0-9]{0,8})(\.[0-9]{1,9})?$/;
+
+/**
+ * One guest's share, converted exactly: `minor` of `from` into minor units of `to` at
+ * `rate`, where one `base` (either `from` or `to`) buys `rate` of the other. Integer
+ * maths (BigInt), half away from zero. minor ≤ 0 → 0; minor > 10^15, a malformed or zero
+ * rate, or a `base` that is neither currency → null. Same as Money.convert in the app.
+ */
+export const convertMinor = (minor, from, to, base, rate) => {
+  if (typeof rate !== 'string' || !RATE_SHAPE.test(rate)) return null;
+  if (typeof minor !== 'number' || !Number.isFinite(minor)) return null;
+  if (minor <= 0) return 0;
+  if (minor > 1e15 || !Number.isInteger(minor)) return null;
+  const f = code(from); const t = code(to); const b = code(base);
+  const [whole, frac = ''] = rate.split('.');
+  const M = BigInt(whole + frac);
+  if (M === 0n) return null;
+  const P = 10n ** BigInt(frac.length);
+  const Sb = BigInt(scale(f)); const Ss = BigInt(scale(t)); const m = BigInt(minor);
+  let N; let D;
+  if (b === t) { N = m * Ss * P; D = Sb * M; } // 1 settle = rate bill
+  else if (b === f) { N = m * Ss * M; D = Sb * P; } // 1 bill = rate settle
+  else return null;
+  let q = N / D;
+  if (2n * (N % D) >= D) q += 1n;
+  return q > 9000000000000000n ? null : Number(q);
 };
 
 // ── Parsing ──────────────────────────────────────────────

@@ -2,8 +2,9 @@
 // iOS engine (SplitSwift/SplitSwift/Money/). LiveBill in the app and liveTotals here
 // build the same engine bill from the same Firestore doc, so every guest total is
 // penny-identical on both (proven by the shared fixtures in money.test.mjs).
-import { toDate, formatMoney, linkAmount } from './format.js';
+import { toDate } from './format.js';
 import { chargeKind, splitBill, toAmount, toMinor } from './money.js';
+import { readPayment } from './payMethods.js';
 
 export const HOST_ID = 'gst_host';
 
@@ -335,97 +336,22 @@ export const normalizeStatic = (data) => ({
 });
 
 // ── Paying the host ───────────────────────────────────────
-// What a guest can pay WITH, per rail (researched Oct 2026). Guests kept assuming they
-// needed the host's app, so every option says what actually works. PayPal is honest:
-// guest card checkout isn't guaranteed. Mirrors PaymentMethodType.guestCapability (iOS).
-/**
- * What the guest pays WITH, the headline for each way to pay. Never the host's bank name:
- * guests read "Monzo" as "I need Monzo" and stopped (founder feedback, Oct 2026).
- */
-export const PAY_WITH = {
-  monzo: 'Apple Pay, card or bank transfer',
-  starling: 'Apple Pay or card',
-  revolut: 'Apple Pay or card',
-  paypal: 'PayPal',
-  venmo: 'Venmo',
-  bank: 'Bank transfer',
-};
-
-export const CAPABILITY = {
-  monzo: 'Apple Pay, card or bank transfer. No Monzo account needed',
-  starling: 'Apple Pay or card. No Starling account needed',
-  revolut: 'Apple Pay or card. No Revolut account needed',
-  paypal: 'PayPal account may be needed',
-  venmo: 'Venmo account needed',
-  bank: 'From any banking app',
-};
-
-/**
- * Deep links for each method the host set up, best payer experience first. Monzo and
- * PayPal accept an amount in the URL; Starling Settle Up and Revolut open the profile
- * and the guest types the amount (no amount format is documented for Settle Up).
- */
-export const buildPayOptions = (payment, { amount, currency, reference }) => {
-  const p = payment || {};
-  const amt = linkAmount(amount, currency);
-  const cur = (currency || 'GBP').toUpperCase();
-  const ref = encodeURIComponent((reference || 'Split').slice(0, 40));
-  const shown = formatMoney(amount, currency);
-  const handle = (s) => encodeURIComponent(String(s).trim().replace(/^@/, ''));
-  const filled = `${shown} filled in for you`;
-  const enter = `Enter ${shown} when it opens`;
-  const opts = [];
-
-  if (p.monzoUsername) opts.push({
-    key: 'monzo', label: 'Monzo', logo: 'logo-monzo.jpg',
-    href: `https://monzo.me/${handle(p.monzoUsername)}/${amt}?d=${ref}`,
-    note: filled, prefilled: true, capability: CAPABILITY.monzo, payWith: PAY_WITH.monzo,
-  });
-  if (p.starlingUsername) opts.push({
-    key: 'starling', label: 'Starling', logo: 'logo-starling.png',
-    href: `https://settleup.starlingbank.com/${handle(p.starlingUsername)}`,
-    note: enter, prefilled: false, capability: CAPABILITY.starling, payWith: PAY_WITH.starling,
-  });
-  if (p.revolutUsername) opts.push({
-    key: 'revolut', label: 'Revolut', logo: 'logo-revolut.png',
-    href: `https://revolut.me/${handle(p.revolutUsername)}`,
-    note: enter, prefilled: false, capability: CAPABILITY.revolut, payWith: PAY_WITH.revolut,
-  });
-  if (p.paypalUsername) opts.push({
-    key: 'paypal', label: 'PayPal', logo: 'logo-paypal.png',
-    href: `https://paypal.me/${handle(p.paypalUsername)}/${amt}${cur}`,
-    note: filled, prefilled: true, capability: CAPABILITY.paypal, payWith: PAY_WITH.paypal,
-  });
-  if (p.venmoHandle) opts.push({
-    key: 'venmo', label: 'Venmo', mark: 'V', tint: '#008cff',
-    href: `https://venmo.com/${handle(p.venmoHandle)}?txn=pay&amount=${amt}&note=${ref}`,
-    note: filled, prefilled: true, capability: CAPABILITY.venmo, payWith: PAY_WITH.venmo,
-  });
-  return opts;
-};
+// The methods, link builders and the `payment` reader live in payMethods.js (shared with
+// the iOS code through pay-vectors.json). This is the pay page's layout on top of them.
 
 /**
  * The pay page's layout: one primary way to pay, then "Other ways to pay".
- *  - primary: the host's `payment.defaultMethod` when it's still usable; otherwise the
- *    first link (best payer first); otherwise bank transfer. Docs from older apps have
- *    no defaultMethod and land on the first link — the old order, unchanged.
- *  - others: the remaining links. Bank details are ALWAYS shown under other ways
- *    (unless bank transfer is itself the primary).
- * → { primary: {kind:'link', opt} | {kind:'bank'} | null, others: opt[], bank: boolean }
+ *  - A document with `payment.methods` (regional payouts): the host's order, with anything
+ *    that cannot take the bill's currency moved below the rest.
+ *  - Any other document (every UK table, and older apps): the host's `defaultMethod` when
+ *    it is still usable, otherwise the first link, otherwise bank transfer; then the
+ *    remaining links, and bank details ALWAYS last (unless they are the primary).
+ * → { path, primary: option | null, others: option[] } (options: see readPayment).
  */
-export const payPlan = (payment, opts) => {
-  const links = buildPayOptions(payment, opts);
-  const bank = bankRows(payment).length > 0;
-  const wanted = String(payment?.defaultMethod || '').toLowerCase();
-  let primary = null;
-  if (wanted === 'bank' && bank) primary = { kind: 'bank' };
-  else {
-    const chosen = links.find((o) => o.key === wanted) || links[0];
-    if (chosen) primary = { kind: 'link', opt: chosen };
-    else if (bank) primary = { kind: 'bank' };
-  }
-  const others = primary?.kind === 'link' ? links.filter((o) => o !== primary.opt) : links;
-  return { primary, others, bank: bank && primary?.kind !== 'bank' };
+export const payPlan = (payment, { amount, currency, reference }) => {
+  const cur = currency || 'GBP';
+  const { path, options } = readPayment(payment, { amountMinor: toMinor(amount || 0, cur), currency: cur, reference });
+  return { path, primary: options[0] || null, others: options.slice(1) };
 };
 
 /** "Kyle" for "Pay Kyle £11.00": the live host's name, else the static doc's payeeName. */
@@ -434,15 +360,5 @@ export const payeeOf = (payment, fallback) => {
   return name && name !== 'the host' ? name : '';
 };
 
-export const bankRows = (payment) => {
-  const p = payment || {};
-  const rows = [];
-  if (p.bankAccountName) rows.push({ label: 'Name', value: String(p.bankAccountName) });
-  (Array.isArray(p.bankDetails) ? p.bankDetails : [])
-    .filter((f) => f && f.label && f.value)
-    .forEach((f) => rows.push({ label: String(f.label), value: String(f.value) }));
-  return rows;
-};
-
 export const hasAnyPayMethod = (payment) =>
-  buildPayOptions(payment, { amount: 0 }).length > 0 || bankRows(payment).length > 0 || !!payment?.qrCodeUrl;
+  readPayment(payment, { amountMinor: 0, currency: 'GBP' }).options.length > 0 || !!payment?.qrCodeUrl;
