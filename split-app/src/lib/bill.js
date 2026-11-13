@@ -2,7 +2,7 @@
 // iOS engine (SplitSwift/SplitSwift/Money/). LiveBill in the app and liveTotals here
 // build the same engine bill from the same Firestore doc, so every guest total is
 // penny-identical on both (proven by the shared fixtures in money.test.mjs).
-import { toDate } from './format.js';
+import { formatMoney, toDate } from './format.js';
 import { chargeKind, splitBill, toAmount, toMinor } from './money.js';
 import { readPayment } from './payMethods.js';
 
