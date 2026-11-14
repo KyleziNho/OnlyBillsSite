@@ -21,12 +21,15 @@ const front = (src) => Object.fromEntries((src.match(/^---\n([\s\S]*?)\n---/)?.[
 
 const jobs = [];
 const blogPosts = [];
-for (const dir of ['blog', 'how-to']) {
+// Spanish and Portuguese articles get a kicker in their own language (no category names yet).
+const KICKER = { es: 'Guía', pt: 'Guia' };
+for (const dir of ['blog', 'how-to', 'es/blog', 'br/blog']) {
   const d = path.join(HERE, 'content', dir);
   if (!fs.existsSync(d)) continue;
   for (const f of fs.readdirSync(d).filter((x) => x.endsWith('.md'))) {
     const fm = front(fs.readFileSync(path.join(d, f), 'utf8'));
-    jobs.push({ slug: f.replace(/\.md$/, ''), title: fm.title, kicker: dir === 'how-to' ? 'Tutorial' : fm.category || 'Article', art: fm.art || 'receipts' });
+    const kicker = KICKER[(fm.lang || '').slice(0, 2)] || (dir === 'how-to' ? 'Tutorial' : fm.category || 'Article');
+    jobs.push({ slug: f.replace(/\.md$/, ''), title: fm.title, kicker, art: fm.art || 'receipts' });
     if (dir === 'blog') blogPosts.push({ slug: f.replace(/\.md$/, ''), title: fm.title || '', seoTitle: fm.seoTitle, category: fm.category });
   }
 }

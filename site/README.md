@@ -18,14 +18,15 @@ cd .. && python3 -m http.server 8765          # preview at http://127.0.0.1:8765
 |---|---|
 | `content/blog/*.md` | Articles → `/blog/<slug>/`. Format and voice rules: `CONTENT_GUIDE.md` |
 | `content/how-to/*.md` | Tutorials → `/how-to/<slug>/` (ordered by `order`) |
-| `pages/home.mjs` | Home page (`/`) and its FAQ |
+| `pages/home.mjs` | Home pages: `/` (en-GB) and `/us/` (en-US), one template with a locale object each (`HOME_LOCALES`), paired by hreflang |
+| `content/es/blog/`, `content/br/blog/` | Spanish and Portuguese articles → `/es/blog/`, `/br/blog/`. Built with `noindex: true` until a native read (`CONTENT_GUIDE.md`) |
 | `static/css/site.css` | Site styles on top of `tokens.css` (copied from `split-app/src/design` at build) |
 | `static/shots/` | App screenshots, `<name>-light.webp` + `<name>-dark.webp` (640px wide) |
 | `static/og/` | Generated share images (`og.mjs`) |
 | `lib.mjs` | Layout, nav, footer, head tags, structured data (Organization, Person, MobileApplication), faces, art |
 | `topics.mjs` | Topic hubs at `/blog/topic/<slug>/`: one per category with 3+ articles, plus keyword clusters (tipping). New articles join automatically |
 
-The build writes only `index.html`, `404.html`, `about/`, `blog/`, `how-to/`, `tools/`, `vs/`, `assets/`,
+The build writes only `index.html`, `404.html`, `about/`, `blog/`, `how-to/`, `tools/`, `vs/`, `us/`, `es/`, `br/`, `assets/`,
 `sitemap.xml` and `robots.txt`. `tools/` holds only redirect pages: the free calculators were retired
 and each old URL forwards to the closest article (`REDIRECTS` in `build.mjs`, which is also where
 any other moved URL goes). It never touches `split/`, `privacy/`, `.well-known/`, `CNAME`

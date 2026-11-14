@@ -1,22 +1,22 @@
 // Builds the marketing site into the repo root (GitHub Pages serves it as-is).
 // Run: cd site && npm install && node build.mjs
-// Writes ONLY: index.html, 404.html, about/, blog/, how-to/, tools/ (redirects), vs/, assets/,
-// sitemap.xml, robots.txt. Never touches split/, privacy/, .well-known/, CNAME or split.html.
+// Writes ONLY: index.html, 404.html, about/, blog/, how-to/, tools/ (redirects), vs/, us/, es/,
+// br/, assets/, sitemap.xml, robots.txt. Never touches split/, privacy/, .well-known/, CNAME or split.html.
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
-import { SITE, esc, abs, fmtDate, shot, video, imessage, layout, appCta, ctaLine, crumbs, crumbsLd, icons, ORG, AUTHOR } from './lib.mjs';
+import { SITE, esc, abs, fmtDate, shot, video, imessage, layout, appCta, ctaLine, crumbs, crumbsLd, icons, ORG, AUTHOR, t, langOf, noticeBlock, SHOT_META } from './lib.mjs';
 import { resolveTopics } from './topics.mjs';
-import { homePage } from './pages/home.mjs';
+import { homePage, HOME_LOCALES } from './pages/home.mjs';
 import { aboutPage } from './pages/about.mjs';
 import { vsPage } from './pages/vs.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
-const OUT_DIRS = ['about', 'blog', 'how-to', 'tools', 'vs', 'assets'];
+const OUT_DIRS = ['about', 'blog', 'how-to', 'tools', 'vs', 'us', 'es', 'br', 'assets'];
 const errors = [];
 const warn = [];
 
@@ -39,14 +39,16 @@ const assetsV = crypto.createHash('sha1')
   .update(fs.readFileSync(path.join(ROOT, 'assets/css/tokens.css')))
   .digest('hex').slice(0, 8);
 const ogFor = (key) => (fs.existsSync(path.join(HERE, 'static/og', key + '.jpg')) ? abs(`/assets/og/${key}.jpg`) : undefined);
-const SHOTS = new Set(fs.readdirSync(path.join(HERE, 'static/shots')).map((f) => f.replace(/-(light|dark)\.webp$/, '')));
+const SHOTS = new Set(Object.keys(SHOT_META));
 
 const pages = []; // { path, lastmod, priority }
+const held = []; // built but noindexed until reviewed: no sitemap, still linted and link-checked
 function write(p, html, meta = {}) {
   const file = p.endsWith('/') ? path.join(ROOT, p, 'index.html') : path.join(ROOT, p);
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, html);
-  if (!meta.skipSitemap) pages.push({ path: p, lastmod: meta.lastmod, priority: meta.priority ?? 0.6 });
+  if (meta.held) held.push({ path: p });
+  else if (!meta.skipSitemap) pages.push({ path: p, lastmod: meta.lastmod, priority: meta.priority ?? 0.6 });
 }
 
 // ── Markdown with OnlyBills blocks ──────────────────────
@@ -68,7 +70,7 @@ const statCard = (parts, cls) => {
   return `<div class="card ${cls}"><span class="num">${esc(num)}</span><p>${inline(label || '')}</p>${source ? `<cite>${inline(source)}</cite>` : ''}</div>`;
 };
 
-function renderBody(md, file) {
+function renderBody(md, file, lang = 'en-GB') {
   const lines = md.split('\n');
   const out = [];
   for (let i = 0; i < lines.length; i += 1) {
@@ -86,8 +88,9 @@ function renderBody(md, file) {
     }
     if ((m = line.match(/^:::shot\s+([\w-]+)\s*(?:\|\s*(.*))?$/))) {
       if (!SHOTS.has(m[1])) { errors.push(`${file}: unknown screenshot "${m[1]}"`); continue; }
-      const cap = m[2] || '';
-      out.push('', `<figure class="figure shot-fig"><div class="shot-stage">${shot(m[1], cap.replace(/[*_`]/g, ''), 0)}</div>${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`, '');
+      // `:::shot name | caption | alt`: alt is optional and defaults to the caption.
+      const [cap = '', alt] = (m[2] || '').split(/\s+\|\s+/);
+      out.push('', `<figure class="figure shot-fig"><div class="shot-stage">${shot(m[1], (alt || cap).replace(/[*_`]/g, ''), 0)}</div>${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`, '');
       continue;
     }
     if ((m = line.match(/^:::video\s+([\w-]+)\s*(?:\|\s*(.*))?$/))) {
@@ -108,7 +111,7 @@ function renderBody(md, file) {
       out.push('', `<div class="note">${marked.parse(inner.join('\n'))}</div>`, '');
       continue;
     }
-    if ((m = line.match(/^:::cta\s*(.*)$/))) { out.push('', ctaLine(m[1] || undefined), ''); continue; }
+    if ((m = line.match(/^:::cta\s*(.*)$/))) { out.push('', ctaLine(m[1] || undefined, undefined, t(lang).ctaSub), ''); continue; }
     if (/^:::/.test(line)) { errors.push(`${file}: unknown block "${line}"`); continue; }
     out.push(line);
   }
@@ -119,16 +122,16 @@ const slugify = (s) => s.toLowerCase().replace(/<[^>]+>/g, '').replace(/&[a-z]+;
 const stripTags = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();
 
 /** Splits off "## FAQ" and "## Sources", renders the rest, returns pieces for the template. */
-function renderArticle(body, file) {
+function renderArticle(body, file, lang) {
   const sections = { main: [], faq: [], sources: [] };
   let cur = 'main';
   for (const line of body.split('\n')) {
-    if (/^##\s+(FAQ|Frequently asked questions)\s*$/i.test(line)) { cur = 'faq'; continue; }
-    if (/^##\s+Sources\s*$/i.test(line)) { cur = 'sources'; continue; }
+    if (/^##\s+(FAQ|Frequently asked questions|Preguntas frecuentes|Perguntas frequentes)\s*$/i.test(line)) { cur = 'faq'; continue; }
+    if (/^##\s+(Sources|Fuentes|Fontes)\s*$/i.test(line)) { cur = 'sources'; continue; }
     if (/^##\s+/.test(line) && cur !== 'main') cur = 'main';
     sections[cur].push(line);
   }
-  let html = marked.parse(renderBody(sections.main.join('\n'), file));
+  let html = marked.parse(renderBody(sections.main.join('\n'), file, lang));
   const toc = [];
   html = html.replace(/<h2>(.*?)<\/h2>/g, (_, inner) => {
     const id = slugify(inner);
@@ -149,7 +152,7 @@ function renderArticle(body, file) {
     const m = line.match(/^###\s+(.+)$/);
     if (m) { q = { q: m[1].trim(), a: [] }; faqs.push(q); } else if (q) q.a.push(line);
   }
-  faqs.forEach((f) => { f.html = marked.parse(renderBody(f.a.join('\n').trim(), file)); });
+  faqs.forEach((f) => { f.html = marked.parse(renderBody(f.a.join('\n').trim(), file, lang)); });
   const sourcesHtml = sections.sources.join('\n').trim()
     ? marked.parse(sections.sources.join('\n')).replace(/<a href="(https?:[^"]+)"/g, '<a href="$1" rel="noopener"') : '';
   const words = stripTags(html).split(/\s+/).length + faqs.reduce((n, f) => n + stripTags(f.html).split(/\s+/).length, 0);
@@ -165,6 +168,9 @@ function lint(file, text) {
   if (hits) warn.push(`${file}: wording to avoid: ${[...new Set(hits.map((h) => h.toLowerCase()))].join(', ')}`);
 }
 
+// `content/<dir>/` → `/<dir>/<slug>/`; `content/es/blog/` → `/es/blog/<slug>/` (and br).
+// Frontmatter `lang` (default en-GB), `noindex: true` (held back from the sitemap and search
+// until a native read), `hreflangTwin` (the other-language version), `trademarks`, `ctaShot`.
 function loadDir(dir, kind) {
   const full = path.join(HERE, 'content', dir);
   if (!fs.existsSync(full)) return [];
@@ -176,13 +182,38 @@ function loadDir(dir, kind) {
     for (const k of ['title', 'description', 'date']) if (!data[k]) errors.push(`${rel}: missing ${k}`);
     if (data.description && (data.description.length < 90 || data.description.length > 175)) warn.push(`${rel}: description is ${data.description.length} chars`);
     const slug = f.replace(/\.md$/, '');
-    return { kind, slug, file: rel, ...data, path: `/${dir}/${slug}/`, ...renderArticle(body, rel) };
+    const lang = langOf(data.lang);
+    if (data.lang && data.lang !== lang) errors.push(`${rel}: unknown lang "${data.lang}"`);
+    const noindex = data.noindex === 'true';
+    const trademarks = (data.trademarks || '').split(',').map((x) => x.trim()).filter(Boolean);
+    if (/\bZelle\b/.test(body) && !trademarks.includes('zelle')) errors.push(`${rel}: names Zelle, so it needs "trademarks: zelle"`);
+    return { kind, slug, file: rel, ...data, lang, noindex, trademarks, path: `/${dir}/${slug}/`, ...renderArticle(body.replace(/<!--[\s\S]*?-->\n?/g, ''), rel, lang) };
   });
 }
 
-const posts = loadDir('blog', 'blog').sort((a, b) => (b.date || '').localeCompare(a.date || '') || a.title.localeCompare(b.title));
+const byDate = (a, b) => (b.date || '').localeCompare(a.date || '') || a.title.localeCompare(b.title);
+// English articles make up /blog/, the hubs, the feed and the home lists. Spanish and
+// Portuguese articles live under /es/ and /br/ and are only linked from their English twins.
+const posts = loadDir('blog', 'blog').sort(byDate);
+const intl = [...loadDir('es/blog', 'blog'), ...loadDir('br/blog', 'blog')].sort(byDate);
+for (const p of [...posts, ...intl]) if (p.lang.startsWith('en') !== !intl.includes(p)) errors.push(`${p.file}: lang ${p.lang} in the wrong folder`);
 const tuts = loadDir('how-to', 'how-to').sort((a, b) => (Number(a.order) || 99) - (Number(b.order) || 99));
-const all = new Map([...posts, ...tuts].map((p) => [p.slug, p]));
+const all = new Map([...posts, ...tuts, ...intl].map((p) => [p.slug, p]));
+const byPath = new Map([...posts, ...tuts, ...intl].map((p) => [p.path, p]));
+
+/**
+ * hreflang pairs, both ways, only between indexable pages: a twin that is still noindexed
+ * (pending a native read) is left out until its `noindex` line is removed.
+ */
+function alternatesOf(p) {
+  if (p.noindex) return { alternates: [] };
+  const twin = p.hreflangTwin && byPath.get(p.hreflangTwin);
+  if (p.hreflangTwin && !twin) warn.push(`${p.file}: hreflangTwin ${p.hreflangTwin} not found`);
+  if (!twin || twin.noindex) return { alternates: [] };
+  if (twin.hreflangTwin !== p.path) errors.push(`${p.file}: twin ${twin.path} does not point back`);
+  const english = p.lang.startsWith('en') ? p : twin;
+  return { alternates: [[twin.lang, twin.path]], xDefault: english.path };
+}
 
 // ── Article / tutorial pages ────────────────────────────
 // Article lists are text only (the home page's post-list): no thumbnails, so a long list
@@ -199,14 +230,17 @@ const hubOf = (p) => topics.find((t) => t.category && t.category === p.category)
 
 function articlePage(p) {
   const isTut = p.kind === 'how-to';
-  const section = isTut ? ['How it works', '/how-to/'] : ['Articles', '/blog/'];
-  const hub = isTut ? null : hubOf(p);
-  const trail = [['Home', '/'], section, ...(hub ? [[hub.name, hub.path]] : []), [p.title, p.path]];
+  const S = t(p.lang);
+  const isIntl = intl.includes(p);
+  const section = isTut ? [S.tutorials, '/how-to/'] : [S.articles, '/blog/'];
+  const hub = isTut || isIntl ? null : hubOf(p);
+  // Spanish and Portuguese articles have no index of their own yet: Home › title.
+  const trail = isIntl ? [[S.home, '/'], [p.title, p.path]] : [[S.home, '/'], section, ...(hub ? [[hub.name, hub.path]] : []), [p.title, p.path]];
   const mins = Math.max(2, Math.round(p.words / 230));
   const related = (p.related || '').split(',').map((s) => s.trim()).filter(Boolean)
     .map((s) => { const r = all.get(s); if (!r) warn.push(`${p.file}: related "${s}" not found`); return r; })
     .filter(Boolean).slice(0, 3);
-  if (related.length < 3) {
+  if (related.length < 3 && !isIntl) {
     const pool = (isTut ? tuts : posts).filter((x) => x !== p && !related.includes(x) && (isTut || x.category === p.category));
     const extra = [...pool, ...posts.filter((x) => x !== p && !related.includes(x))];
     for (const x of extra) { if (related.length >= 3) break; if (!related.includes(x)) related.push(x); }
@@ -224,7 +258,7 @@ function articlePage(p) {
     description: p.description,
     datePublished: p.date,
     dateModified: p.updated || p.date,
-    inLanguage: 'en-GB',
+    inLanguage: p.lang,
     mainEntityOfPage: { '@type': 'WebPage', '@id': abs(p.path) },
     image: ogImg ? { '@type': 'ImageObject', url: ogImg, width: 1200, height: 630 } : { '@type': 'ImageObject', url: abs('/assets/img/og-card.jpg'), width: 1200, height: 800 },
     author: AUTHOR,
@@ -237,43 +271,48 @@ function articlePage(p) {
   if (p.faqs.length) ld.push({ '@type': 'FAQPage', mainEntity: p.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: stripTags(f.html) } })) });
 
   const tocLabel = (t) => t.replace(/^\d+\.\s*/, '');
-  const toc = !isTut && p.toc.length >= 4 ? `<details class="card toc"><summary><b>On this page</b><span class="quiet small">${p.toc.length + (p.faqs.length ? 1 : 0)} sections</span></summary><ul>${p.toc.map(([id, t]) => `<li><a href="#${id}">${esc(tocLabel(t))}</a></li>`).join('')}${p.faqs.length ? '<li><a href="#faq">Questions people ask</a></li>' : ''}</ul></details>` : '';
+  const toc = !isTut && p.toc.length >= 4 ? `<details class="card toc"><summary><b>${S.onThisPage}</b><span class="quiet small">${p.toc.length + (p.faqs.length ? 1 : 0)} ${S.sections}</span></summary><ul>${p.toc.map(([id, t]) => `<li><a href="#${id}">${esc(tocLabel(t))}</a></li>`).join('')}${p.faqs.length ? `<li><a href="#faq">${S.faq}</a></li>` : ''}</ul></details>` : '';
+  // The end card's screen: `ctaShot: name | alt` in frontmatter, else dollars on US pages.
+  const [ctaName, ctaAlt] = (p.ctaShot || '').split('|').map((x) => x.trim());
+  if (ctaName && !SHOTS.has(ctaName)) errors.push(`${p.file}: unknown ctaShot "${ctaName}"`);
+  const ctaScreen = ctaName ? [ctaName, ctaAlt || ''] : p.lang === 'en-US' ? ['guest-claiming-us', 'Friends tick what they had on their own phone and see their share in dollars.'] : undefined;
 
   const body = `
 <article>
   <div class="wrap wrap-prose">
     <header class="article-head">
       ${crumbs(trail)}
-      ${hub ? `<a class="eyebrow" href="${hub.path}">${esc(p.category)}</a>` : `<span class="eyebrow">${esc(isTut ? 'Tutorial' : p.category || 'Article')}</span>`}
+      ${hub ? `<a class="eyebrow" href="${hub.path}">${esc(p.category)}</a>` : `<span class="eyebrow">${esc(isTut ? S.tutorial : (isIntl ? '' : p.category) || S.article)}</span>`}
       <h1 class="h1">${esc(p.title)}</h1>
       <p class="lede">${esc(p.description)}</p>
-      <div class="byline"><img src="/assets/img/maker-avatar.jpg" width="40" height="40" alt=""><span><b><a href="/about/" style="color:inherit">Kyle</a>, founder of OnlyBills</b>${p.updated ? 'Updated ' + fmtDate(p.updated) : fmtDate(p.date)} · ${mins} min read</span></div>
+      <div class="byline"><img src="/assets/img/maker-avatar.jpg" width="40" height="40" alt=""><span><b><a href="/about/" style="color:inherit">Kyle</a>, ${S.byline}</b>${p.updated ? S.updated + ' ' + fmtDate(p.updated, p.lang) : fmtDate(p.date, p.lang)} · ${mins} ${S.minRead}</span></div>
     </header>
     <div class="prose">
       ${toc}
       ${p.html}
-      ${p.faqs.length ? `<h2 id="faq">Questions people ask</h2><div class="faq">${p.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="answer">${f.html}</div></details>`).join('')}</div>` : ''}
+      ${p.faqs.length ? `<h2 id="faq">${S.faq}</h2><div class="faq">${p.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="answer">${f.html}</div></details>`).join('')}</div>` : ''}
       ${tutNav}
-      ${p.sourcesHtml ? `<h2 id="sources">Sources</h2><div class="sources">${p.sourcesHtml}</div>` : ''}
-      <div class="share-row"><span>Share</span><button type="button" data-share data-title="${esc(p.title)}">${icons.link}<span>Copy link</span></button><a href="https://wa.me/?text=${encodeURIComponent(p.title + ' ' + abs(p.path))}" rel="noopener">WhatsApp</a></div>
+      ${p.sourcesHtml ? `<h2 id="sources">${S.sources}</h2><div class="sources">${p.sourcesHtml}</div>` : ''}${noticeBlock(p.trademarks)}
+      <div class="share-row"><span>${S.share}</span><button type="button" data-share data-title="${esc(p.title)}">${icons.link}<span>${S.copyLink}</span></button><a href="https://wa.me/?text=${encodeURIComponent(p.title + ' ' + abs(p.path))}" rel="noopener">WhatsApp</a></div>
     </div>
   </div>
 </article>
 <section class="article-foot">
   <div class="wrap wrap-prose">
-    ${appCta(isTut ? 'Try it on your next bill' : undefined, undefined, isTut ? 'tutorial-end' : 'article-end')}
-    <h2 class="list-head">Keep reading</h2>
+    ${appCta(isTut ? 'Try it on your next bill' : S.endHeading, S.endSub, isTut ? 'tutorial-end' : 'article-end', ctaScreen, S.download)}
+    <h2 class="list-head">${S.keepReading}</h2>
     ${postList(related)}
   </div>
 </section>`;
-  write(p.path, layout({ path: p.path, title: p.seoTitle || p.title, description: p.description, body, schema: ld, ogType: 'article', ogImage: ogFor(p.slug), current: section[1], assetsV,
+  write(p.path, layout({ path: p.path, title: p.seoTitle || p.title, description: p.description, body, schema: ld, ogType: 'article', ogImage: ogFor(p.slug), current: isIntl ? undefined : section[1], assetsV,
+    lang: p.lang, noindex: p.noindex, ...alternatesOf(p),
     extraHead: `<meta property="article:published_time" content="${p.date}">
 <meta property="article:modified_time" content="${p.updated || p.date}">
 <meta property="article:author" content="${abs('/about/')}">${p.category ? `
 <meta property="article:section" content="${esc(p.category)}">` : ''}` }),
-  { lastmod: p.updated || p.date, priority: isTut ? 0.7 : 0.6 });
+  { lastmod: p.updated || p.date, priority: isTut ? 0.7 : 0.6, held: p.noindex });
 }
-[...posts, ...tuts].forEach(articlePage);
+[...posts, ...tuts, ...intl].forEach(articlePage);
 
 // ── Index pages ─────────────────────────────────────────
 // Type-led and text-only, like the home page's article list: a big heading, the newest
@@ -309,7 +348,7 @@ const topicLine = (t) => `<a class="post-line with-desc" href="${t.path}"><b>${e
     </section>` : ''}
   </div>
 </section>`;
-  write('/blog/', layout({ path: '/blog/', title: 'Articles on splitting the bill and tipping in the UK', description: 'Fair ways to split a bill, UK tipping and service charge rules, research on why groups overspend, and scripts for asking friends to pay you back.', body, current: '/blog/', assetsV,
+  write('/blog/', layout({ path: '/blog/', title: 'Articles on splitting the bill and tipping', description: 'Fair ways to split a bill, tipping and service charge at home and abroad, paying friends back in your country, and research on why groups overspend.', body, current: '/blog/', assetsV,
     schema: [crumbsLd(trail), { '@type': ['CollectionPage', 'Blog'], '@id': abs('/blog/') + '#blog', name: 'OnlyBills articles', url: abs('/blog/'), inLanguage: 'en-GB', publisher: { '@id': SITE.url + '/#org' },
       blogPost: posts.map((p) => ({ '@type': 'BlogPosting', '@id': abs(p.path) + '#article', headline: p.title, url: abs(p.path), datePublished: p.date })) }] }),
   { priority: 0.8, lastmod: newest(posts) });
@@ -356,7 +395,7 @@ for (const t of topics) {
     <p class="index-foot">Friend sent you a link? You don’t need the app: <a href="/how-to/claim-your-items-without-the-app/">here’s how claiming works</a>.</p>
   </div>
 </section>`;
-  write('/how-to/', layout({ path: '/how-to/', title: 'How to use OnlyBills: tutorials', description: 'Step-by-step OnlyBills tutorials: scan a receipt, share a live table, split shared dishes and service, get paid back by Monzo, Starling, Revolut or PayPal.', body, current: '/how-to/', assetsV,
+  write('/how-to/', layout({ path: '/how-to/', title: 'How to use OnlyBills: tutorials', description: 'Step-by-step OnlyBills tutorials: scan a receipt, share a live table, split shared dishes and service, and get paid back wherever you live.', body, current: '/how-to/', assetsV,
     schema: [crumbsLd(trail), { '@type': 'CollectionPage', '@id': abs('/how-to/') + '#tutorials', name: 'OnlyBills tutorials', url: abs('/how-to/'), inLanguage: 'en-GB', about: { '@id': SITE.url + '/#app' },
       mainEntity: { '@type': 'ItemList', itemListElement: tuts.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(t.path), name: t.title })) } }] }),
   { priority: 0.8, lastmod: newest(tuts) });
@@ -364,7 +403,7 @@ for (const t of topics) {
 
 // ── Home, about, 404 ────────────────────────────────────
 const ctx = { ogFor, posts, tuts, topics, assetsV, write, layout, warn, errors };
-homePage(ctx);
+for (const loc of HOME_LOCALES) homePage(ctx, loc);
 aboutPage(ctx);
 vsPage(ctx);
 // Old URLs that moved: a tiny page that forwards (GitHub Pages has no server redirects).
@@ -411,7 +450,7 @@ const gitDate = (...files) => {
     return execFileSync('git', ['log', '-1', '--format=%cs', '--', ...rel], { cwd: ROOT, encoding: 'utf8' }).trim() || today;
   } catch { return today; }
 };
-const TEMPLATE_DATES = { '/': ['pages/home.mjs'], '/about/': ['pages/about.mjs'] };
+const TEMPLATE_DATES = { '/': ['pages/home.mjs'], '/us/': ['pages/home.mjs'], '/about/': ['pages/about.mjs'] };
 for (const u of pages) {
   if (u.lastmod) continue;
   const src = TEMPLATE_DATES[u.path];
@@ -429,6 +468,7 @@ ${urls.map((u) => `  <url><loc>${abs(u.path)}</loc><lastmod>${u.lastmod || today
 // noindex, and blocked URLs can still be indexed from links ("Indexed, though blocked").
 fs.writeFileSync(path.join(ROOT, 'robots.txt'), `User-agent: *
 Allow: /
+Disallow: /admin/
 
 Sitemap: ${abs('/sitemap.xml')}
 `);
@@ -447,7 +487,7 @@ ${posts.slice(0, 30).map((p) => `<item><title>${esc(p.title)}</title><link>${abs
 
 // ── Report ──────────────────────────────────────────────
 // Every page's built HTML is linted for dashes too (templates).
-for (const pg of pages) {
+for (const pg of [...pages, ...held]) {
   const f = pg.path.endsWith('/') ? path.join(ROOT, pg.path, 'index.html') : path.join(ROOT, pg.path);
   const visible = fs.readFileSync(f, 'utf8').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '');
   if (/[—–]/.test(visible)) errors.push(`${pg.path}: em/en dash in built page`);
@@ -463,9 +503,10 @@ for (const pg of pages) {
 // SEO checks across every built page, so new articles and templates get them too.
 {
   const seen = { title: new Map(), description: new Map() };
-  for (const pg of pages) {
+  for (const pg of [...pages, ...held]) {
     const f = pg.path.endsWith('/') ? path.join(ROOT, pg.path, 'index.html') : path.join(ROOT, pg.path);
     const h = fs.readFileSync(f, 'utf8');
+    if (held.includes(pg) && !/<meta name="robots" content="noindex">/.test(h)) errors.push(`${pg.path}: held page without noindex`);
     const title = (h.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
     const desc = (h.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '';
     const plain = (x) => x.replace(/&amp;/g, '&').replace(/&quot;/g, '"');
@@ -476,7 +517,7 @@ for (const pg of pages) {
     }
     const h1s = (h.match(/<h1[\s>]/g) || []).length;
     if (h1s !== 1) errors.push(`${pg.path}: ${h1s} <h1> (want exactly 1)`);
-    if (!/rel="canonical"/.test(h)) errors.push(`${pg.path}: no canonical`);
+    if (!held.includes(pg) && !/rel="canonical"/.test(h)) errors.push(`${pg.path}: no canonical`);
     for (const m of h.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
       try { JSON.parse(m[1]); } catch (e) { errors.push(`${pg.path}: bad JSON-LD (${e.message})`); }
     }
@@ -488,5 +529,6 @@ for (const pg of pages) {
 }
 const uniq = (xs) => [...new Set(xs)];
 console.log(`Built ${pages.length} pages (${posts.length} articles, ${tuts.length} tutorials). Assets v${assetsV}.`);
+if (held.length) console.log(`Noindexed until reviewed (not in the sitemap): ${held.map((h) => h.path).join(', ')}`);
 if (warn.length) console.log('Warnings:\n  ' + uniq(warn).join('\n  '));
 if (errors.length) { console.error('Errors:\n  ' + uniq(errors).join('\n  ')); process.exitCode = 1; }
