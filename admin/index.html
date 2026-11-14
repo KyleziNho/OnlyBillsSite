@@ -352,7 +352,7 @@ main{max-width:960px;margin:0 auto;padding:24px var(--gutter) 96px}
       const prev = i ? (num(steps[i - 1].users) ?? 0) : null;
       const w = first > 0 ? Math.min(100, u / first * 100) : 0;
       let sub = '';
-      if (prev !== null) sub = prev < 5 ? TOO_FEW : Math.round(u / prev * 100) + '% of the previous step';
+      if (prev !== null) sub = first < 5 ? TOO_FEW : Math.round(u / first * 100) + '% of those who opened the app';
       return `<li><div class="step-top"><span>${esc(STEP_LABELS[s.step] || label(s.step))}</span>` +
         `<span class="row-value">${esc(fmt(u))}</span></div>` +
         `<div class="track" aria-hidden="true"><span style="width:${w.toFixed(1)}%"></span></div>` +
@@ -472,7 +472,7 @@ main{max-width:960px;margin:0 auto;padding:24px var(--gutter) 96px}
     const list = arr(m.screens);
     const body = list.length
       ? `<div class="group"><table class="tbl"><thead><tr><th scope="col">Screen</th><th scope="col">Views</th><th scope="col">Users</th></tr></thead><tbody>` +
-        list.map(x => `<tr><td>${esc(label(x.screen))}</td><td class="n">${esc(fmt(x.views))}</td><td class="n">${esc(fmt(x.users))}</td></tr>`).join('') +
+        list.map(x => `<tr><td>${esc(['(not set)', '(unknown)'].includes(String(x.screen).trim()) ? 'Other' : label(x.screen))}</td><td class="n">${esc(fmt(x.views))}</td><td class="n">${esc(fmt(x.users))}</td></tr>`).join('') +
         `</tbody></table></div>`
       : group(`<p class="none">Nothing yet.</p>`);
     return block('h-screens', 'Top screens', body, true);
