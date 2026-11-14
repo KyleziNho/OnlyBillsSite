@@ -58,7 +58,7 @@ code{background:var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
   <div id="setup" class="notice err" hidden></div>
 
   <section id="signed-out" class="row">
-    <button id="signin">Sign in with GitHub</button>
+    <button id="signin">Sign in with Google</button>
     <span class="muted" id="signin-msg"></span>
   </section>
 
@@ -121,7 +121,7 @@ code{background:var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
   firebase.initializeApp(CONFIG);
   const auth = firebase.auth();
   const db = firebase.firestore();
-  const provider = new firebase.auth.GithubAuthProvider();
+  const provider = new firebase.auth.GoogleAuthProvider();
 
   $('signin').addEventListener('click', async () => {
     $('signin-msg').textContent = '';
@@ -137,7 +137,7 @@ code{background:var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
     show('signed-out', !user);
     show('signed-in', !!user);
     if (!user) return;
-    $('who').textContent = 'Signed in as ' + (user.displayName || user.email || 'GitHub user') + '. Firebase uid: ' + user.uid;
+    $('who').textContent = 'Signed in as ' + (user.displayName || user.email || 'signed-in user') + '. Firebase uid: ' + user.uid;
     setErr('denied', '');
     show('content', false);
     try {
