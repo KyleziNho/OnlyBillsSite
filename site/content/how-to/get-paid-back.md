@@ -26,6 +26,8 @@ The first screen asks "Do you use any of these?" with Monzo, Starling, Revolut a
 
 Pick one and tap **Continue**. If you bank somewhere else, tap **None of these**. Any bank works for bank transfers. These four are suggested because they give you a payment link that friends can tap.
 
+Outside the UK, OnlyBills suggests the usual ways to get paid where you live, such as Venmo in the US or Bizum in Spain: see [how to get paid back outside the UK](/how-to/get-paid-back-outside-the-uk/). For a bill in another currency, friends can [pay you back in your own currency](/how-to/pay-back-in-your-own-currency/).
+
 :::shot host-08b-payout-monzo | Monzo picked, ready to continue.
 
 ## 2. Add your link

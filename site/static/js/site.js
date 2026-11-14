@@ -34,7 +34,7 @@
   const scheme = () => (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   const loadVideo = (v, name) => {
     const m = scheme();
-    v.poster = `/assets/video/${name}-${m}-poster.jpg`;
+    v.poster = `/assets/video/${name}-${m}-poster.webp`;
     v.innerHTML = `<source src="/assets/video/${name}-${m}.webm" type="video/webm"><source src="/assets/video/${name}-${m}.mp4" type="video/mp4">`;
     v.dataset.loaded = name; v.load();
   };
@@ -46,7 +46,7 @@
   $$('video[data-video]').forEach((v) => {
     const name = v.dataset.video;
     const replay = v.parentElement.querySelector('.vid-replay');
-    v.poster = `/assets/video/${name}-${scheme()}-poster.jpg`;
+    v.poster = `/assets/video/${name}-${scheme()}-poster.webp`;
     if (capture) return;
     if (replay) replay.addEventListener('click', () => { if (v.dataset.loaded !== name) loadVideo(v, name); v.currentTime = 0; replay.hidden = true; tryPlay(v); });
     v.addEventListener('ended', () => { if (replay) replay.hidden = false; });
@@ -134,7 +134,7 @@
   $$('video[data-lazy-loop]').forEach((v) => {
     const narrow = matchMedia('(max-width: 699px)').matches;
     const base = narrow ? v.dataset.srcNarrow : v.dataset.srcWide;
-    v.poster = base + '-poster.jpg';
+    v.poster = base + '-poster.webp';
     if (capture || reduce) return;
     let loaded = false;
     visible(v, () => {

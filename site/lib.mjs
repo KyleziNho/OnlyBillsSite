@@ -1,4 +1,7 @@
 // Shared bits for every page: constants, escaping, faces, icons and the page layout.
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { preferredFace, assignFaces, faceKey } from '../split-app/src/lib/faces.js';
 
 export const SITE = {
@@ -19,8 +22,71 @@ export const esc = (s = '') => String(s)
 
 export const abs = (path) => SITE.url + path;
 
-export const fmtDate = (iso) => new Date(iso + 'T12:00:00Z')
-  .toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+export const fmtDate = (iso, lang = 'en-GB') => new Date(iso + 'T12:00:00Z')
+  .toLocaleDateString(lang, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+/**
+ * Page languages. en-GB is the default and the site's voice; en-US pages use US spelling,
+ * dollars and "check". es-ES, es-419 and pt-BR pages are built but stay noindexed until a
+ * native speaker has read them (see CONTENT_GUIDE.md). `og` is the Open Graph locale.
+ */
+export const LANGS = {
+  'en-GB': { og: 'en_GB' },
+  'en-US': { og: 'en_US' },
+  'es-ES': { og: 'es_ES' },
+  'es-419': { og: 'es_LA' },
+  'pt-BR': { og: 'pt_BR' },
+};
+export const langOf = (lang) => (LANGS[lang] ? lang : 'en-GB');
+const EN = {
+  home: 'Home', articles: 'Articles', tutorials: 'How it works', updated: 'Updated', minRead: 'min read',
+  byline: 'founder of OnlyBills', faq: 'Questions people ask', sources: 'Sources', keepReading: 'Keep reading',
+  share: 'Share', copyLink: 'Copy link', onThisPage: 'On this page', sections: 'sections',
+  ctaSub: 'OnlyBills is free on iPhone, and your friends don’t need the app.',
+  endHeading: 'Split it fairly in a minute',
+  endSub: 'Scan the receipt. Friends tap what they had on their own phone. Free, with no sign-up.',
+  download: 'Download on the', tutorial: 'Tutorial', article: 'Article',
+};
+const ES = {
+  home: 'Inicio', articles: 'Artículos', tutorials: 'Cómo funciona', updated: 'Actualizado', minRead: 'min de lectura',
+  byline: 'fundador de OnlyBills', faq: 'Preguntas frecuentes', sources: 'Fuentes', keepReading: 'Sigue leyendo',
+  share: 'Compartir', copyLink: 'Copiar enlace', onThisPage: 'En esta página', sections: 'secciones',
+  ctaSub: 'OnlyBills es gratis en iPhone, y tus amigos no necesitan la app. La app está en inglés por ahora.',
+  endHeading: 'Divide la cuenta en un minuto',
+  endSub: 'Escanea el ticket. Cada amigo marca lo suyo en su propio móvil. Gratis y sin registro.',
+  download: 'Descárgala en', tutorial: 'Tutorial', article: 'Artículo',
+};
+/** Template strings per language (article chrome, the CTA card). Nav and footer stay English. */
+export const STRINGS = {
+  'en-GB': EN,
+  'en-US': EN,
+  'es-ES': ES,
+  'es-419': ES,
+  'pt-BR': {
+    home: 'Início', articles: 'Artigos', tutorials: 'Como funciona', updated: 'Atualizado', minRead: 'min de leitura',
+    byline: 'fundador do OnlyBills', faq: 'Perguntas frequentes', sources: 'Fontes', keepReading: 'Continue lendo',
+    share: 'Compartilhar', copyLink: 'Copiar link', onThisPage: 'Nesta página', sections: 'seções',
+    ctaSub: 'O OnlyBills é grátis no iPhone, e seus amigos não precisam do app. O app está em inglês por enquanto.',
+    endHeading: 'Divida a conta em um minuto',
+    endSub: 'Escaneie a nota. Cada amigo marca o que pediu no próprio celular. Grátis e sem cadastro.',
+    download: 'Baixe na', tutorial: 'Tutorial', article: 'Artigo',
+  },
+};
+export const t = (lang) => STRINGS[langOf(lang)];
+
+/**
+ * Trademark lines. `payments` is the non-affiliation line every page naming payment brands
+ * carries; `zelle` is the notice the app shows (PayoutText.zelleNotice), required on any page
+ * that names Zelle. Legal wording: keep these in English on every page.
+ */
+export const NOTICES = {
+  payments: 'OnlyBills is not affiliated with, endorsed or sponsored by any payment provider named here. All trademarks belong to their owners.',
+  zelle: 'Zelle® is a registered trademark of Early Warning Services, LLC. ONLYBILLS IS NOT AUTHORIZED, ENDORSED, OR SPONSORED BY EARLY WARNING SERVICES, LLC, OWNER OF ZELLE®.',
+};
+export const noticeBlock = (keys = []) => {
+  const lines = ['payments', 'zelle'].filter((k) => keys.includes(k));
+  return lines.length ? `<div class="tm-notice">${lines.map((k) => `<p>${esc(NOTICES[k])}</p>`).join('')}</div>` : '';
+};
 
 /** A person's 3D face, the same one the app and guest page would give that name. */
 export const faceOf = (name) => preferredFace(faceKey({ name }));
@@ -29,14 +95,42 @@ export const facesFor = (names) => assignFaces(names.map((name) => ({ key: faceK
 export const face = (name, size = 40, alt = '', id = faceOf(name)) =>
   `<img class="face" style="--size:${size}px" src="/assets/faces/${id}.webp" width="${size}" height="${size}" alt="${esc(alt)}" loading="lazy" decoding="async">`;
 
+/** Size of a WebP file from its header (VP8, VP8L or VP8X), or null. */
+function webpSize(file) {
+  const b = fs.readFileSync(file);
+  if (b.toString('ascii', 0, 4) !== 'RIFF' || b.toString('ascii', 8, 12) !== 'WEBP') return null;
+  const chunk = b.toString('ascii', 12, 16);
+  if (chunk === 'VP8X') return [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)];
+  if (chunk === 'VP8L') { const n = b.readUInt32LE(21); return [1 + (n & 0x3fff), 1 + ((n >> 14) & 0x3fff)]; }
+  if (chunk === 'VP8 ') return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+  return null;
+}
+/**
+ * Screens in static/shots: `<name>-light.webp`, plus `<name>-dark.webp` when there is a dark
+ * capture. Light-only shots (most 2.3 marketing captures) show the light screen in both modes.
+ */
+const SHOTS_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), 'static/shots');
+export const SHOT_META = {};
+for (const f of fs.readdirSync(SHOTS_DIR)) {
+  const m = f.match(/^(.+)-(light|dark)\.webp$/);
+  if (!m) continue;
+  const e = (SHOT_META[m[1]] ||= { dark: false, size: null });
+  if (m[2] === 'dark') e.dark = true; else e.size = webpSize(path.join(SHOTS_DIR, f));
+}
+
 /** A screenshot in a phone frame, light/dark picked by the system. */
-export const shot = (base, alt, width = 300, eager = false) => `<div class="phone"${width ? ` style="--w:${width}px"` : ''}><picture><source srcset="/assets/shots/${base}-dark.webp" media="(prefers-color-scheme: dark)"><img src="/assets/shots/${base}-light.webp" width="640" height="1391" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></picture></div>`;
+export const shot = (base, alt, width = 300, eager = false) => {
+  const meta = SHOT_META[base] || { dark: true, size: null };
+  // The original 640×1392 set has always printed 1391; other sizes print their real size.
+  const [w, h] = meta.size && !(meta.size[0] === 640 && meta.size[1] === 1392) ? meta.size : [640, 1391];
+  return `<div class="phone"${width ? ` style="--w:${width}px"` : ''}><picture>${meta.dark ? `<source srcset="/assets/shots/${base}-dark.webp" media="(prefers-color-scheme: dark)">` : ''}<img src="/assets/shots/${base}-light.webp" width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></picture></div>`;
+};
 
 /**
  * A real screen recording of the app in a phone frame. site.js picks the light or dark
  * file, loads it only when it scrolls into view, and plays it once (tap to replay).
  */
-export const video = (name, alt, width = 300, attrs = '') => `<div class="phone vid"${width ? ` style="--w:${width}px"` : ''}><video muted playsinline preload="none" poster="/assets/video/${name}-light-poster.jpg" data-video="${name}" aria-label="${esc(alt)}" ${attrs}></video><button class="vid-replay" type="button" hidden aria-label="Play again"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button></div>`;
+export const video = (name, alt, width = 300, attrs = '') => `<div class="phone vid"${width ? ` style="--w:${width}px"` : ''}><video muted playsinline preload="none" poster="/assets/video/${name}-light-poster.webp" data-video="${name}" aria-label="${esc(alt)}" ${attrs}></video><button class="vid-replay" type="button" hidden aria-label="Play again"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button></div>`;
 
 /**
  * A stylised sent message with a rich link preview (the `:::imessage` block): a right-aligned
@@ -62,12 +156,12 @@ export const storeButton = (label = 'Download on the', where = 'hero') =>
  * The end-of-page app card: a small version of the home page's luminous blue closer, with a
  * real screen rising from the bottom edge and one App Store button. One per page.
  */
-export const appCta = (heading = 'Split it fairly in a minute', sub = 'Scan the receipt. Friends tap what they had on their own phone. Free, with no sign-up.', where = 'article', screen = ['guest-05-live', 'A live table: your share of £22.22 adds up as you tap what you had']) => `
+export const appCta = (heading = EN.endHeading, sub = EN.endSub, where = 'article', screen = ['guest-05-live', 'A live table: your share of £22.22 adds up as you tap what you had'], download = EN.download) => `
 <aside class="end-cta" aria-label="Get OnlyBills">
   <div class="end-cta-copy">
     <h2 class="end-cta-h">${esc(heading)}</h2>
     <p>${esc(sub)}</p>
-    ${storeButton('Download on the', where)}
+    ${storeButton(download, where)}
   </div>
   <div class="end-cta-shot">${shot(screen[0], screen[1], 0)}</div>
 </aside>`;
@@ -76,8 +170,8 @@ export const appCta = (heading = 'Split it fairly in a minute', sub = 'Scan the 
  * The `:::cta` block inside an article: one quiet text row between hairlines, so the body
  * reads as advice, not an advert. The page's end card is the one real call to action.
  */
-export const ctaLine = (heading = 'Split the bill by what everyone had', where = 'article-inline') => `
-<aside class="cta-line" aria-label="Get OnlyBills"><a data-cta="${esc(where)}" href="${SITE.appStore}" rel="noopener">${esc(heading)}</a><span>OnlyBills is free on iPhone, and your friends don’t need the app.</span></aside>`;
+export const ctaLine = (heading = 'Split the bill by what everyone had', where = 'article-inline', sub = EN.ctaSub) => `
+<aside class="cta-line" aria-label="Get OnlyBills"><a data-cta="${esc(where)}" href="${SITE.appStore}" rel="noopener">${esc(heading)}</a><span>${esc(sub)}</span></aside>`;
 
 const NAV = [
   ['/#how', 'How it works'],
@@ -122,24 +216,30 @@ const WEBSITE = { '@type': 'WebSite', '@id': SITE.url + '/#site', url: SITE.url 
  * aggregateRating if it mirrors real App Store ratings shown on the page.
  */
 export const APP_ID = SITE.url + '/#app';
-export const appLd = (extra = {}) => ({
+// Not tied to one country: the app works with bills in any currency and suggests the usual
+// ways to get paid in the UK, the US, Canada, most of Europe and Latin America. Free to
+// download and use; OnlyBills Pro is an optional in-app purchase (no price on the site).
+export const appLd = ({ currency = 'GBP', lang = 'en-GB', ...extra } = {}) => ({
   '@type': 'MobileApplication',
   '@id': APP_ID,
   name: 'OnlyBills',
   operatingSystem: 'iOS, iPadOS',
   applicationCategory: 'FinanceApplication',
-  description: 'Split restaurant bills by what everyone had. Scan the receipt, friends claim their items on their own phone, and everyone pays you back exact to the penny.',
+  description: 'Split restaurant bills by what everyone had, in any currency. Scan the receipt, friends claim their items on their own phone, and everyone pays you back their exact share the way they already pay friends. Free, with optional in-app purchases.',
   url: SITE.url + '/',
   downloadUrl: SITE.appStore,
   installUrl: SITE.appStore,
   sameAs: SITE.appStore,
   image: SITE.url + '/assets/img/app-icon.png',
-  screenshot: SITE.url + '/assets/shots/guest-01-join-light.webp',
-  inLanguage: 'en-GB',
-  countriesSupported: 'GB',
+  screenshot: [
+    SITE.url + '/assets/shots/guest-01-join-light.webp',
+    SITE.url + '/assets/shots/guest-pay-us-venmo-zelle-light.webp',
+    SITE.url + '/assets/shots/guest-share-th-settle-gbp-light.webp',
+  ],
+  inLanguage: lang,
   author: { '@id': SITE.url + '/#org' },
   publisher: { '@id': SITE.url + '/#org' },
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP', url: SITE.appStore, availability: 'https://schema.org/InStock' },
+  offers: { '@type': 'Offer', price: '0', priceCurrency: currency, url: SITE.appStore, availability: 'https://schema.org/InStock' },
   ...extra,
 });
 
@@ -147,19 +247,23 @@ export const appLd = (extra = {}) => ({
  * The page shell. `path` is the canonical path ("/blog/x/"). `schema` is an array of
  * JSON-LD nodes for this page; Organization + WebSite are always included.
  */
-export function layout({ path, title, description, body, schema = [], ogImage, ogImageAlt, ogType = 'website', current, assetsV, extraHead = '', noindex = false }) {
+export function layout({ path, title, description, body, schema = [], ogImage, ogImageAlt, ogType = 'website', current, assetsV, extraHead = '', noindex = false, lang = 'en-GB', alternates = [], xDefault }) {
+  lang = langOf(lang);
   // Brand suffix only when the title still fits in a search result (~60 characters).
   const fullTitle = title.includes('OnlyBills') || title.length > 48 ? title : `${title} · OnlyBills`;
   const img = ogImage || abs('/assets/img/og-card.jpg');
   const imgAlt = ogImageAlt || (ogImage ? title : 'OnlyBills: split the bill by what everyone had');
   const graph = { '@context': 'https://schema.org', '@graph': [ORG, WEBSITE, PERSON, ...schema] };
   // Noindex pages (404, redirects) get no canonical: a 404 served at any URL must not claim one.
+  // hreflang: this page, its indexable twins (`alternates`: [[lang, path]]) and x-default,
+  // which is always the English page of the set.
+  const hreflangs = [[lang, path], ...alternates, ['x-default', xDefault || path]];
   const canonical = noindex ? '' : `<link rel="canonical" href="${abs(path)}">
-<link rel="alternate" hreflang="en-GB" href="${abs(path)}">
-<link rel="alternate" hreflang="x-default" href="${abs(path)}">`;
+${hreflangs.map(([hl, p]) => `<link rel="alternate" hreflang="${hl}" href="${abs(p)}">`).join('\n')}`;
+  const ogAlt = alternates.map(([hl]) => LANGS[hl]?.og).filter((x) => x && x !== LANGS[lang].og);
   const nav = NAV.map(([href, label]) => `<a href="${href}"${current === href ? ' aria-current="page"' : ''}>${label}</a>`).join('');
   return `<!doctype html>
-<html lang="en-GB" class="no-js">
+<html lang="${lang}" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -177,8 +281,8 @@ ${noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots" cont
 <link rel="alternate" type="application/rss+xml" title="OnlyBills articles" href="/blog/feed.xml">
 <meta property="og:type" content="${ogType}">
 <meta property="og:site_name" content="OnlyBills">
-<meta property="og:locale" content="en_GB">
-${noindex ? '' : `<meta property="og:url" content="${abs(path)}">
+<meta property="og:locale" content="${LANGS[lang].og}">
+${ogAlt.map((l) => `<meta property="og:locale:alternate" content="${l}">\n`).join('')}${noindex ? '' : `<meta property="og:url" content="${abs(path)}">
 `}<meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:image" content="${img}">
@@ -237,6 +341,8 @@ function footer() {
         <li><a href="/blog/">All articles</a></li>
         <li><a href="/blog/topic/split-the-bill/">How to split the bill</a></li>
         <li><a href="/blog/topic/tipping/">Tipping and service charge</a></li>
+        <li><a href="/blog/topic/paying-friends-back/">Paying friends back</a></li>
+        <li><a href="/blog/topic/abroad-and-currencies/">Abroad and currencies</a></li>
         <li><a href="/blog/bill-splitting-etiquette/">Bill splitting etiquette</a></li>
         <li><a href="/vs/splitwise/">OnlyBills vs Splitwise</a></li>
         <li><a href="/blog/splitwise-alternatives/">Splitwise alternatives</a></li>
@@ -247,7 +353,7 @@ function footer() {
         <li><a href="mailto:${SITE.email}">Contact</a></li>
       </ul></div>
     </div>
-    <div class="legal"><span>© ${new Date().getFullYear()} OnlyBills</span><span>Apple, iPhone and App Store are trademarks of Apple Inc. Monzo, Starling, Revolut and PayPal are trademarks of their owners.</span></div>
+    <div class="legal"><span>© ${new Date().getFullYear()} OnlyBills</span><span>Apple, iPhone and App Store are trademarks of Apple Inc. Other payment names are trademarks of their owners, and OnlyBills is not affiliated with any of them.</span></div>
   </div>
 </footer>`;
 }

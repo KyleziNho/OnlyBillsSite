@@ -68,6 +68,24 @@ export const CLUSTER_HUBS = [
     art: 'paid',
     match: /\btip(s|ping)?\b|service[- ]charge/i,
   },
+  {
+    slug: 'paying-friends-back',
+    name: 'Paying friends back',
+    title: 'Paying friends back: Venmo, Bizum, Pix, IBAN and more',
+    description: 'How friends pay each other back in the UK, the US, Europe and Latin America: Monzo, Venmo, Zelle, Bizum, Pix, IBAN and the rest, with what each one can do.',
+    lede: 'Every country has its own way to pay a friend back. What each one does, what it can’t, and how to ask without it getting awkward.',
+    art: 'paid',
+    match: /\b(venmo|zelle|cash app|bizum|pix|iban|interac|swish|vipps|tikkie|wero|monzo)\b|pay(ing)? (a )?friends? back|pay(s)? you back|payment apps/i,
+  },
+  {
+    slug: 'abroad-and-currencies',
+    name: 'Abroad and currencies',
+    title: 'Splitting the bill abroad: currencies, tipping and travel',
+    description: 'Splitting bills on holiday and abroad: which currency to pay back in, tipping and service charge by country, and paying friends across Europe and Latin America.',
+    lede: 'Bills in another currency, tipping rules that change at the border, and friends who bank somewhere else.',
+    art: 'pass',
+    match: /\b(abroad|currenc(y|ies)|holiday|europe|by country|latin america|bizum|pix|iban|interac|swish|tikkie)\b/i,
+  },
 ];
 
 const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

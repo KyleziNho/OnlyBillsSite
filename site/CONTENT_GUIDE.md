@@ -36,8 +36,22 @@ Frontmatter (one `key: value` per line, no quotes needed):
 - `category` (blog): one of `Money`, `Etiquette`, `Research`, `Occasions`, `Guides`, `Comparisons`.
 - `art`: the illustration on the article's share image (`og.mjs`), one of `scan, claim, paid, receipts, pass, payout, allclear, camera`. Pages themselves show no art.
 - `related`: comma-separated slugs of other articles or tutorials (2 to 4).
-- `order` (how-to only): position in the tutorials list.
+- `order` (how-to only): position in the tutorials list (decimals are fine, e.g. `7.1`).
 - `summary` (how-to only): one short line for the tutorials index.
+- `lang` (optional): `en-GB` (default), `en-US`, `es-ES`, `es-419` or `pt-BR`. Sets `<html lang>`,
+  `og:locale`, `inLanguage` in structured data, the date format and the article chrome. Spanish
+  articles live in `content/es/blog/` (→ `/es/blog/<slug>/`), Portuguese in `content/br/blog/`
+  (→ `/br/blog/<slug>/`). They stay out of `/blog/`, the hubs and the feed.
+- `hreflangTwin` (optional): the path of the same article in another language, e.g.
+  `/es/blog/dividir-cuenta-bizum/` on the English page and `/blog/split-bill-bizum/` on the Spanish
+  one. Both sides must point at each other. The pair is only printed when both pages are indexable.
+- `noindex: true` (optional): builds the page but keeps it out of the sitemap and search, and drops
+  its hreflang pair. Every Spanish and Portuguese page starts like this until a native speaker has
+  read it; after the review, delete the line and rebuild.
+- `trademarks` (optional): `payments` prints the non-affiliation line, `zelle` the Zelle notice, after
+  the sources. The build fails if a page names Zelle without `zelle`.
+- `ctaShot` (optional): `name | alt` for the screen in the end card (US pages get a dollar screen
+  automatically).
 
 ## Special blocks
 
@@ -58,13 +72,26 @@ A row of 2 or 3 stat cards.
 
 ```
 :::shot guest-05-live | Friends tick what they had and see their share add up.
+:::shot guest-pay-us-venmo-zelle | Caption under the phone. | Alt text, if it should differ from the caption
 ```
-An app screenshot in a phone frame, light and dark versions picked automatically. Available now:
+An app screenshot in a phone frame, light and dark versions picked automatically (light-only shots
+show the light screen in both modes). Available now:
 `guest-01-join` (join a table: "Who are you?"), `guest-02-claimed` (items ticked),
 `guest-03-pay-sheet` (pay sheet with Monzo/bank options), `guest-04-paid` ("Paid"),
 `guest-05-live` (live table: your share £22.22, shared Garlic Naan split 3 ways).
-More (host side: home, scan, check, assign, QR table, summary, Owed, payout setup) are on the way;
-the list is in `static/shots/`.
+Host side: home, scan, check, assign, QR table, summary, Owed, payout setup. Regional 2.3 screens
+(made-up host "Leo", invented venues and numbers): `guest-pay-us-venmo-zelle`, `guest-pay-us-cashapp`,
+`guest-pay-us-venmo-cashapp-zelle`, `guest-claiming-us`, `guest-share-us-tax-tip-breakdown`,
+`guest-claiming-us-groceries`, `guest-pay-es-bizum-revolut`, `guest-pay-br-pix`, `guest-pay-de-paypal-iban`,
+`guest-pay-mx-clabe`, `guest-pay-co-breb`, `guest-pay-se-swish`, `guest-pay-nl-tikkie-link`,
+`guest-pay-ca-interac`, `guest-pay-th-settle-gbp`, `guest-share-th-settle-gbp`, `host-payout-pick-us`,
+`host-payout-pick-es`, `host-settings-getting-paid-es`, `host-cashapp-us`, `host-pix-random-key-br`,
+`host-review-us-check`, `host-review-us-tax-tip-totals`, `host-live-table-us`,
+`host-review-italy-service-totals`, `settle-split-sheet-line`, `settle-how-friends-pay-you-back`,
+`settle-live-table`, `appclip-journey-6-ive-paid`. The full set of clean captures, with alt text, is in
+`~/Desktop/Projects/Apps/OnlyBills/media-2.3/marketing/INDEX.md`; convert more with
+`cwebp -q 82 -resize 640 0 -metadata none in.png -o static/shots/<name>-light.webp`. Older captures
+elsewhere in `media-2.3/` can show real names or logos: don't use them.
 
 ```
 :::imessage Saffron House · Tap what you had | onlybills.app | An illustration of the link in iMessage.
@@ -113,7 +140,10 @@ Answer.
 
 ## Voice (non-negotiable)
 
-- British English and £. Plain, short, warm: a friend who's good with money.
+- British English and £ by default. Plain, short, warm: a friend who's good with money.
+- US pages (`lang: en-US`): US spelling, dollars, "check", "math". Same voice otherwise.
+- Spanish and Portuguese pages are written by (or with) a native speaker, never machine translated,
+  and say near the top that the app is in English for now. They ship with `noindex: true`.
 - **No em dashes or en dashes anywhere** (— or –). The build fails on them. Use full stops,
   commas, colons or brackets. Number ranges: "2 to 4", not "2–4".
 - No hype or filler: effortless, seamless, magic, instantly, in seconds, unlock, elevate,
@@ -170,10 +200,37 @@ UK advertising rules (CAP code) need claims backed up. So:
 - Shared items (a bottle of wine, sides) split between the people who shared them. Service charge,
   tips, discounts and other extras are spread across everyone fairly (in proportion). Always exact
   to the penny; the shares add up to the bill.
-- Friends pay the host back with a link: Monzo ("Card, Apple Pay or bank transfer. No Monzo
-  account needed"), Starling and Revolut ("Card or Apple Pay. No Starling/Revolut account
-  needed"), PayPal ("PayPal account may be needed") or bank transfer ("From any banking app").
-  Never imply friends need the host's bank app.
+- Friends pay the host back the way people pay friends where the host lives. The host picks their
+  country and OnlyBills suggests the usual methods (contract: app repo
+  `docs/REGIONAL_PAYOUTS_CONTRACT.md`, sections 1.1 and 8.2). What you may say about each kind:
+  - **UK:** Monzo ("Apple Pay, card or bank transfer. No Monzo account needed", the only link where
+    the amount is filled in, and only on bills in pounds), Starling and Revolut ("Apple Pay or card.
+    No Starling/Revolut account needed"), PayPal ("PayPal account may be needed") or bank transfer
+    ("From any banking app"). Never imply friends need the host's bank app.
+  - **Venmo, Cash App, Swish:** the button opens the host's profile and the friend sees "Venmo account
+    needed. Enter $22.22 when it opens" (Cash App: "Cash App account needed"; Swish: "Swish and
+    BankID needed"). Never write that the amount is filled in for these until
+    `docs/PAYOUT_DEEPLINKS.md` records a pass.
+  - **Copy-and-paste methods** (Zelle, Interac e-Transfer, Bizum, MB WAY, Vipps, MobilePay, TWINT,
+    BLIK, Wero, IRIS, Yape o Plin, IBAN, alias, CLABE, Bre-B, bank details): the friend copies the
+    number, key or IBAN and the exact amount, each with its own Copy button, then pays in their own
+    bank app. Never "one tap" or "opens Zelle/Bizum".
+  - **Pix** is the only method outside the UK that carries the amount: a Pix Copia e Cola code built
+    with each friend's exact share inside.
+  - **Netherlands:** the host pastes their own Tikkie (or bunq.me) link; friends enter the amount if
+    it asks. OnlyBills does not create iDEAL or Wero links. Apple Cash is not a method.
+  - A method that can't take the bill's currency moves below the others with the reason ("Venmo only
+    takes US dollars").
+  - OnlyBills never moves or holds money and gets no confirmation: friends tap "I've paid".
+- **Settle currency:** on a bill in another currency, friends can pay the host back in the host's
+  own currency at a rate frozen on the table when it is shared: a public reference rate by default,
+  or the rate the host's card gave them. The rate shows as "£1 = THB 43.80 · rate from 13 Nov".
+- **Brand rules:** payment brands are named as plain facts ("friends pay you back on Venmo"), never
+  "integration", "partner", "official", "works with" or "powered by". No third-party logos in our own
+  artwork (share images, figures, the home page); in-app screens inside the phone frame show what
+  the app shows. Pix: write the name, never draw the symbol. Zelle is text only, and any page that
+  names it carries the Zelle notice (`trademarks: zelle`). Pages naming payment brands carry the
+  non-affiliation line (`trademarks: payments`).
 - **Owed** tracks who still owes you across bills, with their faces: a running balance with each
   friend. You can add IOUs for anything else (the taxi, tickets). A reminder after a week to chase
   anyone who hasn't paid.
@@ -203,6 +260,6 @@ UK advertising rules (CAP code) need claims backed up. So:
 - Never call scanning "unlimited" (free or Pro), and never say "free unlimited scans". Don't quote
   a price for OnlyBills Pro on the site; the app shows the real price and renewal before you pay.
 - App Store: https://apps.apple.com/app/onlybills/id6754412082
-- Don't claim: Android, multiple currencies, splitting rent/utilities as a household bills app,
+- Don't claim: Android, splitting rent/utilities as a household bills app,
   automatic bank integration, payment processing by OnlyBills itself (it hands off to the bank or
   PayPal), or anything you can't see in the list above.

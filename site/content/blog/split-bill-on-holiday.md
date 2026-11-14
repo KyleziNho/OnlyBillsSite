@@ -3,7 +3,7 @@ title: How to split costs on a group holiday
 seoTitle: Split costs on a group holiday: kitty, apps and card fees
 description: Kitty, pay as you go, or one person pays and you settle at the end? How to split meals and costs on a group holiday, with examples and the card fees to avoid.
 date: 2026-10-15
-updated: 2026-11-01
+updated: 2026-11-14
 category: Guides
 art: pass
 related: split-costs-stag-hen-do, tricount-alternatives, best-bill-splitting-apps-uk, split-bill-large-group
@@ -83,7 +83,7 @@ Which app suits a trip is covered in [the best bill splitting apps in the UK](/b
 
 An equal split works for groceries and the villa. It's less fair at the restaurant on the last night, when one person had the lobster and a bottle of wine and another had a salad and water. For those meals, split by what each person had, then add each person's total to your trip app.
 
-If your trip is in the UK (a cottage in Cornwall, a weekend in Edinburgh, a stag or hen do in Newcastle), OnlyBills can handle each restaurant bill: scan the receipt, friends tick what they had on their own phones, and service charge is spread fairly. It's built for UK restaurant and pub bills, so for meals abroad, log them in your trip app. If you're weighing up the two kinds of app, see [OnlyBills vs Splitwise](/vs/splitwise/). More on stag and hen weekends in [how to split costs on a stag or hen do](/blog/split-costs-stag-hen-do/).
+OnlyBills can handle each of those restaurant bills, at home or abroad: scan the receipt (receipts in other languages are translated into English), friends tick what they had on their own phones, and service charge is spread fairly. If the bill is in another currency, friends can pay you back in pounds at a rate fixed when you share the table, either a public reference rate or the rate your card gave you. It splits one bill at a time rather than tracking a whole trip, so keep the villa and car hire in your trip app. If you're weighing up the two kinds of app, see [OnlyBills vs Splitwise](/vs/splitwise/). More on currencies in [splitting a bill abroad](/blog/split-bill-abroad-currency/), and on stag and hen weekends in [how to split costs on a stag or hen do](/blog/split-costs-stag-hen-do/).
 
 ## Foreign card fees: decide who pays for what
 
