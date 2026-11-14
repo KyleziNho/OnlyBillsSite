@@ -139,6 +139,7 @@ main{max-width:960px;margin:0 auto;padding:24px var(--gutter) 96px}
 .tbl th,.tbl td{padding:12px 16px;text-align:left;border-top:.5px solid var(--hairline);vertical-align:top}
 .tbl thead th{border-top:0;font-size:13px;color:var(--text-2);font-weight:600;white-space:nowrap}
 .tbl td,.tbl th{overflow-wrap:anywhere}
+.tbl thead th{overflow-wrap:normal;word-break:normal}
 .tbl .n{text-align:right;white-space:nowrap;font-family:var(--font-rounded);font-weight:600}
 
 /* Feedback filters */
@@ -253,6 +254,7 @@ main{max-width:960px;margin:0 auto;padding:24px var(--gutter) 96px}
   const fmt = (v) => (num(v) ?? 0).toLocaleString('en-GB');
   const arr = (v) => (Array.isArray(v) ? v : []);
   const label = (s) => {
+    if (String(s ?? '').trim() === '(not set)') return 'Not recorded yet';
     const t = String(s ?? '').replace(/_/g, ' ').trim();
     return t ? t.charAt(0).toUpperCase() + t.slice(1) : 'Unknown';
   };
@@ -343,7 +345,7 @@ main{max-width:960px;margin:0 auto;padding:24px var(--gutter) 96px}
   // Activation funnel
   function funnel(m) {
     const steps = arr(m.funnel);
-    if (!steps.length) return block('h-funnel', 'Activation funnel', group(`<p class="none">${esc('Nothing yet.')}</p>`));
+    if (!steps.length) return block('h-funnel', 'Activation funnel', group(`<p class="none">${esc('Nothing yet.')}</p>`), true);
     const first = num(steps[0].users) ?? 0;
     const items = steps.map((s, i) => {
       const u = num(s.users) ?? 0;
@@ -358,7 +360,7 @@ main{max-width:960px;margin:0 auto;padding:24px var(--gutter) 96px}
     }).join('');
     return block('h-funnel', 'Activation funnel',
       `<div class="group"><ol class="steps">${items}</ol></div>` +
-      `<p class="footnote">Ever reached in this window. Steps are not strictly ordered per user.</p>`);
+      `<p class="footnote">Ever reached in this window. Steps are not strictly ordered per user.</p>`, true);
   }
 
   // Daily active users, inline SVG
@@ -470,7 +472,7 @@ main{max-width:960px;margin:0 auto;padding:24px var(--gutter) 96px}
     const list = arr(m.screens);
     const body = list.length
       ? `<div class="group"><table class="tbl"><thead><tr><th scope="col">Screen</th><th scope="col">Views</th><th scope="col">Users</th></tr></thead><tbody>` +
-        list.map(x => `<tr><td>${esc(x.screen)}</td><td class="n">${esc(fmt(x.views))}</td><td class="n">${esc(fmt(x.users))}</td></tr>`).join('') +
+        list.map(x => `<tr><td>${esc(label(x.screen))}</td><td class="n">${esc(fmt(x.views))}</td><td class="n">${esc(fmt(x.users))}</td></tr>`).join('') +
         `</tbody></table></div>`
       : group(`<p class="none">Nothing yet.</p>`);
     return block('h-screens', 'Top screens', body, true);
