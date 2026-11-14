@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>OnlyBills admin</title>
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--muted:#6e6e73;--line:#e2e2e6;--accent:#0a84ff;--warn:#b3261e;--warnbg:#fdecea}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#000;--card:#1c1c1e;--ink:#f5f5f7;--muted:#98989f;--line:#2c2c2e;--accent:#0a84ff;--warn:#ff8a80;--warnbg:#3a1714}}
+:root[data-theme="dark"]{--bg:#000;--card:#1c1c1e;--ink:#f5f5f7;--muted:#98989f;--line:#2c2c2e;--accent:#0a84ff;--warn:#ff8a80;--warnbg:#3a1714}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
+main{max-width:1040px;margin:0 auto;padding:28px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:17px;margin:32px 0 12px}
+.sub{color:var(--muted);margin:0 0 20px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+button{font:inherit;border:0;border-radius:999px;padding:10px 18px;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
+button.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
+button:disabled{opacity:.5;cursor:default}
+.notice{border-radius:12px;padding:12px 16px;margin:16px 0;font-size:14px;background:var(--card);border:1px solid var(--line)}
+.notice.err{background:var(--warnbg);color:var(--warn);border-color:transparent}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi .v{font-size:26px;font-weight:650;font-variant-numeric:tabular-nums}
+.kpi .l{color:var(--muted);font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.card.help{border-color:var(--warn)}
+.card p{margin:8px 0 0;white-space:pre-wrap}
+.meta{color:var(--muted);font-size:13px}
+.pill{background:var(--line);border-radius:999px;padding:1px 8px;font-weight:600;color:var(--ink)}
+.bars{display:flex;gap:6px;flex-wrap:wrap}
+.tag{border-radius:999px;padding:2px 9px;font-size:12px;background:var(--line);white-space:nowrap}
+.tag.pulse{background:#dfe9f6;color:#264a7a}
+.tag.settings{background:#e7f1ea;color:#2d5a3e}
+.tag.footer{background:#f1ebf6;color:#5a3f78}
+.mood{border-radius:999px;padding:2px 9px;font-size:12px;background:var(--line)}
+.mood.meh{background:#f6ead9;color:#7a5520}
+.mood.okay{background:#e4f2ea;color:#2d5a3e}
+.mood.love{background:#dfe9f6;color:#264a7a}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600}
+td.msg{min-width:260px;white-space:pre-wrap}
+td.num{color:var(--muted);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+code{background:var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <h1>OnlyBills admin</h1>
+  <p class="sub">Feedback notes from the app and the bill page. Only accounts listed in <code>admins/</code> can read them.</p>
+
+  <div id="setup" class="notice err" hidden></div>
+
+  <section id="signed-out" class="row">
+    <button id="signin">Sign in with GitHub</button>
+    <span class="muted" id="signin-msg"></span>
+  </section>
+
+  <section id="signed-in" hidden>
+    <div class="row" style="justify-content:space-between">
+      <span class="muted" id="who"></span>
+      <button class="ghost" id="signout">Sign out</button>
+    </div>
+    <div id="denied" class="notice err" hidden></div>
+
+    <div id="content" hidden>
+      <div class="kpis" style="margin-top:16px">
+        <div class="kpi"><div class="v" id="k-total">0</div><div class="l">Notes</div></div>
+        <div class="kpi"><div class="v" id="k-7d">0</div><div class="l">Last 7 days</div></div>
+        <div class="kpi"><div class="v" id="k-contact">0</div><div class="l">Left a contact</div></div>
+        <div class="kpi"><div class="v" id="k-mood">0</div><div class="l">Mood answers</div></div>
+      </div>
+
+      <h2>Needs a reply</h2>
+      <p class="muted" style="margin:-6px 0 12px;font-size:13px">Notes that mention money, bills or help (keyword match). Read every note, not just these.</p>
+      <div id="flagged"></div>
+
+      <h2>Sources</h2>
+      <div class="bars" id="sources"></div>
+
+      <h2>All notes</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>#</th><th>Date</th><th>Source</th><th>Screen</th><th>Mood</th><th>Contact</th><th>Message</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table></div>
+    </div>
+  </section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+(() => {
+  // Web app config from Firebase console → Project settings → Your apps → Web.
+  // Not a secret (every web client ships it); access is enforced by Firestore rules.
+  const CONFIG = {
+    apiKey: 'REPLACE_WEB_API_KEY',
+    authDomain: 'onlybills-b8dac.firebaseapp.com',
+    projectId: 'onlybills-b8dac',
+    appId: 'REPLACE_WEB_APP_ID'
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const show = (id, on) => { $(id).hidden = !on; };
+  const setErr = (id, msg) => { $(id).textContent = msg; show(id, !!msg); };
+
+  if (CONFIG.apiKey.startsWith('REPLACE') || CONFIG.appId.startsWith('REPLACE')) {
+    setErr('setup', 'Not configured yet: paste the web app config into admin/index.html (CONFIG).');
+    $('signin').disabled = true;
+    return;
+  }
+
+  firebase.initializeApp(CONFIG);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const provider = new firebase.auth.GithubAuthProvider();
+
+  $('signin').addEventListener('click', async () => {
+    $('signin-msg').textContent = '';
+    try {
+      await auth.signInWithPopup(provider);
+    } catch (e) {
+      $('signin-msg').textContent = e.code === 'auth/popup-closed-by-user' ? '' : 'Sign-in failed: ' + (e.message || e.code);
+    }
+  });
+  $('signout').addEventListener('click', () => auth.signOut());
+
+  auth.onAuthStateChanged(async (user) => {
+    show('signed-out', !user);
+    show('signed-in', !!user);
+    if (!user) return;
+    $('who').textContent = 'Signed in as ' + (user.displayName || user.email || 'GitHub user') + '. Firebase uid: ' + user.uid;
+    setErr('denied', '');
+    show('content', false);
+    try {
+      const snap = await db.collection('feedback').orderBy('createdAt', 'desc').get();
+      render(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      show('content', true);
+    } catch (e) {
+      const denied = e.code === 'permission-denied';
+      setErr('denied', denied
+        ? 'Not authorised. Add this uid as a document ID in the admins collection (any fields), then reload.'
+        : 'Could not load notes: ' + (e.message || e.code));
+    }
+  });
+
+  const toDate = (v) => v && v.toDate ? v.toDate() : (v ? new Date(v) : null);
+  const day = (d) => d ? d.toISOString().slice(0, 10) : '-';
+
+  // Keyword match for notes that mention money or help. A prompt to look, not a filter.
+  const HELP = /need money|help|pay my|bills? to pay|can'?t pay|urgent|lost my job|terminated|depress|panic/i;
+
+  function render(notes) {
+    const now = Date.now();
+    const sorted = notes.slice();
+    const asc = sorted.slice().sort((a, b) => (toDate(a.createdAt)||0) - (toDate(b.createdAt)||0));
+    const num = new Map(asc.map((n, i) => [n.id, i + 1]));
+
+    $('k-total').textContent = notes.length;
+    $('k-7d').textContent = notes.filter(n => { const d = toDate(n.createdAt); return d && now - d < 7 * 864e5; }).length;
+    $('k-contact').textContent = notes.filter(n => n.contact).length;
+    $('k-mood').textContent = notes.filter(n => n.mood).length;
+
+    const flagged = notes.filter(n => HELP.test(n.message || ''));
+    $('flagged').innerHTML = flagged.length ? flagged.map(n => `
+      <div class="card help">
+        <div class="meta"><span class="pill">#${num.get(n.id)}</span> ${esc(day(toDate(n.createdAt)))} · ${esc(n.source)} · ${esc(n.screen || '-')}${n.contact ? ' · contact: <code>' + esc(n.contact) + '</code>' : ''}</div>
+        <p>${esc(n.message)}</p>
+      </div>`).join('') : '<p class="muted">Nothing flagged.</p>';
+
+    const src = {};
+    notes.forEach(n => { src[n.source || '(none)'] = (src[n.source || '(none)'] || 0) + 1; });
+    $('sources').innerHTML = Object.entries(src).sort((a, b) => b[1] - a[1])
+      .map(([k, v]) => `<span class="tag ${esc(k)}">${esc(k)} ${v}</span>`).join('') || '<span class="muted">None yet</span>';
+
+    $('rows').innerHTML = sorted.map(n => `
+      <tr>
+        <td class="num">#${num.get(n.id)}</td>
+        <td>${esc(day(toDate(n.createdAt)))}</td>
+        <td><span class="tag ${esc(n.source)}">${esc(n.source)}</span></td>
+        <td>${esc(n.screen || '-')}</td>
+        <td>${n.mood ? `<span class="mood ${esc(n.mood)}">${esc(n.mood)}</span>` : '<span class="muted">-</span>'}</td>
+        <td>${n.contact ? '<code>' + esc(n.contact) + '</code>' : '<span class="muted">-</span>'}</td>
+        <td class="msg">${esc(n.message)}</td>
+      </tr>`).join('');
+  }
+})();
+</script>
+</body>
+</html>
