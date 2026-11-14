@@ -596,7 +596,7 @@
                 <p>OnlyBills requests the following permissions:</p>
                 <p><strong>Camera Access:</strong> Required to scan receipts. You can deny this and manually enter receipts instead.</p>
                 <p><strong>Photo Library Access:</strong> Optional, allows you to import existing receipt images.</p>
-                    <p><strong>Location:</strong> OnlyBills never asks for access to your location. If a photo you import already has a location saved in it, the app reads it on your device only to work out the country, as described above.</p>
+                    <p><strong>Location:</strong> OnlyBills never asks for access to your location. It only uses the location saved in a photo you import, and only if you share the photo with its location (the photo picker's Options let you leave it out). The app works out the country on your device, uses it to suggest the bill's currency (the review screen says "Guessed from where the photo was taken", and you can change it), and sends only the two-letter country code with the receipt image, as described above. The exact location is never stored or sent. Photos taken with the in-app camera carry no location.</p>
                 <p><strong>Contacts Access:</strong> Optional, makes it easier to select friends when splitting bills. You can use the app without granting contacts access.</p>
             </section>
 
