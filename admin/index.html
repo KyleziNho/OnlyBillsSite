@@ -39,68 +39,140 @@ html{background:var(--bg)}
 body{
   margin:0; min-height:100vh; color:var(--text); background:var(--bg);
   font:17px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
-  -webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums; -webkit-font-smoothing:antialiased;
 }
 /* PageBackground: faint accent wash at the top */
 body::before{content:"";position:fixed;inset:0 0 auto 0;height:260px;pointer-events:none;
   background:linear-gradient(180deg,var(--accent-soft),transparent);z-index:-1}
-main{max-width:640px;margin:0 auto;padding:24px var(--gutter) 96px}
+main{max-width:960px;margin:0 auto;padding:24px var(--gutter) 96px}
+.intro{margin-bottom:8px}
 .title{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin:8px 0 6px}
-.subtitle{color:var(--text-2);font-size:15px;margin:0 0 24px}
-.footnote{color:var(--text-2);font-size:13px}
-.section-head{font-size:13px;font-weight:600;color:var(--text-2);text-transform:none;margin:28px 6px 8px;display:flex;justify-content:space-between;align-items:baseline}
+.subtitle{color:var(--text-2);font-size:15px;margin:0 0 4px}
+.footnote{color:var(--text-2);font-size:13px;line-height:1.35;margin:8px 6px 0}
+.section-head{font-size:13px;font-weight:600;color:var(--text-2);margin:0 6px 8px}
+.block{min-width:0}
+.block + .block{margin-top:0}
+.cols{display:grid;gap:28px;margin-top:28px}
 .group{background:var(--surface);border-radius:var(--r-lg);overflow:hidden}
+.pad{padding:14px 16px}
+.none{margin:0;padding:14px 16px;color:var(--text-2);font-size:15px}
+.sub-head{font-size:13px;font-weight:600;color:var(--text-2);margin:16px 6px 8px}
+.sub-head:first-child{margin-top:0}
+.rows{list-style:none;margin:0;padding:0}
 .row{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:52px;padding:12px 16px;border-top:.5px solid var(--hairline)}
-.row:first-child{border-top:0}
-.row .label{font-size:17px}
-.row .value{font-family:var(--font-rounded);font-variant-numeric:tabular-nums;font-size:17px;font-weight:600;color:var(--text)}
+.rows .row:first-child{border-top:0}
+.row-main{display:flex;flex-direction:column;min-width:0;overflow-wrap:anywhere}
+.row-label{font-size:16px}
+.row-sub{font-size:13px;color:var(--text-2)}
+.row-value{font-family:var(--font-rounded);font-size:17px;font-weight:600;white-space:nowrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 24px;border:0;border-radius:999px;
   font:600 17px/1 -apple-system,BlinkMacSystemFont,sans-serif;cursor:pointer;color:var(--on-accent);background:var(--accent-fill)}
 .btn:active{transform:scale(.98)}
-.btn.block{width:100%}
-.btn:disabled{opacity:.5;cursor:default}
+.btn.block-btn{width:100%}
 .btn.glass{background:var(--glass-bg);color:var(--accent-text);border:.5px solid var(--glass-border);box-shadow:var(--glass-shadow);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);min-height:40px;padding:0 16px;font-size:15px}
+  -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);min-height:40px;padding:0 16px;font-size:15px;flex:none}
 .signin-card{padding:20px 16px;display:grid;gap:16px}
 .signin-card p{margin:0;color:var(--text-2);font-size:15px}
-.notice{border-radius:var(--r-md);padding:14px 16px;font-size:15px;margin-top:16px}
+.notice{border-radius:var(--r-md);padding:14px 16px;font-size:15px;margin:16px 0 0}
 .notice.err{background:var(--negative-soft);color:var(--negative-text)}
 .notice.setup{background:var(--warning-soft);color:var(--warning-text)}
+.notice.calm{background:var(--surface);color:var(--text-2);margin:0}
+.notice.calm strong{color:var(--text)}
+.empty-card{margin:0;padding:20px 16px;font-size:15px;color:var(--text-2);line-height:1.45}
+.empty-card strong{color:var(--text);font-weight:600}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
 .chip{border:0;border-radius:999px;padding:7px 14px;font:500 14px/1 -apple-system,BlinkMacSystemFont,sans-serif;background:var(--fill);color:var(--text);cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--accent-fill);color:var(--on-accent)}
 .pill{display:inline-block;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;background:var(--fill);color:var(--text-2);white-space:nowrap}
-.pill.settings{background:var(--positive-soft);color:var(--positive-text)}
-.pill.pulse{background:var(--accent-soft);color:var(--accent-text)}
-.pill.footer{background:var(--fill);color:var(--text-2)}
 .pill.reply{background:var(--warning-soft);color:var(--warning-text)}
 .pill.mood-meh{background:var(--warning-soft);color:var(--warning-text)}
 .pill.mood-okay{background:var(--positive-soft);color:var(--positive-text)}
 .pill.mood-love{background:var(--accent-soft);color:var(--accent-text)}
+.pill.trial{background:var(--accent-soft);color:var(--accent-text)}
+.pill.paid{background:var(--positive-soft);color:var(--positive-text)}
 .note{padding:14px 16px;border-top:.5px solid var(--hairline)}
 .note:first-child{border-top:0}
 .note-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--text-2);font-size:13px}
-.note-text{margin:8px 0 0;font-size:16px;white-space:pre-wrap;word-wrap:break-word}
+.note-text{margin:8px 0 0;font-size:16px;white-space:pre-wrap;overflow-wrap:anywhere}
 .note-contact{margin-top:8px;font-size:14px;color:var(--text-2);word-break:break-all}
 .note-contact b{color:var(--text);font-weight:600}
 .empty{padding:20px 16px;color:var(--text-2);font-size:15px}
+
+/* Key numbers */
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:var(--surface);border-radius:var(--r-lg);padding:14px 16px;min-width:0;display:flex;flex-direction:column;gap:4px}
+.kpi-label{font-size:13px;color:var(--text-2);font-weight:600}
+.kpi-value{font-family:var(--font-rounded);font-size:28px;font-weight:700;line-height:1.1;letter-spacing:-.01em;overflow-wrap:anywhere}
+.kpi-value.is-note{font-family:inherit;font-size:15px;font-weight:500;color:var(--text-2);line-height:1.3;letter-spacing:0}
+.kpi-ctx{font-size:12px;color:var(--text-2);line-height:1.35}
+.money{font-family:var(--font-rounded);font-weight:700}
+.window-note{margin:10px 6px 0}
+
+/* Funnel */
+.steps{list-style:none;margin:0;padding:14px 16px;display:grid;gap:14px}
+.step-top{display:flex;justify-content:space-between;gap:12px;font-size:15px}
+.track{height:8px;border-radius:999px;background:var(--fill);margin-top:6px;overflow:hidden}
+.track span{display:block;height:100%;background:var(--accent-fill);border-radius:999px}
+.step-sub{font-size:13px;color:var(--text-2);margin-top:4px}
+
+/* Chart */
+.chart{margin:0}
+.chart svg{display:block;width:100%;height:auto}
+.chart .area{fill:var(--accent-soft)}
+.chart .line{fill:none;stroke:var(--accent-text);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.chart .base{stroke:var(--hairline);stroke-width:1;vector-effect:non-scaling-stroke}
+.chart-axis{display:flex;justify-content:space-between;font-size:12px;color:var(--text-2);padding:8px 16px 0}
+.chart-summary{margin:0;padding:10px 16px 14px;font-size:14px;color:var(--text-2)}
+
+/* Mini stats (paywall sources, scans) */
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5px;background:var(--hairline);border-radius:0 0 var(--r-lg) var(--r-lg);overflow:hidden}
+.mini{background:var(--surface);padding:12px 16px;min-width:0}
+.mini-label{font-size:12px;color:var(--text-2)}
+.mini-value{font-family:var(--font-rounded);font-size:20px;font-weight:700;line-height:1.2}
+.mini-value.is-note{font-family:inherit;font-size:14px;font-weight:500;color:var(--text-2)}
+.mini-sub{font-size:12px;color:var(--text-2)}
+.card-head{padding:14px 16px 10px;font-weight:600;font-size:16px}
+.card-foot{padding:8px 16px 12px;font-size:12px;color:var(--text-2);background:var(--surface)}
+
+/* Screens table */
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th,.tbl td{padding:12px 16px;text-align:left;border-top:.5px solid var(--hairline);vertical-align:top}
+.tbl thead th{border-top:0;font-size:13px;color:var(--text-2);font-weight:600;white-space:nowrap}
+.tbl td,.tbl th{overflow-wrap:anywhere}
+.tbl .n{text-align:right;white-space:nowrap;font-family:var(--font-rounded);font-weight:600}
+
+/* Feedback filters */
+.feedback-summary{margin:0 6px 10px;font-size:13px;color:var(--text-2)}
+
 .hidden{display:none!important}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:4px}
-.who{font-size:13px;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.who{font-size:13px;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+
 @media (min-width:600px){.title{font-size:40px}}
+@media (min-width:720px){.kpis{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:860px){
+  .cols{grid-template-columns:1fr 1fr;align-items:start}
+  .block.wide{grid-column:1 / -1}
+}
+@media (prefers-reduced-motion: no-preference){
+  .fade{animation:fade .25s ease-out}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+}
 </style>
 </head>
 <body>
 <main>
-  <h1 class="title">Feedback</h1>
-  <p class="subtitle">Notes sent from the app and the bill page. Only accounts listed in the admins collection can read them.</p>
+  <header class="intro">
+    <h1 class="title">Overview</h1>
+    <p class="subtitle" id="data-date" aria-live="polite">Sign in to see the numbers.</p>
+  </header>
 
   <div id="setup" class="notice setup hidden"></div>
 
   <section id="signed-out" class="hidden">
     <div class="group signin-card">
       <p>Sign in with the Google account that owns OnlyBills.</p>
-      <button id="signin" class="btn block">Sign in with Google</button>
+      <button id="signin" class="btn block-btn">Sign in with Google</button>
       <p id="signin-msg" class="footnote"></p>
     </div>
   </section>
@@ -113,23 +185,18 @@ main{max-width:640px;margin:0 auto;padding:24px var(--gutter) 96px}
     <div id="denied" class="notice err hidden"></div>
 
     <div id="content" class="hidden">
-      <div class="section-head"><span>Overview</span></div>
-      <div class="group">
-        <div class="row"><span class="label">Notes</span><span class="value" id="k-total">0</span></div>
-        <div class="row"><span class="label">Last 7 days</span><span class="value" id="k-7d">0</span></div>
-        <div class="row"><span class="label">Left a contact</span><span class="value" id="k-contact">0</span></div>
-        <div class="row"><span class="label">Answered the mood pulse</span><span class="value" id="k-mood">0</span></div>
-        <div class="row"><span class="label">Needs a reply</span><span class="value" id="k-flag">0</span></div>
-      </div>
-      <p class="footnote" id="sources" style="margin:8px 16px 0"></p>
+      <div id="analytics"></div>
 
-      <div class="section-head"><span>Notes</span></div>
-      <div class="chips" role="group" aria-label="Filter notes">
-        <button class="chip" data-filter="all" aria-pressed="true">All</button>
-        <button class="chip" data-filter="reply" aria-pressed="false">Needs a reply</button>
-        <button class="chip" data-filter="contact" aria-pressed="false">Has a contact</button>
-      </div>
-      <div class="group" id="list"></div>
+      <section class="block" aria-labelledby="feedback-title" style="margin-top:32px">
+        <h2 class="section-head" id="feedback-title">Feedback</h2>
+        <p class="feedback-summary" id="feedback-summary"></p>
+        <div class="chips" role="group" aria-label="Filter feedback">
+          <button class="chip" data-filter="all" aria-pressed="true">All</button>
+          <button class="chip" data-filter="reply" aria-pressed="false">Needs a reply</button>
+          <button class="chip" data-filter="contact" aria-pressed="false">Has a contact</button>
+        </div>
+        <div class="group" id="list"></div>
+      </section>
     </div>
   </section>
 </main>
@@ -163,9 +230,307 @@ main{max-width:640px;margin:0 auto;padding:24px var(--gutter) 96px}
   const db = firebase.firestore();
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  // Signed out: only the sign-in card. Signed in: the notes view.
-  show('signed-out', true);
+  // Copy and labels. Ratios and money come from the document as-is.
+  const NA = 'Not enough data yet';
+  const TOO_FEW = 'Too few to show a percentage';
+  const STEP_LABELS = {
+    first_open: 'Opened the app',
+    onboarding_completed: 'Finished onboarding',
+    receipt_scan_started: 'Started a receipt scan',
+    receipt_scan_succeeded: 'Receipt scan worked',
+    first_split_completed: 'Finished a first split',
+    paywall_viewed: 'Saw the paywall',
+    paywall_cta_tapped: 'Tapped the paywall button',
+    purchase_succeeded: 'Bought a plan'
+  };
+  const METHOD_LABELS = { monzo: 'Monzo', starling: 'Starling', revolut: 'Revolut', paypal: 'PayPal', bank: 'Bank transfer' };
+  const PATH_LABELS = { classic: 'Classic split', live: 'Live table', solo: 'Solo' };
+  const MOOD_LABELS = { love: 'Love it', okay: 'Okay', meh: 'Meh' };
+  const MOOD_CLASS = { love: 'mood-love', okay: 'mood-okay', meh: 'mood-meh' };
 
+  // Helpers. Every string from the document goes through esc() at the point it is inserted.
+  const num = (v) => (typeof v === 'number' && isFinite(v) ? v : null);
+  const fmt = (v) => (num(v) ?? 0).toLocaleString('en-GB');
+  const arr = (v) => (Array.isArray(v) ? v : []);
+  const label = (s) => {
+    const t = String(s ?? '').replace(/_/g, ' ').trim();
+    return t ? t.charAt(0).toUpperCase() + t.slice(1) : 'Unknown';
+  };
+  const plural = (n, one, many) => fmt(n) + ' ' + ((num(n) ?? 0) === 1 ? one : many);
+  const ratioPct = (r) => Math.round(r * 100) + '%';
+  // A percentage of a base, or null when the base is under 5 (show the count only).
+  const share = (part, base, suffix) => {
+    const p = num(part), b = num(base);
+    if (p === null || b === null || b < 5) return null;
+    return Math.round(p / b * 100) + '% ' + suffix;
+  };
+  const dateLong = (s) => {
+    const d = new Date(s + 'T00:00:00Z');
+    return isNaN(d) ? '' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  };
+  const dateShort = (s) => {
+    const d = new Date(s + 'T00:00:00Z');
+    return isNaN(d) ? '' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+  };
+  const money = (amount, currency) => {
+    const x = num(amount) ?? 0;
+    try {
+      return x.toLocaleString('en-GB', { style: 'currency', currency: String(currency) });
+    } catch (e) {
+      return x.toFixed(2) + ' ' + String(currency ?? '');
+    }
+  };
+  const regionName = (code) => {
+    try { return new Intl.DisplayNames(['en-GB'], { type: 'region' }).of(code) || code; } catch (e) { return code; }
+  };
+
+  // Shared markup. Raw strings in, escaped inside.
+  const kpi = (label, valueHtml, ctx, isNote) =>
+    `<div class="kpi"><div class="kpi-label">${esc(label)}</div>` +
+    `<div class="kpi-value${isNote ? ' is-note' : ''}">${valueHtml}</div>` +
+    (ctx ? `<div class="kpi-ctx">${esc(ctx)}</div>` : '') + `</div>`;
+  const ratioKpi = (label, r, ctx) =>
+    num(r) === null ? kpi(label, esc(NA), ctx, true) : kpi(label, esc(ratioPct(r)), ctx, false);
+  const rows = (items) => items.length
+    ? `<ul class="rows">${items.map(i =>
+        `<li class="row"><span class="row-main"><span class="row-label">${esc(i.l)}</span>` +
+        (i.s ? `<span class="row-sub">${esc(i.s)}</span>` : '') +
+        `</span><span class="row-value">${esc(i.v)}</span></li>`).join('')}</ul>`
+    : `<p class="none">Nothing yet.</p>`;
+  const group = (inner) => `<div class="group">${inner}</div>`;
+  const block = (id, title, body, wide) =>
+    `<section class="block${wide ? ' wide' : ''}" aria-labelledby="${id}"><h2 class="section-head" id="${id}">${esc(title)}</h2>${body}</section>`;
+  const mini = (label, value, sub, isNote) =>
+    `<div class="mini"><div class="mini-label">${esc(label)}</div>` +
+    `<div class="mini-value${isNote ? ' is-note' : ''}">${value}</div>` +
+    (sub ? `<div class="mini-sub">${esc(sub)}</div>` : '') + `</div>`;
+
+  // Key numbers
+  function keyNumbers(m) {
+    const k = m.kpis || {};
+    const s = m.scans || {};
+    const f = Object.fromEntries(arr(m.funnel).map(x => [x.step, num(x.users) ?? 0]));
+    const viewed = f.paywall_viewed ?? 0, bought = f.purchase_succeeded ?? 0;
+
+    let paywall;
+    if (num(k.paywallConversion) === null) {
+      paywall = kpi('Paywall conversion', esc(NA), 'Users who bought after seeing the paywall', true);
+    } else if (viewed < 5) {
+      paywall = kpi('Paywall conversion', esc(fmt(bought) + ' of ' + fmt(viewed)), 'Too few to show a percentage', false);
+    } else {
+      paywall = kpi('Paywall conversion', esc(ratioPct(k.paywallConversion)), fmt(bought) + ' of ' + fmt(viewed) + ' who saw the paywall', false);
+    }
+
+    const rev = arr(k.revenue30d);
+    const revHtml = rev.length
+      ? rev.map(r => `<span class="money">${esc(money(r.amount, r.currency))}</span>`).join('<br>')
+      : esc('No purchases yet');
+    const revenue = kpi('Revenue (30 days)', revHtml,
+      plural(k.trialStarts30d, 'trial start', 'trial starts') + ', ' + plural(k.paidStarts30d, 'paid start', 'paid starts'), !rev.length);
+
+    return `<section class="block wide" aria-labelledby="h-kpi"><h2 class="section-head" id="h-kpi">Key numbers</h2>` +
+      `<div class="kpis">` +
+      kpi('Active today', esc(fmt(k.activeToday)), 'Users active on ' + dateLong(m.dataThrough)) +
+      kpi('Active 7 days', esc(fmt(k.active7d)), fmt(k.active28d) + ' in the last 28 days') +
+      kpi('New users (30 days)', esc(fmt(k.newUsers30d)), 'First opened in the window') +
+      ratioKpi('Day 1 retention', k.d1Retention, 'Back the day after first open') +
+      ratioKpi('Day 7 retention', k.d7Retention, 'Back 7 days after first open') +
+      ratioKpi('Scan success', k.scanSuccessRate, fmt(s.succeeded) + ' scans worked, ' + fmt(s.failed) + ' failed') +
+      paywall + revenue +
+      `</div><p class="footnote window-note">Last ${esc(fmt(m.windowDays))} complete days, UTC. Counts are distinct users unless stated.</p></section>`;
+  }
+
+  // Activation funnel
+  function funnel(m) {
+    const steps = arr(m.funnel);
+    if (!steps.length) return block('h-funnel', 'Activation funnel', group(`<p class="none">${esc('Nothing yet.')}</p>`));
+    const first = num(steps[0].users) ?? 0;
+    const items = steps.map((s, i) => {
+      const u = num(s.users) ?? 0;
+      const prev = i ? (num(steps[i - 1].users) ?? 0) : null;
+      const w = first > 0 ? Math.min(100, u / first * 100) : 0;
+      let sub = '';
+      if (prev !== null) sub = prev < 5 ? TOO_FEW : Math.round(u / prev * 100) + '% of the previous step';
+      return `<li><div class="step-top"><span>${esc(STEP_LABELS[s.step] || label(s.step))}</span>` +
+        `<span class="row-value">${esc(fmt(u))}</span></div>` +
+        `<div class="track" aria-hidden="true"><span style="width:${w.toFixed(1)}%"></span></div>` +
+        (sub ? `<div class="step-sub">${esc(sub)}</div>` : '') + `</li>`;
+    }).join('');
+    return block('h-funnel', 'Activation funnel',
+      `<div class="group"><ol class="steps">${items}</ol></div>` +
+      `<p class="footnote">Ever reached in this window. Steps are not strictly ordered per user.</p>`);
+  }
+
+  // Daily active users, inline SVG
+  function dailyChart(m) {
+    const pts = arr(m.daily).map(d => ({ date: String(d.date ?? ''), v: num(d.activeUsers) ?? 0 }));
+    if (!pts.length) return block('h-daily', 'Daily active users', group(`<p class="none">No daily numbers yet.</p>`), true);
+    const W = 340, H = 170, PT = 12, PB = 8, PL = 4, PR = 4;
+    const max = Math.max(1, ...pts.map(p => p.v));
+    const step = pts.length > 1 ? (W - PL - PR) / (pts.length - 1) : 0;
+    const xy = pts.map((p, i) => [PL + i * step, PT + (H - PT - PB) * (1 - p.v / max)]);
+    const line = xy.map((q, i) => (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1)).join(' ');
+    const last = xy[xy.length - 1], first = xy[0];
+    const area = line + ` L${last[0].toFixed(1)} ${H - PB} L${first[0].toFixed(1)} ${H - PB} Z`;
+    const total = pts.reduce((a, p) => a + p.v, 0);
+    const avg = Math.round(total / pts.length);
+    const peak = pts.reduce((a, p) => (p.v > a.v ? p : a), pts[0]);
+    const latest = pts[pts.length - 1];
+    const summary = `Daily active users for the last ${pts.length} days. Average ${avg} a day. ` +
+      `Highest ${peak.v} on ${dateShort(peak.date)}. Latest ${latest.v} on ${dateShort(latest.date)}.`;
+    const body = `<div class="group">` +
+      `<figure class="chart" style="margin:0">` +
+      `<svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="chart-title chart-desc" preserveAspectRatio="none">` +
+      `<title id="chart-title">Daily active users, last ${pts.length} days</title>` +
+      `<desc id="chart-desc">${esc(summary)}</desc>` +
+      `<line class="base" x1="0" x2="${W}" y1="${H - PB}" y2="${H - PB}"/>` +
+      `<path class="area" d="${area}"/><path class="line" d="${line}"/></svg>` +
+      `<figcaption class="chart-axis"><span>${esc(dateShort(pts[0].date))}</span><span>${esc(dateShort(latest.date))}</span></figcaption>` +
+      `</figure>` +
+      `<p class="chart-summary">${esc(summary)}</p></div>`;
+    return block('h-daily', 'Daily active users', body, true);
+  }
+
+  // Onboarding
+  function onboarding(m) {
+    const ob = m.onboarding || {};
+    const beats = arr(ob.beats);
+    const beatItems = beats.map((b, i) => {
+      const u = num(b.users) ?? 0;
+      const prev = i ? (num(beats[i - 1].users) ?? 0) : null;
+      const s = prev === null ? '' : (prev < 5 ? TOO_FEW : Math.round(u / prev * 100) + '% of the previous beat');
+      return { l: label(b.beat), v: fmt(u), s };
+    });
+    const groups = new Map();
+    arr(ob.quiz).forEach(q => {
+      const key = String(q.question ?? '');
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(q);
+    });
+    const quizHtml = [...groups.entries()].map(([question, answers]) => {
+      const total = answers.reduce((a, q) => a + (num(q.users) ?? 0), 0);
+      const items = answers
+        .slice()
+        .sort((a, b) => (num(b.users) ?? 0) - (num(a.users) ?? 0))
+        .map(q => ({ l: label(q.answer), v: fmt(q.users), s: share(q.users, total, 'of answers to this question') || '' }));
+      return `<h3 class="sub-head">${esc(label(question))}</h3>${group(rows(items))}`;
+    }).join('');
+    const body = `<h3 class="sub-head">Drop-off through the steps</h3>${group(rows(beatItems))}` +
+      (groups.size ? `<h3 class="sub-head">Quiz answers</h3>${quizHtml}` : '');
+    return block('h-onb', 'Onboarding', body);
+  }
+
+  // Paywall
+  function paywall(m) {
+    const pw = m.paywall || {};
+    const sources = arr(pw.bySource).map(s => {
+      const viewed = num(s.viewed) ?? 0;
+      const small = viewed < 5 && viewed > 0;
+      const cell = (label, n) => mini(label, esc(fmt(n)), share(n, viewed, 'of viewed') || '', false);
+      return `<div class="group"><div class="card-head">${esc(label(s.source))}</div>` +
+        `<div class="mini-grid">${mini('Viewed', esc(fmt(s.viewed)), '', false)}${cell('Tapped the button', s.ctaTapped)}` +
+        `${cell('Purchased', s.purchased)}${cell('Dismissed', s.dismissed)}</div>` +
+        (small ? `<div class="card-foot">${esc(TOO_FEW)}.</div>` : '') + `</div>`;
+    }).join('');
+    const plans = rows(arr(pw.plans).map(p => ({
+      l: label(p.plan), v: fmt(p.selected) + ' selected', s: fmt(p.ctaTapped) + ' tapped the button'
+    })));
+    const body = (sources ? `<h3 class="sub-head">By where it was shown</h3>${sources}` : group(`<p class="none">Nothing yet.</p>`)) +
+      `<h3 class="sub-head">Plans</h3>${group(plans)}`;
+    return block('h-pw', 'Paywall', body);
+  }
+
+  // Purchases and revenue
+  function purchases(m) {
+    const items = arr(m.purchases).map(p => ({
+      l: label(p.plan),
+      v: plural(p.count, 'purchase', 'purchases'),
+      s: (p.isTrial ? 'Free trial' : 'Paid') + ', ' + plural(p.users, 'user', 'users')
+    }));
+    return block('h-buy', 'Purchases', group(rows(items)));
+  }
+
+  // Receipt scans
+  function scans(m) {
+    const s = m.scans || {};
+    const reasons = arr(s.failureReasons).map(r => ({ l: label(r.reason), v: plural(r.count, 'failure', 'failures') }));
+    const body = `<div class="group"><div class="mini-grid">` +
+      mini('Started', esc(fmt(s.started)), '', false) +
+      mini('Succeeded', esc(fmt(s.succeeded)), '', false) +
+      mini('Failed', esc(fmt(s.failed)), '', false) +
+      mini('Items per scan, on average', num(s.avgItems) === null ? esc(NA) : esc(num(s.avgItems).toFixed(1)), '', num(s.avgItems) === null) +
+      `</div></div>` +
+      `<h3 class="sub-head">Why scans failed</h3>${group(rows(reasons))}` +
+      `<p class="footnote">Failure counts are events, not users.</p>`;
+    return block('h-scan', 'Receipt scans', body);
+  }
+
+  // Screens
+  function screens(m) {
+    const list = arr(m.screens);
+    const body = list.length
+      ? `<div class="group"><table class="tbl"><thead><tr><th scope="col">Screen</th><th scope="col">Views</th><th scope="col">Users</th></tr></thead><tbody>` +
+        list.map(x => `<tr><td>${esc(x.screen)}</td><td class="n">${esc(fmt(x.views))}</td><td class="n">${esc(fmt(x.users))}</td></tr>`).join('') +
+        `</tbody></table></div>`
+      : group(`<p class="none">Nothing yet.</p>`);
+    return block('h-screens', 'Top screens', body, true);
+  }
+
+  // Features
+  function features(m) {
+    const f = m.features || {};
+    const tr = f.trialReminders || {};
+    const methods = arr(f.paymentRequests).map(x => ({ l: METHOD_LABELS[x.method] || label(x.method), v: plural(x.count, 'request', 'requests') }));
+    const paths = arr(f.firstSplits).map(x => ({ l: PATH_LABELS[x.path] || label(x.path), v: plural(x.users, 'user', 'users') }));
+    const body =
+      `<h3 class="sub-head">Live sessions</h3>${group(rows([{ l: 'Hosts who started a live table', v: plural(f.liveSessions, 'user', 'users') }]))}` +
+      `<h3 class="sub-head">Payment methods shared</h3>${group(rows(methods))}` +
+      `<h3 class="sub-head">First split</h3>${group(rows(paths))}` +
+      `<h3 class="sub-head">Trial reminders</h3>${group(rows([
+        { l: 'Reminder shown', v: plural(tr.shown, 'user', 'users') },
+        { l: 'Tapped manage', v: plural(tr.manageTapped, 'user', 'users') }
+      ]))}`;
+    return block('h-feat', 'Features', body);
+  }
+
+  // Audience
+  function audience(m) {
+    const versions = arr(m.versions).map(x => ({ l: x.version, v: plural(x.users, 'user', 'users') }));
+    const os = arr(m.os).map(x => ({ l: x.os, v: plural(x.users, 'user', 'users') }));
+    const countries = arr(m.countries).map(x => ({ l: regionName(x.country), v: plural(x.users, 'user', 'users') }));
+    const mood = arr(m.mood).map(x => ({ l: MOOD_LABELS[x.mood] || label(x.mood), v: plural(x.users, 'user', 'users') }));
+    const body =
+      `<h3 class="sub-head">App versions</h3>${group(rows(versions))}` +
+      `<h3 class="sub-head">iOS versions</h3>${group(rows(os))}` +
+      `<h3 class="sub-head">Countries</h3>${group(rows(countries))}` +
+      `<h3 class="sub-head">Pulse mood</h3>${group(rows(mood))}`;
+    return block('h-aud', 'Audience', body);
+  }
+
+  const emptyCard = `<div class="group"><p class="empty-card"><strong>No analytics yet.</strong> ` +
+    `The first numbers arrive one to two days after the BigQuery link is set up.</p></div>`;
+
+  function renderAnalytics(doc) {
+    const el = $('analytics');
+    if (!doc || doc.hasData !== true) {
+      $('data-date').textContent = 'No analytics yet.';
+      el.innerHTML = `<div class="fade">${emptyCard}</div>`;
+      return;
+    }
+    $('data-date').textContent = doc.dataThrough ? 'Data through ' + dateLong(doc.dataThrough) + ' (UTC)' : 'Data date not set';
+    el.innerHTML = `<div class="fade">${keyNumbers(doc)}<div class="cols">` +
+      funnel(doc) + dailyChart(doc) + onboarding(doc) + paywall(doc) +
+      purchases(doc) + scans(doc) + screens(doc) + features(doc) + audience(doc) +
+      `</div></div>`;
+  }
+
+  function renderAnalyticsError() {
+    $('data-date').textContent = '';
+    $('analytics').innerHTML = `<div class="notice err" role="alert">Could not load the analytics. Reload to try again.</div>`;
+  }
+
+  // Sign-in
+  show('signed-out', true);
   $('signin').addEventListener('click', async () => {
     $('signin-msg').textContent = '';
     try {
@@ -179,22 +544,39 @@ main{max-width:640px;margin:0 auto;padding:24px var(--gutter) 96px}
   auth.onAuthStateChanged(async (user) => {
     show('signed-out', !user);
     show('signed-in', !!user);
-    if (!user) return;
+    if (!user) {
+      $('data-date').textContent = 'Sign in to see the numbers.';
+      return;
+    }
     $('who').textContent = 'Signed in as ' + (user.displayName || user.email || 'your account') + ' · uid ' + user.uid;
     show('denied', false);
     show('content', false);
-    try {
-      const snap = await db.collection('feedback').orderBy('createdAt', 'desc').get();
-      load(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-      show('content', true);
-    } catch (e) {
-      $('denied').textContent = e.code === 'permission-denied'
-        ? 'Not authorised. Add this uid as a document ID in the admins collection, then reload.'
-        : 'Could not load notes. Reload to try again.';
+
+    const [metricsRes, notesRes] = await Promise.allSettled([
+      db.collection('adminMetrics').doc('latest').get(),
+      db.collection('feedback').orderBy('createdAt', 'desc').get()
+    ]);
+    const isDenied = (r) => r.status === 'rejected' && r.reason && r.reason.code === 'permission-denied';
+    if (isDenied(metricsRes) || isDenied(notesRes)) {
+      $('denied').textContent = 'Not authorised. Add this uid as a document ID in the admins collection, then reload.';
       show('denied', true);
+      return;
     }
+
+    if (metricsRes.status === 'fulfilled') renderAnalytics(metricsRes.value.exists ? metricsRes.value.data() : null);
+    else renderAnalyticsError();
+
+    if (notesRes.status === 'fulfilled') {
+      load(notesRes.value.docs.map(d => ({ id: d.id, ...d.data() })));
+    } else {
+      $('denied').textContent = 'Could not load feedback. Reload to try again.';
+      show('denied', true);
+      load([]);
+    }
+    show('content', true);
   });
 
+  // Feedback notes
   const toDate = (v) => v && v.toDate ? v.toDate() : (v ? new Date(v) : null);
   const day = (d) => d ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '-';
   // Keyword match for notes that mention money or help. A prompt to look, not a filter.
@@ -202,23 +584,18 @@ main{max-width:640px;margin:0 auto;padding:24px var(--gutter) 96px}
 
   let all = [];
   let filter = 'all';
-  let num = new Map();
+  let num2 = new Map();
 
   function load(notes) {
     all = notes;
     const asc = notes.slice().sort((a, b) => (toDate(a.createdAt) || 0) - (toDate(b.createdAt) || 0));
-    num = new Map(asc.map((n, i) => [n.id, i + 1]));
+    num2 = new Map(asc.map((n, i) => [n.id, i + 1]));
     const now = Date.now();
-    const flagged = notes.filter(n => NEEDS_REPLY.test(n.message || ''));
-    $('k-total').textContent = notes.length;
-    $('k-7d').textContent = notes.filter(n => { const d = toDate(n.createdAt); return d && now - d < 7 * 864e5; }).length;
-    $('k-contact').textContent = notes.filter(n => n.contact).length;
-    $('k-mood').textContent = notes.filter(n => n.mood).length;
-    $('k-flag').textContent = flagged.length;
-
-    const src = {};
-    notes.forEach(n => { const k = n.source || 'unknown'; src[k] = (src[k] || 0) + 1; });
-    $('sources').textContent = 'By source: ' + (Object.entries(src).sort((a, b) => b[1] - a[1]).map(([k, v]) => k + ' ' + v).join(', ') || 'none yet') + '.';
+    const last7 = notes.filter(n => { const d = toDate(n.createdAt); return d && now - d < 7 * 864e5; }).length;
+    const withContact = notes.filter(n => n.contact).length;
+    const flagged = notes.filter(n => NEEDS_REPLY.test(n.message || '')).length;
+    $('feedback-summary').textContent =
+      `${notes.length} in total, ${last7} in the last 7 days, ${withContact} with a contact, ${flagged} need a reply.`;
     render();
   }
 
@@ -231,13 +608,14 @@ main{max-width:640px;margin:0 auto;padding:24px var(--gutter) 96px}
     document.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
     $('list').innerHTML = list.length ? list.map(n => {
       const flagged = NEEDS_REPLY.test(n.message || '');
-      const mood = n.mood ? `<span class="pill mood-${esc(n.mood)}">${esc(n.mood)}</span>` : '';
+      const moodClass = MOOD_CLASS[n.mood] ? ' ' + MOOD_CLASS[n.mood] : '';
+      const mood = n.mood ? `<span class="pill${moodClass}">${esc(MOOD_LABELS[n.mood] || n.mood)}</span>` : '';
       const contact = n.contact ? `<div class="note-contact"><b>Contact</b> ${esc(n.contact)}</div>` : '';
       return `
       <article class="note">
         <div class="note-meta">
-          <span>#${num.get(n.id)} · ${esc(day(toDate(n.createdAt)))}</span>
-          <span class="pill ${esc(n.source)}">${esc(n.source || 'unknown')}</span>
+          <span>#${num2.get(n.id)} · ${esc(day(toDate(n.createdAt)))}</span>
+          <span class="pill">${esc(n.source || 'unknown')}</span>
           ${n.screen ? `<span>${esc(n.screen)}</span>` : ''}
           ${mood}
           ${flagged ? '<span class="pill reply">Needs a reply</span>' : ''}
