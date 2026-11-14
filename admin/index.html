@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="light dark">
+<title>OnlyBills admin</title>
+<style>
+/* Tokens mirror split-app/src/design/tokens.css (DESIGN.md §3). System light and dark. */
+:root{
+  --accent:#4595ff; --accent-text:#0a66d6; --accent-fill:#0a66d6; --accent-soft:rgba(69,149,255,.14);
+  --positive:#34c759; --positive-text:#146c37; --positive-soft:rgba(52,199,89,.14);
+  --negative-text:#d70015; --negative-soft:rgba(255,59,48,.10);
+  --warning:#ff9500; --warning-text:#8a4b00; --warning-soft:rgba(255,149,0,.16);
+  --bg:#f2f2f7; --surface:#ffffff; --surface-raised:#f2f2f7; --fill:rgba(120,120,128,.16);
+  --hairline:rgba(60,60,67,.18);
+  --text:#000000; --text-2:rgba(60,60,67,.74); --text-3:rgba(60,60,67,.46); --on-accent:#ffffff;
+  --glass-bg:rgba(255,255,255,.62); --glass-border:rgba(255,255,255,.75); --glass-shadow:0 8px 32px rgba(0,0,0,.10),0 1px 2px rgba(0,0,0,.06);
+  --r-lg:26px; --r-md:20px; --r-sm:12px; --gutter:20px;
+  --font-rounded:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --accent-text:#4b9bff; --accent-fill:#0a66d6; --positive-text:#5be07f; --negative-text:#ff6961; --warning-text:#ffb340;
+    --bg:#000000; --surface:#1c1c1e; --surface-raised:#2c2c2e; --fill:rgba(120,120,128,.36);
+    --hairline:rgba(84,84,88,.65); --text:#ffffff; --text-2:rgba(235,235,245,.68); --text-3:rgba(235,235,245,.40);
+    --glass-bg:rgba(60,60,67,.55); --glass-border:rgba(255,255,255,.14); --glass-shadow:0 8px 32px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --accent-text:#4b9bff; --positive-text:#5be07f; --negative-text:#ff6961; --warning-text:#ffb340;
+  --bg:#000000; --surface:#1c1c1e; --surface-raised:#2c2c2e; --fill:rgba(120,120,128,.36);
+  --hairline:rgba(84,84,88,.65); --text:#ffffff; --text-2:rgba(235,235,245,.68); --text-3:rgba(235,235,245,.40);
+  --glass-bg:rgba(60,60,67,.55); --glass-border:rgba(255,255,255,.14); --glass-shadow:0 8px 32px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{
+  margin:0; min-height:100vh; color:var(--text); background:var(--bg);
+  font:17px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+/* PageBackground: faint accent wash at the top */
+body::before{content:"";position:fixed;inset:0 0 auto 0;height:260px;pointer-events:none;
+  background:linear-gradient(180deg,var(--accent-soft),transparent);z-index:-1}
+main{max-width:640px;margin:0 auto;padding:24px var(--gutter) 96px}
+.title{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin:8px 0 6px}
+.subtitle{color:var(--text-2);font-size:15px;margin:0 0 24px}
+.footnote{color:var(--text-2);font-size:13px}
+.section-head{font-size:13px;font-weight:600;color:var(--text-2);text-transform:none;margin:28px 6px 8px;display:flex;justify-content:space-between;align-items:baseline}
+.group{background:var(--surface);border-radius:var(--r-lg);overflow:hidden}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:52px;padding:12px 16px;border-top:.5px solid var(--hairline)}
+.row:first-child{border-top:0}
+.row .label{font-size:17px}
+.row .value{font-family:var(--font-rounded);font-variant-numeric:tabular-nums;font-size:17px;font-weight:600;color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 24px;border:0;border-radius:999px;
+  font:600 17px/1 -apple-system,BlinkMacSystemFont,sans-serif;cursor:pointer;color:var(--on-accent);background:var(--accent-fill)}
+.btn:active{transform:scale(.98)}
+.btn.block{width:100%}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.glass{background:var(--glass-bg);color:var(--accent-text);border:.5px solid var(--glass-border);box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);min-height:40px;padding:0 16px;font-size:15px}
+.signin-card{padding:20px 16px;display:grid;gap:16px}
+.signin-card p{margin:0;color:var(--text-2);font-size:15px}
+.notice{border-radius:var(--r-md);padding:14px 16px;font-size:15px;margin-top:16px}
+.notice.err{background:var(--negative-soft);color:var(--negative-text)}
+.notice.setup{background:var(--warning-soft);color:var(--warning-text)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.chip{border:0;border-radius:999px;padding:7px 14px;font:500 14px/1 -apple-system,BlinkMacSystemFont,sans-serif;background:var(--fill);color:var(--text);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent-fill);color:var(--on-accent)}
+.pill{display:inline-block;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;background:var(--fill);color:var(--text-2);white-space:nowrap}
+.pill.settings{background:var(--positive-soft);color:var(--positive-text)}
+.pill.pulse{background:var(--accent-soft);color:var(--accent-text)}
+.pill.footer{background:var(--fill);color:var(--text-2)}
+.pill.reply{background:var(--warning-soft);color:var(--warning-text)}
+.pill.mood-meh{background:var(--warning-soft);color:var(--warning-text)}
+.pill.mood-okay{background:var(--positive-soft);color:var(--positive-text)}
+.pill.mood-love{background:var(--accent-soft);color:var(--accent-text)}
+.note{padding:14px 16px;border-top:.5px solid var(--hairline)}
+.note:first-child{border-top:0}
+.note-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--text-2);font-size:13px}
+.note-text{margin:8px 0 0;font-size:16px;white-space:pre-wrap;word-wrap:break-word}
+.note-contact{margin-top:8px;font-size:14px;color:var(--text-2);word-break:break-all}
+.note-contact b{color:var(--text);font-weight:600}
+.empty{padding:20px 16px;color:var(--text-2);font-size:15px}
+.hidden{display:none!important}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:4px}
+.who{font-size:13px;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (min-width:600px){.title{font-size:40px}}
+</style>
+</head>
+<body>
+<main>
+  <h1 class="title">Feedback</h1>
+  <p class="subtitle">Notes sent from the app and the bill page. Only accounts listed in the admins collection can read them.</p>
+
+  <div id="setup" class="notice setup hidden"></div>
+
+  <section id="signed-out" class="hidden">
+    <div class="group signin-card">
+      <p>Sign in with the Google account that owns OnlyBills.</p>
+      <button id="signin" class="btn block">Sign in with Google</button>
+      <p id="signin-msg" class="footnote"></p>
+    </div>
+  </section>
+
+  <section id="signed-in" class="hidden">
+    <div class="topbar">
+      <span class="who" id="who"></span>
+      <button class="btn glass" id="signout">Sign out</button>
+    </div>
+    <div id="denied" class="notice err hidden"></div>
+
+    <div id="content" class="hidden">
+      <div class="section-head"><span>Overview</span></div>
+      <div class="group">
+        <div class="row"><span class="label">Notes</span><span class="value" id="k-total">0</span></div>
+        <div class="row"><span class="label">Last 7 days</span><span class="value" id="k-7d">0</span></div>
+        <div class="row"><span class="label">Left a contact</span><span class="value" id="k-contact">0</span></div>
+        <div class="row"><span class="label">Answered the mood pulse</span><span class="value" id="k-mood">0</span></div>
+        <div class="row"><span class="label">Needs a reply</span><span class="value" id="k-flag">0</span></div>
+      </div>
+      <p class="footnote" id="sources" style="margin:8px 16px 0"></p>
+
+      <div class="section-head"><span>Notes</span></div>
+      <div class="chips" role="group" aria-label="Filter notes">
+        <button class="chip" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" data-filter="reply" aria-pressed="false">Needs a reply</button>
+        <button class="chip" data-filter="contact" aria-pressed="false">Has a contact</button>
+      </div>
+      <div class="group" id="list"></div>
+    </div>
+  </section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+(() => {
+  // Web app config from Firebase console → Project settings → Your apps → Web.
+  // Not a secret (every web client ships it); access is enforced by Firestore rules.
+  const CONFIG = {
+    apiKey: 'AIzaSyByDh_nxkV1kWGdIHFldDAoIU7iGqU3FQc',
+    authDomain: 'onlybills-b8dac.firebaseapp.com',
+    projectId: 'onlybills-b8dac',
+    appId: '1:572680746912:web:9c3890b712bdc19a9a16c5'
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const show = (id, on) => $(id).classList.toggle('hidden', !on);
+
+  if (CONFIG.apiKey.startsWith('REPLACE') || CONFIG.appId.startsWith('REPLACE')) {
+    $('setup').textContent = 'Not configured yet: add the web app config to CONFIG in this file.';
+    show('setup', true);
+    return;
+  }
+
+  firebase.initializeApp(CONFIG);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  // Signed out: only the sign-in card. Signed in: the notes view.
+  show('signed-out', true);
+
+  $('signin').addEventListener('click', async () => {
+    $('signin-msg').textContent = '';
+    try {
+      await auth.signInWithPopup(provider);
+    } catch (e) {
+      if (e.code !== 'auth/popup-closed-by-user') $('signin-msg').textContent = 'Sign-in failed. Try again.';
+    }
+  });
+  $('signout').addEventListener('click', () => auth.signOut());
+
+  auth.onAuthStateChanged(async (user) => {
+    show('signed-out', !user);
+    show('signed-in', !!user);
+    if (!user) return;
+    $('who').textContent = 'Signed in as ' + (user.displayName || user.email || 'your account') + ' · uid ' + user.uid;
+    show('denied', false);
+    show('content', false);
+    try {
+      const snap = await db.collection('feedback').orderBy('createdAt', 'desc').get();
+      load(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      show('content', true);
+    } catch (e) {
+      $('denied').textContent = e.code === 'permission-denied'
+        ? 'Not authorised. Add this uid as a document ID in the admins collection, then reload.'
+        : 'Could not load notes. Reload to try again.';
+      show('denied', true);
+    }
+  });
+
+  const toDate = (v) => v && v.toDate ? v.toDate() : (v ? new Date(v) : null);
+  const day = (d) => d ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '-';
+  // Keyword match for notes that mention money or help. A prompt to look, not a filter.
+  const NEEDS_REPLY = /need money|help|pay my|bills? to pay|can'?t pay|urgent|lost my job|terminated|depress|panic/i;
+
+  let all = [];
+  let filter = 'all';
+  let num = new Map();
+
+  function load(notes) {
+    all = notes;
+    const asc = notes.slice().sort((a, b) => (toDate(a.createdAt) || 0) - (toDate(b.createdAt) || 0));
+    num = new Map(asc.map((n, i) => [n.id, i + 1]));
+    const now = Date.now();
+    const flagged = notes.filter(n => NEEDS_REPLY.test(n.message || ''));
+    $('k-total').textContent = notes.length;
+    $('k-7d').textContent = notes.filter(n => { const d = toDate(n.createdAt); return d && now - d < 7 * 864e5; }).length;
+    $('k-contact').textContent = notes.filter(n => n.contact).length;
+    $('k-mood').textContent = notes.filter(n => n.mood).length;
+    $('k-flag').textContent = flagged.length;
+
+    const src = {};
+    notes.forEach(n => { const k = n.source || 'unknown'; src[k] = (src[k] || 0) + 1; });
+    $('sources').textContent = 'By source: ' + (Object.entries(src).sort((a, b) => b[1] - a[1]).map(([k, v]) => k + ' ' + v).join(', ') || 'none yet') + '.';
+    render();
+  }
+
+  function render() {
+    const list = all.filter(n => {
+      if (filter === 'reply') return NEEDS_REPLY.test(n.message || '');
+      if (filter === 'contact') return !!n.contact;
+      return true;
+    });
+    document.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+    $('list').innerHTML = list.length ? list.map(n => {
+      const flagged = NEEDS_REPLY.test(n.message || '');
+      const mood = n.mood ? `<span class="pill mood-${esc(n.mood)}">${esc(n.mood)}</span>` : '';
+      const contact = n.contact ? `<div class="note-contact"><b>Contact</b> ${esc(n.contact)}</div>` : '';
+      return `
+      <article class="note">
+        <div class="note-meta">
+          <span>#${num.get(n.id)} · ${esc(day(toDate(n.createdAt)))}</span>
+          <span class="pill ${esc(n.source)}">${esc(n.source || 'unknown')}</span>
+          ${n.screen ? `<span>${esc(n.screen)}</span>` : ''}
+          ${mood}
+          ${flagged ? '<span class="pill reply">Needs a reply</span>' : ''}
+        </div>
+        <p class="note-text">${esc(n.message)}</p>
+        ${contact}
+      </article>`;
+    }).join('') : '<div class="empty">Nothing here.</div>';
+  }
+
+  document.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => { filter = b.dataset.filter; render(); }));
+})();
+</script>
+</body>
+</html>
