@@ -12,6 +12,9 @@
 //   ?demo=1[&person=Dad][&state=pay]   static shared bill (v1)
 //   ?demo=loading | notfound | error | offline   app-level pages
 //
+// Venues, people, handles and numbers are made up (no real restaurant, no real account):
+// screenshots of these states go on the website and in articles.
+//
 // Nothing here ever writes to Firestore: demo writes only update local state.
 
 const HOUR = 36e5;
@@ -21,10 +24,10 @@ const PHOTO = 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=fo
 const RECEIPT = 'https://images.unsplash.com/photo-1554774853-b415df9eeb92?auto=format&fit=crop&w=900&q=75';
 
 const PAYMENT = {
-  monzoUsername: 'kylezinho',
-  revolutUsername: 'kylezinho',
-  paypalUsername: 'kylezinho',
-  bankAccountName: 'Kyle O’Sullivan',
+  monzoUsername: 'kyledemo27',
+  revolutUsername: 'kyledemo27',
+  paypalUsername: 'kyledemo27',
+  bankAccountName: 'Kyle Test',
   bankDetails: [
     { label: 'Sort code', value: '04-00-04' },
     { label: 'Account no', value: '12345678' },
@@ -77,22 +80,49 @@ const withMe = (d, claims = []) => {
   return d;
 };
 
+// Made-up menus for the regional states (invented venues, everyday dishes): [name, price, qty?]
+// in item order, so the claims in baseLive() stay the same (you: itm_001 shared, itm_003).
+const MENUS = {
+  us: { items: [['Carnitas Tacos', 12.5], ['Chips & Guacamole', 9], ['Elote', 6], ['Al Pastor Tacos', 12],
+    ['Horchata', 4.5], ['Mexican Coke', 8, 2], ['Fish Tacos', 13.5], ['Churros', 7]],
+    charges: { chg_000: { name: 'Tax', amount: 6.26, kind: 'tax' }, chg_001: { name: 'Tip', amount: 14.5, kind: 'tip' } } },
+  es: { items: [['Tortilla española', 7.5], ['Croquetas de jamón', 8.5], ['Patatas bravas', 6.5], ['Gambas al ajillo', 12],
+    ['Pan con tomate', 3.5], ['Caña', 5, 2], ['Pimientos de Padrón', 6], ['Tinto de verano', 4.5]], charges: {} },
+  br: { items: [['Feijoada', 52], ['Porção de mandioca', 26], ['Coxinha', 14], ['Pastel de queijo', 18],
+    ['Pão de queijo', 16], ['Chope', 24, 2], ['Caipirinha', 22], ['Guaraná', 8]],
+    charges: { chg_000: { name: 'Serviço (10%)', amount: 18, percent: 10 } } },
+  saffron: { items: [['Black Daal', 7.9], ['Garlic Naan', 4.8, 2], ['Onion Bhaji', 4.9], ['Lamb Keema Bun', 13.2],
+    ['Butter Chicken', 14.5], ['Mango Lassi', 9.9, 2], ['Paneer Tikka', 9.5], ['Chai', 3.7]],
+    charges: { chg_000: { name: 'Service (12.5%)', amount: 8.55, percent: 12.5 } } },
+  th: { items: [['Pad Thai', 180], ['Massaman Curry', 280], ['Som Tam', 120], ['Tom Yum Goong', 320],
+    ['Jasmine Rice', 40], ['Thai Iced Tea', 140, 2], ['Mango Sticky Rice', 150], ['Spring Rolls', 120]],
+    charges: { chg_000: { name: 'Service (10%)', amount: 135, percent: 10 } } },
+};
+const withMenu = (d, menu) => {
+  const m = MENUS[menu];
+  if (!m) return d;
+  m.items.forEach(([name, price, qty = 1], i) => {
+    Object.assign(d.items[`itm_00${i}`], { name, price, qty });
+  });
+  d.charges = JSON.parse(JSON.stringify(m.charges));
+  delete d.rating; delete d.ratingCount; delete d.receiptImageUrl;
+  return d;
+};
+
 /** A table in another currency with the pay sheet open, for the regional payout states. */
-const payDemo = (currency, storeName, payment) => {
-  const d = withMe(baseLive(), ['itm_001', 'itm_003']);
+const payDemo = (currency, storeName, payment, menu = 'saffron') => {
+  const d = withMenu(withMe(baseLive(), ['itm_001', 'itm_003']), menu);
   Object.assign(d, { currency, storeName, payment });
   return { data: d, identity: ME, sheet: 'pay' };
 };
 
-/** A Bangkok table in baht (prices ×40), its host paid back in pounds (`payment.settle`). */
+/** A Bangkok table in baht (a made-up Thai menu), its host paid back in pounds (`payment.settle`). */
 const thaiDemo = (sheet) => {
-  const d = withMe(baseLive(), ['itm_001', 'itm_003']);
-  Object.values(d.items).forEach((it) => { it.price = Math.round(it.price * 40); });
-  Object.values(d.charges).forEach((c) => { c.amount = Math.round(c.amount * 40); });
+  const d = withMenu(withMe(baseLive(), ['itm_001', 'itm_003']), 'th');
   Object.assign(d, {
-    currency: 'THB', storeName: 'Jay Fai',
+    currency: 'THB', storeName: 'Baan Som Saeng',
     payment: {
-      monzoUsername: 'kylezinho', defaultMethod: 'monzo', payeeName: 'Kyle',
+      monzoUsername: 'kyledemo27', defaultMethod: 'monzo', payeeName: 'Kyle',
       settle: { cur: 'GBP', base: 'GBP', rate: '43.80', src: 'frankfurter', date: '2026-11-13' },
     },
   });
@@ -121,17 +151,17 @@ export const LIVE_STATES = {
   // (no defaultMethod) — it must keep working: first link leads.
   'pay-default': () => {
     const d = withMe(baseLive(), ['itm_001', 'itm_003']);
-    d.payment = { ...PAYMENT, starlingUsername: 'kylezinho', defaultMethod: 'starling' };
+    d.payment = { ...PAYMENT, starlingUsername: 'kyledemo27', defaultMethod: 'starling' };
     return { data: d, identity: ME, sheet: 'pay' };
   },
   'pay-starling': () => {
     const d = withMe(baseLive(), ['itm_001', 'itm_003']);
-    d.payment = { starlingUsername: 'kylezinho', bankAccountName: PAYMENT.bankAccountName, bankDetails: PAYMENT.bankDetails, defaultMethod: 'starling' };
+    d.payment = { starlingUsername: 'kyledemo27', bankAccountName: PAYMENT.bankAccountName, bankDetails: PAYMENT.bankDetails, defaultMethod: 'starling' };
     return { data: d, identity: ME, sheet: 'pay' };
   },
   'pay-paypal': () => {
     const d = withMe(baseLive(), ['itm_001', 'itm_003']);
-    d.payment = { paypalUsername: 'kylezinho', defaultMethod: 'paypal' };
+    d.payment = { paypalUsername: 'kyledemo27', defaultMethod: 'paypal' };
     return { data: d, identity: ME, sheet: 'pay' };
   },
   'pay-bank': () => {
@@ -141,60 +171,60 @@ export const LIVE_STATES = {
   },
   // Regional payouts: documents with `payment.methods`, as the app writes them (the legacy
   // keys beside it are the mirror rows older clients show; this page ignores them).
-  'pay-us': () => payDemo('USD', 'Taqueria El Farolito', {
+  'pay-us': () => payDemo('USD', 'Juniper Lane Tacos', {
     v: 2, payeeName: 'Kyle', defaultMethod: 'bank', bankAccountName: 'Kyle',
-    bankDetails: [{ label: 'Venmo', value: '@kyle-z' }, { label: 'Zelle', value: '+14155550100' }],
+    bankDetails: [{ label: 'Venmo', value: '@kyle-demo-27' }, { label: 'Zelle', value: '+14155550123' }],
     methods: [
-      { id: 'venmo', kind: 'link', label: 'Venmo', handle: 'kyle-z', cur: ['USD'], fields: [{ label: 'Venmo', value: '@kyle-z' }] },
-      { id: 'zelle', kind: 'copy', label: 'Zelle', cur: ['USD'], fields: [{ label: 'Zelle', value: '+14155550100' }] },
+      { id: 'venmo', kind: 'link', label: 'Venmo', handle: 'kyle-demo-27', cur: ['USD'], fields: [{ label: 'Venmo', value: '@kyle-demo-27' }] },
+      { id: 'zelle', kind: 'copy', label: 'Zelle', cur: ['USD'], fields: [{ label: 'Zelle', value: '+14155550123' }] },
     ],
-  }),
-  'pay-es': () => payDemo('EUR', 'Bar Tomate', {
-    v: 2, payeeName: 'Kyle', revolutUsername: 'kylezinho', defaultMethod: 'bank', bankAccountName: 'Kyle',
+  }, 'us'),
+  'pay-es': () => payDemo('EUR', 'Taberna La Gaviota Azul', {
+    v: 2, payeeName: 'Kyle', revolutUsername: 'kyledemo27', defaultMethod: 'bank', bankAccountName: 'Kyle',
     bankDetails: [{ label: 'Bizum', value: '+34612345678' }],
     methods: [
       { id: 'bizum', kind: 'copy', label: 'Bizum', cur: ['EUR'], fields: [{ label: 'Bizum', value: '+34612345678' }] },
-      { id: 'revolut', kind: 'link', label: 'Revolut', handle: 'kylezinho' },
+      { id: 'revolut', kind: 'link', label: 'Revolut', handle: 'kyledemo27' },
     ],
-  }),
-  'pay-de': () => payDemo('EUR', 'Zur Letzten Instanz', {
-    v: 2, payeeName: 'Kyle', paypalUsername: 'kylezinho', defaultMethod: 'paypal', bankAccountName: 'Kyle O Sullivan',
+  }, 'es'),
+  'pay-de': () => payDemo('EUR', 'Saffron House', {
+    v: 2, payeeName: 'Kyle', paypalUsername: 'kyledemo27', defaultMethod: 'paypal', bankAccountName: 'Kyle Test',
     bankDetails: [{ label: 'IBAN', value: 'DE89370400440532013000' }],
     methods: [
-      { id: 'paypal', kind: 'link', label: 'PayPal', handle: 'kylezinho' },
-      { id: 'iban', kind: 'copy', label: 'IBAN', fields: [{ label: 'IBAN', value: 'DE89370400440532013000' }, { label: 'Name', value: 'Kyle O Sullivan' }] },
+      { id: 'paypal', kind: 'link', label: 'PayPal', handle: 'kyledemo27' },
+      { id: 'iban', kind: 'copy', label: 'IBAN', fields: [{ label: 'IBAN', value: 'DE89370400440532013000' }, { label: 'Name', value: 'Kyle Test' }] },
     ],
   }),
-  'pay-br': () => payDemo('BRL', 'Boteco do Zé', {
+  'pay-br': () => payDemo('BRL', 'Boteco Seu Ramiro', {
     v: 2, payeeName: 'Kyle', defaultMethod: 'bank', bankAccountName: 'Kyle',
-    bankDetails: [{ label: 'Pix key', value: '123e4567-e12b-12d1-a456-426655440000' }],
+    bankDetails: [{ label: 'Pix key', value: '123e4567-e89b-12d3-a456-426614174000' }],
     methods: [
-      { id: 'pix', kind: 'pix', label: 'Pix', cur: ['BRL'], key: '123e4567-e12b-12d1-a456-426655440000', name: 'KYLE O', city: 'BRASIL',
-        fields: [{ label: 'Pix key', value: '123e4567-e12b-12d1-a456-426655440000' }] },
+      { id: 'pix', kind: 'pix', label: 'Pix', cur: ['BRL'], key: '123e4567-e89b-12d3-a456-426614174000', name: 'KYLE TEST', city: 'SAO PAULO',
+        fields: [{ label: 'Pix key', value: '123e4567-e89b-12d3-a456-426614174000' }] },
     ],
-  }),
+  }, 'br'),
   // A method id this build has never heard of: labelled copy rows, never a link.
-  'pay-unknown': () => payDemo('INR', 'Bombay Canteen', {
+  'pay-unknown': () => payDemo('INR', 'Saffron House', {
     v: 2, payeeName: 'Kyle',
     methods: [
-      { id: 'upi', kind: 'link', label: 'UPI', url: 'https://upi.example/kyle', cur: ['INR'],
-        fields: [{ label: 'UPI ID', value: 'kyle@okbank' }, { label: 'Name', value: 'Kyle O Sullivan' }] },
+      { id: 'upi', kind: 'link', label: 'UPI', url: 'https://upi.example/kyletest', cur: ['INR'],
+        fields: [{ label: 'UPI ID', value: 'kyletest@okbank' }, { label: 'Name', value: 'Kyle Test' }] },
     ],
   }),
   // Only a pasted link (the Netherlands): named from the allow-list, never from the document.
-  'pay-link': () => payDemo('EUR', 'Café de Jaren', {
+  'pay-link': () => payDemo('EUR', 'Saffron House', {
     v: 2, payeeName: 'Kyle',
-    methods: [{ id: 'link', kind: 'link', label: 'Tikkie', url: 'https://tikkie.me/pay/Kyle/abc123XYZ' }],
+    methods: [{ id: 'link', kind: 'link', label: 'Tikkie', url: 'https://tikkie.me/pay/example/abc123' }],
   }),
   // A US host on a euro bill: nothing takes the currency, so the order stays and each says why.
-  'pay-demoted': () => payDemo('EUR', 'Bar Tomate', {
+  'pay-demoted': () => payDemo('EUR', 'Taberna La Gaviota Azul', {
     v: 2, payeeName: 'Kyle',
     methods: [
-      { id: 'venmo', kind: 'link', label: 'Venmo', handle: 'kyle-z', cur: ['USD'] },
-      { id: 'zelle', kind: 'copy', label: 'Zelle', cur: ['USD'], fields: [{ label: 'Zelle', value: 'kyle@example.com' }] },
-      { id: 'pix', kind: 'pix', label: 'Pix', cur: ['BRL'], key: '123e4567-e12b-12d1-a456-426655440000', name: 'KYLE O', city: 'BRASIL' },
+      { id: 'venmo', kind: 'link', label: 'Venmo', handle: 'kyle-demo-27', cur: ['USD'] },
+      { id: 'zelle', kind: 'copy', label: 'Zelle', cur: ['USD'], fields: [{ label: 'Zelle', value: 'kyle.test@example.com' }] },
+      { id: 'pix', kind: 'pix', label: 'Pix', cur: ['BRL'], key: '123e4567-e89b-12d3-a456-426614174000', name: 'KYLE TEST', city: 'SAO PAULO' },
     ],
-  }),
+  }, 'es'),
   // Settle currency: a UK Monzo host on a baht bill, paid back in pounds at £1 = ฿43.80.
   'pay-th': () => thaiDemo(true),
   'claiming-th': () => thaiDemo(false),
@@ -260,13 +290,13 @@ export const LIVE_STATES = {
   assigned: () => {
     const d = baseLive();
     Object.assign(d, { status: 'assigned', locked: false, expiresAt: new Date(Date.now() + 7 * 24 * HOUR), requestedAt: t(0.2 * HOUR) });
-    d.storeName = 'Dishoom Kensington';
+    d.storeName = 'Saffron House';
     d.rating = 4.6; d.ratingCount = 9120; d.placeType = 'Indian restaurant';
     d.items = {
-      itm_000: { order: 0, name: 'Chicken Ruby', price: 14.9, qty: 1, claimedBy: { gst_host: true } },
-      itm_001: { order: 1, name: 'House Black Daal', price: 7.9, qty: 1, claimedBy: { gst_host: true, gst_a3f9c2e1: true } },
+      itm_000: { order: 0, name: 'Butter Chicken', price: 14.9, qty: 1, claimedBy: { gst_host: true } },
+      itm_001: { order: 1, name: 'Black Daal', price: 7.9, qty: 1, claimedBy: { gst_host: true, gst_a3f9c2e1: true } },
       itm_002: { order: 2, name: 'Garlic Naan', price: 10.5, qty: 3, claimedBy: { gst_a3f9c2e1: 2, gst_7b2e4d90: true } },
-      itm_003: { order: 3, name: 'Lamb Raan Bun', price: 12.5, qty: 1, claimedBy: { gst_7b2e4d90: true } },
+      itm_003: { order: 3, name: 'Lamb Keema Bun', price: 12.5, qty: 1, claimedBy: { gst_7b2e4d90: true } },
       itm_004: { order: 4, name: 'Paneer Tikka', price: 9.5, qty: 1, claimedBy: { gst_a3f9c2e1: true } },
       itm_005: { order: 5, name: 'Mango Lassi', price: 11.0, qty: 2, claimedBy: { gst_a3f9c2e1: true, gst_c41e8a07: true } },
       itm_006: { order: 6, name: 'Okra Fries', price: 6.5, qty: 1, claimedBy: { gst_c41e8a07: true } },
