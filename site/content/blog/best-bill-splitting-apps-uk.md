@@ -10,7 +10,7 @@ related: splitwise-alternatives, tricount-alternatives, split-bill-monzo-revolut
 
 The best bill splitting app depends on the job. For a house or a two week trip, pick a balance app: Tricount if you want it free with no limits, Splitwise if your friends already use it, Settle Up if you want a web app too. For one restaurant or pub bill where everyone had different things, pick an app that reads the receipt and lets each person claim their own items: Splitwise's free Itemize feature or OnlyBills. If everyone had about the same and you bank with Monzo, Revolut or Starling, the split button in your bank's app is enough.
 
-Below is what each one does, what's free, whether you need an account, and which phones it works on. We checked every fact on the app's own website, its UK App Store listing or launch coverage, as of November 2026. Prices and features change, so check the listing before you pay for anything.
+Below is what each one does, what's free, whether you need an account, and which phones it works on. We checked every fact on the app's own website, its UK App Store listing or launch coverage, as of November 2026. Prices and features change, so check the listing before you pay for anything. In the US, where most friends pay on Venmo or Cash App? See [the best bill splitting apps in 2026](/blog/best-bill-splitting-apps/).
 
 ## Which bill splitting app should you use?
 

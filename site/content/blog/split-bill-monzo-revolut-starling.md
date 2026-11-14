@@ -99,6 +99,8 @@ You don't need everyone on the same bank to get paid back. You have three option
 
 If you're the one paying and don't have their details, see [how to pay a friend back without their bank details](/blog/pay-friend-without-bank-details-uk/).
 
+Friends who bank outside the UK won't have Monzo or Starling, and may pay with Bizum, Swish or an IBAN transfer instead. See [how friends pay each other back in Europe](/blog/pay-friends-back-europe/), or, for a mixed table, [how to split a bill when everyone uses a different payment app](/blog/split-bill-different-payment-apps/).
+
 :::shot guest-03-pay-sheet | In OnlyBills, friends see their exact share and pick how to pay you.
 
 OnlyBills puts these together. After friends tick what they had, they see their exact share and a pay sheet. If you've added your Monzo link, they can pay by card, Apple Pay or bank transfer, with no Monzo account needed. With Starling or Revolut it's card or Apple Pay, no account needed. PayPal (a PayPal account may be needed) and bank transfer (from any banking app) are there too. OnlyBills doesn't handle the money: it hands off to your bank or PayPal. To add your links, see [how to get paid back](/how-to/get-paid-back/).
