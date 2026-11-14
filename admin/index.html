@@ -4,91 +4,132 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="light dark">
 <title>OnlyBills admin</title>
 <style>
-:root{--bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--muted:#6e6e73;--line:#e2e2e6;--accent:#0a84ff;--warn:#b3261e;--warnbg:#fdecea}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#000;--card:#1c1c1e;--ink:#f5f5f7;--muted:#98989f;--line:#2c2c2e;--accent:#0a84ff;--warn:#ff8a80;--warnbg:#3a1714}}
-:root[data-theme="dark"]{--bg:#000;--card:#1c1c1e;--ink:#f5f5f7;--muted:#98989f;--line:#2c2c2e;--accent:#0a84ff;--warn:#ff8a80;--warnbg:#3a1714}
+/* Tokens mirror split-app/src/design/tokens.css (DESIGN.md §3). System light and dark. */
+:root{
+  --accent:#4595ff; --accent-text:#0a66d6; --accent-fill:#0a66d6; --accent-soft:rgba(69,149,255,.14);
+  --positive:#34c759; --positive-text:#146c37; --positive-soft:rgba(52,199,89,.14);
+  --negative-text:#d70015; --negative-soft:rgba(255,59,48,.10);
+  --warning:#ff9500; --warning-text:#8a4b00; --warning-soft:rgba(255,149,0,.16);
+  --bg:#f2f2f7; --surface:#ffffff; --surface-raised:#f2f2f7; --fill:rgba(120,120,128,.16);
+  --hairline:rgba(60,60,67,.18);
+  --text:#000000; --text-2:rgba(60,60,67,.74); --text-3:rgba(60,60,67,.46); --on-accent:#ffffff;
+  --glass-bg:rgba(255,255,255,.62); --glass-border:rgba(255,255,255,.75); --glass-shadow:0 8px 32px rgba(0,0,0,.10),0 1px 2px rgba(0,0,0,.06);
+  --r-lg:26px; --r-md:20px; --r-sm:12px; --gutter:20px;
+  --font-rounded:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --accent-text:#4b9bff; --accent-fill:#0a66d6; --positive-text:#5be07f; --negative-text:#ff6961; --warning-text:#ffb340;
+    --bg:#000000; --surface:#1c1c1e; --surface-raised:#2c2c2e; --fill:rgba(120,120,128,.36);
+    --hairline:rgba(84,84,88,.65); --text:#ffffff; --text-2:rgba(235,235,245,.68); --text-3:rgba(235,235,245,.40);
+    --glass-bg:rgba(60,60,67,.55); --glass-border:rgba(255,255,255,.14); --glass-shadow:0 8px 32px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --accent-text:#4b9bff; --positive-text:#5be07f; --negative-text:#ff6961; --warning-text:#ffb340;
+  --bg:#000000; --surface:#1c1c1e; --surface-raised:#2c2c2e; --fill:rgba(120,120,128,.36);
+  --hairline:rgba(84,84,88,.65); --text:#ffffff; --text-2:rgba(235,235,245,.68); --text-3:rgba(235,235,245,.40);
+  --glass-bg:rgba(60,60,67,.55); --glass-border:rgba(255,255,255,.14); --glass-shadow:0 8px 32px rgba(0,0,0,.4);
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
-main{max-width:1040px;margin:0 auto;padding:28px 16px 64px}
-h1{font-size:26px;margin:0 0 4px}
-h2{font-size:17px;margin:32px 0 12px}
-.sub{color:var(--muted);margin:0 0 20px}
-.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-button{font:inherit;border:0;border-radius:999px;padding:10px 18px;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
-button.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
-button:disabled{opacity:.5;cursor:default}
-.notice{border-radius:12px;padding:12px 16px;margin:16px 0;font-size:14px;background:var(--card);border:1px solid var(--line)}
-.notice.err{background:var(--warnbg);color:var(--warn);border-color:transparent}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-.kpi .v{font-size:26px;font-weight:650;font-variant-numeric:tabular-nums}
-.kpi .l{color:var(--muted);font-size:13px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
-.card.help{border-color:var(--warn)}
-.card p{margin:8px 0 0;white-space:pre-wrap}
-.meta{color:var(--muted);font-size:13px}
-.pill{background:var(--line);border-radius:999px;padding:1px 8px;font-weight:600;color:var(--ink)}
-.bars{display:flex;gap:6px;flex-wrap:wrap}
-.tag{border-radius:999px;padding:2px 9px;font-size:12px;background:var(--line);white-space:nowrap}
-.tag.pulse{background:#dfe9f6;color:#264a7a}
-.tag.settings{background:#e7f1ea;color:#2d5a3e}
-.tag.footer{background:#f1ebf6;color:#5a3f78}
-.mood{border-radius:999px;padding:2px 9px;font-size:12px;background:var(--line)}
-.mood.meh{background:#f6ead9;color:#7a5520}
-.mood.okay{background:#e4f2ea;color:#2d5a3e}
-.mood.love{background:#dfe9f6;color:#264a7a}
-.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600}
-td.msg{min-width:260px;white-space:pre-wrap}
-td.num{color:var(--muted);font-variant-numeric:tabular-nums}
-.muted{color:var(--muted)}
-code{background:var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
-[hidden]{display:none!important}
+html{background:var(--bg)}
+body{
+  margin:0; min-height:100vh; color:var(--text); background:var(--bg);
+  font:17px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+/* PageBackground: faint accent wash at the top */
+body::before{content:"";position:fixed;inset:0 0 auto 0;height:260px;pointer-events:none;
+  background:linear-gradient(180deg,var(--accent-soft),transparent);z-index:-1}
+main{max-width:640px;margin:0 auto;padding:24px var(--gutter) 96px}
+.title{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin:8px 0 6px}
+.subtitle{color:var(--text-2);font-size:15px;margin:0 0 24px}
+.footnote{color:var(--text-2);font-size:13px}
+.section-head{font-size:13px;font-weight:600;color:var(--text-2);text-transform:none;margin:28px 6px 8px;display:flex;justify-content:space-between;align-items:baseline}
+.group{background:var(--surface);border-radius:var(--r-lg);overflow:hidden}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:52px;padding:12px 16px;border-top:.5px solid var(--hairline)}
+.row:first-child{border-top:0}
+.row .label{font-size:17px}
+.row .value{font-family:var(--font-rounded);font-variant-numeric:tabular-nums;font-size:17px;font-weight:600;color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 24px;border:0;border-radius:999px;
+  font:600 17px/1 -apple-system,BlinkMacSystemFont,sans-serif;cursor:pointer;color:var(--on-accent);background:var(--accent-fill)}
+.btn:active{transform:scale(.98)}
+.btn.block{width:100%}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.glass{background:var(--glass-bg);color:var(--accent-text);border:.5px solid var(--glass-border);box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);min-height:40px;padding:0 16px;font-size:15px}
+.signin-card{padding:20px 16px;display:grid;gap:16px}
+.signin-card p{margin:0;color:var(--text-2);font-size:15px}
+.notice{border-radius:var(--r-md);padding:14px 16px;font-size:15px;margin-top:16px}
+.notice.err{background:var(--negative-soft);color:var(--negative-text)}
+.notice.setup{background:var(--warning-soft);color:var(--warning-text)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.chip{border:0;border-radius:999px;padding:7px 14px;font:500 14px/1 -apple-system,BlinkMacSystemFont,sans-serif;background:var(--fill);color:var(--text);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent-fill);color:var(--on-accent)}
+.pill{display:inline-block;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;background:var(--fill);color:var(--text-2);white-space:nowrap}
+.pill.settings{background:var(--positive-soft);color:var(--positive-text)}
+.pill.pulse{background:var(--accent-soft);color:var(--accent-text)}
+.pill.footer{background:var(--fill);color:var(--text-2)}
+.pill.reply{background:var(--warning-soft);color:var(--warning-text)}
+.pill.mood-meh{background:var(--warning-soft);color:var(--warning-text)}
+.pill.mood-okay{background:var(--positive-soft);color:var(--positive-text)}
+.pill.mood-love{background:var(--accent-soft);color:var(--accent-text)}
+.note{padding:14px 16px;border-top:.5px solid var(--hairline)}
+.note:first-child{border-top:0}
+.note-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--text-2);font-size:13px}
+.note-text{margin:8px 0 0;font-size:16px;white-space:pre-wrap;word-wrap:break-word}
+.note-contact{margin-top:8px;font-size:14px;color:var(--text-2);word-break:break-all}
+.note-contact b{color:var(--text);font-weight:600}
+.empty{padding:20px 16px;color:var(--text-2);font-size:15px}
+.hidden{display:none!important}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:4px}
+.who{font-size:13px;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (min-width:600px){.title{font-size:40px}}
 </style>
 </head>
 <body>
 <main>
-  <h1>OnlyBills admin</h1>
-  <p class="sub">Feedback notes from the app and the bill page. Only accounts listed in <code>admins/</code> can read them.</p>
+  <h1 class="title">Feedback</h1>
+  <p class="subtitle">Notes sent from the app and the bill page. Only accounts listed in the admins collection can read them.</p>
 
-  <div id="setup" class="notice err" hidden></div>
+  <div id="setup" class="notice setup hidden"></div>
 
-  <section id="signed-out" class="row">
-    <button id="signin">Sign in with Google</button>
-    <span class="muted" id="signin-msg"></span>
+  <section id="signed-out" class="hidden">
+    <div class="group signin-card">
+      <p>Sign in with the Google account that owns OnlyBills.</p>
+      <button id="signin" class="btn block">Sign in with Google</button>
+      <p id="signin-msg" class="footnote"></p>
+    </div>
   </section>
 
-  <section id="signed-in" hidden>
-    <div class="row" style="justify-content:space-between">
-      <span class="muted" id="who"></span>
-      <button class="ghost" id="signout">Sign out</button>
+  <section id="signed-in" class="hidden">
+    <div class="topbar">
+      <span class="who" id="who"></span>
+      <button class="btn glass" id="signout">Sign out</button>
     </div>
-    <div id="denied" class="notice err" hidden></div>
+    <div id="denied" class="notice err hidden"></div>
 
-    <div id="content" hidden>
-      <div class="kpis" style="margin-top:16px">
-        <div class="kpi"><div class="v" id="k-total">0</div><div class="l">Notes</div></div>
-        <div class="kpi"><div class="v" id="k-7d">0</div><div class="l">Last 7 days</div></div>
-        <div class="kpi"><div class="v" id="k-contact">0</div><div class="l">Left a contact</div></div>
-        <div class="kpi"><div class="v" id="k-mood">0</div><div class="l">Mood answers</div></div>
+    <div id="content" class="hidden">
+      <div class="section-head"><span>Overview</span></div>
+      <div class="group">
+        <div class="row"><span class="label">Notes</span><span class="value" id="k-total">0</span></div>
+        <div class="row"><span class="label">Last 7 days</span><span class="value" id="k-7d">0</span></div>
+        <div class="row"><span class="label">Left a contact</span><span class="value" id="k-contact">0</span></div>
+        <div class="row"><span class="label">Answered the mood pulse</span><span class="value" id="k-mood">0</span></div>
+        <div class="row"><span class="label">Needs a reply</span><span class="value" id="k-flag">0</span></div>
       </div>
+      <p class="footnote" id="sources" style="margin:8px 16px 0"></p>
 
-      <h2>Needs a reply</h2>
-      <p class="muted" style="margin:-6px 0 12px;font-size:13px">Notes that mention money, bills or help (keyword match). Read every note, not just these.</p>
-      <div id="flagged"></div>
-
-      <h2>Sources</h2>
-      <div class="bars" id="sources"></div>
-
-      <h2>All notes</h2>
-      <div class="table-wrap"><table>
-        <thead><tr><th>#</th><th>Date</th><th>Source</th><th>Screen</th><th>Mood</th><th>Contact</th><th>Message</th></tr></thead>
-        <tbody id="rows"></tbody>
-      </table></div>
+      <div class="section-head"><span>Notes</span></div>
+      <div class="chips" role="group" aria-label="Filter notes">
+        <button class="chip" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" data-filter="reply" aria-pressed="false">Needs a reply</button>
+        <button class="chip" data-filter="contact" aria-pressed="false">Has a contact</button>
+      </div>
+      <div class="group" id="list"></div>
     </div>
   </section>
 </main>
@@ -109,12 +150,11 @@ code{background:var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
 
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const show = (id, on) => { $(id).hidden = !on; };
-  const setErr = (id, msg) => { $(id).textContent = msg; show(id, !!msg); };
+  const show = (id, on) => $(id).classList.toggle('hidden', !on);
 
   if (CONFIG.apiKey.startsWith('REPLACE') || CONFIG.appId.startsWith('REPLACE')) {
-    setErr('setup', 'Not configured yet: paste the web app config into admin/index.html (CONFIG).');
-    $('signin').disabled = true;
+    $('setup').textContent = 'Not configured yet: add the web app config to CONFIG in this file.';
+    show('setup', true);
     return;
   }
 
@@ -123,12 +163,15 @@ code{background:var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
   const db = firebase.firestore();
   const provider = new firebase.auth.GoogleAuthProvider();
 
+  // Signed out: only the sign-in card. Signed in: the notes view.
+  show('signed-out', true);
+
   $('signin').addEventListener('click', async () => {
     $('signin-msg').textContent = '';
     try {
       await auth.signInWithPopup(provider);
     } catch (e) {
-      $('signin-msg').textContent = e.code === 'auth/popup-closed-by-user' ? '' : 'Sign-in failed: ' + (e.message || e.code);
+      if (e.code !== 'auth/popup-closed-by-user') $('signin-msg').textContent = 'Sign-in failed. Try again.';
     }
   });
   $('signout').addEventListener('click', () => auth.signOut());
@@ -137,61 +180,75 @@ code{background:var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
     show('signed-out', !user);
     show('signed-in', !!user);
     if (!user) return;
-    $('who').textContent = 'Signed in as ' + (user.displayName || user.email || 'signed-in user') + '. Firebase uid: ' + user.uid;
-    setErr('denied', '');
+    $('who').textContent = 'Signed in as ' + (user.displayName || user.email || 'your account') + ' · uid ' + user.uid;
+    show('denied', false);
     show('content', false);
     try {
       const snap = await db.collection('feedback').orderBy('createdAt', 'desc').get();
-      render(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      load(snap.docs.map(d => ({ id: d.id, ...d.data() })));
       show('content', true);
     } catch (e) {
-      const denied = e.code === 'permission-denied';
-      setErr('denied', denied
-        ? 'Not authorised. Add this uid as a document ID in the admins collection (any fields), then reload.'
-        : 'Could not load notes: ' + (e.message || e.code));
+      $('denied').textContent = e.code === 'permission-denied'
+        ? 'Not authorised. Add this uid as a document ID in the admins collection, then reload.'
+        : 'Could not load notes. Reload to try again.';
+      show('denied', true);
     }
   });
 
   const toDate = (v) => v && v.toDate ? v.toDate() : (v ? new Date(v) : null);
-  const day = (d) => d ? d.toISOString().slice(0, 10) : '-';
-
+  const day = (d) => d ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '-';
   // Keyword match for notes that mention money or help. A prompt to look, not a filter.
-  const HELP = /need money|help|pay my|bills? to pay|can'?t pay|urgent|lost my job|terminated|depress|panic/i;
+  const NEEDS_REPLY = /need money|help|pay my|bills? to pay|can'?t pay|urgent|lost my job|terminated|depress|panic/i;
 
-  function render(notes) {
+  let all = [];
+  let filter = 'all';
+  let num = new Map();
+
+  function load(notes) {
+    all = notes;
+    const asc = notes.slice().sort((a, b) => (toDate(a.createdAt) || 0) - (toDate(b.createdAt) || 0));
+    num = new Map(asc.map((n, i) => [n.id, i + 1]));
     const now = Date.now();
-    const sorted = notes.slice();
-    const asc = sorted.slice().sort((a, b) => (toDate(a.createdAt)||0) - (toDate(b.createdAt)||0));
-    const num = new Map(asc.map((n, i) => [n.id, i + 1]));
-
+    const flagged = notes.filter(n => NEEDS_REPLY.test(n.message || ''));
     $('k-total').textContent = notes.length;
     $('k-7d').textContent = notes.filter(n => { const d = toDate(n.createdAt); return d && now - d < 7 * 864e5; }).length;
     $('k-contact').textContent = notes.filter(n => n.contact).length;
     $('k-mood').textContent = notes.filter(n => n.mood).length;
-
-    const flagged = notes.filter(n => HELP.test(n.message || ''));
-    $('flagged').innerHTML = flagged.length ? flagged.map(n => `
-      <div class="card help">
-        <div class="meta"><span class="pill">#${num.get(n.id)}</span> ${esc(day(toDate(n.createdAt)))} · ${esc(n.source)} · ${esc(n.screen || '-')}${n.contact ? ' · contact: <code>' + esc(n.contact) + '</code>' : ''}</div>
-        <p>${esc(n.message)}</p>
-      </div>`).join('') : '<p class="muted">Nothing flagged.</p>';
+    $('k-flag').textContent = flagged.length;
 
     const src = {};
-    notes.forEach(n => { src[n.source || '(none)'] = (src[n.source || '(none)'] || 0) + 1; });
-    $('sources').innerHTML = Object.entries(src).sort((a, b) => b[1] - a[1])
-      .map(([k, v]) => `<span class="tag ${esc(k)}">${esc(k)} ${v}</span>`).join('') || '<span class="muted">None yet</span>';
-
-    $('rows').innerHTML = sorted.map(n => `
-      <tr>
-        <td class="num">#${num.get(n.id)}</td>
-        <td>${esc(day(toDate(n.createdAt)))}</td>
-        <td><span class="tag ${esc(n.source)}">${esc(n.source)}</span></td>
-        <td>${esc(n.screen || '-')}</td>
-        <td>${n.mood ? `<span class="mood ${esc(n.mood)}">${esc(n.mood)}</span>` : '<span class="muted">-</span>'}</td>
-        <td>${n.contact ? '<code>' + esc(n.contact) + '</code>' : '<span class="muted">-</span>'}</td>
-        <td class="msg">${esc(n.message)}</td>
-      </tr>`).join('');
+    notes.forEach(n => { const k = n.source || 'unknown'; src[k] = (src[k] || 0) + 1; });
+    $('sources').textContent = 'By source: ' + (Object.entries(src).sort((a, b) => b[1] - a[1]).map(([k, v]) => k + ' ' + v).join(', ') || 'none yet') + '.';
+    render();
   }
+
+  function render() {
+    const list = all.filter(n => {
+      if (filter === 'reply') return NEEDS_REPLY.test(n.message || '');
+      if (filter === 'contact') return !!n.contact;
+      return true;
+    });
+    document.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+    $('list').innerHTML = list.length ? list.map(n => {
+      const flagged = NEEDS_REPLY.test(n.message || '');
+      const mood = n.mood ? `<span class="pill mood-${esc(n.mood)}">${esc(n.mood)}</span>` : '';
+      const contact = n.contact ? `<div class="note-contact"><b>Contact</b> ${esc(n.contact)}</div>` : '';
+      return `
+      <article class="note">
+        <div class="note-meta">
+          <span>#${num.get(n.id)} · ${esc(day(toDate(n.createdAt)))}</span>
+          <span class="pill ${esc(n.source)}">${esc(n.source || 'unknown')}</span>
+          ${n.screen ? `<span>${esc(n.screen)}</span>` : ''}
+          ${mood}
+          ${flagged ? '<span class="pill reply">Needs a reply</span>' : ''}
+        </div>
+        <p class="note-text">${esc(n.message)}</p>
+        ${contact}
+      </article>`;
+    }).join('') : '<div class="empty">Nothing here.</div>';
+  }
+
+  document.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => { filter = b.dataset.filter; render(); }));
 })();
 </script>
 </body>
